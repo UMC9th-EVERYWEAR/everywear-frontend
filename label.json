@@ -1,0 +1,57 @@
+[
+  {
+    "name": "👨‍💻동환",
+    "color": "FA5C5C",
+    "description": "PR 요청자 : 김동환"
+  },
+  {
+    "name": "👩‍💻정인",
+    "color": "FEB21A",
+    "description": "PR 요청자 : 최정인"
+  },
+  {
+    "name": "🧑‍💻재범",
+    "color": "360185", 
+    "description": "PR 요청자 : 김재범"
+  },
+  {
+    "name": "🐞BUG",
+    "color": "FF0000",
+    "description": "버그 이슈"
+  },
+  {
+    "name": "⚙️CHORE",
+    "color": "F5F2F2",
+    "description": "세팅 관련 및 설정 변경(pnpm, gulp, yarn, CI/CD 등)"
+  },
+  {
+    "name": "✂️REFACTOR",
+    "color": "FFBBE1",
+    "description": "코드를 더 깔끔하게 만들기만 하고, 코드 작동 방식이나 출력에 대한 부분은 변경 X"
+  },
+  {
+    "name": "📄DOCS",
+    "color": "d4c5f9",
+    "description": "문서 수정"
+  },
+  {
+    "name": "🛠️FEATURE",
+    "color": "00F7FF",
+    "description": "구현·개선 관련 사항 및 새로운 기능 추가"
+  },
+  {
+    "name": "⚒️FIX",
+    "color": "FDFFB8",
+    "description": "버그를 수정"
+  },
+  {
+    "name": "🧪TEST",
+    "color": "B8DB80",
+    "description": "누락된 테스트 추가 또는 기존 테스트 수정, 깨진 테스트 활성화"
+  },
+  {
+    "name": "🎨DESIGN",
+    "color": "E83C91",
+    "description": "코드의 수정 없이 스타일만 변경 또는 퍼블리싱 관련 수정"
+  }
+]
