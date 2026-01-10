@@ -8,28 +8,31 @@ const NAV_ITEMS = [
   { id: 'closet', label: '내 옷장', Icon: ClosetIcon },
 ];
 
-export const BottomNav = () => {
+export const Navbar = () => {
   const [activeTab, setActiveTab] = useState('home');
 
   return (
-    <nav className="absolute bottom-0 w-full bg-white border-t border-neutral-100 pb-safe shadow-[var(--shadow-4)] z-10">
-      <div className="flex justify-around items-center h-16">
-        {NAV_ITEMS.map(({ id, label, Icon }) => {
-          const isActive = activeTab === id;
-          return (
-            <button
-              key={id}
-              onClick={() => setActiveTab(id)}
-              className={`flex flex-col items-center justify-center w-full h-full transition-colors duration-200 ${
-                isActive ? 'text-primary-600' : 'text-neutral-700'
-              }`}
-            >
+    <nav className="absolute bottom-0 flex w-[375px] h-[50px] px-4 justify-between items-center bg-white border-t border-neutral-100 shadow-[var(--shadow-4)] z-10">
+      {NAV_ITEMS.map(({ id, label, Icon }) => {
+        const isActive = activeTab === id;
+
+        return (
+          <button
+            key={id}
+            onClick={() => setActiveTab(id)}
+            className={`flex flex-1 flex-col items-center justify-center transition-colors duration-200 ${
+              isActive ? 'text-primary-600' : 'text-neutral-700'
+            }`}
+          >
+            <div className="flex items-center justify-center h-[20px]">
               <Icon />
-              <span className="text-regular-10 mt-1 font-medium">{label}</span>
-            </button>
-          );
-        })}
-      </div>
+            </div>
+            <span className="text-regular-10 mt-[2px] font-medium leading-none text-center">
+              {label}
+            </span>
+          </button>
+        );
+      })}
     </nav>
   );
 };
