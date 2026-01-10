@@ -1,11 +1,9 @@
-import React from "react";
-
 interface ProductCardProps {
-  company: string;    // 무신사 등
-  name: string;       // 베이직 화이트 티셔츠
-  price: string;      // 29,000원
-  rating: number;     // 4.7
-  imageUrl: string;   // 상품 이미지 주소
+  company: string;    
+  name: string;       
+  price: string;     
+  rating: number;     
+  imageUrl: string; 
 }
 
 // 별점 아이콘 (스펙 반영)
