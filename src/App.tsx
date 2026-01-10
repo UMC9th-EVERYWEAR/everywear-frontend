@@ -1,85 +1,26 @@
-import { useState } from 'react';
 import Header from './components/layout/Header';
 import { Navbar } from './components/layout/Navbar';
-import CategoryBar from './components/common/CategoryBar';
-import { Button } from './components/common/Button';
-import { Modal } from './components/common/Modal';
+import Home from './pages/Home'; // 수정된 Home 컴포넌트 임포트
 
 function App() {
-  const [isConfirmOpen, setIsConfirmOpen] = useState(false);
-  const [isErrorOpen, setIsErrorOpen] = useState(false);
-  const [isWithdrawOpen, setIsWithdrawOpen] = useState(false);
-
   return (
+    // 전체 배경: 중앙 정렬 및 연한 회색 배경
     <div className="min-h-screen bg-neutral-50 flex justify-center font-['Pretendard']">
+      
+      {/* 375px 모바일 피그마 규격 컨테이너 */}
       <div className="w-[375px] min-h-screen bg-white shadow-xl flex flex-col relative overflow-x-hidden">
         
+        {/* 1. 상단 레이아웃 (고정) */}
         <Header />
-        <CategoryBar />
-
-        <main className="flex-1 overflow-y-auto p-4 flex flex-col items-center gap-6 pt-10">
-          {/* 기본 */}
-          <Button onClick={() => setIsConfirmOpen(true)}>
-            AI 피팅하기
-          </Button>
-
-          {/* Outlined */}
-          <Button variant="outlined" onClick={() => setIsErrorOpen(true)}>
-            사진 변경하기
-          </Button>
-
-          {/* Disabled */}
-          <Button disabled onClick={() => setIsWithdrawOpen(true)}>
-            탈퇴하기
-          </Button>
-
-          {/* Hover 상태 고정 */}
-          <Button variant="hover" onClick={() => alert('Hover 버튼 클릭')}>
-            AI 피팅하기
-          </Button>
+        
+        {/* 2. 스크롤 가능한 메인 콘텐츠 영역 */}
+        <main className="flex-1 overflow-y-auto no-scrollbar pb-[70px]">
+          <Home />
         </main>
 
-
+        {/* 3. 하단 네비게이션 바 (고정) */}
         <Navbar />
-
-        {/* 확인 모달 */}
-        <Modal
-          isOpen={isConfirmOpen}
-          onClose={() => setIsConfirmOpen(false)}
-          title="피팅을 시작할까요?"
-          text="선택하신 상품으로 AI 피팅을 진행합니다."
-          btn1Text="시작하기"
-          btn1Action={() => {
-            alert('피팅 시작!');
-            setIsConfirmOpen(false);
-          }}
-          btn2Text="취소"
-          btn2Action={() => setIsConfirmOpen(false)}
-        />
-
-        {/* 에러 모달 (버튼 1개) */}
-        <Modal
-          isOpen={isErrorOpen}
-          onClose={() => setIsErrorOpen(false)}
-          title="AI 피팅을 실패했습니다."
-          text="나중에 다시 시도해주세요."
-          btn1Text="확인"
-          btn1Action={() => setIsErrorOpen(false)}
-        />
-
-        {/* 탈퇴 모달 */}
-        <Modal
-          isOpen={isWithdrawOpen}
-          onClose={() => setIsWithdrawOpen(false)}
-          title="정말 탈퇴하시겠습니까?"
-          btn1Text="예"
-          btn1Action={() => {
-            alert('탈퇴 처리됨');
-            setIsWithdrawOpen(false);
-          }}
-          btn2Text="아니오"
-          btn2Action={() => setIsWithdrawOpen(false)}
-        />
+        
       </div>
     </div>
   );
