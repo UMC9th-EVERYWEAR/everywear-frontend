@@ -64,7 +64,7 @@ const CategoryBar = () => {
               onClick={() => setSelected(cat.name)}
               className={`
                 flex items-center justify-center min-w-[60px] p-[10px] 
-                rounded-full gap-0 border box-border
+                rounded-full gap-0 border box-border cursor-pointer
                 transition-all duration-200
                 ${isActive 
                   ? "bg-[#3B4599] text-white font-bold border-[#3B4599]"
@@ -76,8 +76,11 @@ const CategoryBar = () => {
                 {cat.renderIcon(isActive)}
               </div>
               
+              {/* 2. '전체' 아이콘일 때만 텍스트 간격을 ml-[2px]로 미세 조정*/}
               <span className={`
-                text-[12px] font-medium font-['Pretendard']`}>
+                text-[12px] font-medium font-['Pretendard']
+                ${cat.name === '전체' ? 'ml-[2px]' : 'ml-[-1px]'}
+              `}>
                 {cat.name}
               </span>
             </button>
