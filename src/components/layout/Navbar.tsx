@@ -20,7 +20,7 @@ export const Navbar = () => {
           <button
             key={id}
             onClick={() => setActiveTab(id)}
-            className={`flex flex-1 flex-col items-center justify-center transition-colors duration-200 ${
+            className={`flex flex-1 flex-col items-center justify-center transition-colors duration-200 cursor-pointer ${
               isActive ? 'text-primary-600' : 'text-neutral-700'
             }`}
           >

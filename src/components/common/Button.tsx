@@ -27,9 +27,9 @@ export const Button = ({
   };
 
   const variantStyles = {
-    filled: 'bg-[#3B4599] text-[#F0F2F7] hover:bg-[#2C3374]',
-    outlined: 'bg-white text-[#3B4599] border-[1.5px] border-[#3B4599] hover:bg-[#F5F6FA]',
-    hover: 'bg-[#2C3374] text-[#F0F2F7]', // ← hover 고정 스타일
+    filled: 'bg-[#3B4599] text-[#F0F2F7] hover:bg-[#2C3374] cursor-pointer',
+    outlined: 'bg-white text-[#3B4599] border-[1.5px] border-[#3B4599] hover:bg-[#F5F6FA] cursor-pointer',
+    hover: 'bg-[#2C3374] text-[#F0F2F7] cursor-pointer',
   };
 
   const disabledStyle = 'bg-[#A0A7B2] text-white cursor-not-allowed';
@@ -50,4 +50,5 @@ export const Button = ({
     </button>
   );
 };
+
 export default Button;

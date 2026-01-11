@@ -46,7 +46,7 @@ export const Modal = ({
           {btn2Text && btn2Action && (
             <button
               onClick={btn2Action}
-              className="flex-1 h-[40px] bg-neutral-100 text-neutral-500 rounded-[8px] text-[14px] font-bold"
+              className="flex-1 h-[40px] bg-neutral-100 text-neutral-500 rounded-[8px] text-[14px] font-bold cursor-pointer hover:bg-neutral-200 transition-colors"
             >
               {btn2Text}
             </button>
@@ -54,7 +54,7 @@ export const Modal = ({
 
           <button
             onClick={btn1Action}
-            className="flex-1 h-[40px] bg-[#3B4599] text-white rounded-[8px] text-[14px] font-bold"
+            className="flex-1 h-[40px] bg-[#3B4599] text-white rounded-[8px] text-[14px] font-bold cursor-pointer hover:bg-[#2C3374] transition-colors"
           >
             {btn1Text}
           </button>
