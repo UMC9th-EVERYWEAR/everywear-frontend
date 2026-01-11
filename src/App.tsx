@@ -5,42 +5,26 @@ import CategoryBar from './components/common/CategoryBar';
 import { Button } from './components/common/Button';
 import { Modal } from './components/common/Modal';
 
- function App() {
-  const [count, setCount] = useState(0)
+function App() {
   const [isConfirmOpen, setIsConfirmOpen] = useState(false);
   const [isErrorOpen, setIsErrorOpen] = useState(false);
   const [isWithdrawOpen, setIsWithdrawOpen] = useState(false);
 
   return (
-
-<div className="min-h-screen bg-neutral-50 flex justify-center font-['Pretendard']">
+    <div className="min-h-screen bg-neutral-50 flex justify-center font-['Pretendard']">
       <div className="w-[375px] min-h-screen bg-white shadow-xl flex flex-col relative overflow-x-hidden">
-
-        <Header />
+        
+        {/* type=main은 everywear, type=sub는 최근피팅내역 헤더 */}
+        <Header type="main" /> 
+        
         <CategoryBar />
 
         <main className="flex-1 overflow-y-auto p-4 flex flex-col items-center gap-6 pt-10">
-          {/* 기본 */}
-          <Button onClick={() => setIsConfirmOpen(true)}>
-            AI 피팅하기
-          </Button>
-
-          {/* Outlined */}
-          <Button variant="outlined" onClick={() => setIsErrorOpen(true)}>
-            사진 변경하기
-          </Button>
-
-          {/* Disabled */}
-          <Button disabled onClick={() => setIsWithdrawOpen(true)}>
-            탈퇴하기
-          </Button>
-
-          {/* Hover 상태 고정 */}
-          <Button variant="hover" onClick={() => alert('Hover 버튼 클릭')}>
-            AI 피팅하기
-          </Button>
+          <Button onClick={() => setIsConfirmOpen(true)}>AI 피팅하기</Button>
+          <Button variant="outlined" onClick={() => setIsErrorOpen(true)}>사진 변경하기</Button>
+          <Button disabled onClick={() => setIsWithdrawOpen(true)}>탈퇴하기</Button>
+          <Button variant="hover" onClick={() => alert('Hover 버튼 클릭')}>AI 피팅하기</Button>
         </main>
-
 
         <Navbar />
 
@@ -83,8 +67,7 @@ import { Modal } from './components/common/Modal';
           btn2Action={() => setIsWithdrawOpen(false)}
         />
       </div>
-
- </div>
+    </div>
   );
 }
 
