@@ -6,12 +6,12 @@ const Home = () => {
       
       {/* 1. 상단 섹션 (동일) */}
       <section className="px-5 pt-6 pb-2">
-        <p className="text-[#444444] text-[12px] font-[400] leading-[150%] tracking-[-0.36px]">
-          유명 브랜드 가상 피팅가이드를 확인해보세요
-        </p>
+
         <h2 className="text-[#000000] text-[20px] font-[500] leading-normal mt-1">
           파트너 쇼핑몰
         </h2>
+           <p className="text-[#596373] text-[12px] font-[400] leading-[150%] tracking-[-0.36px]">
+          유명 브랜드 가상 피팅가이드를 확인해보세요</p>
       </section>
 
       {/* 2. 파트너 쇼핑몰 (동일) */}
@@ -23,16 +23,16 @@ const Home = () => {
         ))}
       </section>
 
-      {/* 3. 가상 피팅 가이드 & 상품 추가 (동일) */}
+      {/* 3. 가상 피팅 가이드 & 상품 추가 */}
       <section className="flex flex-col items-center px-5 mt-4 gap-4">
-        <span className="text-[#2287A0] text-[14px] font-[400] border-b border-[#2287A0] cursor-pointer">
+        {/* 요청하신 피그마 스펙 적용 */}
+        <span className="text-[#8D98FF] text-[10px] font-[400] leading-[150%] tracking-[-0.3px] font-['Pretendard'] border-b border-[#8D98FF] cursor-pointer">
           유명 브랜드 가상 피팅 가이드
         </span>
         <div className="w-[321px]">
           <Button variant="filled">상품 추가하기</Button>
         </div>
       </section>
-
       {/* 4. 상품 둘러보기 섹션 */}
       <section className="px-5 mt-10">
         <div className="flex justify-between items-end mb-4">
