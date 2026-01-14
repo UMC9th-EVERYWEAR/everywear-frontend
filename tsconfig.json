@@ -4,8 +4,10 @@
     { "path": "./tsconfig.app.json" },
     { "path": "./tsconfig.node.json" }
   ],
-  "paths": {
-    "@/src/*": ["./src/*"],
-    "@/public/*": ["./public/*"]
+  "compilerOptions": {
+    "paths": {
+      "@/src/*": ["./src/*"],
+      "@/public/*": ["./public/*"]
+    }
   }
 }
