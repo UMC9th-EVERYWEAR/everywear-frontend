@@ -3,6 +3,7 @@ import Header from './Header';
 import { Navbar } from './Navbar';
 import { Modal } from '../common/Modal';
 import { useState } from 'react';
+import { PATH } from '../../router/path';
 
 const RootLayout = () => {
 	const { pathname } = useLocation();
@@ -23,12 +24,11 @@ const RootLayout = () => {
 
 	/* HEADER_TITLE_MAP: 추후 헤더 타이틀 동적 변경 */
 	const HEADER_TITLE_MAP = [
-		{ pattern: '/recent-fitting', title: '최근 피팅 내역' },
-		{ pattern: '/ai-fitting', title: 'AI 분석' },
-		{ pattern: '/ai-fitting/:id', title: 'AI 분석 결과' },
-		{ pattern: '/products', title: '전체 상품 보기' },
-		{ pattern: '/closet', title: '내 옷장' },
-		{ pattern: '/setting', title: '설정' },
+		{ pattern: PATH.RECENT_FITTING, title: '최근 피팅 내역' },
+		{ pattern: PATH.AI_FITTING.DETAIL, title: 'AI 분석' },
+		{ pattern: PATH.PRODUCTS.ROOT, title: '전체 상품 보기' },
+		{ pattern: PATH.CLOSET, title: '내 옷장' },
+		{ pattern: PATH.SETTING.ROOT, title: '설정' },
 	] as const;
 
 	/*  getHeaderTitle: pathname으로 title 뽑는 함수 */
@@ -53,7 +53,9 @@ const RootLayout = () => {
 						type={isMain ? 'main' : 'sub'}
 						title={getHeaderTitle(pathname)}
 					                      />}
-					<Outlet />
+					<div className='grow bg-white'>
+						<Outlet />
+					</div>
 					<Navbar />
 					{/* 모달 등 전역 요소 */}
 					<Modal 

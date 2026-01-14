@@ -39,7 +39,6 @@ export const PATH = {
 	RECENT_FITTING: '/recent-fitting',
 
 	AI_FITTING: {
-		ROOT: '/ai-fitting',
 		DETAIL: '/ai-fitting/:id', 
 	},
 
