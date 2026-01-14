@@ -4,6 +4,7 @@ import { protectedRoutes } from './routes/protected-routes';
 import ProtectedRoute from './routes/ProtectedRoute';
 import { publicRoutes } from './routes/public-routes';
 import RootLayout from '../components/layout/RootLayout';
+import NotFoundPage from '../pages/NotFoundPage';
 
 
   	/*  RootLayout 아래에
@@ -22,6 +23,8 @@ export const router = createBrowserRouter([
 				Component: ProtectedRoute,
 				children: protectedRoutes,
 			},
+			      { path: '*', Component: NotFoundPage },
+
 		],
 	},
 
