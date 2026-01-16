@@ -1,3 +1,4 @@
+import SettingPhotoPage from '@/src/pages/setting/SettingPhotoPage';
 import Home from '../../pages/Home';
 import SettingPage from '../../pages/setting/SettingPage';
 import { PATH } from '../path';
@@ -15,6 +16,10 @@ export const protectedRoutes = [
 	{
 		path: PATH.SETTING.ROOT,
 		Component: SettingPage,
+	},
+	{
+		path: PATH.SETTING.CHANGE_PHOTO,
+		Component: SettingPhotoPage,
 	},
 	// 필요하면 계속 추가
 	// { path: PATH.CLOSET, Component: ClosetPage },

@@ -1,7 +1,9 @@
 import arrowRight from '@/public/svgs/arrow-right.svg';
 import { ArrowRightIcon } from '@/src/components/setting/ArrowRightIcon.';
 import ToggleBtn from '@/src/components/setting/ToggleBtn';
+import { PATH } from '@/src/router/path';
 import { useState } from 'react';
+import { useNavigate } from 'react-router';
 const SettingPage = () => {	
 	const [openLoginSetting, setOpenLoginSetting] = useState(false);
 	const [isNotificationEnabled, setIsNotificationEnabled] = useState(false);
@@ -26,6 +28,12 @@ const SettingPage = () => {
 		}));
 	};
 
+	const navigate = useNavigate();
+	const goChangePhoto = () => {
+		navigate(PATH.SETTING.CHANGE_PHOTO);
+	};
+
+
 
 	return <div className="mt-5 mx-4 w-[calc(100%-32px)]">
 		<div className='text-neutral-900  mb-7 '>
@@ -34,7 +42,10 @@ const SettingPage = () => {
 				<div>
 					<div className='border-b py-1 border-neutral-900 text-medium-16'>회원정보</div>
 							
-					<div className='py-2 flex justify-between border-b-[0.5px] border-neutral-300 '>
+					<button
+						onClick={goChangePhoto}
+						className='py-2 w-full flex justify-between border-b-[0.5px] border-neutral-300 cursor-pointer'
+					>
 						<span className='text-regular-14 flex items-center'>기본 사진 변경</span>
 						<img
 							src={arrowRight}
@@ -42,7 +53,7 @@ const SettingPage = () => {
 							className='cursor-pointer'
 
 						/>
-					</div>			
+					</button>			
 
 					<button
 						onClick={toggleLoginSetting}
