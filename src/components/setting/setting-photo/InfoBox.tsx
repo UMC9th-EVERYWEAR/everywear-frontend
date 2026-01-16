@@ -10,7 +10,7 @@ const InfoBox = ({ children, className }: InfoBoxProps) => {
 	return (
 		<div
 			className={cn(
-				'mx-4 flex flex-col gap-1 mb-8 bg-[#DBDFFE] rounded-lg px-4 py-2.5 text-regular-12',
+				'mx-4 flex w-85.75 flex-col gap-1 mb-8 bg-[#DBDFFE] rounded-lg px-4 py-2.5 text-regular-12',
 				className,
 			)}
 		>
