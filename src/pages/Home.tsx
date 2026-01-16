@@ -1,19 +1,9 @@
 import { useRef, useState } from 'react';
 import { Button } from '../components/common/Button';
-import MusinsaLogo from "../../public/Images/MusinsaLogo.svg";
-import ZigzagLogo from "../../public/Images/ZigzagLogo.png";
-import Logo29cm from "../../public/Images/29cmLogo.svg";
-import WLogo from "../../public/Images/WLogo.svg";
-import ProductCard from '../components/common/ProductCard';
-import RectangleIcon from "../../public/Images/Rectangle.svg"; 
-import EllipseIcon from "../../public/Images/Ellipse.svg";     
-
-
-const products = [
-  { id: 1, company: "무신사", name: "오버핏 후드티", price: "₩39,000", rating: 4.5, imageUrl: "https://via.placeholder.com/300" },
-  { id: 2, company: "지그재그", name: "와이드 슬랙스", price: "₩49,000", rating: 4.2, imageUrl: "https://via.placeholder.com/300" },
-  { id: 3, company: "29CM", name: "니트 가디건", price: "₩59,000", rating: 4.8, imageUrl: "https://via.placeholder.com/300" },
-];
+import MusinsaLogo from "../assets/Images/MusinsaLogo.svg";
+import ZigzagLogo from "../assets/Images/ZigzagLogo.svg";
+import Logo29cm from "../assets/Images/29cmLogo.svg";
+import WLogo from "../assets/Images/WLogo.svg";
 
 const Home = () => {
   const [ratio4, setRatio4] = useState(0);
