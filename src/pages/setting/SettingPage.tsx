@@ -1,4 +1,5 @@
 import arrowRight from '@/public/svgs/arrow-right.svg';
+import clsx from 'clsx';
 import { useState } from 'react';
 const SettingPage = () => {
 	const [openLoginSetting, setOpenLoginSetting] = useState(false);
@@ -40,7 +41,7 @@ const SettingPage = () => {
 					<span className='text-regular-14 flex items-center'>알림 설정</span>
 					<button
 						onClick={toggleNotification}
-						className='w-10 h-5 bg-[#D9D9D9] rounded-full relative cursor-pointer'
+						className={clsx('w-10 h-5 bg-[#D9D9D9] rounded-full relative cursor-pointer')}
 					>
 						<div className='bg-white w-4 h-4 rounded-full absolute top-0.5 left-[1.77px]'></div>
 					</button>
