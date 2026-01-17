@@ -34,6 +34,7 @@ const Banner = () => {
 					<img
 						src={dummy}
 						alt="add"
+						className='rounded'
 					/>
 				</button>
 			);
@@ -45,7 +46,7 @@ const Banner = () => {
 				<img
 					src={item.imageUrl}
 					alt="card"
-					className={cn('w-full h-full object-cover',
+					className={cn('w-full h-full object-cover rounded-lg overflow-hidden',
 						item.isDefault ? 'border-4 border-primary-600' : '',
 					)}
 				/>

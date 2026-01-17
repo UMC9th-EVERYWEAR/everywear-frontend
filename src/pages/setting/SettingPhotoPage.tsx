@@ -15,7 +15,7 @@ const SettingPhotoPage = () => {
 			<div className='block w-full max-[480px] min-w-0 py-3 mb-8'>
 				<Banner />
 			</div>
-			<div className='mx-4 flex justify-between w-full max-w-[375px]'>
+			<div className='mx-4 flex justify-between w-full max-w-[343px]'>
 				<button className='text-regular-16 text-primary-600 p-2.5 border-[1.5px] w-20 rounded-full h-11 break-keep text-center flex items-center hover:opacity-80 cursor-pointer'>삭제하기</button>
 				<button
 					onClick={() => setOpenChangePhotoModal(true)}
