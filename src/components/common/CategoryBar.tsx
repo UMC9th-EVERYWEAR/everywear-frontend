@@ -1,4 +1,5 @@
 import { useState } from "react";
+import {ICON_DATA} from "../../assets/SvgIndex";
 // 1. 전체
 const AllIcon = ({ isActive }: { isActive: boolean }) => (
   <div className="flex items-center justify-center w-[16px] h-[16px] px-[2px] py-[2px]">
