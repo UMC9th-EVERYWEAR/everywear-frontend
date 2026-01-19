@@ -25,7 +25,7 @@ const RootLayout = () => {
 	/* HEADER_TITLE_MAP: 추후 헤더 타이틀 동적 변경 */
 	const HEADER_TITLE_MAP = [
 		{ pattern: PATH.RECENT_FITTING, title: '최근 피팅 내역' },
-		{ pattern: PATH.AI_FITTING.DETAIL, title: 'AI 분석' },
+		{ pattern: PATH.AI_FITTING.DETAIL, title: 'AI 분석하기' },
 		{ pattern: PATH.PRODUCTS.ROOT, title: '전체 상품 보기' },
 		{ pattern: PATH.CLOSET, title: '내 옷장' },
 		{ pattern: PATH.SETTING.ROOT, title: '설정' },
