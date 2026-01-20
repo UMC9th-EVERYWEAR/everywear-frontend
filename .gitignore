@@ -12,6 +12,10 @@ dist
 dist-ssr
 *.local
 
+
+# lefthook
+.lefthook
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
