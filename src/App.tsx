@@ -1,40 +1,28 @@
-import { useState } from 'react';
-import Header from './components/layout/Header';
-import { Navbar } from './components/layout/Navbar';
-import { Modal } from './components/common/Modal';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import ProtectedRoute from './router/routes/ProtectedRoute'; // ✅ 알려주신 경로 반영
 import Home from './pages/Home';
-import CategoryBar from './components/common/CategoryBar';
-
 
 function App() {
-  const [isWithdrawOpen, setIsWithdrawOpen] = useState(false);
-
   return (
-    <div className="min-h-screen bg-gray-50 flex justify-center">
-      <div className="relative w-[375px] h-screen bg-white shadow-lg overflow-hidden flex flex-col">
-        
-        {/* 상단 고정 헤더 */}
-        <Header type="main" />
-        <CategoryBar />
+    <Router>
+      <div className="min-h-screen bg-gray-50 flex justify-center">
+        {/* 모바일 뷰 컨테이너 */}
+        <div className="relative w-[375px] h-screen bg-white shadow-lg overflow-hidden flex flex-col">
+          
+          <Routes>
+            {/* 🔒 레이아웃(헤더/네브바)이 포함된 ProtectedRoute를 부모로 설정 */}
+            <Route element={<ProtectedRoute />}>
+              {/* ✅ "/" 경로로 들어오면 바로 Home 컴포넌트를 보여줌 */}
+              <Route path="/" element={<Home />} />
+              
+              {/* 나중에 페이지가 추가되면 여기에 더 넣으시면 됩니다 */}
+              {/* <Route path="/setting" element={<SettingPage />} /> */}
+            </Route>
+          </Routes>
 
-        {/* 2. 메인 영역에 Home 컴포넌트를 넣습니다. */}
-        <main className="flex-1 overflow-y-auto no-scrollbar">
-          <Home />
-        </main>
-
-        {/* 하단 네비바 */}
-        <Navbar />
-
-        {/* 모달 등 전역 요소 */}
-        <Modal 
-          isOpen={isWithdrawOpen}
-          onClose={() => setIsWithdrawOpen(false)}
-          title="정말 탈퇴하시겠습니까?"
-          btn1Text="확인"
-          btn1Action={() => setIsWithdrawOpen(false)}
-        />
+        </div>
       </div>
-    </div>
+    </Router>
   );
 }
 
