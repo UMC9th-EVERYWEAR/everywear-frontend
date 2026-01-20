@@ -1,5 +1,5 @@
 import React from "react";
-import {ICON_DATA} from "../../../public/svgs/Icons/SvgIndex";
+import {ICON_DATA} from "../../../public/Svgs/Icons/SvgIndex";
 
 interface IconProps extends React.SVGProps<SVGSVGElement> {
   size?: number;
