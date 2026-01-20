@@ -2,9 +2,28 @@ import { Modal } from '@/src/components/common/Modal';
 import Banner from '@/src/components/setting/setting-photo/Banners';
 import CheckItem from '@/src/components/setting/setting-photo/CheckItem';
 import InfoBox from '@/src/components/setting/setting-photo/InfoBox';
+import dummy from '@/public/svgs/dummyphoto.jpeg';
+
+import type { PhotoItem } from '@/src/types/schemas/setting/setting-photo';
 import { useState } from 'react';
+import { cn } from '@/src/lib/utils';
+// 더미 데이터
+const PHOTO_ITEMS_DUMMY: PhotoItem[] = [
+	{ isDefault: true, imageUrl: dummy },
+	{ isDefault: false, imageUrl: dummy },
+	{ isDefault: false, imageUrl: dummy },
+	{ isDefault: false, imageUrl: dummy },
+	{ isDefault: false, imageUrl: '' }, // ✅ 이미지 없음 => AddCard 렌더링
+];
+
 const SettingPhotoPage = () => {
 	const [openChangePhotoModal, setOpenChangePhotoModal] = useState(false);
+	const [openDeletePhotoModal, setOpenDeletePhotoModal] = useState(false); // 사진 삭제 후 서버 값으로 초기화
+
+	const [hasImage, setHasImage] = useState(false); 
+	const [photoItems, setPhotoItems] = useState<PhotoItem[]>(PHOTO_ITEMS_DUMMY);
+
+
 	return (
 		<div className="pt-6 flex flex-col items-center text-neutral-900">
 			<InfoBox>
@@ -13,13 +32,23 @@ const SettingPhotoPage = () => {
 				<CheckItem text="최대 5개까지 사진을 등록할 수 있어요." />
 			</InfoBox>
 			<div className='block w-full max-[480px] min-w-0 py-3 mb-8'>
-				<Banner />
+				<Banner
+					setHasImage={setHasImage}
+					photoItems={photoItems}
+				/>
 			</div>
 			<div className='mx-4 flex justify-between w-full max-w-[343px]'>
-				<button className='text-regular-16 text-primary-600 p-2.5 border-[1.5px] w-20 rounded-full h-11 break-keep text-center flex items-center hover:opacity-80 cursor-pointer'>삭제하기</button>
+				<button
+					onClick={() => setOpenDeletePhotoModal(true)}
+					className={cn('text-regular-16 text-primary-600 p-2.5 border-[1.5px] w-20 rounded-full h-11 break-keep text-center flex items-center hover:opacity-80 cursor-pointer',
+						hasImage ? '' : 'text-neutral-400 pointer-events-none',
+					)}
+				>삭제하기</button>
 				<button
 					onClick={() => setOpenChangePhotoModal(true)}
-					className='text-regular-16 bg-primary-600 text-white p-2.5 border w-63.25 rounded-full h-11 break-keep justify-center flex items-center hover:opacity-90 cursor-pointer'
+					className={cn('text-regular-16 bg-primary-600 text-white p-2.5 border w-63.25 rounded-full h-11 break-keep justify-center flex items-center hover:opacity-90 cursor-pointer',
+						hasImage ? '' : 'bg-neutral-400 pointer-events-none',
+					)}
 				>선택하기</button>
 			</div>
 			{
@@ -32,6 +61,18 @@ const SettingPhotoPage = () => {
 					btn2Text="취소"
 					btn2Action={()=>setOpenChangePhotoModal(false)} 
 				                        />
+			}
+
+			{
+				openDeletePhotoModal && <Modal
+					isOpen={openDeletePhotoModal}
+					onClose={()=>setOpenDeletePhotoModal(false)}
+					title="사진을 삭제하시겠습니까?"
+					btn1Text="삭제하기"
+					btn1Action={()=>setOpenDeletePhotoModal(false)} // TODO: api로 사진 삭제 요청
+					btn2Text="취소"
+					btn2Action={()=>setOpenDeletePhotoModal(false)} 
+				                        />	
 			}
 		</div>
 	);

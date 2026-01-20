@@ -1,25 +1,29 @@
 import dummy from '@/public/svgs/dummyphoto.jpeg';
+import plusIcon from '@/public/svgs/plus-icon.svg';
 import type { PhotoItem } from '@/src/types/schemas/setting/setting-photo';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination } from 'swiper/modules';
 
 import 'swiper/css';
 import 'swiper/css/pagination';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { cn } from '@/src/lib/utils';
 
-const Banner = () => {
+interface BannerProps {
+	setHasImage: (hasImage: boolean) => void;
+	photoItems: PhotoItem[];
+}
 
-	// 더미 데이터
-	const PHOTO_ITEMS_DUMMY: PhotoItem[] = [
-		{ isDefault: true, imageUrl: dummy },
-		{ isDefault: false, imageUrl: dummy },
-		{ isDefault: false, imageUrl: dummy },
-		{ isDefault: false, imageUrl: dummy },
-		{ isDefault: false, imageUrl: '' }, // ✅ 이미지 없음 => AddCard 렌더링
-	];
+const Banner = ({ setHasImage , photoItems }: BannerProps) => {
+
 
 	  const [activeRealIndex, setActiveRealIndex] = useState(0);
+
+	useEffect(() => {
+		// 사진이 하나라도 있으면 true, 없으면 false
+		const hasImage = photoItems[activeRealIndex].imageUrl !== '';
+		setHasImage(hasImage);
+	}, [setHasImage, activeRealIndex, photoItems]);
 
 
 	// slide 안에 들어갈 컨텐츠 결정 함수 (추천 네이밍)
@@ -29,12 +33,12 @@ const Banner = () => {
 			return (
 				<button
 					type="button"
-					className=" aspect-square rounded-lg border border-neutral-200 flex items-center justify-center"
+					className=" aspect-square rounded-lg w-full h-full  bg-neutral-50 flex items-center justify-center"
 				>
 					<img
-						src={dummy}
+						src={plusIcon}
 						alt="add"
-						className='rounded'
+						className=''
 					/>
 				</button>
 			);
@@ -70,11 +74,11 @@ const Banner = () => {
 				640: {  spaceBetween: 16 },
 			}}
 			className="photo-swiper pb-6 h-106.75"
-			   onSwiper={(swiper) => setActiveRealIndex(swiper.realIndex)}
+			onSwiper={(swiper) => setActiveRealIndex(swiper.realIndex)}
 			onSlideChange={(swiper) => setActiveRealIndex(swiper.realIndex)}
 			loop
 		>
-			{PHOTO_ITEMS_DUMMY.map((item, idx) => (
+			{photoItems.map((item, idx) => (
 				<SwiperSlide
 					key={idx}
 					className="!w-78.75"
