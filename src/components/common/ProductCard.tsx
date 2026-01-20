@@ -26,8 +26,8 @@ const ProductCard = ({ company, name, price, rating, imageUrl }: ProductCardProp
           </div>
 
           {/* 2. 정보 카드 (137 x 67, 위로 -34px 겹침) */}
-          <div className="w-[137px] h-[67px] bg-white -mt-[34px] px-[10px] pt-[8px] pb-[12px] rounded-b-[10px] shadow-[0_-4px_10px_rgba(0,0,0,0.02)] z-10 flex flex-col justify-between">
-            
+          <div className="w-[137px] bg-white -mt-[34px] p-4 rounded-b-[10px] shadow-[0_-4px_10px_rgba(0,0,0,0.02)] z-10 flex flex-col gap-1">
+
             {/* 회사명 & 별점 */}
             <div className="flex justify-between items-center">
               <span className="text-[#767676] text-[10px]">

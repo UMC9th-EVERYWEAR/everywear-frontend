@@ -3,7 +3,7 @@ import React from 'react';
 interface ButtonProps {
   children: React.ReactNode;
   variant?: 'filled' | 'outlined' | 'hover';
-  size?: 'sm' | 'md' | 'lg';
+  size?: 'sm' | 'md' | 'lg' | 'xl';
   disabled?: boolean;
   onClick?: () => void;
 }
@@ -11,7 +11,7 @@ interface ButtonProps {
 export const Button = ({
   children,
   variant = 'filled',
-  size = 'md',
+  size = 'xl',
   disabled = false,
   onClick,
 }: ButtonProps) => {
@@ -24,6 +24,7 @@ export const Button = ({
     sm: 'w-[200px] p-[8px] text-[14px]',
     md: 'w-[300px] p-[10px] text-[16px]',
     lg: 'w-[340px] p-[12px] text-[18px]',
+    xl: 'w-full p-[16px] text-[18px]', 
   };
 
   const variantStyles = {
