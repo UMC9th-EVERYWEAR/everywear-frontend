@@ -1,12 +1,12 @@
 import { useRef, useState } from 'react';
 import { Button } from '../components/common/Button';
-import MusinsaLogo from "../../public/Images/MusinsaLogo.svg";
-import ZigzagLogo from "../../public/Images/ZigzagLogo.png";
-import Logo29cm from "../../public/Images/29cmLogo.svg";
-import WLogo from "../../public/Images/WLogo.svg";
+import MusinsaLogo from "../../public/LogoImages/MusinsaLogo.svg";
+import ZigzagLogo from "../../public/LogoImages/ZigzagLogo.png";
+import Logo29cm from "../../public/LogoImages/29cmLogo.svg";
+import WLogo from "../../public/LogoImages/WLogo.svg";
 import ProductCard from '../components/common/ProductCard';
-import RectangleIcon from "../../public/Images/Rectangle.svg"; 
-import EllipseIcon from "../../public/Images/Ellipse.svg";     
+import RectangleIcon from "../../public/LogoImages/Rectangle.svg"; 
+import EllipseIcon from "../../public/LogoImages/Ellipse.svg";     
 
 
 const products = [

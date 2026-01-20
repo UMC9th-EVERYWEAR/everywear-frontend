@@ -1,3 +1,4 @@
+import React from "react";
 export const ICON_DATA = {
   // '전체' 아이콘
   AllIcon: (isActive: boolean) => (
