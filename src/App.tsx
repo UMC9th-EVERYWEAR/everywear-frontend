@@ -3,8 +3,11 @@ import Header from './components/layout/Header';
 import { Navbar } from './components/layout/Navbar';
 import { Modal } from './components/common/Modal';
 import Home from './pages/Home';
+import CategoryBar from './components/common/CategoryBar';
+
 
 function App() {
+  const [isWithdrawOpen, setIsWithdrawOpen] = useState(false);
 
   return (
     <div className="min-h-screen bg-gray-50 flex justify-center">
@@ -12,6 +15,7 @@ function App() {
         
         {/* 상단 고정 헤더 */}
         <Header type="main" />
+        <CategoryBar />
 
         {/* 2. 메인 영역에 Home 컴포넌트를 넣습니다. */}
         <main className="flex-1 overflow-y-auto no-scrollbar">

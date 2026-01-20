@@ -1,5 +1,6 @@
 import { Navigate, Outlet } from 'react-router';
 import { PATH } from '../path';
+import Header from '@/src/components/layout/Header';
 
 
 /*
@@ -8,13 +9,14 @@ import { PATH } from '../path';
  */
 export default function ProtectedRoute() {
 	// TODO: Api 연결 시에는 apiclient에서 인증 상태를 확인하도록 변경
-	const isAuthed = true; // 임시: 항상 인증된 상태로 가정
+	const isAuthed = true; // 임시: 항상 인증된 상태로 가정w
 
 	if (!isAuthed) {
 		return <Navigate
 			to={PATH.LOGIN}
 			replace
 		       />;
+			   
 	}
 
 	return <Outlet />;
