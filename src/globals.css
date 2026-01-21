@@ -2,17 +2,24 @@
 
 
 
-
 @layer base {
+  :root {
+    --font-pretendard: "Pretendard";
+  }
+
   body {
     font-family: var(--font-pretendard);
   }
+}
+.text-bold-24 {
+  font-size: 24px;
+  font-weight: 700;
 }
 
 @theme {
   --line-height-default: 1.5;
 
-  
+  --color-neutral-1000: #D2D2D2;
   --color-neutral-900: #2a323f;
   --color-neutral-700: #596373;
   --color-neutral-500: #828b9a;
@@ -34,6 +41,15 @@
 }
 
 @layer utilities {
+
+  .font-head02-bold-20 {
+    font-family: 'PretendardBold', sans-serif;
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: -0.6px;
+  }
+  
   .text-bold-24 {
     font-size: 24px;
     font-weight: 700;
@@ -86,6 +102,11 @@
 
   .text-medium-16 {
     font-size: 16px;
+    font-weight: 500;
+  }
+
+  .text-medium-14 {
+    font-size: 14px;
     font-weight: 500;
   }
 

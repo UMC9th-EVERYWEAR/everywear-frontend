@@ -30,7 +30,7 @@ const RootLayout = () => {
 		{ pattern: PATH.CLOSET, title: '내 옷장' },
 		{ pattern: PATH.SETTING.ROOT, title: '설정' },
 		{ pattern: PATH.SETTING.CHANGE_PHOTO, title: '기본 사진 변경' },
-
+		{ pattern: PATH.SETTING.INQUIRY, title: '1:1 문의하기' },
 	] as const;
 
 	/*  getHeaderTitle: pathname으로 title 뽑는 함수 */

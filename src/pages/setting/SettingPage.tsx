@@ -33,6 +33,9 @@ const SettingPage = () => {
 		navigate(PATH.SETTING.CHANGE_PHOTO);
 	};
 
+	const goInquiry = () => {
+		navigate(PATH.SETTING.INQUIRY);
+	};
 
 
 	return <div className="mt-5 mx-4 w-[calc(100%-32px)]">
@@ -133,14 +136,17 @@ const SettingPage = () => {
 						/>
 					</div>
 
-					<div className='py-2 flex justify-between border-b-[0.5px] border-neutral-300 '>
+					<button 
+						onClick={goInquiry}
+						className='py-2 w-full flex justify-between border-b-[0.5px] border-neutral-300 cursor-pointer'
+					>
 						<span className='text-regular-14 flex items-center'>1:1 문의하기</span>
 						<img
 							src={arrowRight}
 							alt="arrow right"
 							className='cursor-pointer'
 						/>
-					</div>
+					</button>
 				</div>
 
 			</div>

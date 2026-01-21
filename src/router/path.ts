@@ -49,5 +49,6 @@ export const PATH = {
 		LOGOUT: '/setting/logout',
 		WITHDRAW: '/setting/withdraw',        
 		CHANGE_PHOTO: '/setting/change-photo',  
+		 INQUIRY: '/setting/inquiry',
 	},
 } as const;

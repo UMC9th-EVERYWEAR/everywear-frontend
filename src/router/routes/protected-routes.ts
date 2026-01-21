@@ -2,6 +2,7 @@ import SettingPhotoPage from '@/src/pages/setting/SettingPhotoPage';
 import Home from '../../pages/Home';
 import SettingPage from '../../pages/setting/SettingPage';
 import { PATH } from '../path';
+import SettingInquiry from '@/src/pages/setting/SettingInquiry';
 
 /*
  * protectedRoutes
@@ -20,6 +21,10 @@ export const protectedRoutes = [
 	{
 		path: PATH.SETTING.CHANGE_PHOTO,
 		Component: SettingPhotoPage,
+	},
+	{
+		path: PATH.SETTING.INQUIRY,
+		Component: SettingInquiry,
 	},
 	// 필요하면 계속 추가
 	// { path: PATH.CLOSET, Component: ClosetPage },
