@@ -1,23 +1,23 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import ProtectedRoute from './router/routes/ProtectedRoute'; 
-import Home from './pages/Home';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { PATH } from './router/path'; 
+import RootLayout from '@/src/components/layout/RootLayout';
+import ProtectedRoute from '@/src/router/routes/ProtectedRoute';
+import Home from '@/src/pages/Home';
 
 function App() {
   return (
-    <Router>
-      <div className="min-h-screen bg-gray-50 flex justify-center">
-        {/* 모바일 뷰 컨테이너 */}
-        <div className="relative w-[375px] h-screen bg-white shadow-lg overflow-hidden flex flex-col">
-          
-          <Routes>
-            <Route element={<ProtectedRoute />}>
-              <Route path="/" element={<Home />} />
-            </Route>
-          </Routes>
+    <BrowserRouter>
+      <Routes>
+        <Route element={<RootLayout />}>
+          <Route element={<ProtectedRoute />}>
+            <Route path="/" element={<Navigate to={PATH.HOME} replace />} />
+            
+            <Route path={PATH.HOME} element={<Home />} />
+          </Route>
 
-        </div>
-      </div>
-    </Router>
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
 

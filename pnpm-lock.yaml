@@ -23,6 +23,9 @@ importers:
       react-router:
         specifier: ^7.12.0
         version: 7.12.0(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
+      react-router-dom:
+        specifier: ^7.12.0
+        version: 7.12.0(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       tailwindcss:
         specifier: ^4.1.18
         version: 4.1.18
@@ -78,12 +81,9 @@ importers:
       globals:
         specifier: ^16.5.0
         version: 16.5.0
-<<<<<<< HEAD
-=======
       lefthook:
         specifier: ^2.0.15
         version: 2.0.15
->>>>>>> develop
       typescript:
         specifier: ~5.9.3
         version: 5.9.3
@@ -1438,8 +1438,6 @@ packages:
     resolution: {integrity: sha512-MbjN408fEndfiQXbFQ1vnd+1NoLDsnQW41410oQBXiyXDMYH5z505juWa4KUE1LqxRC7DgOgZDbKLxHIwm27hA==}
     engines: {node: '>=0.10'}
 
-<<<<<<< HEAD
-=======
   lefthook-darwin-arm64@2.0.15:
     resolution: {integrity: sha512-ygAqG/NzOgY9bEiqeQtiOmCRTtp9AmOd3eyrpEaSrRB9V9f3RHRgWDrWbde9BiHSsCzcbeY9/X2NuKZ69eUsNA==}
     cpu: [arm64]
@@ -1494,7 +1492,6 @@ packages:
     resolution: {integrity: sha512-sl5rePO6UUOLKp6Ci+MMKOc86zicBaPUCvSw2Cq4gCAgTmxpxhIjhz7LOu2ObYerVRPpTq3gvzPTjI71UotjnA==}
     hasBin: true
 
->>>>>>> develop
   levn@0.4.1:
     resolution: {integrity: sha512-+bT2uH4E5LGE7h/n3evcS/sQlJXCpIp6ym8OWJ5eV6+67Dsql/LaaT7qJBAt2rzfoa/5QBGBhxDix1dMt2kQKQ==}
     engines: {node: '>= 0.8.0'}
@@ -1715,7 +1712,6 @@ packages:
     resolution: {integrity: sha512-QgT5//D3jfjJb6Gsjxv0Slpj23ip+HtOpnNgnb2S5zU3CB26G/IDPGoy4RJB42wzFE46DRsstbW6tKHoKbhAxw==}
     engines: {node: '>=0.10.0'}
 
-<<<<<<< HEAD
   react-router-dom@7.12.0:
     resolution: {integrity: sha512-pfO9fiBcpEfX4Tx+iTYKDtPbrSLLCbwJ5EqP+SPYQu1VYCXdy79GSj0wttR0U4cikVdlImZuEZ/9ZNCgoaxwBA==}
     engines: {node: '>=20.0.0'}
@@ -1723,8 +1719,6 @@ packages:
       react: '>=18'
       react-dom: '>=18'
 
-=======
->>>>>>> develop
   react-router@7.12.0:
     resolution: {integrity: sha512-kTPDYPFzDVGIIGNLS5VJykK0HfHLY5MF3b+xj0/tTyNYL1gF1qs7u67Z9jEhQk2sQ98SUaHxlG31g1JtF7IfVw==}
     engines: {node: '>=20.0.0'}
@@ -3547,8 +3541,6 @@ snapshots:
     dependencies:
       language-subtag-registry: 0.3.23
 
-<<<<<<< HEAD
-=======
   lefthook-darwin-arm64@2.0.15:
     optional: true
 
@@ -3592,7 +3584,6 @@ snapshots:
       lefthook-windows-arm64: 2.0.15
       lefthook-windows-x64: 2.0.15
 
->>>>>>> develop
   levn@0.4.1:
     dependencies:
       prelude-ls: 1.2.1
@@ -3791,15 +3782,12 @@ snapshots:
 
   react-refresh@0.18.0: {}
 
-<<<<<<< HEAD
   react-router-dom@7.12.0(react-dom@19.2.3(react@19.2.3))(react@19.2.3):
     dependencies:
       react: 19.2.3
       react-dom: 19.2.3(react@19.2.3)
       react-router: 7.12.0(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
 
-=======
->>>>>>> develop
   react-router@7.12.0(react-dom@19.2.3(react@19.2.3))(react@19.2.3):
     dependencies:
       cookie: 1.1.1
