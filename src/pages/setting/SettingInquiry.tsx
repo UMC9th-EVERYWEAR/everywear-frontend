@@ -5,7 +5,6 @@ import emailjs from '@emailjs/browser';
 import { uploadImageToImgBB } from '@/src/lib/imgbb';
 import AttachmentPicker from '@/src/components/setting/setting-inquiry/AttachmentPicker';
 import { Modal } from '@/src/components/common/Modal';
-import { set } from 'zod';
 
 
 type TagCategory = '앱 오류신고' | '앱 개선제안' | '앱 이용문의';

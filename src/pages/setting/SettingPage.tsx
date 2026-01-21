@@ -1,4 +1,5 @@
 import arrowRight from '@/public/svgs/arrow-right.svg';
+import { Modal } from '@/src/components/common/Modal';
 import { ArrowRightIcon } from '@/src/components/setting/ArrowRightIcon.';
 import ToggleBtn from '@/src/components/setting/ToggleBtn';
 import { PATH } from '@/src/router/path';
@@ -6,6 +7,8 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router';
 const SettingPage = () => {	
 	const [openLoginSetting, setOpenLoginSetting] = useState(false);
+	const [openLogoutSetting, setOpenLogoutSetting] = useState(false);
+	
 	const [isNotificationEnabled, setIsNotificationEnabled] = useState(false);
 	const [linkedSocialAccounts, setLinkedSocialAccounts] = useState({
 		naver: false,
@@ -153,10 +156,25 @@ const SettingPage = () => {
 		</div>
 
 		<div className='text-neutral-700 text-regular-12'>
-			<p className='cursor-pointer'>로그아웃</p>
-			<p className='cursor-pointer'>회원탈퇴</p>
+			<button
+				onClick={()=>setOpenLogoutSetting(true)}
+				className='cursor-pointer py-1'
+			>로그아웃</button>
+			<p className='cursor-pointer py-1'>회원탈퇴</p>
 		</div>
 
+		{
+			openLogoutSetting && (
+				<Modal
+					isOpen={openLogoutSetting}
+					title='로그아웃 하시겠습니까?'
+					onClose={()=>setOpenLogoutSetting(false)}
+					btn1Action={()=>setOpenLogoutSetting(false)} // TODO:로컬스토리지 삭제 후 로그인 화면 이동
+					btn1Text='예'
+					btn2Action={()=>setOpenLogoutSetting(false)}
+					btn2Text='아니요'
+				/> )
+		}
 	</div>;
 }
 
