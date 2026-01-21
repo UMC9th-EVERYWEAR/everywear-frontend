@@ -4,6 +4,8 @@ import { useState } from 'react';
 import emailjs from '@emailjs/browser';
 import { uploadImageToImgBB } from '@/src/lib/imgbb';
 import AttachmentPicker from '@/src/components/setting/setting-inquiry/AttachmentPicker';
+import { Modal } from '@/src/components/common/Modal';
+import { set } from 'zod';
 
 
 type TagCategory = '앱 오류신고' | '앱 개선제안' | '앱 이용문의';
@@ -23,6 +25,8 @@ const SettingInquiry = () => {
 
 	const [files, setFiles] = useState<File[]>([]);
 	const [isSending, setIsSending] = useState(false);
+
+	const [completed, setCompleted] = useState(false);
 
 
 	
@@ -89,8 +93,7 @@ const SettingInquiry = () => {
 				{ publicKey: PUBLIC_KEY },
 			);
 
-			alert('문의가 전송되었습니다!');
-
+			setCompleted(true);
 			// reset
 			setTitle('');
 			setEmail('');
@@ -215,10 +218,22 @@ const SettingInquiry = () => {
 			<button
 				type="submit"             
 				disabled={isSending}
-				className="w-85 h-11 rounded-lg bg-primary-600 text-white text-medium-16 disabled:opacity-50"
+				className="w-85 h-11 rounded-lg bg-primary-600 text-white text-medium-16 disabled:opacity-50 cursor-pointer"
 			>
 				{isSending ? '전송 중...' : '접수하기'}
 			</button>
+
+			{
+				completed && (
+					<Modal
+						isOpen={completed}
+						title='접수가 완료되었습니다'
+						btn1Action={()=>setCompleted(false)}
+						btn1Text='확인'
+						onClose={()=>setCompleted(false)}
+					/>
+				)
+			}
 		</form>
 	);
 };
