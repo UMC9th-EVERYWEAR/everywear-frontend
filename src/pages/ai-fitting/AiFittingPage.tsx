@@ -25,7 +25,7 @@ const AiFittingPage = () => {
 				{/* AI 피팅 버튼 */}
 				<button
 					className={clsx(
-						'text-base flex-1 h-11 flex items-center justify-center p-2.5  transition-all duration-300', 
+						'text-base flex-1 h-11 flex items-center justify-center p-2.5  transition-all duration-300 cursor-pointer', 
 						!isAiFitting ? 'text-primary-600' :
 							'text-neutral-400')}
 					onClick={handleTabBar}
@@ -34,7 +34,7 @@ const AiFittingPage = () => {
 				{/* AI 리뷰 버튼 */}
 				<button
 					className={clsx(
-						'text-base flex-1 h-11 flex items-center justify-center p-2.5  transition-all duration-300', 
+						'text-base flex-1 h-11 flex items-center justify-center p-2.5  transition-all duration-300 cursor-pointer', 
 						isAiFitting ? 'text-primary-600' :
 							'text-neutral-400')}
 					onClick={handleTabBar}
@@ -49,8 +49,8 @@ const AiFittingPage = () => {
 					)}
 				/>
 			</div>
-
-			<div className='border rounded-xl border-neutral-200 border-solid h-25.75 px-[10px] py-[6px] flex'>
+			{/* 피팅 상품 정보(FittingItemInfo) */}
+			<div className='border rounded-xl border-neutral-200 border-solid h-25.75 px-[10px] py-[6px] flex mb-[10px]'>
 				
 				{/* 피팅 상품 이미지 */}
 				<div className='flex items-center h-full py-[3px] mr-[16px]'>
@@ -84,11 +84,17 @@ const AiFittingPage = () => {
 
 					{/* 구매하기 & 내 옷장 저장(하트) 버튼 */}
 					<div className='flex justify-between'>
-						<div className='w-[201px] p-[4px] bg-primary-600 border rounded-[10px] flex justify-center text-neutral-50 text-regular-16'>
+						<button
+							className='w-[201px] p-[4px] bg-primary-600 border rounded-[10px] 
+                        flex justify-center text-neutral-50 text-regular-16 cursor-pointer'
+						>
 							구매하기
-						</div>
+						</button>
 						<div className='flex items-center '>
-							<button onClick={handleHeart}>
+							<button
+								onClick={handleHeart}
+								className='cursor-pointer'
+							>
 								{isHearted ? <img
 									src={FittingCardHeartFill}
 									alt='내 옷장 저장'
@@ -100,6 +106,32 @@ const AiFittingPage = () => {
 						</div>
 					</div>
 				</div>
+			</div>
+			<div className='h-[541px] w-full flex flex-col items-center justify-between'>
+				{/* 피팅 전 사진(before) & 사진 변경하기 버튼 */}
+				<div className='h-[473px] w-full px-[10px] py-[16px] flex flex-col items-center border rounded-xl border-neutral-200 justify-between'>
+					{/* 피팅 전 사진 */}
+					<img
+						className='border border-none rounded-xl h-[384.754px] w-[323px] flex items-center'
+						src='https://lh3.googleusercontent.com/d/1XuItc3eisxkLo6ZXqClQs-ZcsbYU0brI'
+						alt='피팅 전 사진'
+					/>
+
+					{/* 사진 변경하기 버튼 */}
+					<button
+						className='w-[164px] h-[44px] p-[10px] border rounded-[10px] 
+                border-solid border-primary-600 flex justify-center items-center text-primary-600 cursor-pointer'
+					>
+						사진 변경하기
+					</button>
+
+				</div>
+
+				{/* 구매하기 버튼 */}
+				<button
+					className='p-[10px] w-[343px] h-[48px] flex justify-center items-center
+                 bg-primary-600 border rounded-[10px] text-regular-16 text-[#F0F2F7] cursor-pointer'
+				>AI 피팅하기</button>
 			</div>
 		</div>
 	)
