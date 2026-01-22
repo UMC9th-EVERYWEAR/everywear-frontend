@@ -3,6 +3,7 @@ import Home from '../../pages/Home';
 import SettingPage from '../../pages/setting/SettingPage';
 import { PATH } from '../path';
 import SettingInquiry from '@/src/pages/setting/SettingInquiry';
+import SettingWithdraw from '@/src/pages/setting/SettingWithdrawPage';
 
 /*
  * protectedRoutes
@@ -26,6 +27,12 @@ export const protectedRoutes = [
 		path: PATH.SETTING.INQUIRY,
 		Component: SettingInquiry,
 	},
+	{
+		path: PATH.SETTING.WITHDRAW,
+		Component:  SettingWithdraw
+		,
+	},
+	
 	// 필요하면 계속 추가
 	// { path: PATH.CLOSET, Component: ClosetPage },
 	// { path: PATH.PRODUCTS.ROOT, Component: ProductsPage },

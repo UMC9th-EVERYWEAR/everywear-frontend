@@ -40,6 +40,9 @@ const SettingPage = () => {
 		navigate(PATH.SETTING.INQUIRY);
 	};
 
+	const goWithdraw = () => {
+		navigate(PATH.SETTING.WITHDRAW);
+	};
 
 	return <div className="mt-5 mx-4 w-[calc(100%-32px)]">
 		<div className='text-neutral-900  mb-7 '>
@@ -155,12 +158,15 @@ const SettingPage = () => {
 			</div>
 		</div>
 
-		<div className='text-neutral-700 text-regular-12'>
+		<div className='text-neutral-700 flex flex-col items-start text-regular-12'>
 			<button
 				onClick={()=>setOpenLogoutSetting(true)}
 				className='cursor-pointer py-1'
 			>로그아웃</button>
-			<p className='cursor-pointer py-1'>회원탈퇴</p>
+			<button
+				onClick={goWithdraw}
+				className='cursor-pointer py-1'
+			>회원탈퇴</button>
 		</div>
 
 		{
