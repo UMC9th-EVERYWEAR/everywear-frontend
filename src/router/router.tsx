@@ -25,13 +25,14 @@ export const router = createBrowserRouter([
         children: [
           ...protectedRoutes,
           {
-            path: 'home', // 'www.site.com/home'으로 접속
+            path: '/home', 
             Component: Home,
           },
           {
-            path: 'recent-fitting',
+            path: '/recent-fitting',
             Component: RecentFittingPage,
           },
+          
         ],
       },
 
