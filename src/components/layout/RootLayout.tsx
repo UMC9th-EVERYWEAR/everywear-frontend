@@ -13,6 +13,8 @@ const RootLayout = () => {
 	/* hideHeaderRoutes: 헤더 숨길 라우트 목록 */
 	const hideHeaderRoutes = ['/login', '/onboarding'];
 	/* hideNavRoutes: Nav 숨길 라우트 목록 */ 
+	const hideNavRoutes = ['/login', '/onboarding', '/onboarding/photo'];
+
 	// 추후 추가 가능
 
 	// 헤더 기능은 딱 2개
@@ -20,6 +22,8 @@ const RootLayout = () => {
 	// 2. setting 페이지로 이동
 
 	const shouldHideHeader = hideHeaderRoutes.includes(pathname);
+	const shouldHideNav = hideNavRoutes.includes(pathname);
+
 
 
 	/* HEADER_TITLE_MAP: 추후 헤더 타이틀 동적 변경 */
@@ -56,7 +60,7 @@ const RootLayout = () => {
 					<div className='grow bg-white'>
 						<Outlet />
 					</div>
-					<Navbar />
+					{!shouldHideNav &&	<Navbar />}
 					{/* 모달 등 전역 요소 */}
 					<Modal 
 						isOpen={isWithdrawOpen}
