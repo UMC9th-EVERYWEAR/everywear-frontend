@@ -60,8 +60,24 @@ export const dummyReviewData: ReviewDataAll = [
 		weight: 85,
 		reviewImage: [
 			{
+				id: 1,
+				imgUrl: 'https://lh3.googleusercontent.com/d/1eiIWEzT2SD1mdYZC1uDOko1vKCyMd5w-',
+			},
+			{
+				id: 2,
+				imgUrl: 'https://lh3.googleusercontent.com/d/1eiIWEzT2SD1mdYZC1uDOko1vKCyMd5w-',
+			},
+			{
 				id: 3,
-				imgUrl: 'https://via.placeholder.com/150',
+				imgUrl: 'https://lh3.googleusercontent.com/d/1eiIWEzT2SD1mdYZC1uDOko1vKCyMd5w-',
+			},
+			{
+				id: 4,
+				imgUrl: 'https://lh3.googleusercontent.com/d/1eiIWEzT2SD1mdYZC1uDOko1vKCyMd5w-',
+			},
+			{
+				id: 5,
+				imgUrl: 'https://lh3.googleusercontent.com/d/1eiIWEzT2SD1mdYZC1uDOko1vKCyMd5w-',
 			},
 		],
 		reviewBody: '오버핏으로 입으려고 한 치수 크게 샀는데 딱 원하는 느낌입니다. 재질이 부드러워서 피부에 닿는 느낌이 좋아요.',

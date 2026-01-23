@@ -4,6 +4,8 @@ import FittingItemInfo from '@/src/components/ai-fitting/FittingItemInfo';
 import AiFittingBody from '@/src/components/ai-fitting/AiFittingBody';
 import AiReviewBody from '@/src/components/ai-fitting/AiReveiwBody';
 
+import { dummyReviewData, dummyReviewKeywordData, dummyReviewSummaryData } from '@/src/data/ai-fitting/reviewMockData';
+
 const AiFittingPage = () => {
 	// 목데이터
 	const imageUrlExample = 'https://lh3.googleusercontent.com/d/1XuItc3eisxkLo6ZXqClQs-ZcsbYU0brI'
@@ -50,12 +52,22 @@ const AiFittingPage = () => {
 				handleHeart={handleHeart}
 			/>
 			
-			{!isAiFitting ? <AiFittingBody
-				isFittingFetching={isFittingFetching}
-				isFittingPending={isFittingPending}
-				imageUrlExample={imageUrlExample}
-				handleFittingStarted={handleFittingStarted}
-			                /> : <AiReviewBody />}
+			{!isAiFitting ? 
+				<AiFittingBody
+					isFittingFetching={isFittingFetching}
+					isFittingPending={isFittingPending}
+					imageUrlExample={imageUrlExample}
+					handleFittingStarted={handleFittingStarted}
+				/> : 
+				<AiReviewBody
+					isAnalysisStarted={true}
+					isReviewFetching={false}
+					isReviewSummaryFetching={false}
+					summaryData={dummyReviewSummaryData}
+					keywordData={dummyReviewKeywordData.data}
+					reviewData={dummyReviewData}
+
+				/>}
 		</div>
 	)
 }
