@@ -1,13 +1,13 @@
-import { Component } from 'react';
-import Home from '../../pages/Home';
-import SettingPage from '../../pages/setting/SettingPage';
-import { PATH } from '../path';
-import RecentFittingPage from '../../pages/recent-fitting';
 
 /*
  * protectedRoutes
  * - 인증이 필요한 페이지들
  */
+
+import Home from '@/src/pages/home/home-page';
+import SettingPage from '@/src/pages/setting/setting-page';
+import  { PATH } from '@/src/shared/configs/path';
+import RecentFitting from '@/src/pages/recent-fitting/recent-fitting-page';
 
 export const protectedRoutes = [
 	{
@@ -20,7 +20,7 @@ export const protectedRoutes = [
 	},
 	{
 		path: PATH.RECENT_FITTING,
-		Component: RecentFittingPage,
+		Component: RecentFitting,
 	},
 	// 필요하면 계속 추가
 	// { path: PATH.CLOSET, Component: ClosetPage },

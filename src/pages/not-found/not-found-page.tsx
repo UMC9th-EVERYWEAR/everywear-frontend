@@ -1,6 +1,6 @@
+import { PATH } from '@/src/shared/configs/path';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router';
-import { PATH } from '../router/path';
 
 const NotFoundPage = () => {
 	const navigate = useNavigate();

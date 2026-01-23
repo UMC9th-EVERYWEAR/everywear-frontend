@@ -1,5 +1,5 @@
 import { Navigate, Outlet } from 'react-router';
-import { PATH } from '../path';
+import { PATH } from '../../../shared/configs/path';
 /*
  * 인증이 필요한 라우트를 감싸는 Guard 컴포넌트
  * 인증 안 된 경우 login으로 보내고, 인증 된 경우 Outlet으로 자식 라우트 렌더

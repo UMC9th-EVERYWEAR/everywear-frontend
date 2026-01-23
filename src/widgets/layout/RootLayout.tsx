@@ -1,9 +1,9 @@
 import { matchPath, Outlet, useLocation } from 'react-router';
-import Header from './Header';
-import { Navbar } from './Navbar';
-import { Modal } from '../common/Modal';
+import Header from '@/src/widgets/layout/Header';
+import { Navbar } from '@/src/widgets/layout/Navbar';
+import { Modal } from '@/src/shared/components/common/Modal';
 import { useState } from 'react';
-import { PATH } from '../../router/path';
+import  { PATH } from '@/src/shared/configs/path';
 
 const RootLayout = () => {
 	const { pathname } = useLocation();
