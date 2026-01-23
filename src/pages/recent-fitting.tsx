@@ -3,15 +3,7 @@ import React from 'react';
 // 임시 데이터: api연동 필요
 const fittingHistory = [
   
-  { id: 1, date: '2025.6.7', month: '2025년 6월', imageUrl: 'https://via.placeholder.com/300' },
-  { id: 2, date: '2025.6.7', month: '2025년 6월', imageUrl: 'https://via.placeholder.com/300' },
-  { id: 3, date: '2025.6.7', month: '2025년 6월', imageUrl: 'https://via.placeholder.com/300' },
-  { id: 4, date: '2025.5.7', month: '2025년 5월', imageUrl: 'https://via.placeholder.com/300' },
-  { id: 5, date: '2025.5.7', month: '2025년 5월', imageUrl: 'https://via.placeholder.com/300' },
-  { id: 6, date: '2025.5.7', month: '2025년 5월', imageUrl: 'https://via.placeholder.com/300' },
-  { id: 7, date: '2025.4.7', month: '2025년 4월', imageUrl: 'https://via.placeholder.com/300' },
-  { id: 8, date: '2025.4.7', month: '2025년 4월', imageUrl: 'https://via.placeholder.com/300' },
-  { id: 9, date: '2025.4.7', month: '2025년 4월', imageUrl: 'https://via.placeholder.com/300' },
+  
 ];
 
 const RecentFitting = () => {
