@@ -6,17 +6,16 @@ interface HeaderProps {
 
 const Header = ({ type, title = '최근 피팅 내역', onBack }: HeaderProps) => {
 	return (
-		<header className="w-full  h-[45px] px-4 bg-white flex items-center sticky top-0 z-30">
+		<header className="w-full h-[45px] px-4 bg-white flex items-center sticky top-0 z-30 shadow-[0_2px_8px_rgba(0,0,0,0.06)]">
       
 			{type === 'main' ? (
 			/*1. 메인 헤더 레이아웃*/
 				<div className="flex justify-between items-end w-full pb-1">
-					<h1 
-						className="text-[#3B4599] text-[20px] font-[800] tracking-[-0.4px] leading-none"
-						style={{ fontFamily: 'Pretendard' }}
-					>
-						Every Wear
-					</h1>
+					<img 
+      				  src="../../public/LogoImages/Everywear.svg" 
+       				 alt="Everywear" 
+        			className="h-[18px] w-auto object-contain" 
+      				/>
 					<button className="text-[#3B4599] transition-opacity active:opacity-50 cursor-pointer">
 						<svg
 							xmlns="http://www.w3.org/2000/svg"

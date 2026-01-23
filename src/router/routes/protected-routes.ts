@@ -1,6 +1,8 @@
+import { Component } from 'react';
 import Home from '../../pages/Home';
 import SettingPage from '../../pages/setting/SettingPage';
 import { PATH } from '../path';
+import RecentFittingPage from '../../pages/recent-fitting';
 
 /*
  * protectedRoutes
@@ -15,6 +17,10 @@ export const protectedRoutes = [
 	{
 		path: PATH.SETTING.ROOT,
 		Component: SettingPage,
+	},
+	{
+		path: PATH.RECENT_FITTING,
+		Component: RecentFittingPage,
 	},
 	// 필요하면 계속 추가
 	// { path: PATH.CLOSET, Component: ClosetPage },

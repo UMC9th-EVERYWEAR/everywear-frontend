@@ -1,10 +1,11 @@
 import { createBrowserRouter } from 'react-router';
-
+import RecentFittingPage from '../pages/recent-fitting';
 import { protectedRoutes } from './routes/protected-routes';
 import ProtectedRoute from './routes/ProtectedRoute';
 import { publicRoutes } from './routes/public-routes';
 import RootLayout from '../components/layout/RootLayout';
 import NotFoundPage from '../pages/NotFoundPage';
+import Home from '../pages/Home';
 
 
   	/*  RootLayout 아래에
@@ -20,12 +21,22 @@ export const router = createBrowserRouter([
 		children: [
 			...publicRoutes, // 인증 필요 없는 페이지들(/login 등)
 			{
-				Component: ProtectedRoute,
-				children: protectedRoutes,
-			},
-			      { path: '*', Component: NotFoundPage },
+        Component: ProtectedRoute,
+        children: [
+          ...protectedRoutes,
+          {
+            path: 'home', // 'www.site.com/home'으로 접속
+            Component: Home,
+          },
+          {
+            path: 'recent-fitting',
+            Component: RecentFittingPage,
+          },
+        ],
+      },
 
-		],
-	},
-
+      // 3. 잘못된 주소 접근 시
+      { path: '*', Component: NotFoundPage },
+    ],
+  },
 ]);
