@@ -24,7 +24,7 @@ const AiFittingFrame = ({ isFittingPending, type, imgUrl } : AiFittingFrameProps
 					alt='피팅 전/후 이미지'
 				                     /> : <div className='h-[116px] w-full flex flex-col justify-between items-center'>
 					<span className='text-regular-16 text-neutral-900'>가상 피팅을 진행중입니다.</span>
-					<LoadingSpinner />
+					<LoadingSpinner size={15}/>
 				</div>}
 
 			</div>

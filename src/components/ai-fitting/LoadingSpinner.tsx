@@ -1,27 +1,23 @@
-// export const LoadingSpinner = () => {
-// 	return (
-// 		<div
-// 			className="size-12 animate-spin rounded-full border-6 border-[#d9d9d9] border-t-primary-600"
-// 			role="status"
-// 		>
-// 			{/* <span className="sr-only">로딩 중...</span> */}
-// 		</div>
-// 	);
-// };
-export const LoadingSpinner = () => {
+interface LoadingSpinnerProps {
+	size : number;
+}
+
+export const LoadingSpinner = ({ size } : LoadingSpinnerProps) => {
+	const pixelSize = size * 4;
 	return (
 		<div role="status">
 			<svg
-				// size-12 (48px) 등 크기는 여기서 조절하세요
-				className="size-15 animate-spin" 
+				className='animate-spin'
+				style={{ width: pixelSize, height: pixelSize }}
 				viewBox="0 0 24 24"
 				fill="none"
 				xmlns="http://www.w3.org/2000/svg"
 			>
 				{/* 1. 회색 배경 트랙 (완전한 원) */}
 				<circle
-					className="text-gray-200" // 이미지의 연회색 부분
-					strokeWidth="3" // 선 두께
+					className="text-gray-300"
+					strokeWidth="3" 
+					strokeLinecap="round"
 					stroke="currentColor"
 					r="10"
 					cx="12"
@@ -42,7 +38,6 @@ export const LoadingSpinner = () => {
 					strokeDasharray="18 45" 
 				/>
 			</svg>
-			<span className="sr-only">로딩 중...</span>
 		</div>
 	);
 };
