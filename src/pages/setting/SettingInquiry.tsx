@@ -1,16 +1,20 @@
 import Tag from '@/src/components/setting/setting-inquiry/Tag';
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useState } from 'react';
 import emailjs from '@emailjs/browser';
 import { uploadImageToImgBB } from '@/src/lib/imgbb';
 import AttachmentPicker from '@/src/components/setting/setting-inquiry/AttachmentPicker';
 import { Modal } from '@/src/components/common/Modal';
+import type { TagCategory, InquiryDraft } from '@/src/types/schemas/setting/setting-inquiry';
 
 
-type TagCategory = '앱 오류신고' | '앱 개선제안' | '앱 이용문의';
+
+
 const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
 const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
 const PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+const INQUIRY_DRAFT_KEY = 'everywear:setting-inquiry:draft';
+
 
 
 const SettingInquiry = () => {
@@ -26,6 +30,45 @@ const SettingInquiry = () => {
 	const [isSending, setIsSending] = useState(false);
 
 	const [completed, setCompleted] = useState(false);
+	const [draftLoaded, setDraftLoaded] = useState(false);
+
+
+	// 복원 useEffect ( 추후에 창 나가기 시에 초기화하는 것으로 수정)
+	useEffect(() => {
+		try {
+			const raw = localStorage.getItem(INQUIRY_DRAFT_KEY);
+			if (!raw) return;
+
+			const parsed: InquiryDraft = JSON.parse(raw);
+
+			setTagCategory(parsed.tagCategory ?? '앱 오류신고');
+			setTitle(parsed.title ?? '');
+			setEmail(parsed.email ?? '');
+			setMessage(parsed.message ?? '');
+		} catch (e) {
+			console.error('draft restore failed', e);
+		}finally {
+			setDraftLoaded(true); // 복원 완료
+		}
+	}, []);
+
+
+	useEffect(() => {
+		  if (!draftLoaded) return; //  복원 끝나기 전이면 저장 X
+
+		const draft: InquiryDraft = {
+			tagCategory,
+			title,
+			email,
+			message,
+		};
+
+		try {
+			localStorage.setItem(INQUIRY_DRAFT_KEY, JSON.stringify(draft));
+		} catch (e) {
+			console.error('draft save failed', e);
+		}
+	}, [tagCategory, title, email, message]);
 
 
 	
@@ -60,7 +103,7 @@ const SettingInquiry = () => {
 			const deleteUrls = uploadResults.map((r) => r.deleteUrl);
 
 			// 2) EmailJS 템플릿 변수 구성
-			// ✅ 템플릿에서 image_urls, image_html 변수를 활용할 수 있게 전달
+			// 템플릿에서 image_urls, image_html 변수를 활용할 수 있게 전달
 			const imageHtml = imageUrls
 				.map(
 					(url) => `
@@ -82,15 +125,16 @@ const SettingInquiry = () => {
 					category: tagCategory,
 					message: `[${tagCategory}]\n\n${message}`,
 
-					// ✅ 템플릿에서 쓸 변수들
+					// 템플릿에서 쓸 변수들
 					image_urls: imageUrls.join('\n'),
 					image_html: imageHtml,
 
-					// (선택) 추후 삭제용 링크
+					// 추후 삭제용 링크
 					delete_urls: deleteUrls.join('\n'),
 				},
 				{ publicKey: PUBLIC_KEY },
 			);
+			localStorage.removeItem(INQUIRY_DRAFT_KEY);
 
 			setCompleted(true);
 			// reset

@@ -69,7 +69,7 @@ const AttachmentPicker = ({ max = 5, files, onChangeFiles }: AttachmentPickerPro
 				{previewUrls.map(({ file, url }, idx) => (
 					<div
 						key={`${file.name}-${idx}`}
-						className="relative w-18.5 h-20rounded-2xl border border-neutral-400"
+						className="relative w-18.5 h-20rounded-2xl border border-neutral-400 rounded-lg"
 					>
 						<img
 							src={url}

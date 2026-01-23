@@ -9,11 +9,11 @@ import { Modal } from '@/src/components/common/Modal';
 import { useState } from 'react';
 const SettingWithdraw = () => {
 
-	const [withdrawDisable, setWithdrawDisabled] = useState(false);
+	const [isConfirmed, setIsConfirmed] = useState(false);
 	const [openWithdraw, setOpenWithdraw] = useState(false)
 
 	const toggleWithdraw = () => {
-		setWithdrawDisabled((prev)=> !prev)
+		setIsConfirmed((prev)=> !prev)
 	}
 	const userName = '홍길동'; // TODO: 나중엔 데이터로 가져옴
 	return <div className='mx-4 mt-3.5 text-neutral-900 h-screen overflow-hidden flex flex-col items-center'>
@@ -42,7 +42,7 @@ const SettingWithdraw = () => {
 					onClick={toggleWithdraw}
 				>
 					<img
-						src={withdrawDisable ? unCheck : completeCheck }
+						src={isConfirmed ? completeCheck:  unCheck }
 						alt='check'
 					/>
 					<p className='text-medium-16'>탈퇴 유의사항을 모두 확인했어요.</p>
@@ -50,7 +50,7 @@ const SettingWithdraw = () => {
 			</div>
 			<Button
 				variant='filled'
-				disabled={withdrawDisable}
+				disabled={!isConfirmed}
 				onClick={()=>setOpenWithdraw(true)}
 			>탈퇴하기</Button>
 		</div>
