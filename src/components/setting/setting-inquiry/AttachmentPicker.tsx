@@ -74,7 +74,7 @@ const AttachmentPicker = ({ max = 5, files, onChangeFiles }: AttachmentPickerPro
 						<img
 							src={url}
 							alt="preview"
-							className="w-full h-full object-cover"
+							className="w-full h-full object-cover rounded-lg"
 						/>
 
 						<button
