@@ -2,7 +2,7 @@ import { Component } from 'react';
 import Home from '../../pages/Home';
 import SettingPage from '../../pages/setting/SettingPage';
 import { PATH } from '../path';
-import RecentFittingPage from '../../pages/recent-fitting';
+import RecentFittingPage from '../../pages/RecentFitting';
 
 /*
  * protectedRoutes

@@ -1,11 +1,12 @@
 import { useNavigate, useLocation } from 'react-router'; 
 import { HomeIcon, ProductIcon, FittingIcon, ClosetIcon } from '../common/Icons';
+import { PATH } from '@/src/router/path';
 
 const NAV_ITEMS = [
-    { id: 'home', label: '홈', Icon: HomeIcon, path: '/home' }, 
-    { id: 'product', label: '전체 상품', Icon: ProductIcon, path: '/product' },
-    { id: 'fitting', label: '최근 피팅', Icon: FittingIcon, path: '/recent-fitting' },
-    { id: 'closet', label: '내 옷장', Icon: ClosetIcon, path: '/closet' },
+	{ id: 'home', label: '홈', Icon: HomeIcon, path: PATH.HOME }, 
+	{ id: 'product', label: '전체 상품', Icon: ProductIcon, path: PATH.PRODUCTS.ROOT },
+	{ id: 'fitting', label: '최근 피팅', Icon: FittingIcon, path: PATH.RECENT_FITTING },
+	{ id: 'closet', label: '내 옷장', Icon: ClosetIcon, path: PATH.CLOSET },
 ];
 
 export const Navbar = () => {

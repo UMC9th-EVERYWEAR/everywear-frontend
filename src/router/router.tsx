@@ -1,5 +1,5 @@
 import { createBrowserRouter } from 'react-router';
-import RecentFittingPage from '../pages/recent-fitting';
+import RecentFittingPage from '../pages/RecentFitting';
 import { protectedRoutes } from './routes/protected-routes';
 import ProtectedRoute from './routes/ProtectedRoute';
 import { publicRoutes } from './routes/public-routes';
