@@ -3,7 +3,7 @@ import Header from './Header';
 import { Navbar } from './Navbar';
 import { Modal } from '../common/Modal';
 import { useMemo, useState } from 'react';
-import { hideHeaderPatterns, hideNavPatterns, PATH } from '../../constants/path';
+import { hideHeaderPatterns, hideNavPatterns, PATH } from '@/src/constants/path';
 
 const RootLayout = () => {
 	const { pathname } = useLocation();
