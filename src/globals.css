@@ -2,17 +2,24 @@
 
 
 
-
 @layer base {
+  :root {
+    --font-pretendard: "Pretendard";
+  }
+
   body {
     font-family: var(--font-pretendard);
   }
+}
+.text-bold-24 {
+  font-size: 24px;
+  font-weight: 700;
 }
 
 @theme {
   --line-height-default: 1.5;
 
-
+  --color-neutral-1000: #D2D2D2;
   --color-neutral-900: #2a323f;
   --color-neutral-700: #596373;
   --color-neutral-500: #828b9a;
@@ -30,9 +37,19 @@
   --shadow-8: 0px 2px 5px rgba(0, 0, 0, 0.15);
   --shadow-12: 0px 0px 8px rgba(0, 0, 0, 0.15);
   --shadow-16: 0px 1px 5px rgba(0, 0, 0, 0.20);
+  --shadow-photo: 0px 8px 4px rgba(0, 0, 0, 0.15);
 }
 
 @layer utilities {
+
+  .font-head02-bold-20 {
+    font-family: 'PretendardBold', sans-serif;
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: -0.6px;
+  }
+  
   .text-bold-24 {
     font-size: 24px;
     font-weight: 700;
@@ -88,6 +105,11 @@
     font-weight: 500;
   }
 
+  .text-medium-14 {
+    font-size: 14px;
+    font-weight: 500;
+  }
+
   .text-medium-12 {
     font-size: 12px;
     font-weight: 500;
@@ -129,4 +151,19 @@
   }
   
   
+
+  /* pagination 위치 */
+  .photo-swiper .swiper-pagination {
+    @apply !bottom-0 !flex justify-center !items-center;
+  }
+
+  /* dot 기본 스타일 */
+.photo-swiper .swiper-pagination-bullet {
+  @apply !w-2 !h-2 !rounded-full !opacity-100 !bg-[#D9D9D9];
+}
+
+  /* dot 활성화 */
+  .photo-swiper .swiper-pagination-bullet-active {
+    @apply !bg-primary-600 !w-2.5 !h-2.5 ;
+  }
 }
