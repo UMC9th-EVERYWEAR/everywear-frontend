@@ -202,11 +202,9 @@ src/
 │
 ├── pages/                         # 라우팅 단위 페이지(View)
 │   ├── home/
-│   │   └── home-page.tsx
 │   ├── setting/
-│   │   └── setting-page.tsx
-│   ├── recent-fitting-page.tsx
-│   └── not-found-page.tsx
+│   ├── recent-fitting/
+│   └── not-found/
 │
 ├── providers/                     # 전역 Provider
 ├── router/                        # 라우터 설정
