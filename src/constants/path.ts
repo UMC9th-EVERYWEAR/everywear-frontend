@@ -52,3 +52,21 @@ export const PATH = {
 		INQUIRY: '/setting/inquiry',
 	},
 } as const;
+
+/* hideHeaderRoutes: 헤더 숨길 라우트 목록 */
+export const hideHeaderPatterns = [
+	PATH.ONBOARDING,
+	PATH.LOGIN,
+
+];	
+
+/* hideNavRoutes: Nav 숨길 라우트 목록 */ 
+export const hideNavPatterns = [
+	PATH.ONBOARDING,
+	PATH.LOGIN,
+	PATH.SETTING.ROOT,
+	PATH.SETTING.CHANGE_PHOTO,
+	PATH.SETTING.WITHDRAW,
+	PATH.SETTING.INQUIRY,
+	PATH.AI_FITTING.DETAIL,
+];

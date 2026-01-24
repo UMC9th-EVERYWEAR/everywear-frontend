@@ -3,27 +3,13 @@ import Header from './Header';
 import { Navbar } from './Navbar';
 import { Modal } from '../common/Modal';
 import { useState } from 'react';
-import { PATH } from '../../constants/path';
+import { hideHeaderPatterns, hideNavPatterns, PATH } from '../../constants/path';
 
 const RootLayout = () => {
 	const { pathname } = useLocation();
 	const [isWithdrawOpen, setIsWithdrawOpen] = useState(false);
   
 
-	/* hideHeaderRoutes: 헤더 숨길 라우트 목록 */
-	const hideHeaderPatterns = [
-		PATH.ONBOARDING,
-		PATH.LOGIN,
-	];	/* hideNavRoutes: Nav 숨길 라우트 목록 */ 
-	const hideNavPatterns = [
-		PATH.ONBOARDING,
-		PATH.LOGIN,
-		PATH.SETTING.ROOT,
-		PATH.SETTING.CHANGE_PHOTO,
-		PATH.SETTING.WITHDRAW,
-		PATH.SETTING.INQUIRY,
-		PATH.AI_FITTING.DETAIL,
-	];
 	// 추후 추가 가능
 
 	// 헤더 기능은 딱 2개
