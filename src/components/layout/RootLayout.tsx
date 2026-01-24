@@ -2,26 +2,24 @@ import { matchPath, Outlet, useLocation } from 'react-router';
 import Header from './Header';
 import { Navbar } from './Navbar';
 import { Modal } from '../common/Modal';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { hideHeaderPatterns, hideNavPatterns, PATH } from '../../constants/path';
 
 const RootLayout = () => {
 	const { pathname } = useLocation();
 	const [isWithdrawOpen, setIsWithdrawOpen] = useState(false);
   
-
 	// 추후 추가 가능
 
 	// 헤더 기능은 딱 2개
 	// 1. 뒤로가기
 	// 2. setting 페이지로 이동
-
-	const shouldHideHeader = hideHeaderPatterns.some((pattern) =>
+	const shouldHideHeader = useMemo(() => hideHeaderPatterns.some((pattern) =>
 		matchPath(pattern, pathname),
-	);
-	const shouldHideNav = hideNavPatterns.some((pattern) =>
+	), [pathname]);
+	const shouldHideNav = useMemo(() => hideNavPatterns.some((pattern) =>
 		matchPath(pattern, pathname),
-	);
+	), [pathname]);
 
 	/* HEADER_TITLE_MAP: 추후 헤더 타이틀 동적 변경 */
 	const HEADER_TITLE_MAP = [
