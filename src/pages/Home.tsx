@@ -41,13 +41,13 @@ const Home = () => {
   const INDICATOR_MAX_DISTANCE = 37;
 
   return (
-    <div className="flex flex-col w-full bg-white pb-10">
+    <div className='flex flex-col w-full bg-white pb-10 min-h-[calc(100vh-101px)]'>
       
       {/* 1. 상단 섹션 */}
-      <section className="px-4 pt-6 pb-2">
-        <h2 className="text-[#000000] text-[20px] font-[500] leading-normal mt-1">
-          파트너 쇼핑몰
-        </h2>
+      <section className='px-4 pt-10 pb-2'> 
+			<h2 className='text-[#000000] text-[20px] font-[500] leading-normal mt-1'>
+				파트너 쇼핑몰
+			</h2>
         <p className="text-[#596373] text-[12px] font-[400] leading-[150%] tracking-[-0.36px]">
           유명 브랜드 가상 피팅가이드를 확인해보세요
         </p>
