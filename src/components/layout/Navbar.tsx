@@ -1,4 +1,4 @@
-import { useNavigate, useLocation } from 'react-router-dom'; // 1. Hook 임포트
+import { useNavigate, useLocation } from 'react-router'; // 1. Hook 임포트
 import { HomeIcon, ProductIcon, FittingIcon, ClosetIcon } from '../common/Icons';
 
 const NAV_ITEMS = [
