@@ -1,8 +1,8 @@
 import camera from '@/public/svgs/onboarding/camera-blue.svg'
 const OnBoardingPage = () => {
-	return <div ><img
+	return <div className='bg-bg-onboarding'><img
 		src={camera}
 		alt='camera'
-	             /></div>
+	                                         /></div>
 }
 export default OnBoardingPage
