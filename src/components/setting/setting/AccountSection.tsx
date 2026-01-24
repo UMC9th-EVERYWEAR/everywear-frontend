@@ -39,6 +39,7 @@ const AccountSection = ({
 				<img
 					src={arrowRight}
 					alt="arrow right"
+					className='cursor-pointer'
 				/>
 			</button>
 

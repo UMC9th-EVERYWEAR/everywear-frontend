@@ -13,7 +13,7 @@ const PHOTO_ITEMS_DUMMY: PhotoItem[] = [
 	{ isDefault: false, imageUrl: dummy },
 	{ isDefault: false, imageUrl: dummy },
 	{ isDefault: false, imageUrl: '' },
-	{ isDefault: false, imageUrl: '' }, // ✅ 이미지 없음 => AddCard 렌더링
+	{ isDefault: false, imageUrl: '' }, //  이미지 없음 => AddCard 렌더링
 ];
 
 const SettingPhotoPage = () => {

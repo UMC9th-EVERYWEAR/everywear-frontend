@@ -1,8 +1,8 @@
-import SettingPhotoPage from '@/src/pages/setting/SettingPhotoPage';
+import SettingPhotoPage from '@/src/pages/setting/setting-photo-page';
 import Home from '../../pages/Home';
-import SettingPage from '../../pages/setting/SettingPage';
-import SettingInquiry from '@/src/pages/setting/SettingInquiryPage';
-import SettingWithdraw from '@/src/pages/setting/SettingWithdrawPage';
+import SettingPage from '../../pages/setting/setting-page';
+import SettingInquiry from '@/src/pages/setting/setting-inquiry-page';
+import SettingWithdraw from '@/src/pages/setting/setting-withdraw-page';
 import RecentFitting from '@/src/pages/recent-fitting';
 import  { PATH } from '@/src/constants/path';
 

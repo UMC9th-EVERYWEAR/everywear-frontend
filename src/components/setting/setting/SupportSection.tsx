@@ -16,6 +16,8 @@ const SupportSection = ({ onInquiry }: Props) => {
 				<img
 					src={arrowRight}
 					alt="arrow right"
+					className='cursor-pointer'
+
 				/>
 			</div>
 
@@ -24,6 +26,8 @@ const SupportSection = ({ onInquiry }: Props) => {
 				<img
 					src={arrowRight}
 					alt="arrow right"
+					className='cursor-pointer'
+
 				/>
 			</div>
 
@@ -35,6 +39,8 @@ const SupportSection = ({ onInquiry }: Props) => {
 				<img
 					src={arrowRight}
 					alt="arrow right"
+					className='cursor-pointer'
+
 				/>
 			</button>
 		</div>
