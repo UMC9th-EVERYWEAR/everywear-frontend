@@ -1,94 +1,87 @@
-import { useState } from "react";
-// 1. 전체
+import { ICON_DATA } from '../../../public/Svgs/Icons/SvgIndex';
+
+
+interface CategoryBarProps {
+	selected: string;
+	onSelect: (category: string) => void;
+}
+
 const AllIcon = ({ isActive }: { isActive: boolean }) => (
-  <div className="flex items-center justify-center w-[16px] h-[16px] px-[2px] py-[2px]">
-    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="12" viewBox="0 0 12 12" fill="none">
-  <path d="M8 12C7.63333 12 7.31956 11.8696 7.05867 11.6087C6.79778 11.3478 6.66711 11.0338 6.66667 10.6667V8C6.66667 7.63333 6.79733 7.31956 7.05867 7.05867C7.32 6.79778 7.63378 6.66711 8 6.66667H10.6667C11.0333 6.66667 11.3473 6.79733 11.6087 7.05867C11.87 7.32 12.0004 7.63378 12 8V10.6667C12 11.0333 11.8696 11.3473 11.6087 11.6087C11.3478 11.87 11.0338 12.0004 10.6667 12H8ZM8 5.33333C7.63333 5.33333 7.31956 5.20289 7.05867 4.942C6.79778 4.68111 6.66711 4.36711 6.66667 4V1.33333C6.66667 0.966667 6.79733 0.652889 7.05867 0.392C7.32 0.131111 7.63378 0.000444444 8 0H10.6667C11.0333 0 11.3473 0.130667 11.6087 0.392C11.87 0.653333 12.0004 0.967111 12 1.33333V4C12 4.36667 11.8696 4.68067 11.6087 4.942C11.3478 5.20333 11.0338 5.33378 10.6667 5.33333H8ZM1.33333 5.33333C0.966667 5.33333 0.652889 5.20289 0.392 4.942C0.131111 4.68111 0.000444444 4.36711 0 4V1.33333C0 0.966667 0.130667 0.652889 0.392 0.392C0.653333 0.131111 0.967111 0.000444444 1.33333 0H4C4.36667 0 4.68067 0.130667 4.942 0.392C5.20333 0.653333 5.33378 0.967111 5.33333 1.33333V4C5.33333 4.36667 5.20289 4.68067 4.942 4.942C4.68111 5.20333 4.36711 5.33378 4 5.33333H1.33333ZM1.33333 12C0.966667 12 0.652889 11.8696 0.392 11.6087C0.131111 11.3478 0.000444444 11.0338 0 10.6667V8C0 7.63333 0.130667 7.31956 0.392 7.05867C0.653333 6.79778 0.967111 6.66711 1.33333 6.66667H4C4.36667 6.66667 4.68067 6.79733 4.942 7.05867C5.20333 7.32 5.33378 7.63378 5.33333 8V10.6667C5.33333 11.0333 5.20289 11.3473 4.942 11.6087C4.68111 11.87 4.36711 12.0004 4 12H1.33333Z" fill={isActive ? "#FFFFFF" : "#596373"}/>
-</svg>
-  </div>
+	<div className="flex items-center justify-center w-[16px] h-[16px] px-[2px] py-[2px]">
+		{ICON_DATA.AllIcon(isActive)}
+	</div>
 );
-//2. 상의
+
 const TopIcon = ({ isActive }: { isActive: boolean }) => (
-  <div className="flex items-center justify-center w-[16px] h-[16px] px-[1.33px] py-[2px]">
-    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="12" viewBox="0 0 14 12" fill="none">
-  <path d="M8.58867 0.0048273L8.652 0.000160658L8.72667 0.00282729L8.802 0.0141606L8.87733 0.0341607L12.8773 1.36749C12.9976 1.40758 13.1039 1.48111 13.1838 1.57947C13.2638 1.67783 13.314 1.79693 13.3287 1.92283L13.3333 2.00016V5.33349C13.3333 5.49678 13.2734 5.65439 13.1649 5.77641C13.0563 5.89843 12.9068 5.97639 12.7447 5.99549L12.6667 6.00016H11.3333V10.6668C11.3334 11.0032 11.2064 11.3272 10.9777 11.5739C10.7489 11.8205 10.4354 11.9716 10.1 11.9968L10 12.0002H3.33333C2.99695 12.0003 2.67296 11.8732 2.4263 11.6445C2.17965 11.4158 2.02856 11.1023 2.00333 10.7668L2 10.6668V6.00016H0.666667C0.503378 6.00014 0.345775 5.94019 0.223752 5.83168C0.101729 5.72318 0.0237715 5.57366 0.00466668 5.41149L3.80479e-08 5.33349V2.00016C-4.27825e-05 1.87339 0.0360591 1.74924 0.104072 1.64226C0.172085 1.53528 0.26919 1.44991 0.384 1.39616L0.456 1.36749L4.456 0.0341607C4.55622 0.000780185 4.66294 -0.00830679 4.76736 0.00764891C4.87179 0.0236046 4.97092 0.0641461 5.0566 0.125932C5.14228 0.187719 5.21206 0.268981 5.26017 0.363022C5.30828 0.457064 5.33336 0.561193 5.33333 0.666827C5.33178 1.01282 5.46479 1.34586 5.70425 1.5956C5.94371 1.84533 6.27088 1.99221 6.61663 2.00519C6.96237 2.01817 7.29963 1.89624 7.55714 1.66517C7.81466 1.43409 7.97227 1.11196 7.99667 0.766827L8.00267 0.606827L8.014 0.531494L8.03867 0.442161L8.068 0.373494L8.10133 0.312161L8.14667 0.250161L8.19267 0.196827C8.22956 0.161272 8.26844 0.130161 8.30933 0.103494L8.37333 0.0681607L8.442 0.0388274L8.514 0.017494L8.58867 0.0048273Z" fill={isActive ? "#FFFFFF" : "#596373"}/>
-</svg>
-  </div> 
+	<div className="flex items-center justify-center w-[16px] h-[16px] px-[1.33px] py-[2px]">
+		{ICON_DATA.TopIcon(isActive)}
+	</div>
 );
-// 3. 하의 
+
 const BottomIcon = ({ isActive }: { isActive: boolean }) => (
-  <div className="flex items-center justify-center w-[16px] h-[16px] px-[2.66px] py-[0.62px]">
-    <svg xmlns="http://www.w3.org/2000/svg" width="11" height="15" viewBox="0 0 11 15" fill="none">
-  <path d="M5.16506 9.62867e-05C3.77269 0.00594004 2.43881 0.230596 1.46 0.656346C0.9545 5.26441 0.43525 9.99469 0 13.961L3.8545 14.7365L4.92191 6.5226H5.56659L6.63691 14.7648H6.64372L10.6769 13.9435C10.186 9.51497 9.70747 5.085 9.21681 0.656346C8.00753 0.209252 6.5575 -0.00521621 5.16509 9.62867e-05H5.16506Z" fill={isActive ? "#FFFFFF" : "#596373"}/>
-</svg>
-  </div>
+	<div className="flex items-center justify-center w-[16px] h-[16px] px-[2.66px] py-[0.62px]">
+		{ICON_DATA.BottomIcon(isActive)}
+	</div>
 );
-// 4. 아우터 
+
 const OuterIcon = ({ isActive }: { isActive: boolean }) => (
-  <div className="flex items-center justify-center w-[18px] h-[18px] px-[1.65px] py-[2.25px]">
-   <svg xmlns="http://www.w3.org/2000/svg" width="15" height="14" viewBox="0 0 15 14" fill="none">
-  <path fill-rule="evenodd" clip-rule="evenodd" d="M8.49637 0C8.84578 2.37364e-05 9.19038 0.0814238 9.50287 0.23775L11.0254 0.99975C11.4829 1.22851 11.8888 1.54846 12.2181 1.93991C12.5474 2.33137 12.7931 2.78605 12.9401 3.276L14.6366 8.93025C14.7382 9.26864 14.7171 9.63203 14.577 9.95638C14.437 10.2807 14.1869 10.5452 13.8709 10.7032L13.1119 11.082C12.9648 11.1556 12.7976 11.1787 12.6361 11.148C12.4746 11.1172 12.3276 11.0342 12.2179 10.9117L11.8504 10.5L11.6494 11.814C11.5243 12.2969 11.2424 12.7245 10.8479 13.0297C10.4534 13.3348 9.96865 13.5003 9.46987 13.5H5.23087C4.73209 13.5003 4.24735 13.3348 3.85284 13.0297C3.45832 12.7245 3.1764 12.2969 3.05137 11.814L2.85037 10.5L2.48287 10.9117C2.37308 11.0344 2.22599 11.1175 2.0643 11.1482C1.9026 11.179 1.73528 11.1557 1.58812 11.082L0.829121 10.7032C0.513116 10.5452 0.263032 10.2807 0.122946 9.95638C-0.0171411 9.63203 -0.0382387 9.26864 0.0633712 8.93025L1.75987 3.276C1.9069 2.78605 2.15262 2.33137 2.48191 1.93991C2.81119 1.54846 3.21709 1.22851 3.67462 0.99975L5.19787 0.23775C5.51036 0.0814238 5.85496 2.37364e-05 6.20437 0H8.49637ZM8.49637 1.5H6.20437C6.1174 1.5001 6.03112 1.51533 5.94937 1.545L5.86912 1.5795L5.14912 1.9395L7.35037 5.3625L9.55162 1.938L8.83162 1.578C8.75376 1.53929 8.66976 1.51442 8.58337 1.5045L8.49637 1.5Z" fill={isActive ? "#FFFFFF" : "#596373"}/>
-</svg>
-  </div>
+	<div className="flex items-center justify-center w-[18px] h-[18px] px-[1.65px] py-[2.25px]">
+		{ICON_DATA.OuterIcon(isActive)}
+	</div>
 );
 
-// 5. 원피스
 const DressIcon = ({ isActive }: { isActive: boolean }) => (
-  <div className="flex items-center justify-center w-[16px] h-[16px] px-[1.79px] py-[0.78px]">
-   <svg xmlns="http://www.w3.org/2000/svg" width="13" height="14" viewBox="0 0 13 14" fill="none">
-  <path d="M4.12812 0L3.49375 0.318125C3.49375 1.31906 3.51875 3.06375 3.92812 4.41062C5.75 4.85437 6.66875 4.85437 8.49063 4.41062C8.90625 3.06687 8.925 1.70625 8.92813 0.318125L8.29063 0C8.15313 0.179375 7.925 0.47 7.60937 0.830312C7.38437 1.08531 7.14688 1.34156 6.91875 1.54281C6.80625 1.64344 6.69688 1.73031 6.5875 1.79813C6.475 1.86688 6.36562 1.92625 6.20937 1.92625C6.05312 1.92625 5.94375 1.86688 5.83125 1.79813C5.72187 1.73031 5.6125 1.64344 5.5 1.54281C5.27187 1.34156 5.03437 1.08531 4.80937 0.830312C4.49375 0.47 4.26562 0.179375 4.12812 0ZM3.85938 4.97L0 12.6919C0.00875 12.7263 0.025 12.7638 0.0675 12.8106C0.13 12.8825 0.241875 12.97 0.399063 13.0513C0.714063 13.22 1.20281 13.3731 1.79688 13.495C2.98438 13.7388 4.6 13.8638 6.20937 13.8638C7.81875 13.8638 9.43438 13.7388 10.6219 13.495C11.2156 13.3731 11.7063 13.22 12.0188 13.0513C12.1781 12.97 12.2875 12.8825 12.35 12.8106C12.3938 12.7638 12.4094 12.7263 12.4188 12.6919L8.55938 4.97C6.74688 5.40437 5.67188 5.40437 3.85938 4.97Z" fill={isActive ? "#FFFFFF" : "#596373"}/>
-</svg>
-  </div>
+	<div className="flex items-center justify-center w-[16px] h-[16px] px-[1.79px] py-[0.78px]">
+		{ICON_DATA.DressIcon(isActive)}
+	</div>
 );
 
-const CategoryBar = () => {
-  const [selected, setSelected] = useState("전체");
+// 2. 부모로부터 selected와 onSelect를 받음
+const CategoryBar = ({ selected, onSelect }: CategoryBarProps) => {
+	const categories = [
+		{ name: '전체', renderIcon: (active: boolean) => <AllIcon isActive={active} /> },
+		{ name: '상의', renderIcon: (active: boolean) => <TopIcon isActive={active} /> },
+		{ name: '하의', renderIcon: (active: boolean) => <BottomIcon isActive={active} /> },
+		{ name: '아우터', renderIcon: (active: boolean) => <OuterIcon isActive={active} /> },
+		{ name: '원피스', renderIcon: (active: boolean) => <DressIcon isActive={active} /> },
+	];
 
-  const categories = [
-    { name: "전체", renderIcon: (active: boolean) => <AllIcon isActive={active} /> },
-    { name: "상의", renderIcon: (active: boolean) => <TopIcon isActive={active} /> },
-    { name: "하의", renderIcon: (active: boolean) => <BottomIcon isActive={active} /> },
-    { name: "아우터", renderIcon: (active: boolean) => <OuterIcon isActive={active} /> },
-    { name: "원피스", renderIcon: (active: boolean) => <DressIcon isActive={active} /> },
-  ];
-
-  return (
-    <div className="w-[375px] overflow-x-auto no-scrollbar bg-white sticky top-[45px] z-20">
-      <div className="flex gap-[10px] p-4 items-center whitespace-nowrap">
-        {categories.map((cat) => {
-          const isActive = selected === cat.name;
-          
-          return (
-            <button
-              key={cat.name}
-              onClick={() => setSelected(cat.name)}
-              className={`
-                flex items-center justify-center min-w-[60px] p-[10px] 
-                rounded-full gap-0 border box-border cursor-pointer
-                transition-all duration-200
-                ${isActive 
-                  ? "bg-[#3B4599] text-white font-bold border-[#3B4599]"
-                  : "bg-[rgba(255,255,255,0.50)] text-[#596373] border-[#C7CBD2]"
-                }
-              `}
-            >
-              <div className="flex items-center justify-center shrink-0">
-                {cat.renderIcon(isActive)}
-              </div>
-              
-              {/* 2. '전체' 아이콘일 때만 텍스트 간격을 ml-[2px]로 미세 조정*/}
-              <span className={`
-                text-[12px] font-medium font-['Pretendard']
-                ${cat.name === '전체' ? 'ml-[2px]' : 'ml-[-1px]'}
-              `}>
-                {cat.name}
-              </span>
-            </button>
-          );
-        })}
-      </div>
-    </div>
-  );
+	return (
+		<div className="w-[375px] overflow-x-auto no-scrollbar bg-white sticky top-[45px] z-20">
+			<div className="flex gap-[10px] p-4 items-center whitespace-nowrap">
+				{categories.map((cat) => {
+					const isActive = selected === cat.name;
+					
+					return (
+						<button
+							key={cat.name}
+							onClick={() => onSelect(cat.name)} //클릭 시 부모의 상태 변경 함수 호출
+							className={`
+								flex items-center justify-center min-w-[60px] p-[10px] 
+								rounded-full gap-0 border box-border cursor-pointer
+								transition-all duration-200
+								${isActive 
+									? 'bg-[#3B4599] text-white font-bold border-[#3B4599]'
+									: 'bg-[rgba(255,255,255,0.50)] text-[#596373] border-[#C7CBD2]'
+								}
+							`}
+						>
+							<div className="flex items-center justify-center shrink-0">
+								{cat.renderIcon(isActive)}
+							</div>
+							
+							<span className={`
+								text-[12px] font-medium font-["Pretendard"]
+								${cat.name === '전체' ? 'ml-[2px]' : 'ml-[-1px]'}
+							`}>
+								{cat.name}
+							</span>
+						</button>
+					);
+				})}
+			</div>
+		</div>
+	);
 };
 
 export default CategoryBar;

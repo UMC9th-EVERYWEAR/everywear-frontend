@@ -3,7 +3,7 @@ import Header from './Header';
 import { Navbar } from './Navbar';
 import { Modal } from '../common/Modal';
 import { useState } from 'react';
-import { PATH } from '../../router/path';
+import { PATH } from '../../constants/path';
 
 const RootLayout = () => {
 	const { pathname } = useLocation();
@@ -29,6 +29,10 @@ const RootLayout = () => {
 		{ pattern: PATH.PRODUCTS.ROOT, title: '전체 상품 보기' },
 		{ pattern: PATH.CLOSET, title: '내 옷장' },
 		{ pattern: PATH.SETTING.ROOT, title: '설정' },
+		{ pattern: PATH.SETTING.CHANGE_PHOTO, title: '기본 사진 변경' },
+		{ pattern: PATH.SETTING.INQUIRY, title: '1:1 문의하기' },
+		{ pattern: PATH.SETTING.WITHDRAW, title: '회원탈퇴' },
+
 	] as const;
 
 	/*  getHeaderTitle: pathname으로 title 뽑는 함수 */
