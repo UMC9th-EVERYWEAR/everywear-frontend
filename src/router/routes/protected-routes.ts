@@ -1,10 +1,10 @@
 import SettingPhotoPage from '@/src/pages/setting/SettingPhotoPage';
 import Home from '../../pages/Home';
 import SettingPage from '../../pages/setting/SettingPage';
-import { PATH } from '../path';
 import SettingInquiry from '@/src/pages/setting/SettingInquiryPage';
 import SettingWithdraw from '@/src/pages/setting/SettingWithdrawPage';
 import RecentFitting from '@/src/pages/recent-fitting';
+import  { PATH } from '@/src/constants/path';
 
 /*
  * protectedRoutes

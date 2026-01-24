@@ -1,9 +1,9 @@
-import { Modal } from '@/src/components/common/Modal';
 import AccountSection from '@/src/components/setting/setting/AccountSection';
 import FooterActions from '@/src/components/setting/setting/FooterActions';
+import LogoutModal from '@/src/components/setting/setting/LogooutModal';
 import NotificationSection from '@/src/components/setting/setting/Notification';
 import SupportSection from '@/src/components/setting/setting/SupportSection';
-import { PATH } from '@/src/router/path';
+import  { PATH } from '@/src/constants/path';
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
 const SettingPage = () => {	
@@ -71,19 +71,11 @@ const SettingPage = () => {
 			onWithdraw={goWithdraw}
 		/>
 
-
-		{
-			openLogoutSetting && (
-				<Modal
-					isOpen={openLogoutSetting}
-					title='로그아웃 하시겠습니까?'
-					onClose={()=>setOpenLogoutSetting(false)}
-					btn1Action={()=>setOpenLogoutSetting(false)} // TODO:로컬스토리지 삭제 후 로그인 화면 이동
-					btn1Text='예'
-					btn2Action={()=>setOpenLogoutSetting(false)}
-					btn2Text='아니요'
-				/> )
-		}
+		<LogoutModal
+			open={openLogoutSetting}
+			onClose={() => setOpenLogoutSetting(false)}
+		/>	
+		
 	</div>;
 }
 
