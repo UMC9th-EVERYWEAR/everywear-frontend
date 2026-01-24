@@ -144,7 +144,9 @@
     font-weight: 400;
   }
 
-
+  /* =========================
+    SWIPER
+     ========================= */
   /* pagination 위치 */
   .photo-swiper .swiper-pagination {
     @apply !bottom-0 !flex justify-center !items-center;
@@ -158,5 +160,21 @@
   /* dot 활성화 */
   .photo-swiper .swiper-pagination-bullet-active {
     @apply !bg-primary-600 !w-2.5 !h-2.5 ;
+  }
+  /* =========================
+    SCROLL
+     ========================= */
+
+    @keyframes frame-in {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  .animate-frame-in {
+    animation: frame-in 1.5s forwards;
   }
 }

@@ -51,7 +51,7 @@ const OnboardingNotice = ({ feature }: OnboardingNoticeProps) => {
 
 			<div>
 				<h3 className="text-bold-18 text-primary-600">{title}</h3>
-				<p className="mt-1 text-sm text-gray-600">{description}</p>
+				<p className="mt-1 text-regular-14 text-neutral-700">{description}</p>
 			</div>
 		</div>
 	);
