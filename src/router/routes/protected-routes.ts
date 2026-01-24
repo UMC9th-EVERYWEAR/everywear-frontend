@@ -1,8 +1,8 @@
 import { Component } from 'react';
-import Home from '../../pages/Home';
-import SettingPage from '../../pages/setting/SettingPage';
+import Home from '@/src/pages/Home';
+import SettingPage from '@/src/pages/setting/SettingPage';
 import { PATH } from '../path';
-import RecentFittingPage from '../../pages/RecentFitting';
+import RecentFittingPage from '@/src/pages/RecentFitting';
 
 /*
  * protectedRoutes
