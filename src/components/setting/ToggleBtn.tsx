@@ -1,4 +1,4 @@
-import { cn } from '@/src/lib/utils';
+import { cn } from '@/src/utils/cn';
 
 interface ToggleProps {
   checked: boolean;
@@ -25,7 +25,7 @@ const ToggleBtn = ({
 			onClick={onChange}
 			className={cn(
 				'w-10 h-5 rounded-full relative transition-colors',
-				checked ? 'bg-primary-600' : 'bg-[#D9D9D9]',
+				checked ? 'bg-primary-600' : 'bg-neutral-1000',
 				disabled && 'opacity-50 cursor-not-allowed',
 				!disabled && 'cursor-pointer',
 				className,

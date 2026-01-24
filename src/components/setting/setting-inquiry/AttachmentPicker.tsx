@@ -1,4 +1,4 @@
-import { cn } from '@/src/lib/utils';
+import { cn } from '@/src/utils/cn';
 import React, { useEffect, useMemo } from 'react';
 import cameraIcon from '@/public/svgs/camera-icon.svg';
 import closeIcon from '@/public/svgs/blue-close-icon.svg';

@@ -2,7 +2,7 @@ import SettingPhotoPage from '@/src/pages/setting/SettingPhotoPage';
 import Home from '../../pages/Home';
 import SettingPage from '../../pages/setting/SettingPage';
 import { PATH } from '../path';
-import SettingInquiry from '@/src/pages/setting/SettingInquiry';
+import SettingInquiry from '@/src/pages/setting/SettingInquiryPage';
 import SettingWithdraw from '@/src/pages/setting/SettingWithdrawPage';
 
 /*

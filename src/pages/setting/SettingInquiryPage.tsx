@@ -2,7 +2,7 @@ import Tag from '@/src/components/setting/setting-inquiry/Tag';
 import React, { useEffect, useRef } from 'react';
 import { useState } from 'react';
 import emailjs from '@emailjs/browser';
-import { uploadImageToImgBB } from '@/src/lib/imgbb';
+import { uploadImageToImgBB } from '@/src/utils/imgbb';
 import AttachmentPicker from '@/src/components/setting/setting-inquiry/AttachmentPicker';
 import { Modal } from '@/src/components/common/Modal';
 import type { TagCategory, InquiryDraft } from '@/src/types/schemas/setting/setting-inquiry';

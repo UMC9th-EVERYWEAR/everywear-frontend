@@ -81,27 +81,25 @@ const SettingPage = () => {
 										checked={linkedSocialAccounts.naver}
 										onChange={() => toggleSocialLink('naver')}
 									/>
-
 								</div>
-								<div className='flex justify-between'>
 
+								<div className='flex justify-between'>
 									<button className='text-regular-14 text-left'>카카오 로그인 연동</button>
 									<ToggleBtn
 										checked={linkedSocialAccounts.kakao}
 										onChange={() => toggleSocialLink('kakao')}
 									/>
-
 								</div>
 
 								<div className='flex justify-between'>
-
 									<button className='text-regular-14 text-left'>애플 로그인 연동</button>
 									<ToggleBtn
 										checked={linkedSocialAccounts.apple}
 										onChange={() => toggleSocialLink('apple')}
 									/>
-
 								</div>
+
+								<p className='text-regular-10 text-neutral-400'>* SNS 계정을 연결하시면 간편하게 로그인할 수 있습니다.</p>
 
 							</div>
 						)

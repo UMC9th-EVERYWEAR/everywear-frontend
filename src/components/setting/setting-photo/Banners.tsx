@@ -5,7 +5,7 @@ import { Pagination } from 'swiper/modules';
 import React from 'react';
 import 'swiper/css';
 import 'swiper/css/pagination';
-import { cn } from '@/src/lib/utils';
+import { cn } from '@/src/utils/cn';
 import {  useEffect, useRef } from 'react';
 
 interface BannerProps {

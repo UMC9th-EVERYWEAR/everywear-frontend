@@ -6,7 +6,7 @@ import dummy from '@/public/svgs/dummyphoto.jpeg';
 
 import type { PhotoItem } from '@/src/types/schemas/setting/setting-photo';
 import { useState } from 'react';
-import { cn } from '@/src/lib/utils';
+import { cn } from '@/src/utils/cn';
 // 더미 데이터
 const PHOTO_ITEMS_DUMMY: PhotoItem[] = [
 	{ isDefault: true, imageUrl: dummy },

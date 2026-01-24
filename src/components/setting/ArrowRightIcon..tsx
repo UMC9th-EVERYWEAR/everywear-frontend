@@ -1,5 +1,5 @@
 import arrowRight from '@/public/svgs/arrow-right.svg'
-import { cn } from '@/src/lib/utils'
+import { cn } from '@/src/utils/cn';
 
 interface ArrowRightIconProps {
   className?: string
