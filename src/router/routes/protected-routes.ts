@@ -1,5 +1,4 @@
 import SettingPhotoPage from '@/src/pages/setting/setting-photo-page';
-import Home from '../../pages/Home';
 import SettingPage from '../../pages/setting/setting-page';
 import SettingInquiry from '@/src/pages/setting/setting-inquiry-page';
 import SettingWithdraw from '@/src/pages/setting/setting-withdraw-page';
