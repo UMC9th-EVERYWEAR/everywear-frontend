@@ -10,9 +10,9 @@ const ItemAddCountSection = ({ category, count, onClick } : ItemAddCountSectionP
 		<div className='flex justify-between items-center mb-5'>
 			<p className='text-regular-14 font-anonymous'>{category} 상품({count})</p>
 			<button
-				className='w-[70.667px] h-6 px-1.75 py-1.25 flex justify-center 
+				className='w-18 h-6 px-1.75 py-1.25 flex justify-center 
                 items-center border rounded-sm border-none bg-primary-600 shrink-0 
-                font-inter text-[11.333px] text-white cursor-pointer'
+                font-inter text-regular-12 text-white cursor-pointer'
 				onClick={onClick}
 			>+ 상품추가</button>
 		</div>

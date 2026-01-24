@@ -140,7 +140,6 @@
     font-weight: 400;
   }
 
-
   /* 새로운 폰트 추가 */
    .font-anonymous {
     font-family: "Anonymous Pro", monospace;
@@ -157,9 +156,9 @@
   }
 
   /* dot 기본 스타일 */
-.photo-swiper .swiper-pagination-bullet {
-  @apply !w-2 !h-2 !rounded-full !opacity-100 !bg-[#D9D9D9];
-}
+  .photo-swiper .swiper-pagination-bullet {
+    @apply !w-2 !h-2 !rounded-full !opacity-100 !bg-[#D9D9D9];
+  }
 
   /* dot 활성화 */
   .photo-swiper .swiper-pagination-bullet-active {
