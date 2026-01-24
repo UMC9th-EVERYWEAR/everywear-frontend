@@ -5,6 +5,7 @@ import { PATH } from '@/src/constants/path';
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
 
+// 타입은 나중에 백엔드 연동하고 파일 하나로 정리할 예정입니다.
 export interface ProductCardProps {
   company: string;
   name: string;
@@ -19,85 +20,7 @@ export interface ProductDataType extends ProductCardProps {
   category: '상의' | '하의' | '아우터' | '원피스';
 }
 
-const MOCK_PRODUCTS: ProductDataType[] = [
-	// [상의]
-	{
-		id: 1,
-		company: '무신사 스탠다드',
-		name: '베이직 화이트 셔츠',
-		price: '29,000',
-		rating: 4.7,
-		imageUrl: 'https://lh3.googleusercontent.com/d/1XuItc3eisxkLo6ZXqClQs-ZcsbYU0brI',
-		category: '상의',
-		isCloset: true,
-	},
-	{
-		id: 2,
-		company: '지오다노',
-		name: '옥스포드 셔츠 블루',
-		price: '35,000',
-		rating: 4.5,
-		imageUrl: 'https://lh3.googleusercontent.com/d/1XuItc3eisxkLo6ZXqClQs-ZcsbYU0brI',
-		category: '상의',
-		isCloset: true,
-	},
-	{
-		id: 3,
-		company: '나이키',
-		name: '에센셜 로고 티셔츠',
-		price: '45,000',
-		rating: 4.8,
-		imageUrl: 'https://lh3.googleusercontent.com/d/1XuItc3eisxkLo6ZXqClQs-ZcsbYU0brI',
-		category: '상의',
-		isCloset: true,
-	},
-
-	// [하의]
-	{
-		id: 4,
-		company: '에잇세컨즈',
-		name: '와이드 데님 팬츠',
-		price: '49,900',
-		rating: 4.6,
-		imageUrl: 'https://lh3.googleusercontent.com/d/1XuItc3eisxkLo6ZXqClQs-ZcsbYU0brI',
-		category: '하의',
-		isCloset: true,
-	},
-	{
-		id: 5,
-		company: '플랙',
-		name: '스트레이트 블랙 진',
-		price: '89,000',
-		rating: 4.5,
-		imageUrl: 'https://lh3.googleusercontent.com/d/1XuItc3eisxkLo6ZXqClQs-ZcsbYU0brI',
-		category: '하의',
-		isCloset: true,
-	},
-
-	// [아우터]
-	{
-		id: 6,
-		company: '노스페이스',
-		name: '눕시 숏 패딩',
-		price: '250,000',
-		rating: 4.9,
-		imageUrl: 'https://lh3.googleusercontent.com/d/1XuItc3eisxkLo6ZXqClQs-ZcsbYU0brI',
-		category: '아우터',
-		isCloset: true,
-	},
-	{
-		id: 7,
-		company: '커버낫',
-		name: '울 싱글 코트',
-		price: '129,000',
-		rating: 4.3,
-		imageUrl: 'https://lh3.googleusercontent.com/d/1XuItc3eisxkLo6ZXqClQs-ZcsbYU0brI',
-		category: '아우터',
-		isCloset: true,
-	},
-
-	// [원피스]
-];
+const MOCK_PRODUCTS: ProductDataType[] = [];
 
 const ClosetPage = () => {
 	const navigate = useNavigate();
@@ -126,7 +49,7 @@ const ClosetPage = () => {
 				/>
 
 				<ItemBrowseSection data={filteredProducts} />
-                
+
 			</div>
       
 		</div>
