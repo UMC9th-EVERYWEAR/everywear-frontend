@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router';
-import { PATH } from '../router/path';
+import { PATH } from '../constants/path';
 
 const NotFoundPage = () => {
 	const navigate = useNavigate();

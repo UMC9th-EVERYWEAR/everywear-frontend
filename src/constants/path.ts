@@ -52,8 +52,8 @@ export const PATH = {
 
 	SETTING: {
 		ROOT: '/setting',
-		LOGOUT: '/setting/logout',
 		WITHDRAW: '/setting/withdraw',        
 		CHANGE_PHOTO: '/setting/change-photo',  
+		INQUIRY: '/setting/inquiry',
 	},
 } as const;

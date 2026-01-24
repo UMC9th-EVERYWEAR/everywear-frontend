@@ -1,7 +1,10 @@
+import SettingPhotoPage from '@/src/pages/setting/setting-photo-page';
 import Home from '../../pages/Home';
-import SettingPage from '../../pages/setting/SettingPage';
-import { PATH } from '../path';
-import RecentFittingPage from '../../pages/recent-fitting';
+import SettingPage from '../../pages/setting/setting-page';
+import SettingInquiry from '@/src/pages/setting/setting-inquiry-page';
+import SettingWithdraw from '@/src/pages/setting/setting-withdraw-page';
+import RecentFitting from '@/src/pages/recent-fitting';
+import  { PATH } from '@/src/constants/path';
 import OnBoardingPage from '@/src/pages/onboarding/onboarding-page';
 import OnBoardingPhotoPage from '@/src/pages/onboarding/onboarding-photo-page';
 
@@ -9,6 +12,7 @@ import OnBoardingPhotoPage from '@/src/pages/onboarding/onboarding-photo-page';
  * protectedRoutes
  * - 인증이 필요한 페이지들
  */
+
 
 export const protectedRoutes = [
 	{
@@ -20,8 +24,21 @@ export const protectedRoutes = [
 		Component: SettingPage,
 	},
 	{
+		path: PATH.SETTING.CHANGE_PHOTO,
+		Component: SettingPhotoPage,
+	},
+	{
+		path: PATH.SETTING.INQUIRY,
+		Component: SettingInquiry,
+	},
+	{
+		path: PATH.SETTING.WITHDRAW,
+		Component:  SettingWithdraw
+		,
+	},
+	{ 
 		path: PATH.RECENT_FITTING,
-		Component: RecentFittingPage,
+		Component: RecentFitting,
 	},
 	{
 		path: PATH.ONBOARDING.ROOT,
