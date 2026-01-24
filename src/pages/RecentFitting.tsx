@@ -19,7 +19,7 @@ const RecentFitting = () => {
 	// 데이터가 없을 경우 표시할 화면
 	if (fittingHistory.length === 0) {
 		return (
-			<div className='flex flex-1 flex-col items-center justify-center h-[calc(100vh-110px)] bg-white'>
+			<div className="flex flex-1 flex-col items-center justify-center h-full bg-white">
 				<p className='text-neutral-500 text-medium-16'>
 					피팅 내역이 없습니다
 				</p>
