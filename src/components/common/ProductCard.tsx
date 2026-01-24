@@ -1,7 +1,9 @@
-interface ProductCardProps {
+import { formatPrice } from '@/src/utils/formatPrice';
+
+export interface ProductCardProps {
   company: string;
   name: string;
-  price: string;
+  price: number;
   rating: number;
   imageUrl: string;
   isCloset?: boolean;
@@ -63,7 +65,7 @@ const ProductCard = ({ company, name, price, rating, imageUrl, isCloset = false 
 
 				{/* 가격 */}
 				<p className="overflow-hidden text-[#2A323F] text-[12px] leading-[18px] whitespace-nowrap font-anonymous">
-					{price}원
+					{formatPrice(price)}원
 				</p>
 
 				{/* 구매하기 & AI 분석하기 버튼(내 옷장 페이지에서만 적용) */}

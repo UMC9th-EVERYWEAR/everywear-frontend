@@ -1,20 +1,12 @@
 import ItemAddCountSection from '@/src/components/closet/ItemAddSection';
 import ItemBrowseSection from '@/src/components/closet/ItemBrowseSection';
 import CategoryBar from '@/src/components/common/CategoryBar';
+import type { ProductCardProps } from '@/src/components/common/ProductCard';
 import { PATH } from '@/src/constants/path';
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
 
 // 타입은 나중에 백엔드 연동하고 파일 하나로 정리할 예정입니다.
-export interface ProductCardProps {
-  company: string;
-  name: string;
-  price: string;
-  rating: number;
-  imageUrl: string;
-  isCloset?: boolean;
-}
-
 export interface ProductDataType extends ProductCardProps {
   id: number;
   category: '상의' | '하의' | '아우터' | '원피스';
