@@ -1,11 +1,11 @@
 import { createBrowserRouter } from 'react-router';
-import RecentFittingPage from '../pages/recent-fitting';
+import RecentFittingPage from '../page/recent-fitting';
 import { protectedRoutes } from './routes/protected-routes';
 import ProtectedRoute from './routes/ProtectedRoute';
 import { publicRoutes } from './routes/public-routes';
-import RootLayout from '../components/layout/RootLayout';
-import NotFoundPage from '../pages/NotFoundPage';
-import Home from '../pages/Home';
+import RootLayout from '../component/layout/RootLayout';
+import NotFoundPage from '../page/NotFoundPage';
+import Home from '../page/Home';
 
 
   	/*  RootLayout 아래에
