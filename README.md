@@ -201,7 +201,12 @@ src/
 │   └── domain/                    # 비즈니스 로직 성격의 hook
 │
 ├── pages/                         # 라우팅 단위 페이지(View)
+│   ├── onboarding/
+│   ├── login/
 │   ├── home/
+│   ├── products/
+│   ├── ai-fitting/
+│   ├── closet/
 │   ├── setting/
 │   ├── recent-fitting/
 │   └── not-found/
