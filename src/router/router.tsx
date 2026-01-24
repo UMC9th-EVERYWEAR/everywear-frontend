@@ -8,13 +8,12 @@ import { protectedRoutes } from './routes/protected-routes';
 import ProtectedRoute from './routes/ProtectedRoute';
 import { publicRoutes } from './routes/public-routes';
 import RecentFitting from '../pages/recent-fitting';
+import ClosetPage from '../pages/closet/closet-page';
+
   	/*  RootLayout 아래에
 	publicRoutes들은 바로 접근 가능
 	protectedRoutes들은 ProtectedRoute라는 (Guard) 아래에 있음 
 	*/
-
-
-
 
 export const router = createBrowserRouter([
 	{
@@ -33,6 +32,10 @@ export const router = createBrowserRouter([
 					{
 						path: 'recent-fitting',
 						Component: RecentFitting,
+					},
+					{
+						path: 'closet',
+						Component: ClosetPage,
 					},
 				],
 			},

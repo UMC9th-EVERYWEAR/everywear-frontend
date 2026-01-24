@@ -1,4 +1,4 @@
-import type { ProductDataType } from '@/src/pages/closet/ClosetPage';
+import type { ProductDataType } from '@/src/pages/closet/closet-page';
 import ProductCard from '../common/ProductCard';
 
 interface ItemBrowseSectionProps {

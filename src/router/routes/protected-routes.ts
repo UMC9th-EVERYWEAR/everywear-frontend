@@ -2,9 +2,10 @@ import SettingPhotoPage from '@/src/pages/setting/setting-photo-page';
 import SettingPage from '../../pages/setting/setting-page';
 import SettingInquiry from '@/src/pages/setting/setting-inquiry-page';
 import SettingWithdraw from '@/src/pages/setting/setting-withdraw-page';
-import ClosetPage from '@/src/pages/closet/ClosetPage';
+import ClosetPage from '@/src/pages/closet/closet-page';
 import RecentFitting from '@/src/pages/recent-fitting';
 import  { PATH } from '@/src/constants/path';
+import Home from '@/src/pages/Home';
 
 /*
  * protectedRoutes
