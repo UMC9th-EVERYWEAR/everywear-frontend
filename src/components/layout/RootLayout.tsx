@@ -3,7 +3,7 @@ import Header from './Header';
 import { Navbar } from './Navbar';
 import { Modal } from '../common/Modal';
 import { useState } from 'react';
-import { PATH } from '../../router/path';
+import { PATH } from '../../constants/path';
 
 const RootLayout = () => {
 	const { pathname } = useLocation();

@@ -1,7 +1,8 @@
-import arrowRight from '@/public/svgs/arrow-right.svg';
 import { Modal } from '@/src/components/common/Modal';
-import { ArrowRightIcon } from '@/src/components/setting/ArrowRightIcon.';
-import ToggleBtn from '@/src/components/setting/ToggleBtn';
+import AccountSection from '@/src/components/setting/setting/AccountSection';
+import FooterActions from '@/src/components/setting/setting/FooterActions';
+import NotificationSection from '@/src/components/setting/setting/Notification';
+import SupportSection from '@/src/components/setting/setting/SupportSection';
 import { PATH } from '@/src/router/path';
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
@@ -47,125 +48,29 @@ const SettingPage = () => {
 	return <div className="mt-5 mx-4 w-[calc(100%-32px)]">
 		<div className='text-neutral-900  mb-7 '>
 			<div className=' flex flex-col gap-5' >
-			
-				<div>
-					<div className='border-b py-1 border-neutral-900 text-medium-16'>회원정보</div>
-							
-					<button
-						onClick={goChangePhoto}
-						className='py-2 w-full flex justify-between border-b-[0.5px] border-neutral-300 cursor-pointer'
-					>
-						<span className='text-regular-14 flex items-center'>기본 사진 변경</span>
-						<img
-							src={arrowRight}
-							alt="arrow right"
-							className='cursor-pointer'
-
-						/>
-					</button>			
-
-					<button
-						onClick={toggleLoginSetting}
-						className='py-2 w-full flex justify-between border-b-[0.5px] border-neutral-300 '
-					>
-						<span className='text-regular-14 flex items-center'>간편 로그인 설정</span>
-						<ArrowRightIcon rotated={openLoginSetting} />
-					</button>
-
-					{
-						openLoginSetting && (
-							<div className='flex flex-col gap-2 py-2'>
-								<div className='flex justify-between'>
-									<button className='text-regular-14 text-left'>네이버 로그인 연동</button>
-									<ToggleBtn
-										checked={linkedSocialAccounts.naver}
-										onChange={() => toggleSocialLink('naver')}
-									/>
-								</div>
-
-								<div className='flex justify-between'>
-									<button className='text-regular-14 text-left'>카카오 로그인 연동</button>
-									<ToggleBtn
-										checked={linkedSocialAccounts.kakao}
-										onChange={() => toggleSocialLink('kakao')}
-									/>
-								</div>
-
-								<div className='flex justify-between'>
-									<button className='text-regular-14 text-left'>애플 로그인 연동</button>
-									<ToggleBtn
-										checked={linkedSocialAccounts.apple}
-										onChange={() => toggleSocialLink('apple')}
-									/>
-								</div>
-
-								<p className='text-regular-10 text-neutral-400'>* SNS 계정을 연결하시면 간편하게 로그인할 수 있습니다.</p>
-
-							</div>
-						)
-					}
-				</div>
-
-				<div>
-					<div className='border-b py-1 border-neutral-900 text-medium-16'>알림</div>
-					<div className='py-2 flex justify-between border-b-[0.5px] border-neutral-300 '>
-						<span className='text-regular-14 flex items-center'>알림 설정</span>
-						<ToggleBtn
-							checked={isNotificationEnabled}
-							onChange={toggleNotification}
-						/>
-					</div>			
-
-				</div>
-
-			
-				<div>
-					<div className='border-b py-1 border-neutral-900 text-medium-16'>지원</div>
-							
-					<div className='py-2 flex justify-between border-b-[0.5px] border-neutral-300 '>
-						<span className='text-regular-14 flex items-center'>서비스 이용약관</span>
-						<img
-							src={arrowRight}
-							alt="arrow right"
-							className='cursor-pointer'
-						/>
-					</div>			
-
-					<div className='py-2 flex justify-between border-b-[0.5px] border-neutral-300 '>
-						<span className='text-regular-14 flex items-center'>개인정보 처리방침</span>
-						<img
-							src={arrowRight}
-							alt="arrow right"
-							className='cursor-pointer'
-						/>
-					</div>
-
-					<button 
-						onClick={goInquiry}
-						className='py-2 w-full flex justify-between border-b-[0.5px] border-neutral-300 cursor-pointer'
-					>
-						<span className='text-regular-14 flex items-center'>1:1 문의하기</span>
-						<img
-							src={arrowRight}
-							alt="arrow right"
-							className='cursor-pointer'
-						/>
-					</button>
-				</div>
-
+				<AccountSection
+					openLoginSetting={openLoginSetting}
+					toggleLoginSetting={toggleLoginSetting}
+					linkedSocialAccounts={linkedSocialAccounts}
+					toggleSocialLink={toggleSocialLink}
+					onChangePhoto={goChangePhoto}
+				/>
+				
+				<NotificationSection
+					enabled={isNotificationEnabled}
+					onToggle={toggleNotification}
+				/>
+				<SupportSection
+					onInquiry={() => navigate(PATH.SETTING.INQUIRY)}
+				/>
 			</div>
 		</div>
 
-		<div className='text-neutral-700 flex flex-col items-start text-regular-12'>
-			<button
-				onClick={()=>setOpenLogoutSetting(true)}
-				className='cursor-pointer py-1'
-			>로그아웃</button>
-			<button
-				onClick={goWithdraw}
-				className='cursor-pointer py-1'
-			>회원탈퇴</button>
-		</div>
+		<FooterActions
+			onLogout={goInquiry}
+			onWithdraw={goWithdraw}
+		/>
+
 
 		{
 			openLogoutSetting && (

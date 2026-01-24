@@ -4,11 +4,13 @@ import SettingPage from '../../pages/setting/SettingPage';
 import { PATH } from '../path';
 import SettingInquiry from '@/src/pages/setting/SettingInquiryPage';
 import SettingWithdraw from '@/src/pages/setting/SettingWithdrawPage';
+import RecentFitting from '@/src/pages/recent-fitting';
 
 /*
  * protectedRoutes
  * - 인증이 필요한 페이지들
  */
+
 
 export const protectedRoutes = [
 	{
@@ -32,7 +34,10 @@ export const protectedRoutes = [
 		Component:  SettingWithdraw
 		,
 	},
-	
+	{ 
+		path: PATH.RECENT_FITTING,
+		Component: RecentFitting,
+	},
 	// 필요하면 계속 추가
 	// { path: PATH.CLOSET, Component: ClosetPage },
 	// { path: PATH.PRODUCTS.ROOT, Component: ProductsPage },
