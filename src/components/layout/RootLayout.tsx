@@ -44,30 +44,37 @@ const RootLayout = () => {
 
 
 	return (
-		<div className="min-h-screen  bg-gray-50 flex justify-center">
-			<div className='w-full flex justify-center'>
+		/* 1. h-screen과 overflow-hidden으로 전체 바구니 크기를 화면에 딱 맞춤 */
+		<div className='h-screen w-full bg-gray-50 flex justify-center overflow-hidden'>
+			<div className='flex flex-col max-w-2xl w-full h-full bg-white relative'>
 
-				<div className='flex flex-col max-w-2xl w-full'>
-
-					{!shouldHideHeader && <Header
+				{/* 2. 헤더 (고정) */}
+				{!shouldHideHeader && (
+					<Header
 						type={isMain ? 'main' : 'sub'}
 						title={getHeaderTitle(pathname)}
-					                      />}
-					<div className='grow bg-white'>
-						<Outlet />
-					</div>
-					<Navbar />
-					{/* 모달 등 전역 요소 */}
-					<Modal 
-						isOpen={isWithdrawOpen}
-						onClose={() => setIsWithdrawOpen(false)}
-						title="정말 탈퇴하시겠습니까?"
-						btn1Text="확인"
-						btn1Action={() => setIsWithdrawOpen(false)}
 					/>
-				</div>
+				)}
+
+				{/* 3. 콘텐츠 영역 (여기만 스크롤!) 
+				       grow를 주어 남은 공간을 다 차지하게 하고, no-scrollbar로 깔끔하게 처리 */}
+				<main className='flex-1 overflow-y-auto no-scrollbar'>
+					<Outlet />
+				</main>
+
+				{/* 4. 네비바 (고정) */}
+				<Navbar />
+
+				{/* 모달 */}
+				<Modal 
+					isOpen={isWithdrawOpen}
+					onClose={() => setIsWithdrawOpen(false)}
+					title='정말 탈퇴하시겠습니까?'
+					btn1Text='확인'
+					btn1Action={() => setIsWithdrawOpen(false)}
+				/>
 			</div>
-		</div >
+		</div>
 	);
 };
 

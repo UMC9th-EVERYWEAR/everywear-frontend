@@ -6,6 +6,7 @@
 @layer base {
   body {
     font-family: var(--font-pretendard);
+    scrollbar-gutter: stable;
   }
 }
 
@@ -33,6 +34,13 @@
 }
 
 @layer utilities {
+  .no-scrollbar {
+		-ms-overflow-style: none; /* IE and Edge */
+		scrollbar-width: none; /* Firefox */
+	}
+	.no-scrollbar::-webkit-scrollbar {
+		display: none; /* Chrome, Safari, Opera */
+	}
   .text-bold-24 {
     font-size: 24px;
     font-weight: 700;
