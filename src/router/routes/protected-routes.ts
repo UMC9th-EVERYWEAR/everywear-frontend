@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import Home from '../../page/Home';
 import SettingPage from '../../page/setting/SettingPage';
-import { PATH } from '../path';
+import { PATH } from '../../constants/path';
 import RecentFittingPage from '../../page/recent-fitting';
 
 /*
