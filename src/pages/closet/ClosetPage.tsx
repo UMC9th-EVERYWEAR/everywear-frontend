@@ -1,10 +1,11 @@
+import ItemAddCountSection from '@/src/components/closet/ItemAddSection';
+import ItemBrowseSection from '@/src/components/closet/ItemBrowseSection';
 import CategoryBar from '@/src/components/common/CategoryBar';
-import ProductCard from '@/src/components/common/ProductCard';
 import { PATH } from '@/src/constants/path';
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
 
-interface ProductCardProps {
+export interface ProductCardProps {
   company: string;
   name: string;
   price: string;
@@ -13,7 +14,7 @@ interface ProductCardProps {
   isCloset?: boolean;
 }
 
-interface ProductDataType extends ProductCardProps {
+export interface ProductDataType extends ProductCardProps {
   id: number;
   category: '상의' | '하의' | '아우터' | '원피스';
 }
@@ -115,40 +116,17 @@ const ClosetPage = () => {
 				selected={selected}
 				onSelect={handleSelected}
 			/>
+
 			<div className='w-[375px] flex flex-col mb-5'> {/* 나중에 width 설정 바꿔야 함 */}
-				{/* 상품 종류 및 개수 & 상품 추가 버튼 */}
-				<div className='flex justify-between items-center mb-5'>
-					<p className='text-regular-14 font-anonymous'>{selected} 상품({filteredProducts.length})</p>
-					<button
-						className='w-[70.667px] h-6 px-1.75 py-1.25 flex justify-center 
-                items-center border rounded-sm border-none bg-primary-600 shrink-0 
-                font-inter text-[11.333px] text-white cursor-pointer'
-						onClick={() => navigate(PATH.PRODUCTS.URL)}
-					>+ 상품추가</button>
-				</div>
 
-				{/* 내 상품 본문 */}
-				{filteredProducts.length === 0 ? (
-					<div className="flex items-center justify-center text-neutral-500 text-medium-15 h-[75vh]">
-						상품이 없습니다.
-					</div>
-				) : 
-					<div className='grid grid-cols-2 gap-4 place-items-center'>
-						{filteredProducts.map((product) => (
-							<ProductCard
-								key={product.id} // 리스트 렌더링엔 key가 필수
-								company={product.company}
-								name={product.name}
-								price={product.price}
-								rating={product.rating}
-								imageUrl={product.imageUrl}
-								isCloset={product.isCloset}
-							/>
-						))}
-					</div>}
+				<ItemAddCountSection
+					category={selected}
+					count={filteredProducts.length}
+					onClick={() => navigate(PATH.PRODUCTS.URL)}
+				/>
 
-
-
+				<ItemBrowseSection data={filteredProducts} />
+                
 			</div>
       
 		</div>
