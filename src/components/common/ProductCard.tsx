@@ -4,6 +4,7 @@ interface ProductCardProps {
   price: string;
   rating: number;
   imageUrl: string;
+  isCloset?: number;
 }
 
 const StarIcon = () => (
@@ -21,12 +22,12 @@ const StarIcon = () => (
 	</svg>
 );
 
-const ProductCard = ({ company, name, price, rating, imageUrl }: ProductCardProps) => {
+const ProductCard = ({ company, name, price, rating, imageUrl, isCloset = 0 }: ProductCardProps) => {
 	return (
-		<div className="flex flex-col items-center w-[137px] shrink-0 cursor-pointer active:scale-[0.98] transition-transform">
+		<div className="flex flex-col items-center w-[160px] shrink-0 cursor-pointer active:scale-[0.98] transition-transform">
       
 			{/* 1. 이미지 영역 (137 x 178) */}
-			<div className="w-[137px] h-[178px] rounded-[10px] overflow-hidden bg-[#F2F2F2]">
+			<div className="w-full h-[178px] rounded-[10px] overflow-hidden bg-[#F2F2F2]">
 				<img
 					src={imageUrl}
 					alt={name}
@@ -35,16 +36,20 @@ const ProductCard = ({ company, name, price, rating, imageUrl }: ProductCardProp
 			</div>
 
 			{/* 2. 정보 카드 (137 x 67, 위로 -34px 겹침) */}
-			<div className="w-[137px] bg-white -mt-[34px] p-4 rounded-b-[10px] shadow-[0_-4px_10px_rgba(0,0,0,0.02)] z-10 flex flex-col gap-1">
+			<div
+				className="w-full p-2.5 -mt-[34px] z-10 flex flex-col bg-white rounded-b-xl shadow-[0_2px_4px_0_rgba(0,0,0,0.25)]"
+			>
 
 				{/* 회사명 & 별점 */}
-				<div className="flex justify-between items-center">
-					<span className="text-[#767676] text-[10px]">
+				<div className="flex justify-between items-center text-regular-10">
+					<span className="text-[#767676] font-anonymous">
 						{company}
 					</span>
-					<div className="flex items-center gap-[2px]">
-						<StarIcon />
-						<span className="text-[#2A323F] text-[10px]">
+					<div className="flex items-center">
+						<div className="flex items-center justify-center w-[14px] h-[14px]">
+							<StarIcon />
+						</div>
+						<span className="text-neutral-900">
 							{rating}
 						</span>
 					</div>
@@ -52,15 +57,29 @@ const ProductCard = ({ company, name, price, rating, imageUrl }: ProductCardProp
 
  
 				{/* 상품명 */}
-				<h3 className="w-[100px] h-[21px] overflow-hidden text-[#2A323F] text-[14px] font-medium leading-[21px] whitespace-nowrap text-ellipsis">
+				<h3 className="w-full overflow-hidden text-neutral-900 text-regular-14 leading-[21px] whitespace-nowrap text-ellipsis">
 					{name}
 				</h3>
 
 				{/* 가격 */}
-				<p className="w-[38px] h-[18px] overflow-hidden text-[#2A323F] text-[12px] leading-[18px] whitespace-nowrap">
-					{price}
+				<p className="overflow-hidden text-[#2A323F] text-[12px] leading-[18px] whitespace-nowrap font-anonymous">
+					{price}원
 				</p>
 
+				{/* 구매하기 & AI 분석하기 버튼(내 옷장 페이지에서만 적용) */}
+				<div className="mt-2.5 flex justify-between w-full">
+					<button
+						className='flex justify-center w-16 p-1  tracking-[-2px] leading-4.5
+                          items-center border rounded-lg border-none bg-primary-600 shrink-0 
+                          text-medium-12 text-white cursor-pointer font-anonymous'
+						
+					>구매하기</button>
+					<button
+						className='flex justify-center w-16 p-1 tracking-[-2px] leading-4.5
+                          items-center border rounded-lg border-none bg-primary-600 shrink-0 
+                          text-medium-12 text-white cursor-pointer font-anonymous'
+					>AI 분석하기</button>
+				</div>
 			</div>
 		</div>
 	);
