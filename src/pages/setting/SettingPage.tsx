@@ -14,7 +14,7 @@ const SettingPage = () => {
 	const [linkedSocialAccounts, setLinkedSocialAccounts] = useState({
 		naver: false,
 		kakao: false,
-		apple: false,
+		google: false,
 	});
 
 
@@ -25,7 +25,7 @@ const SettingPage = () => {
 	const toggleNotification = () =>
 		setIsNotificationEnabled((prev) => !prev);
 
-	const toggleSocialLink = (provider: 'naver' | 'kakao' | 'apple') => {
+	const toggleSocialLink = (provider: 'naver' | 'kakao' | 'google') => {
 		setLinkedSocialAccounts((prev) => ({
 			...prev,
 			[provider]: !prev[provider],

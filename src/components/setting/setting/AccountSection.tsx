@@ -9,9 +9,9 @@ interface Props {
   linkedSocialAccounts: {
     naver: boolean;
     kakao: boolean;
-    apple: boolean;
+    google: boolean;
   };
-  toggleSocialLink: (provider: 'naver' | 'kakao' | 'apple') => void;
+  toggleSocialLink: (provider: 'naver' | 'kakao' | 'google') => void;
   onChangePhoto: () => void;
 }
 
@@ -54,17 +54,16 @@ const AccountSection = ({
 
 			{openLoginSetting && (
 				<div className="flex flex-col gap-2 py-2">
-					{(['naver', 'kakao', 'apple'] as const).map((provider) => (
+					{(['kakao', 'google'] as const).map((provider) => (
 						<div
 							key={provider}
 							className="flex justify-between"
 						>
 							<button className="text-regular-14 text-left">
-								{provider === 'naver'
-									? '네이버 로그인 연동'
-									: provider === 'kakao'
-										? '카카오 로그인 연동'
-										: '애플 로그인 연동'}
+						
+								{provider === 'kakao'
+									? '카카오 로그인 연동'
+									: '구글 로그인 연동'}
 							</button>
 							<ToggleBtn
 								checked={linkedSocialAccounts[provider]}
