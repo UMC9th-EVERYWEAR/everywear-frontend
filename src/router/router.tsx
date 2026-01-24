@@ -1,5 +1,3 @@
-
-
 import { createBrowserRouter } from 'react-router';
 import RootLayout from '../components/layout/RootLayout';
 import Home from '../pages/Home';
@@ -8,13 +6,12 @@ import { protectedRoutes } from './routes/protected-routes';
 import ProtectedRoute from './routes/ProtectedRoute';
 import { publicRoutes } from './routes/public-routes';
 import RecentFitting from '../pages/recent-fitting';
-  	/*  RootLayout 아래에
+import AiFittingPage from '../pages/ai-fitting/AiFittingPage';
+
+/*  RootLayout 아래에
 	publicRoutes들은 바로 접근 가능
 	protectedRoutes들은 ProtectedRoute라는 (Guard) 아래에 있음 
 	*/
-
-
-
 
 export const router = createBrowserRouter([
 	{
@@ -33,6 +30,10 @@ export const router = createBrowserRouter([
 					{
 						path: 'recent-fitting',
 						Component: RecentFitting,
+					},
+					{
+						path: 'ai-fitting:id',
+						Component: AiFittingPage,
 					},
 				],
 			},
