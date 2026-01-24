@@ -4,7 +4,7 @@ interface ProductCardProps {
   price: string;
   rating: number;
   imageUrl: string;
-  isCloset?: number;
+  isCloset?: boolean;
 }
 
 const StarIcon = () => (
@@ -22,7 +22,7 @@ const StarIcon = () => (
 	</svg>
 );
 
-const ProductCard = ({ company, name, price, rating, imageUrl, isCloset = 0 }: ProductCardProps) => {
+const ProductCard = ({ company, name, price, rating, imageUrl, isCloset = false }: ProductCardProps) => {
 	return (
 		<div className="flex flex-col items-center w-[160px] shrink-0 cursor-pointer active:scale-[0.98] transition-transform">
       
@@ -67,19 +67,20 @@ const ProductCard = ({ company, name, price, rating, imageUrl, isCloset = 0 }: P
 				</p>
 
 				{/* 구매하기 & AI 분석하기 버튼(내 옷장 페이지에서만 적용) */}
-				<div className="mt-2.5 flex justify-between w-full">
-					<button
-						className='flex justify-center w-16 p-1  tracking-[-2px] leading-4.5
+				{isCloset && (
+					<div className="mt-2.5 flex justify-between w-full">
+						<button
+							className='flex justify-center w-16 p-1  tracking-[-2px] leading-4.5
                           items-center border rounded-lg border-none bg-primary-600 shrink-0 
                           text-medium-12 text-white cursor-pointer font-anonymous'
 						
-					>구매하기</button>
-					<button
-						className='flex justify-center w-16 p-1 tracking-[-2px] leading-4.5
+						>구매하기</button>
+						<button
+							className='flex justify-center w-16 p-1 tracking-[-2px] leading-4.5
                           items-center border rounded-lg border-none bg-primary-600 shrink-0 
                           text-medium-12 text-white cursor-pointer font-anonymous'
-					>AI 분석하기</button>
-				</div>
+						>AI 분석하기</button>
+					</div>)}
 			</div>
 		</div>
 	);

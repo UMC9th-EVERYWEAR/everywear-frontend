@@ -1,6 +1,5 @@
 import { ICON_DATA } from '../../../public/Svgs/Icons/SvgIndex';
 
-
 interface CategoryBarProps {
 	selected: string;
 	onSelect: (category: string) => void;
@@ -61,8 +60,8 @@ const CategoryBar = ({ selected, onSelect }: CategoryBarProps) => {
 								rounded-full gap-0 border box-border cursor-pointer
 								transition-all duration-200
 								${isActive 
-									? 'bg-[#3B4599] text-white font-bold border-[#3B4599]'
-									: 'bg-[rgba(255,255,255,0.50)] text-[#596373] border-[#C7CBD2]'
+								? 'bg-[#3B4599] text-white font-bold border-[#3B4599]'
+								: 'bg-[rgba(255,255,255,0.50)] text-[#596373] border-[#C7CBD2]'
 								}
 							`}
 						>
@@ -70,10 +69,12 @@ const CategoryBar = ({ selected, onSelect }: CategoryBarProps) => {
 								{cat.renderIcon(isActive)}
 							</div>
 							
-							<span className={`
+							<span
+								className={`
 								text-[12px] font-medium font-["Pretendard"]
 								${cat.name === '전체' ? 'ml-[2px]' : 'ml-[-1px]'}
-							`}>
+							`}
+							>
 								{cat.name}
 							</span>
 						</button>
