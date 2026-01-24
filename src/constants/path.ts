@@ -29,6 +29,7 @@
 
 export const PATH = {
 	LOGIN: '/login',
+	ONBOARDING: '/onboarding',
 	HOME: '/home',
 
 	PRODUCTS: {
