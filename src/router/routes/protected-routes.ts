@@ -1,4 +1,5 @@
 import  { PATH } from '@/src/constants/path';
+import ClosetPage from '@/src/pages/closet/ClosetPage';
 import Home from '@/src/pages/Home';
 import RecentFitting from '@/src/pages/recent-fitting';
 import SettingPage from '@/src/pages/setting/SettingPage';
@@ -21,6 +22,10 @@ export const protectedRoutes = [
 	{
 		path: PATH.RECENT_FITTING,
 		Component: RecentFitting,
+	},
+	{
+		path: PATH.CLOSET,
+		Component: ClosetPage,
 	},
 	// 필요하면 계속 추가
 	// { path: PATH.CLOSET, Component: ClosetPage },

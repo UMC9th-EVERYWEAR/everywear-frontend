@@ -1,6 +1,6 @@
 import CategoryBar from '@/src/components/common/CategoryBar';
 import ProductCard from '@/src/components/common/ProductCard';
-import { PATH } from '@/src/router/path';
+import { PATH } from '@/src/constants/path';
 import { useNavigate } from 'react-router';
 
 
