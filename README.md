@@ -8,16 +8,19 @@ AI로 입어보고 AI로 분석하는 스마트 피팅 앱
 <table align="center">
     <tr align="center">
       <td style="min-width: 150px;">
+          <img width="200" height="300" alt="smurf2 2" src="https://github.com/user-attachments/assets/48fb3d3f-862c-454d-aef5-71a1a0c89646" />
+              <br/>
               <b>최정인</b>
-            </a>
         </td>
       <td style="min-width: 150px;">
-            </a>
+            <img width="200" height="300" alt="1-74285756 2" src="https://github.com/user-attachments/assets/b1315436-0bcd-48b7-bdae-bb80d3024d8c" />
+              <br/>
+              <b>김재범</b>           
+        </td>
+      <td style="min-width: 150px;">
+          <img width="200" height="300" alt="smurf3 2" src="https://github.com/user-attachments/assets/0e3ee9c8-426a-45d1-9393-a19aed778ec1" />
+              <br/>
               <b>김동환</b>
-        </td>
-      <td style="min-width: 150px;">
-              <b>김재범</b>
-            </a>
         </td>
     </tr>
 
