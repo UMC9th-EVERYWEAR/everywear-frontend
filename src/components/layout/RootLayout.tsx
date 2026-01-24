@@ -11,19 +11,31 @@ const RootLayout = () => {
   
 
 	/* hideHeaderRoutes: 헤더 숨길 라우트 목록 */
-	const hideHeaderRoutes = ['/login', '/onboarding'];
-	/* hideNavRoutes: Nav 숨길 라우트 목록 */ 
-	const hideNavRoutes = ['/login', PATH.LOGIN, PATH.AI_FITTING, PATH.SETTING.ROOT, PATH.SETTING.CHANGE_PHOTO, PATH.SETTING.WITHDRAW, PATH.SETTING.INQUIRY];
-
+	const hideHeaderPatterns = [
+		PATH.ONBOARDING,
+		PATH.LOGIN,
+	];	/* hideNavRoutes: Nav 숨길 라우트 목록 */ 
+	const hideNavPatterns = [
+		PATH.ONBOARDING,
+		PATH.LOGIN,
+		PATH.SETTING.ROOT,
+		PATH.SETTING.CHANGE_PHOTO,
+		PATH.SETTING.WITHDRAW,
+		PATH.SETTING.INQUIRY,
+		PATH.AI_FITTING.DETAIL,
+	];
 	// 추후 추가 가능
 
 	// 헤더 기능은 딱 2개
 	// 1. 뒤로가기
 	// 2. setting 페이지로 이동
 
-	const shouldHideHeader = hideHeaderRoutes.includes(pathname);
-	const shouldHideNav = hideNavRoutes.includes(pathname);
-
+	const shouldHideHeader = hideHeaderPatterns.some((pattern) =>
+		matchPath(pattern, pathname),
+	);
+	const shouldHideNav = hideNavPatterns.some((pattern) =>
+		matchPath(pattern, pathname),
+	);
 
 	/* HEADER_TITLE_MAP: 추후 헤더 타이틀 동적 변경 */
 	const HEADER_TITLE_MAP = [

@@ -12,10 +12,10 @@ const Header = ({ type, title = '최근 피팅 내역', onBack }: HeaderProps) =
 			/*1. 메인 헤더 레이아웃*/
 				<div className="flex justify-between items-end w-full pb-1">
 					<img 
-      				  src="../../public/svgs/LogoImages/Everywear.svg" 
-       				 alt="Everywear" 
-        			className="h-[18px] w-auto object-contain" 
-      				/>
+						src="../../public/svgs/LogoImages/Everywear.svg" 
+						alt="Everywear" 
+						className="h-[18px] w-auto object-contain"
+					/>
 					<button className="text-[#3B4599] transition-opacity active:opacity-50 cursor-pointer">
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
