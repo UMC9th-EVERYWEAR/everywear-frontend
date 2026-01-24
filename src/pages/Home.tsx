@@ -1,10 +1,10 @@
 import { useRef, useState } from 'react';
-import { Button } from '../components/common/Button';
+import { Button } from '../component/common/Button';
 import MusinsaLogo from "../../public/LogoImages/MusinsaLogo.svg";
 import ZigzagLogo from "../../public/LogoImages/ZigzagLogo.png";
 import Logo29cm from "../../public/LogoImages/29cmLogo.svg";
 import WLogo from "../../public/LogoImages/WLogo.svg";
-import ProductCard from '../components/common/ProductCard';
+import ProductCard from '../component/common/ProductCard';
 import RectangleIcon from "../../public/LogoImages/Rectangle.svg"; 
 import EllipseIcon from "../../public/LogoImages/Ellipse.svg";     
 
