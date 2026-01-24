@@ -1,8 +1,8 @@
-import { Component } from 'react';
 import Home from '../../pages/Home';
 import SettingPage from '../../pages/setting/SettingPage';
 import { PATH } from '../path';
 import RecentFittingPage from '../../pages/recent-fitting';
+import ClosetPage from '@/src/pages/closet/ClosetPage';
 
 /*
  * protectedRoutes
@@ -21,6 +21,10 @@ export const protectedRoutes = [
 	{
 		path: PATH.RECENT_FITTING,
 		Component: RecentFittingPage,
+	},
+	{
+		path: PATH.CLOSET,
+		Component: ClosetPage,
 	},
 	// 필요하면 계속 추가
 	// { path: PATH.CLOSET, Component: ClosetPage },
