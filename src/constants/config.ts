@@ -1,12 +1,16 @@
 // ENV_CONFIG 사용 방식
 // import.meta.env를 여기저기서 직접 쓰지 않기 위해
 
-// export const ENV_CONFIG = {
-//   BASE_URL: import.meta.env.VITE_BASE_URL as string,
+export const ENV_CONFIG = {
+	// EmailJS
+	EMAILJS: {
+		SERVICE_ID: import.meta.env.VITE_EMAILJS_SERVICE_ID as string,
+		TEMPLATE_ID: import.meta.env.VITE_EMAILJS_TEMPLATE_ID as string,
+		PUBLIC_KEY: import.meta.env.VITE_EMAILJS_PUBLIC_KEY as string,
+	},
 
-//   // OAuth
-//   KAKAO_URI: import.meta.env.VITE_KAKAO_URI as string,
-//   KAKAO_REDIRECT_URI: import.meta.env.VITE_KAKAO_REDIRECT_URI as string,
-//   KAKAO_LOCAL_REDIRECT_URI: import.meta.env
-//     .VITE_KAKAO_LOCAL_REDIRECT_URI as string,
-// ...
+	// ImgBB
+	IMGBB: {
+		API_KEY: import.meta.env.VITE_IMGBB_API_KEY as string,
+	},
+} as const;
