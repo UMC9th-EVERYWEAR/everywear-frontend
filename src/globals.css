@@ -118,28 +118,14 @@
     font-weight: 400;
   }
 
-  .anonymous-pro-regular {
-  font-family: "Anonymous Pro", monospace;
-  font-weight: 400;
-  font-style: normal;
+  /* 새로운 폰트 추가 */
+   .font-anonymous {
+    font-family: "Anonymous Pro", monospace;
   }
 
-  .anonymous-pro-bold {
-    font-family: "Anonymous Pro", monospace;
-    font-weight: 700;
-    font-style: normal;
-  }
-
-  .anonymous-pro-regular-italic {
-    font-family: "Anonymous Pro", monospace;
-    font-weight: 400;
-    font-style: italic;
-  }
-
-  .anonymous-pro-bold-italic {
-    font-family: "Anonymous Pro", monospace;
-    font-weight: 700;
-    font-style: italic;
+  .font-inter {
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
   }
   
 }
