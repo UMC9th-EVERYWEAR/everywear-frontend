@@ -18,6 +18,12 @@
 }
 
 @theme {
+  --breakpoint-*: initial;
+  --breakpoint-tablet: 40rem;
+  --breakpoint-laptop: 64rem;
+  --breakpoint-desktop: 80rem;
+
+
   --line-height-default: 1.5;
 
   --color-neutral-1000: #D2D2D2;
@@ -32,6 +38,8 @@
 
   --color-primary-600: #3b4599;
   --color-primary-300: #8d98ff;
+
+  --color-kakao: #FEE500;
 
   --shadow-0: 0px 0px 0px rgba(0, 0, 0, 0.05);
   --shadow-4: 0px 2px 6px rgba(0, 0, 0, 0.10);
@@ -70,7 +78,7 @@
   }
 
   .text-semibold-24 {
-    font-size: 24px;
+    font-size: 20px;
     font-weight: 600;
   }
 
@@ -140,6 +148,28 @@
   }
 
 
+    /* 반응형을 위한 추가 */
+
+  .text-regular-only {
+    font-weight: 400;
+  }
+  .text-medium-only {
+    font-weight: 500;
+  }
+  .text-semibold-only {
+    font-weight: 600;
+  }
+  .text-bold-only {
+    font-weight: 700;
+  }
+
+  .text-14-only { font-size: 14px; }
+  .text-16-only { font-size: 16px; }
+  .text-18-only { font-size: 18px; }
+  .text-20-only { font-size: 20px; }
+
+
+
   /* pagination 위치 */
   .photo-swiper .swiper-pagination {
     @apply !bottom-0 !flex justify-center !items-center;
@@ -155,3 +185,7 @@
     @apply !bg-primary-600 !w-2.5 !h-2.5 ;
   }
 }
+
+@custom-variant tablet (min-width: var(--breakpoint-tablet));
+@custom-variant laptop (min-width: var(--breakpoint-laptop));
+@custom-variant desktop (min-width: var(--breakpoint-desktop));
