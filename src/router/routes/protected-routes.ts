@@ -1,10 +1,3 @@
-<<<<<<< HEAD
-import { Component } from 'react';
-import Home from '@/src/pages/Home';
-import SettingPage from '@/src/pages/setting/SettingPage';
-import { PATH } from '../path';
-import RecentFittingPage from '@/src/pages/RecentFitting';
-=======
 import SettingPhotoPage from '@/src/pages/setting/setting-photo-page';
 import Home from '../../pages/Home';
 import SettingPage from '../../pages/setting/setting-page';
@@ -13,7 +6,6 @@ import SettingWithdraw from '@/src/pages/setting/setting-withdraw-page';
 import RecentFitting from '@/src/pages/recent-fitting';
 import  { PATH } from '@/src/constants/path';
 import AiFittingPage from '@/src/pages/ai-fitting/ai-fitting-page';
->>>>>>> origin/develop
 
 /*
  * protectedRoutes
