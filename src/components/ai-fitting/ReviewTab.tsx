@@ -1,17 +1,14 @@
-import { LoadingSpinner } from './LoadingSpinner';
 import ReviewKeywordTag from './ReviewKeywordList';
 import ReviewCard from './ReviewCard';
-import type { ReviewData } from '@/src/types/ai-fitting/data'; 
-import type { ReviewTabState } from '@/src/types/ai-fitting/status';
+import type { ReviewState } from '@/src/types/ai-fitting/status';
+import { LoadingSpinner } from './LoadingSpinner';
 
 interface ReviewTabProps {
-   state: ReviewTabState;
-   data: ReviewData;
+   state: ReviewState;
 }
 
-const ReviewTab = ({ state, data }: ReviewTabProps) => {
-
-
+const ReviewTab = ({ state }: ReviewTabProps) => {
+	
 	return (
 		<div className='flex flex-col items-center mb-[34px]'>
 			<div className='w-full'>
@@ -21,7 +18,8 @@ const ReviewTab = ({ state, data }: ReviewTabProps) => {
 					<span className='font-bold text-sm text-primary-600 mb-1'>AI 리뷰 요약</span>
                     
 					{/* 로딩 중일 때 */}
-					{isReviewSummaryFetching && (
+					{/* AI 리뷰 가져오기 로딩중 또는 AI 리뷰는 가져왔지만 요약이 로딩중일때 */}
+					{(state.status === 'loading' || state.status === 'success' && state.summary.status === 'loading') && (
 						<div className="w-full flex items-center min-h-[42px]">
 							<div className="w-[36.5px] flex justify-center items-center flex-shrink-0">
 								<LoadingSpinner size={5}/>
@@ -32,10 +30,10 @@ const ReviewTab = ({ state, data }: ReviewTabProps) => {
 						</div>
 					)}
 
-					{/* 로딩 끝 & 데이터 받음 */}
-					{!isReviewSummaryFetching && summaryData && (
+					{/* AI 리뷰 가져오기 성공 & 요약 성공 */}
+					{state.status === 'success' && state.summary.status === 'success' && (
 						<div className='w-full flex min-h-[42px] text-regular-14 text-neutral-900'>
-							{summaryData}
+							{state.summary.text}
 						</div>
 					)}
 
@@ -44,15 +42,13 @@ const ReviewTab = ({ state, data }: ReviewTabProps) => {
 
 
 				{/* 주요 리뷰 키워드 */}
-				{keywordData && (
+				{state.status === 'success'  && (
 					<div className='flex flex-col my-1.5'>
 						<span className='text-primary-600 font-bold text-sm flex justify-start mb-1'>
 							주요 리뷰 키워드
 						</span>
 
-						{!isReviewFetching && (
-							<ReviewKeywordTag keywordList={keywordData} />
-						)}
+						<ReviewKeywordTag keywordList={state.keywords} />
 					</div>)}
 
 
@@ -63,15 +59,15 @@ const ReviewTab = ({ state, data }: ReviewTabProps) => {
 					</span>
 
 					{/* 로딩 중 */}
-					{isReviewFetching && (
+					{state.status === 'loading' && (
 						<div className='flex justify-center py-10'>
 							<LoadingSpinner size={8} />
 						</div>
 					)}
 
 					{/* 데이터 있음 (props로 받은 reviewData 매핑) */}
-					{!isReviewFetching && reviewData && reviewData.length > 0 ? (
-						reviewData.map((review) => (
+					{state.status === 'success' && state.reviews.length > 0 ? (
+						state.reviews.map((review) => (
 							<ReviewCard
 								key={review.id}
 								data={review}
@@ -79,7 +75,7 @@ const ReviewTab = ({ state, data }: ReviewTabProps) => {
 						))
 					) : (
 					// 로딩 끝났는데 데이터가 없을 때
-						!isReviewFetching && (
+						state.status === 'success' && (
 							<div className='py-4 text-center text-neutral-400 text-sm'>
 								리뷰가 없습니다.
 							</div>

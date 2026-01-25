@@ -30,7 +30,7 @@ export type ReviewSummaryState =
 export type ReviewErrorReason = 'NETWORK_ERROR' | 'SERVER_ERROR';
 
 // [D] 리뷰 탭 전체 상태 (최상위 상태)
-export type ReviewTabState = 
+export type ReviewState = 
   | { status: 'idle' }
   | { status: 'loading' } // 전체 화면 로딩 (스피너)
   | { status: 'fatal_error'; error: ReviewErrorReason } // 치명적 에러 (재시도 버튼 등 필요)

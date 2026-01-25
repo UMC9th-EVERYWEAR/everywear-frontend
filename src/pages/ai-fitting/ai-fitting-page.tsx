@@ -2,11 +2,9 @@ import { useState } from 'react';
 import TabBar from '@/src/components/ai-fitting/TabBar';
 import FittingItemInfo, { type ItemData } from '@/src/components/ai-fitting/FittingItemInfo';
 import FittingTab from '@/src/components/ai-fitting/FittingTab';
-import ReviewTab from '@/src/components/ai-fitting/ReviewTab'; // 이름 통일
-
-// 타입 임포트
-import type { FittingState, ReviewTabState } from '@/src/types/ai-fitting/status';
-import { MOCK_REVIEW_DATA } from '@/src/data/ai-fitting/reviewMockData'; // 이 데이터도 타입에 맞춰주세요
+import ReviewTab from '@/src/components/ai-fitting/ReviewTab'; 
+import type { FittingState, ReviewState } from '@/src/types/ai-fitting/status';
+import { MOCK_REVIEW_DATA } from '@/src/data/ai-fitting/reviewMockData'; 
 import type { ModalState } from '@/src/types/ai-fitting/modal';
 import { Modal } from '@/src/components/common/Modal';
 
@@ -27,16 +25,22 @@ const AiFittingPage = () => {
 	const [isHearted, setIsHearted] = useState(false);
 
 	const [fittingState, setFittingState] = useState<FittingState>({ status: 'idle' });
+	const [reviewState, setReviewState] = useState<ReviewState>({ status : 'idle' })
 	const [modal, setModal]	 = useState<ModalState>({ type : 'none' });
 
 	// 핸들러 함수
 	const handleTabChange = (newTab: TabType) => setActiveTab(newTab);
-	// 1. 피팅 시작 (에러 시뮬레이션 포함)
+
+	// 피팅 시작 함수(에러 상황까지 구현)
+	// 나중에 api 연결되면 api 요청으로 변환할 예정
 	const handleStartFitting = () => {
 		setFittingState({ status: 'loading' });
+
+		// 피팅 로딩 처리
 		setTimeout(() => {
-			const isError = 1; 
-			if (isError) {
+			const isFittingError = 1;
+			
+			if (isFittingError) {
 				setFittingState({ status: 'error', error: 'INVALID_USER_IMAGE' });
 				setModal({ 
 					type: 'fittingError', 
@@ -47,24 +51,55 @@ const AiFittingPage = () => {
 					status: 'success', 
 					resultUrl: 'https://lh3.googleusercontent.com/d/1XuItc3eisxkLo6ZXqClQs-ZcsbYU0brI', 
 				});
-				// 성공 시 모달 오픈!
+				// 성공 시 모달 오픈
 				setModal({ type: 'success' }); 
 			}
-		}, 2000);
+		}, 10000);
+		handleStartReview();
 	};
 
-	// 2. [핵심] 에러 모달의 "확인" 버튼을 눌렀을 때 실행할 함수
-	const handleErrorModalClose = () => {
-		setModal({ type: 'none' });       // 1. 모달 닫기
-		setFittingState({ status: 'idle' }); // 2. 피팅 상태 초기화 (처음 화면으로)
+	const handleStartReview = () => {
+		setReviewState({ status : 'loading' });
+		// 리뷰 로딩 처리
+		setTimeout(() => {
+			const isReviewError = 1; 
+			const isSummaryError = 1;
+
+			if (isReviewError) {
+				setReviewState({ status: 'fatal_error', error: 'NETWORK_ERROR' });
+				setModal({ 
+					type: 'reviewError', 
+					reason: 'NETWORK_ERROR',
+				});
+			} else {
+				setReviewState({ 
+					status: 'success', 
+					summary: isSummaryError ? { status : 'error', error: 'INSUFFICIENT_REVIEWS' } : { status : 'success', text : MOCK_REVIEW_DATA.summary },
+					keywords: MOCK_REVIEW_DATA.keywords,
+					reviews: MOCK_REVIEW_DATA.reviews,
+				});
+			}
+		}, 5000);
+	}
+
+	// 에러 모달 시 확인 버튼 기능
+	// 모달 닫고, 피팅 상태 초기화
+	const handleFittingErrorModalClose = () => {
+		setModal({ type: 'none' }); 
+		setFittingState({ status: 'idle' });
 	};
 
-	// 3. 일반적인 모달 닫기 (성공, 하트 등에서 사용 - 상태 리셋 안 함)
+	const handleReviewErrorModalClose = () => {
+		setModal({ type: 'none' }); 
+		setReviewState({ status: 'idle' });
+	};
+
+	// 일반 모달 닫기 (성공, 하트 등에서 사용 - 상태 리셋 안 함)
 	const handleGeneralModalClose = () => {
 		setModal({ type: 'none' });
 	};
 
-	// C. 하트(찜) 클릭
+	// 하트(찜) 클릭
 	const handleHeart = () => {
 		const nextState = !isHearted;
 		setIsHearted(nextState);
@@ -74,7 +109,7 @@ const AiFittingPage = () => {
 		}
 	};
 
-	// D. 구매 클릭
+	// 구매 클릭
 	const handleBuy = () => {
 		setModal({ type: 'buy' });
 	};
@@ -82,6 +117,7 @@ const AiFittingPage = () => {
 	const handleGoToShop = () => {
 		// window.open(주소, '_blank', 보안옵션)
 		window.open('https://www.musinsa.com/products/5863714', '_blank', 'noopener,noreferrer');
+		setModal({ type: 'none' });
 	};
 
 	return (
@@ -108,6 +144,12 @@ const AiFittingPage = () => {
 					/>
 				)}
 
+				{activeTab === 'review' && (
+					<ReviewTab
+						state={reviewState}
+					/>
+				)}
+
 				<Modal
 					isOpen={modal.type === 'success'}
 					onClose={handleGeneralModalClose}
@@ -118,20 +160,20 @@ const AiFittingPage = () => {
 
 				<Modal
 					isOpen={modal.type === 'fittingError' && modal.reason === 'INVALID_PRODUCT_IMAGE'}
-					onClose={handleErrorModalClose}
+					onClose={handleFittingErrorModalClose}
 					title='AI 피팅을 실패했습니다'
 					text='피팅이 불가능한 상품입니다'
 					btn1Text="확인"
-					btn1Action={handleErrorModalClose}
+					btn1Action={handleFittingErrorModalClose}
 				/>
 
 				<Modal
 					isOpen={modal.type === 'fittingError' && modal.reason === 'INVALID_USER_IMAGE'}
-					onClose={handleErrorModalClose}
+					onClose={handleFittingErrorModalClose}
 					title='AI 피팅을 실패했습니다'
 					text='가이드에 맞는 대표사진으로 변경해주세요'
 					btn1Text="확인"
-					btn1Action={handleErrorModalClose}
+					btn1Action={handleFittingErrorModalClose}
 					btn2Text='변경하기'
 				/>
 
@@ -151,6 +193,43 @@ const AiFittingPage = () => {
 					text='내 옷장에 추가되었습니다'
 					btn1Text="확인"
 					btn1Action={handleGeneralModalClose}
+				/>
+
+				<Modal
+					isOpen={modal.type === 'reviewSummaryError' && modal.reason === 'GENERATION_FAILED'}
+					onClose={handleReviewErrorModalClose}
+					text='AI 리뷰 요약을 실패했습니다.'
+					btn1Text="재시도"
+					btn1Action={handleStartReview}
+					btn2Text='닫기'
+					btn2Action={handleReviewErrorModalClose}
+				/>
+
+				<Modal
+					isOpen={modal.type === 'reviewSummaryError' && modal.reason === 'INSUFFICIENT_REVIEWS'}
+					onClose={handleReviewErrorModalClose}
+					title='AI 리뷰 요약을 실패했습니다.'
+					text='리뷰 수가 부족하여 AI 리뷰 요약이 불가능합니다.'
+					btn1Text="확인"
+					btn1Action={handleReviewErrorModalClose}
+				/>
+
+				<Modal
+					isOpen={modal.type === 'reviewError' && modal.reason === 'NETWORK_ERROR'}
+					onClose={handleReviewErrorModalClose}
+					title='AI 리뷰를 가져오는 데 실패했습니다.'
+					text='네트워크 오류가 발생했습니다.'
+					btn1Text="확인"
+					btn1Action={handleReviewErrorModalClose}
+				/>
+
+				<Modal
+					isOpen={modal.type === 'reviewError' && modal.reason === 'SERVER_ERROR'}
+					onClose={handleReviewErrorModalClose}
+					title='AI 리뷰를 가져오는 데 실패했습니다.'
+					text='예기치 못한 오류가 발생했습니다.'
+					btn1Text="확인"
+					btn1Action={handleReviewErrorModalClose}
 				/>
 			</div>
 		</div>
