@@ -1,6 +1,7 @@
 import { formatPrice } from '@/src/utils/formatPrice';
 
 export interface ProductCardProps {
+	id : number;
   company: string;
   name: string;
   price: number;

@@ -1,6 +1,6 @@
 import  { useState, useRef } from 'react';
 import Button from '../components/common/Button';
-import ProductCard from '@/src/components/common/ProductCard';
+import ProductCard, { type ProductCardProps } from '@/src/components/common/ProductCard';
 
 import MusinsaLogo from '@/public/svgs/LogoImages/MusinsaLogo.svg';
 import ZigzagLogo from '@/public/svgs/LogoImages/ZigzagLogo.png';
@@ -10,10 +10,10 @@ import RectangleIcon from '@/public/svgs/LogoImages/Rectangle.svg';
 import EllipseIcon from '@/public/svgs/LogoImages/Ellipse.svg';     
 
 
-const products = [
-	{ id: 1, company: '무신사', name: '오버핏 후드티', price: '₩39,000', rating: 4.5, imageUrl: 'https://via.placeholder.com/300' },
-	{ id: 2, company: '지그재그', name: '와이드 슬랙스', price: '₩49,000', rating: 4.2, imageUrl: 'https://via.placeholder.com/300' },
-	{ id: 3, company: '29CM', name: '니트 가디건', price: '₩59,000', rating: 4.8, imageUrl: 'https://via.placeholder.com/300' },
+const products : ProductCardProps[] = [
+	{ id: 1, company: '무신사', name: '오버핏 후드티', price: 39000, rating: 4.5, imageUrl: 'https://via.placeholder.com/300' },
+	{ id: 2, company: '지그재그', name: '와이드 슬랙스', price: 49000, rating: 4.2, imageUrl: 'https://via.placeholder.com/300' },
+	{ id: 3, company: '29CM', name: '니트 가디건', price: 59000, rating: 4.8, imageUrl: 'https://via.placeholder.com/300' },
 ];
 
 const Home = () => {
