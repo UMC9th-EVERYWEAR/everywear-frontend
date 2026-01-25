@@ -1,94 +1,57 @@
+import type { ReviewData } from '@/src/types/ai-fitting/data';
 
-import type { ReviewDataAll, ReviewKeywordAll } from '@/src/types/ai-fitting/review';
+export const MOCK_REVIEW_DATA: ReviewData = {
 
-export const dummyReviewSummaryData = '흰색 무지 티셔츠는 탄탄한 원단과 무난한 핏으로 데일리 기본템으로 활용도가 높다는 평가가 많습니다. \
-대부분 착용감과 가성비에 만족하며, 세탁 후에도 형태 유지가 잘 된다는 의견이 있습니다.'
+	summary: '구매자들의 85%가 사이즈가 정사이즈라고 응답했습니다. 주로 재질의 탄탄함과 마감 처리에 대한 만족도가 높으며, 기장은 키 175cm 기준 발목을 살짝 덮는 정도입니다. 배송은 평균 2일 이내로 빠른 편입니다.',
+  
+	keywords: [
+		{ id: 1, label: '핏이 예뻐요' },
+		{ id: 2, label: '신축성 좋음' },
+		{ id: 3, label: '재질이 탄탄함' },
+		{ id: 4, label: '가성비 최고' },
+	],
 
-export const dummyReviewData: ReviewDataAll = [
-	{
-		starCount: 4,
-		date: '2024-01-15', 
-		itemName: '베이직 화이트 티셔츠',
-		size: 'L',
-		gender: '남성',
-		height: 170,
-		weight: 73,
-		reviewImage: [
-			{
-				id: 1,
-				imgUrl: 'https://lh3.googleusercontent.com/d/1eiIWEzT2SD1mdYZC1uDOko1vKCyMd5w-',
-			},
-			{
-				id: 2,
-				imgUrl: 'https://lh3.googleusercontent.com/d/1eiIWEzT2SD1mdYZC1uDOko1vKCyMd5w-',
-			},
-			{
-				id: 3,
-				imgUrl: 'https://lh3.googleusercontent.com/d/1eiIWEzT2SD1mdYZC1uDOko1vKCyMd5w-',
-			},
-			{
-				id: 4,
-				imgUrl: 'https://lh3.googleusercontent.com/d/1eiIWEzT2SD1mdYZC1uDOko1vKCyMd5w-',
-			},
-			{
-				id: 5,
-				imgUrl: 'https://lh3.googleusercontent.com/d/1eiIWEzT2SD1mdYZC1uDOko1vKCyMd5w-',
-			},
-		],
-		reviewBody: '170에 73키로 남성에게는 M사이즈가 정사이즈로 딱 좋았어요! 원래 L사이즈 하려다가 후기랑 \
-        보구 고른건데 M사이즈 아주 좋은 선택이였어요 오트밀 색상이 겨울엔 좀 더 따뜻한 느낌을 줄거 같아서 구매했는데 \
-        개인적으로는 네이비색상이 더 예쁘긴 하네용 ㅎ 니트 자체는 부드럽고 따뜻해서 좋아요~ 보풀이 잘 일어날지 여부는 좀 입어보고 일반후기로 올려볼게요!',
-	},
-	{
-		starCount: 4,
-		date: '2024-02-02',
-		itemName: '베이직 화이트 티셔츠',
-		size: 'M',
-		gender: '여성',
-		height: 162,
-		weight: 50,
-		reviewImage: [], // 이미지가 없는 경우 빈 배열
-		reviewBody: '배송이 정말 빨랐습니다. 사이즈는 정사이즈 같아요. 다만 생각보다 조금 얇은 감이 있어서 이너로 입기에 더 좋을 것 같습니다.',
-	},
-	{
-		starCount: 5,
-		date: '2024-02-10',
-		itemName: '베이직 화이트 티셔츠',
-		size: 'XL',
-		gender: '남성',
-		height: 181,
-		weight: 85,
-		reviewImage: [
-			{
-				id: 1,
-				imgUrl: 'https://lh3.googleusercontent.com/d/1eiIWEzT2SD1mdYZC1uDOko1vKCyMd5w-',
-			},
-			{
-				id: 2,
-				imgUrl: 'https://lh3.googleusercontent.com/d/1eiIWEzT2SD1mdYZC1uDOko1vKCyMd5w-',
-			},
-			{
-				id: 3,
-				imgUrl: 'https://lh3.googleusercontent.com/d/1eiIWEzT2SD1mdYZC1uDOko1vKCyMd5w-',
-			},
-			{
-				id: 4,
-				imgUrl: 'https://lh3.googleusercontent.com/d/1eiIWEzT2SD1mdYZC1uDOko1vKCyMd5w-',
-			},
-			{
-				id: 5,
-				imgUrl: 'https://lh3.googleusercontent.com/d/1eiIWEzT2SD1mdYZC1uDOko1vKCyMd5w-',
-			},
-		],
-		reviewBody: '오버핏으로 입으려고 한 치수 크게 샀는데 딱 원하는 느낌입니다. 재질이 부드러워서 피부에 닿는 느낌이 좋아요.',
-	},
-];
-
-export const dummyReviewKeywordData: ReviewKeywordAll = {
-	data: [
-		{ id: 1, data: '핏 좋음' },
-		{ id: 2, data: '품질 우수' },
-		{ id: 3, data: '가성비' },
-		{ id: 4, data: '배송 느림' },
+	reviews: [
+		{
+			id: 101,
+			rating: 5,
+			date: '2026-01-24',
+			productName: '와이드 데님 팬츠',
+			productSize: 'L',
+			gender: 'Male',
+			buyerHeight: 178,
+			buyerWeight: 72,
+			content: '인생 바지 찾았습니다. 허벅지가 좀 있는 편인데 와이드하게 떨어져서 핏이 너무 예쁘네요. 기장도 수선 없이 딱 맞습니다. 재구매 의사 있습니다!',
+			images: [
+				{ id: 1, imgUrl: 'https://placehold.co/400x600?text=Review+Image+1' },
+				{ id: 2, imgUrl: 'https://placehold.co/400x600?text=Review+Image+2' },
+			],
+		},
+		{
+			id: 102,
+			rating: 4,
+			date: '2026-01-23',
+			productName: '와이드 데님 팬츠',
+			productSize: 'M',
+			gender: 'Female',
+			buyerHeight: 162,
+			buyerWeight: 55,
+			content: '생각보다 기장이 조금 길어서 굽 있는 신발이랑 신어야 할 것 같아요. 그래도 색감은 화면이랑 똑같고 예쁩니다. 허리는 밴딩이라 편해요.',
+			images: [], // 이미지가 없는 리뷰 케이스
+		},
+		{
+			id: 103,
+			rating: 5,
+			date: '2026-01-20',
+			productName: '와이드 데님 팬츠',
+			productSize: 'XL',
+			gender: 'Male',
+			buyerHeight: 185,
+			buyerWeight: 80,
+			content: '키 큰 분들에게 강추합니다. XL 시키니까 핏 딱 떨어지네요. 물빠짐도 거의 없고 튼튼해요.',
+			images: [
+				{ id: 3, imgUrl: 'https://placehold.co/400x600?text=Review+Image+3' },
+			],
+		},
 	],
 };

@@ -15,7 +15,9 @@ export interface ItemData {
 	title: string,
 	price: number,
 	imgUrl: string,
+	buyUrl : string,
 }
+
 
 const FittingItemInfo = ({ data, isHearted, handleHeart } : FittingItemInfoProps) =>  {
 	return (
@@ -35,27 +37,27 @@ const FittingItemInfo = ({ data, isHearted, handleHeart } : FittingItemInfoProps
 			<div className='flex flex-col w-full font-normal'>
 				{/* 쇼핑몰 정보 & 별점 */}
 				<div className='flex justify-between'>
-					<p className='flex text-[#767676] text-regular-12'>{}</p>
+					<p className='flex text-[#767676] text-regular-12 font-anonymous'>{data.company}</p>
 					<div className='flex items-center'>
 						<img
 							className='h-[14px] w-[14px]'
 							src={FittingCardStar}
 							alt='피팅 상품 별점'
 						/>
-						<p className='text-neutral-900 text-regular-12'>{data.rating}</p>
+						<p className='text-neutral-900 text-regular-12 font-anonymous'>{data.rating}</p>
 					</div>
 
 				</div>
 				{/* 피팅 상품 이름 */}
 				<p className='text-neutral-900 text-regular-14 flex justify-start'>{data.title}</p>
 				{/* 피팅 상품 가격 */}
-				<p className='text-neutral-900 text-regular-14 flex justify-start'>{data.price}원</p>
+				<p className='text-neutral-900 text-regular-14 flex justify-start font-anonymous'>{data.price}원</p>
 
 				{/* 구매하기 & 내 옷장 저장(하트) 버튼 */}
-				<div className='flex justify-between'>
+				<div className='flex justify-between gap-3'>
 					<button
-						className='w-[201px] p-[4px] bg-primary-600 border rounded-[10px] 
-                        flex justify-center text-neutral-50 text-regular-16 cursor-pointer'
+						className='flex flex-1 p-[4px] bg-primary-600 border rounded-[10px] 
+                        justify-center text-neutral-50 text-regular-16 cursor-pointer font-anonymous'
 					>
 						구매하기
 					</button>

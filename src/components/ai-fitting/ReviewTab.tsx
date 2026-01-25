@@ -1,38 +1,20 @@
 import { LoadingSpinner } from './LoadingSpinner';
-import ReviewKeywordTag from './ReviewKeywordTag';
+import ReviewKeywordTag from './ReviewKeywordList';
 import ReviewCard from './ReviewCard';
-// 타입 import 경로를 실제 프로젝트에 맞게 수정해주세요
-import type { ReviewData } from '@/src/types/ai-fitting/review'; 
+import type { ReviewData } from '@/src/types/ai-fitting/data'; 
+import type { ReviewTabState } from '@/src/types/ai-fitting/status';
 
-
-
-interface KeywordItem {
-    id: number;
-    data: string;
+interface ReviewTabProps {
+   state: ReviewTabState;
+   data: ReviewData;
 }
 
-interface AiReviewBodyProps {
-    isAnalysisStarted: boolean;       // AI 분석 시작 여부
-    isReviewSummaryFetching: boolean; // 요약 로딩 상태
-    isReviewFetching: boolean;        // 리뷰/키워드 로딩 상태
-    summaryData: string | null;       // 요약 데이터
-    reviewData: ReviewData[] | null;  // 리뷰 데이터
-    // 키워드 데이터 (목데이터 구조에 맞게 조정, 여기서는 string[] 대신 목데이터 형식을 따름)
-    keywordData: KeywordItem[] | null; 
-}
-
-const AiReviewBody = ({ 
-	isReviewSummaryFetching,
-	isReviewFetching, 
-	summaryData, 
-	reviewData,
-	keywordData,
-}: AiReviewBodyProps) => {
+const ReviewTab = ({ state, data }: ReviewTabProps) => {
 
 
 	return (
 		<div className='flex flex-col items-center mb-[34px]'>
-			<div className='w-[343px]'>
+			<div className='w-full'>
                 
 				{/* AI 리뷰 요약 */}
 				<div className='bg-[#E3E6FE] border border-none rounded-xl p-[10px] flex flex-col'>
@@ -109,4 +91,4 @@ const AiReviewBody = ({
 	)
 }
 
-export default AiReviewBody;
+export default ReviewTab;
