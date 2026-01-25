@@ -2,7 +2,7 @@ import kakaoIcon from '@/public/svgs/login/kakao-icon.svg'
 import googleIcon from '@/public/svgs/login/google-icon.svg'
 import { cn } from '@/src/utils/cn'
 
-type LoginType = 'KAKAO' | 'GOOGLE' // TODO: 나중에 설정페이지에서 재사용하도록 수정
+export type LoginType = 'KAKAO' | 'GOOGLE' // TODO: 나중에 설정페이지에서 재사용하도록 수정
 
 const LOGIN_BTN: Record <
 LoginType,
@@ -21,12 +21,14 @@ description: string
 }
 
 interface LoginBtnProps {
-	type: LoginType
+	type: LoginType;
+	onClick: () => void;
 }
 
-const LoginBtn = ({ type }: LoginBtnProps) => {
+const LoginBtn = ({ type, onClick }: LoginBtnProps) => {
 	const { icon, description } = LOGIN_BTN[type]
-	return(<div
+	return(<button
+		onClick={onClick}
 		className={cn('w-65 rounded-lg flex gap-2 items-center justify-center py-3 cursor-pointer',
 			type === 'KAKAO' ? 'bg-kakao' : 'bg-white border border-neutral-500',
 		)}
@@ -36,6 +38,6 @@ const LoginBtn = ({ type }: LoginBtnProps) => {
 			alt='icon'
 		/>
 		<p>{description}</p>
-	</div>)
+	</button>)
 }
 export default LoginBtn

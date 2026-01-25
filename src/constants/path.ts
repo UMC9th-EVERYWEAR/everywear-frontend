@@ -28,7 +28,10 @@
 
 
 export const PATH = {
-	LOGIN: '/login',
+	LOGIN: {
+		ROOT: '/login',
+		TERMS: '/login/terms',
+	},
 	ONBOARDING: '/onboarding',
 	HOME: '/home',
 
@@ -56,14 +59,15 @@ export const PATH = {
 /* hideHeaderRoutes: 헤더 숨길 라우트 목록 */
 export const hideHeaderPatterns = [
 	PATH.ONBOARDING,
-	PATH.LOGIN,
+	PATH.LOGIN.ROOT,
 
 ];	
 
 /* hideNavRoutes: Nav 숨길 라우트 목록 */ 
 export const hideNavPatterns = [
 	PATH.ONBOARDING,
-	PATH.LOGIN,
+	PATH.LOGIN.ROOT,
+	PATH.LOGIN.TERMS,
 	PATH.SETTING.ROOT,
 	PATH.SETTING.CHANGE_PHOTO,
 	PATH.SETTING.WITHDRAW,

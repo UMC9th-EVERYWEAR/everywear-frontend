@@ -35,6 +35,8 @@ const RootLayout = () => {
 		{ pattern: PATH.SETTING.CHANGE_PHOTO, title: '기본 사진 변경' },
 		{ pattern: PATH.SETTING.INQUIRY, title: '1:1 문의하기' },
 		{ pattern: PATH.SETTING.WITHDRAW, title: '회원탈퇴' },
+		{ pattern: PATH.LOGIN.TERMS, title: '뒤로가기' },
+
 
 	] as const;
 

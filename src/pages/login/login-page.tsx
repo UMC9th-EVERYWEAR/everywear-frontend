@@ -1,7 +1,27 @@
 import logo from '@/public/svgs/LogoImages/Everywear.svg'
-import LoginBtn from '@/src/components/login/LoginBtn'
+import LoginBtn, { type LoginType } from '@/src/components/login/LoginBtn'
+import { PATH } from '@/src/constants/path';
+import { useNavigate } from 'react-router';
 
 const LoginPage = () => {
+
+	const navigate = useNavigate();
+
+	const handleLogin = (type:LoginType ) => {
+		if(type === 'KAKAO'){
+			console.log('kakaologin')
+			// TODO: kakaologin 구현
+			
+		}if(type === 'GOOGLE'){
+			console.log('googlelogin')
+			// TODO: googlelogin 구현
+		}
+		
+		// TODO: 로그인 후 약관 or 홈페이지 이동 구현
+		navigate(PATH.LOGIN.TERMS);
+
+	}
+
 	return(
 		<div className="bg-primary-600 min-h-screen px-8 flex justify-center items-center">
 			<div className="bg-white w-full rounded-lg  pt-26 pb-26 flex items-center flex-col gap-16 sm:h-screen">
@@ -21,8 +41,14 @@ const LoginPage = () => {
 				</div>
 
 				<div className='w-full flex flex-col gap-2.5 px-8 py-3 items-center'>
-					<LoginBtn type='KAKAO'/>
-					<LoginBtn type='GOOGLE' />
+					<LoginBtn
+						type='KAKAO'
+						onClick={()=>handleLogin('KAKAO')}
+					/>
+					<LoginBtn
+						type='GOOGLE'
+						onClick={()=>handleLogin('GOOGLE')}
+					/>
 				</div>
 			</div>
 		</div>

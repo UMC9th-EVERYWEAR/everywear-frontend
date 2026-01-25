@@ -14,7 +14,7 @@ import LoginPage from '@/src/pages/login/login-page';
 */
 export const publicRoutes = [
 	{
-		path: PATH.LOGIN,
+		path: PATH.LOGIN.ROOT,
 		Component: LoginPage,
 	},
 ]
