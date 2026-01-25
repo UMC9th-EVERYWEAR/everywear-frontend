@@ -6,6 +6,7 @@ import SettingWithdraw from '@/src/pages/setting/setting-withdraw-page';
 import RecentFitting from '@/src/pages/recent-fitting';
 import  { PATH } from '@/src/constants/path';
 import AiFittingPage from '@/src/pages/ai-fitting/ai-fitting-page';
+import LoginPage from '@/src/pages/login/login-page';
 
 /*
  * protectedRoutes
@@ -42,6 +43,10 @@ export const protectedRoutes = [
 	{
 		path: PATH.AI_FITTING.DETAIL,
 		Component: AiFittingPage,
+	},
+	{
+		path: PATH.LOGIN,
+		Component: LoginPage,
 	},
 	// 필요하면 계속 추가
 	// { path: PATH.CLOSET, Component: ClosetPage },

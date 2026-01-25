@@ -17,6 +17,7 @@ const RootLayout = () => {
 	const shouldHideHeader = useMemo(() => hideHeaderPatterns.some((pattern) =>
 		matchPath(pattern, pathname),
 	), [pathname]);
+	
 	const shouldHideNav = useMemo(() => hideNavPatterns.some((pattern) =>
 		matchPath(pattern, pathname),
 	), [pathname]);
@@ -66,7 +67,7 @@ const RootLayout = () => {
 				</main>
 
 				{/* 4. 네비바 (고정) */}
-				<Navbar />
+				{!shouldHideNav  && <Navbar />}	
 
 				{/* 모달 */}
 				<Modal 
