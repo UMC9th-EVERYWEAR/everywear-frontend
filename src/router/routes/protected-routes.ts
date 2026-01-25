@@ -5,6 +5,7 @@ import SettingInquiry from '@/src/pages/setting/setting-inquiry-page';
 import SettingWithdraw from '@/src/pages/setting/setting-withdraw-page';
 import RecentFitting from '@/src/pages/recent-fitting';
 import  { PATH } from '@/src/constants/path';
+import OnboardingPhotoPage from '@/src/pages/onboarding/onboarding-photo-page';
 
 /*
  * protectedRoutes
@@ -37,6 +38,10 @@ export const protectedRoutes = [
 	{ 
 		path: PATH.RECENT_FITTING,
 		Component: RecentFitting,
+	},
+	{ 
+		path: PATH.ONBOARDING.PHOTO,
+		Component: OnboardingPhotoPage,
 	},
 	// 필요하면 계속 추가
 	// { path: PATH.CLOSET, Component: ClosetPage },
