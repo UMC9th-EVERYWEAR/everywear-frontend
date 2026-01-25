@@ -2,6 +2,7 @@ import { PATH } from '@/src/constants/path';
 import { useNavigate } from 'react-router';
 import Button from '../../common/Button';
 import GuidePhoto from './GuidePhoto';
+import { cn } from '@/src/utils/cn';
 
 const GuideSection = () => {
 
@@ -11,7 +12,11 @@ const GuideSection = () => {
 	};
 
 	return (
-		<div>
+		<div
+			className={cn(
+				'transition-all duration-500 ease-out opacity-0 animate-guide-in',
+			)}
+		>
 			<div className="border border-neutral-200 w-full rounded-sm px-2 py-5 flex flex-col items-center mb-5.5">
 
 				<p className="text-medium-20 mb-1 text-black">인물 사진 업로드 가이드 라인</p>

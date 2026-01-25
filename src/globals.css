@@ -163,7 +163,7 @@
     @apply !bg-primary-600 !w-2.5 !h-2.5 ;
   }
   /* =========================
-    SCROLL
+    ANIMATION
      ========================= */
 
     @keyframes frame-in {
@@ -175,7 +175,22 @@
     }
   }
 
+  @keyframes guide-in {
+    0% {
+      opacity: 0;
+      transform: translateY(-30px); /* -10 */
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
   .animate-frame-in {
     animation: frame-in 1.5s forwards;
   }
+  .animate-guide-in {
+    animation: guide-in 0.8s ease-out forwards;
+  }
+
 }
