@@ -1,6 +1,7 @@
 
 import cameraIcon from '@/public/svgs/onboarding/camera-blue.svg';
-import gallerlyIcon from '@/public/svgs/onboarding/gallerly.svg';
+import galleryIcon from '@/public/svgs/onboarding/gallerly.svg';
+
 
 
 export type PhotoBtnType =
@@ -21,21 +22,33 @@ const PHOTO_BTN_CONFIG: Record<
 	},
 	GALLERY: {
 		title: '갤러리에서 선택',
-		icon: gallerlyIcon,
+		icon: galleryIcon,
 	},
 };
 
 interface PhotoBtnProps {
   btnType: PhotoBtnType;
+	handleClick: (type : PhotoBtnType ) => void
 }
 
 
-const PhotoBtn = ({ btnType }: PhotoBtnProps) => {
+const PhotoBtn = ({ btnType, handleClick }: PhotoBtnProps) => {
 	const { title, icon } = PHOTO_BTN_CONFIG[btnType];
 
 	return (
 		<div className="max-w-42 w-full">
-			<button className="w-full border border-primary-600 rounded-lg py-4 flex gap-2.5 justify-center cursor-pointer hover:bg-primary-300/10"> 
+			<button
+				onClick={() => handleClick(btnType)}
+				className="w-full border border-primary-600 rounded-lg py-4 flex gap-2.5 justify-center cursor-pointer hover:bg-primary-300/10"
+			> 
+				{ }
+				{/* <video
+					ref={videoRef}
+					autoPlay
+					playsInline
+					className="w-full"
+				/> */}
+
 				<img
 					src={icon}
 					alt='btn-img'
