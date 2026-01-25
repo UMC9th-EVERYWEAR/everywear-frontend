@@ -1,10 +1,10 @@
 import type { ReviewData } from '@/src/types/ai-fitting/review'
 import ReviewStarOff from '@/public/ai-fitting/ReviewStarOff.svg'
 import ReviewStarOn from '@/public/ai-fitting/ReviewStarOn.svg'
-import { useState, useRef, type MouseEvent } from 'react' 
-import clsx from 'clsx' 
+import { useState } from 'react' 
 import { truncate } from '@/src/utils/truncate'
 import useDraggableScroll from '@/src/hooks/domain/ai-fitting'
+import { cn } from '@/src/utils/cn'
 
 interface ReviewCardProps {
     data : ReviewData
@@ -71,7 +71,7 @@ const ReviewCard = ({ data } : ReviewCardProps) => {
 			 
 				<div
 					ref={scrollRef}
-					className={clsx(
+					className={cn(
 						'flex gap-2 overflow-x-auto scrollbar-hide focus:outline-none', // 기본 스타일
 						isDragging ? 'cursor-grabbing' : 'cursor-grab', // 드래그 시 커서 변경
 					)}

@@ -1,5 +1,5 @@
 import type { TabType } from '@/src/pages/ai-fitting/ai-fitting-page';
-import clsx from 'clsx';
+import { cn } from '@/src/utils/cn';
 
 interface TabBarProps {
 	onTabChange : (tab : TabType) => void;
@@ -12,7 +12,7 @@ const TabBar = ({ onTabChange, activeTab } : TabBarProps) => {
             
 			{/* 1. AI 피팅 버튼 */}
 			<button
-				className={clsx(
+				className={cn(
 					'text-base flex-1 h-11 flex items-center justify-center p-2.5 transition-all duration-300 cursor-pointer', 
 					activeTab === 'fitting' ? 'text-primary-600' : 'text-neutral-400',
 				)}
@@ -21,7 +21,7 @@ const TabBar = ({ onTabChange, activeTab } : TabBarProps) => {
 
 			{/* 2. AI 리뷰 버튼 */}
 			<button
-				className={clsx(
+				className={cn(
 					'text-base flex-1 h-11 flex items-center justify-center p-2.5 transition-all duration-300 cursor-pointer', 
 					activeTab === 'review' ? 'text-primary-600' : 'text-neutral-400',
 				)}
@@ -30,7 +30,7 @@ const TabBar = ({ onTabChange, activeTab } : TabBarProps) => {
 
 			{/* 3. 버튼 밑 밑줄 이동(슬라이딩 인디케이터) */}
 			<div
-				className={clsx(
+				className={cn(
 					'absolute bottom-0 left-0 h-0.25 w-1/2 bg-primary-600', 
 					'transition-transform duration-200 ease-in-out', 
 					activeTab === 'review' ? 'translate-x-full' : 'translate-x-0', 

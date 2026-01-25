@@ -1,10 +1,7 @@
 import { LoadingSpinner } from './LoadingSpinner';
 import ReviewKeywordTag from './ReviewKeywordTag';
 import ReviewCard from './ReviewCard';
-// 타입 import 경로를 실제 프로젝트에 맞게 수정해주세요
 import type { ReviewData } from '@/src/types/ai-fitting/review'; 
-
-
 
 interface KeywordItem {
     id: number;
