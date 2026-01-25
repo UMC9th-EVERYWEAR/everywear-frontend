@@ -60,14 +60,15 @@ export const PATH = {
 
 /* hideHeaderRoutes: 헤더 숨길 라우트 목록 */
 export const hideHeaderPatterns = [
-	PATH.ONBOARDING,
+	PATH.ONBOARDING.ROOT,
 	PATH.LOGIN,
 
 ];	
 
 /* hideNavRoutes: Nav 숨길 라우트 목록 */ 
 export const hideNavPatterns = [
-	PATH.ONBOARDING,
+	PATH.ONBOARDING.ROOT,
+	PATH.ONBOARDING.PHOTO,
 	PATH.LOGIN,
 	PATH.SETTING.ROOT,
 	PATH.SETTING.CHANGE_PHOTO,
