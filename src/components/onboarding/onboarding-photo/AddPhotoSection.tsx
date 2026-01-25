@@ -1,8 +1,10 @@
 import { getWebcamStream } from '@/src/utils/getWebcam';
-import { useRef, useState } from 'react';
+import {  useRef, useState } from 'react';
 import Button from '@/src/components/common/Button';
 import PhotoBtn, { type PhotoBtnType } from './PhotoBtn';
 import { cn } from '@/src/utils/cn';
+import React from 'react';
+import { usePhotoInput } from '@/src/hooks/domain/onboarding/usePhotoInput';
 
 interface AddPhotoSectionProps {
   setShowGuide: () => void;
@@ -11,74 +13,23 @@ interface AddPhotoSectionProps {
 // 헤더에 대한 고민 필요
 
 const AddPhotoSection = ({ setShowGuide } : AddPhotoSectionProps) => {
-	const [isCamera, setIsCamera] = useState(false)
-	const [photo, setPhoto] = useState<string | null>(null);
+	const {
+		photo,
+		isCamera,
+		videoRef,
+		canvasRef,
+		fileInputRef,
+		openCamera,
+		openFilePicker,
+		handleChangeFile,
+		capturePhoto,
+	} = usePhotoInput();
 
-	const videoRef = useRef<HTMLVideoElement | null>(null);
-	const canvasRef = useRef<HTMLCanvasElement | null>(null);
-
-	const handleClick = async (btnType: PhotoBtnType) => {
-		if (btnType === 'CAMERA') {
-			if (!videoRef.current) return;
-			const stream = await getWebcamStream();
-			// camera 처리
-			videoRef.current.srcObject = stream
-			setIsCamera(true);
-		}
-	
-		if (btnType === 'GALLERY') {
-			// gallery 열기
-		}
+	const handleClick = (type: PhotoBtnType) => {
+		if (type === 'CAMERA') openCamera();
+		if (type === 'GALLERY') openFilePicker();
 	};
 
-	// 화질 안좋음 이슈 함수
-	// const drawToCanvas = () => {
-	// 	try {
-	// 		const ctx = canvasRef.current?.getContext('2d');
-	// 		if(!canvasRef.current) return;
-
-	// 		canvasRef.current.width = videoRef?.current.width
-	// 		canvasRef.current.height = 100
-	// 		if(ctx && ctx !== null) {
-	// 			if(videoRef.current){
-	// 				ctx.translate(canvasRef.current.width, 0);
-	// 				ctx.scale(-1, 1);
-	// 				ctx.drawImage(videoRef.current, 0, 0, canvasRef.current.width, canvasRef.current.height)
-	// 				ctx.setTransform(1,0,0,1,0,0);
-
-	// 			}
-	// 		}
-	// 	}
-	// 	 catch (err){
-	// 		console.log(err)
-	// 	}
-	// }
-	
-	  const handleCapture = () => {
-		if (!videoRef.current || !canvasRef.current) {
-			return;
-		}
-		
-		const $canvas = canvasRef.current;
-		const $video = videoRef.current;
- 
-		const context = $canvas.getContext('2d');
-		if (!context) {
-			return;
-		}
- 
-		$canvas.width = $video.videoWidth;
-		$canvas.height = $video.videoHeight;
- 
-		context.drawImage($video, 0, 0, $canvas.width, $canvas.height);
-		const imageToDataUrl = $canvas.toDataURL('image/png');
-		setPhoto(imageToDataUrl);
-		setIsCamera(false)
-	};
- 
-
-		
-	const hasFile = false
 	return(
 		<>
 			{
@@ -115,6 +66,13 @@ const AddPhotoSection = ({ setShowGuide } : AddPhotoSectionProps) => {
 							<PhotoBtn
 								btnType='GALLERY' 
 								handleClick={handleClick}
+							/>
+							<input
+								ref={fileInputRef}
+								type="file"
+								accept="image/*"
+								hidden
+								onChange={handleChangeFile}
 							/>
 						</div>
 						<Button disabled={!photo}>확인하기</Button>
@@ -157,25 +115,25 @@ const AddPhotoSection = ({ setShowGuide } : AddPhotoSectionProps) => {
 					ref={videoRef}
 					autoPlay
 					playsInline
-					  className={cn('w-screen border border-primary-600 object-cover',
+					className={cn('w-screen border border-primary-600 object-cover',
 						isCamera ? 'min-h-screen h-full' : 'invisible h-0',
 
 					)}
-					muted // ios
+					muted
 				/>
 				{/*btn2 */}
 				<button
-					onClick={handleCapture}
+					onClick={capturePhoto}
 					className='absolute bottom-20 left-1/2 -translate-x-1/2 bg-white rounded-full w-15 h-15 flex justify-center items-center cursor-pointer'
 				>
 					<div
 						className='bg-white border-primary-600 border-[1.5px] rounded-full w-13 h-13'
 					></div>
 				</button>
-				      <canvas
+				<canvas
 					ref={canvasRef}
 					className="hidden"
-				      />
+				/>
 			</div>
 		
 		</>
