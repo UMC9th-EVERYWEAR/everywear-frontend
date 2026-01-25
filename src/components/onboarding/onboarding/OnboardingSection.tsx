@@ -36,6 +36,7 @@ const OnboardingSection = ({ setIsGuide } : OnboardingSectionProps) => {
 			<ScrollAnimationContainer
 				className='flex flex-col gap-6 mt-5 mb-9'
 				stepDelay={1}
+
 				onLastVisible={() => setShowButton(true)}
 			>
 				<OnboardingNotice feature='ACCURACY'/>
@@ -47,7 +48,7 @@ const OnboardingSection = ({ setIsGuide } : OnboardingSectionProps) => {
 			<div className='h-15 w-full'>
 				{showButton && (
 					<ScrollAnimationContainer
-						baseDelay={1}
+						baseDelay={0.3}
 						className='w-full'
 					>
 						<Button onClick={setIsGuide}>가이드 보기</Button>
