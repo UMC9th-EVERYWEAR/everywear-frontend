@@ -17,6 +17,7 @@ const ItemBrowseSection = ({ data } : ItemBrowseSectionProps) => {
 					{data.map((product) => (
 						<ProductCard
 							key={product.id} // 리스트 렌더링엔 key가 필수
+							id={product.id}
 							company={product.company}
 							name={product.name}
 							price={product.price}

@@ -1,13 +1,13 @@
 import { formatPrice } from '@/src/utils/formatPrice';
 
 export interface ProductCardProps {
-	id : number;
-  company: string;
-  name: string;
-  price: number;
-  rating: number;
-  imageUrl: string;
-  isCloset?: boolean;
+    id: number; 
+    company: string;
+    name: string;
+    price: number;
+    rating: number;
+    imageUrl: string;
+    isCloset?: boolean;
 }
 
 const StarIcon = () => (

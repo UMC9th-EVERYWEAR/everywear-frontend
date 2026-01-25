@@ -8,7 +8,6 @@ import { useNavigate } from 'react-router';
 
 // 타입은 나중에 백엔드 연동하고 파일 하나로 정리할 예정입니다.
 export interface ProductDataType extends ProductCardProps {
-  id: number;
   category: '상의' | '하의' | '아우터' | '원피스';
 }
 
