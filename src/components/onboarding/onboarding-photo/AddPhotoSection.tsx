@@ -1,5 +1,4 @@
-import { getWebcamStream } from '@/src/utils/getWebcam';
-import {  useRef, useState } from 'react';
+
 import Button from '@/src/components/common/Button';
 import PhotoBtn, { type PhotoBtnType } from './PhotoBtn';
 import { cn } from '@/src/utils/cn';
