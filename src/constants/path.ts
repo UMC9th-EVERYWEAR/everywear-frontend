@@ -20,15 +20,16 @@
  * /setting/change-photo  → pages/setting/ChangePhotoPage.tsx
  */
 
-// ✅ 라우트 문자열을 상수로 관리해서 오타/불일치 방지
-// ✅ URL 변경 시 한 곳(PATH)만 수정하면 전체 반영되도록 하기 위함
-// ✅ Link/navigate/route 등록에서 같은 path를 재사용해 일관성 유지
-// ✅ 라우트 구조를 한눈에 문서처럼 파악할 수 있게 하기 위함
-// ✅ 동적 라우트(:id 등)도 통일된 규칙으로 관리하기 위함
+//  라우트 문자열을 상수로 관리해서 오타/불일치 방지
+//  URL 변경 시 한 곳(PATH)만 수정하면 전체 반영되도록 하기 위함
+//  Link/navigate/route 등록에서 같은 path를 재사용해 일관성 유지
+//  라우트 구조를 한눈에 문서처럼 파악할 수 있게 하기 위함
+//  동적 라우트(:id 등)도 통일된 규칙으로 관리하기 위함
 
 
 export const PATH = {
 	LOGIN: '/login',
+	ONBOARDING: '/onboarding',
 	HOME: '/home',
 
 	PRODUCTS: {
@@ -51,3 +52,21 @@ export const PATH = {
 		INQUIRY: '/setting/inquiry',
 	},
 } as const;
+
+/* hideHeaderRoutes: 헤더 숨길 라우트 목록 */
+export const hideHeaderPatterns = [
+	PATH.ONBOARDING,
+	PATH.LOGIN,
+
+];	
+
+/* hideNavRoutes: Nav 숨길 라우트 목록 */ 
+export const hideNavPatterns = [
+	PATH.ONBOARDING,
+	PATH.LOGIN,
+	PATH.SETTING.ROOT,
+	PATH.SETTING.CHANGE_PHOTO,
+	PATH.SETTING.WITHDRAW,
+	PATH.SETTING.INQUIRY,
+	PATH.AI_FITTING.DETAIL,
+];

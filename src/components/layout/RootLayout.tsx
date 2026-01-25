@@ -2,25 +2,24 @@ import { matchPath, Outlet, useLocation } from 'react-router';
 import Header from './Header';
 import { Navbar } from './Navbar';
 import { Modal } from '../common/Modal';
-import { useState } from 'react';
-import { PATH } from '../../constants/path';
+import { useMemo, useState } from 'react';
+import { hideHeaderPatterns, hideNavPatterns, PATH } from '@/src/constants/path';
 
 const RootLayout = () => {
 	const { pathname } = useLocation();
 	const [isWithdrawOpen, setIsWithdrawOpen] = useState(false);
   
-
-	/* hideHeaderRoutes: 헤더 숨길 라우트 목록 */
-	const hideHeaderRoutes = ['/login', '/onboarding'];
-	/* hideNavRoutes: Nav 숨길 라우트 목록 */ 
 	// 추후 추가 가능
 
 	// 헤더 기능은 딱 2개
 	// 1. 뒤로가기
 	// 2. setting 페이지로 이동
-
-	const shouldHideHeader = hideHeaderRoutes.includes(pathname);
-
+	const shouldHideHeader = useMemo(() => hideHeaderPatterns.some((pattern) =>
+		matchPath(pattern, pathname),
+	), [pathname]);
+	const shouldHideNav = useMemo(() => hideNavPatterns.some((pattern) =>
+		matchPath(pattern, pathname),
+	), [pathname]);
 
 	/* HEADER_TITLE_MAP: 추후 헤더 타이틀 동적 변경 */
 	const HEADER_TITLE_MAP = [
@@ -60,7 +59,7 @@ const RootLayout = () => {
 					<div className='grow bg-white'>
 						<Outlet />
 					</div>
-					<Navbar />
+					{!shouldHideNav && <Navbar />}
 					{/* 모달 등 전역 요소 */}
 					<Modal 
 						isOpen={isWithdrawOpen}
