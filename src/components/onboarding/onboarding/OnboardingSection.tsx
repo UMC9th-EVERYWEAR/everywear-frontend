@@ -44,15 +44,17 @@ const OnboardingSection = ({ setIsGuide } : OnboardingSectionProps) => {
 				<OnboardingTip />
 			</ScrollAnimationContainer>
 
-			{showButton && (
-				<ScrollAnimationContainer
-					baseDelay={1}
-					className='w-full'
-				>
-					<Button onClick={setIsGuide}>가이드 보기</Button>
-				</ScrollAnimationContainer>
-			)}
-
+			<div className='h-15 w-full'>
+				{showButton && (
+					<ScrollAnimationContainer
+						baseDelay={1}
+						className='w-full'
+					>
+						<Button onClick={setIsGuide}>가이드 보기</Button>
+					</ScrollAnimationContainer>
+				)}
+			</div>
+		
 		
 
 		</div>

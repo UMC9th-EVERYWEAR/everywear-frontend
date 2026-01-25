@@ -3,7 +3,7 @@ import security from '@/public/svgs/onboarding/lock-icon.svg'
 import speed from '@/public/svgs/onboarding/cart-icon.svg'
 
 
-type FeatureKey = 'ACCURACY' | 'SECURITY' | 'SPEED';
+export type FeatureKey = 'ACCURACY' | 'SECURITY' | 'SPEED';
 
 
 interface OnboardingNoticeProps {
