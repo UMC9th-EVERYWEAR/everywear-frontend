@@ -1,16 +1,17 @@
-import { useNavigate, useLocation } from 'react-router'; // 1. Hook 임포트
+import { useNavigate, useLocation } from 'react-router'; 
 import { HomeIcon, ProductIcon, FittingIcon, ClosetIcon } from '../common/Icons';
+import { PATH } from '@/src/constants/path';
 
 const NAV_ITEMS = [
-	{ id: 'home', label: '홈', Icon: HomeIcon, path: '/home' }, // path 추가
-	{ id: 'product', label: '전체 상품', Icon: ProductIcon, path: '/product' },
-	{ id: 'fitting', label: '최근 피팅', Icon: FittingIcon, path: '/recent-fitting' }, // 아까 만든 경로
-	{ id: 'closet', label: '내 옷장', Icon: ClosetIcon, path: '/closet' },
+	{ id: 'home', label: '홈', Icon: HomeIcon, path: PATH.HOME }, 
+	{ id: 'product', label: '전체 상품', Icon: ProductIcon, path: PATH.PRODUCTS.ROOT },
+	{ id: 'fitting', label: '최근 피팅', Icon: FittingIcon, path: PATH.RECENT_FITTING },
+	{ id: 'closet', label: '내 옷장', Icon: ClosetIcon, path: PATH.CLOSET },
 ];
 
 export const Navbar = () => {
-	const navigate = useNavigate(); // 2. 이동을 위한 함수
-	const location = useLocation(); // 3. 현재 경로를 가져오는 함수
+    const navigate = useNavigate(); //이동을 위한 함수
+    const location = useLocation(); //현재 경로를 가져오는 함수
 
 	return (
 		<nav className="sticky bottom-0 flex w-full h-[50px] px-4 justify-between items-center bg-white border-t border-neutral-100 shadow-[var(--shadow-4)] z-10">
