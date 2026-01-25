@@ -6,6 +6,7 @@ interface FittingItemInfoProps {
     data: ItemData
     isHearted : boolean;
     handleHeart : () => void;
+	handleBuy : () => void;
 
 }
 
@@ -19,7 +20,7 @@ export interface ItemData {
 }
 
 
-const FittingItemInfo = ({ data, isHearted, handleHeart } : FittingItemInfoProps) =>  {
+const FittingItemInfo = ({ data, isHearted, handleHeart, handleBuy } : FittingItemInfoProps) =>  {
 	return (
 		<div className='border rounded-xl border-neutral-200 border-solid h-25.75 px-[10px] py-[6px] flex mb-[10px]'>
 				
@@ -58,6 +59,7 @@ const FittingItemInfo = ({ data, isHearted, handleHeart } : FittingItemInfoProps
 					<button
 						className='flex flex-1 p-[4px] bg-primary-600 border rounded-[10px] 
                         justify-center text-neutral-50 text-regular-16 cursor-pointer font-anonymous'
+						onClick={handleBuy}
 					>
 						구매하기
 					</button>

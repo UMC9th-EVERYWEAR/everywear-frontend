@@ -27,13 +27,13 @@ export type ReviewSummaryState =
   | { status: 'error'; error: ReviewSummaryErrorReason }; // 요약만 실패
 
 // [C] 리뷰 "불러오기" 치명적 에러 (목록 자체를 못 가져옴)
-export type ReviewFetchErrorReason = 'NETWORK_ERROR' | 'SERVER_ERROR';
+export type ReviewErrorReason = 'NETWORK_ERROR' | 'SERVER_ERROR';
 
 // [D] 리뷰 탭 전체 상태 (최상위 상태)
 export type ReviewTabState = 
   | { status: 'idle' }
   | { status: 'loading' } // 전체 화면 로딩 (스피너)
-  | { status: 'fatal_error'; error: ReviewFetchErrorReason } // 치명적 에러 (재시도 버튼 등 필요)
+  | { status: 'fatal_error'; error: ReviewErrorReason } // 치명적 에러 (재시도 버튼 등 필요)
   | { 
       status: 'success'; 
       reviews: ReviewItem[];        // 리뷰 목록 (무조건 존재)

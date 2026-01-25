@@ -13,7 +13,7 @@ interface FittingFrameProps {
 const FittingFrame = ({ type = 'BEFORE', imgUrl, state }: FittingFrameProps) => {
 	return (
 		<div
-			className="w-full h-[464px] px-2.5 py-4 border rounded-xl border-solid border-neutral-200 
+			className="w-full h-[500px] px-2.5 py-4 border rounded-xl border-solid border-neutral-200 
 		 flex flex-col bg-white items-center gap-2"
 		>
 			{state.status !== 'idle' && 
@@ -46,7 +46,7 @@ const FittingFrame = ({ type = 'BEFORE', imgUrl, state }: FittingFrameProps) => 
 						className="w-fit object-cover"
 					/>
 				)}
-				{state.status === 'idle' && imgUrl && (
+				{state.status === 'idle' && (
 					<button
 						className='w-[50%] p-2.5 flex justify-center items-center border 
 						rounded-[10px] border-solid border-primary-600 font-anonymous 

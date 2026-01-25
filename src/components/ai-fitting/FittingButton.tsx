@@ -3,31 +3,38 @@ import ButtonLayout from './ButtonLayout';
 
 interface FittingButtonProps {
     state: FittingStateStatus;
-	onClick?: () => void;
+    onStart: () => void;    // 피팅 시작 & 재생성
+    onDownload: () => void; // 다운로드
 }
 
-const FittingButton = ({ state, onClick } : FittingButtonProps) => {
+const FittingButton = ({ state, onStart, onDownload } : FittingButtonProps) => {
 	return (
 		<>
+			{/* 1. IDLE 상태: 피팅 시작 버튼 */}
 			{state === 'idle' && (
 				<ButtonLayout
 					content='AI 피팅하기'
 					className='bg-primary-600 text-white'
-					onClick={onClick}
-				/>)}
-			
+					onClick={onStart} // 부모의 handleStartFitting 실행
+				/>
+			)}
             
+			{/* 2. SUCCESS/LOADING/ERROR 상태 */}
 			{state !== 'idle' && (
 				<div className='flex flex-col mt-5 gap-5'>
+					{/* 재생성 버튼 */}
 					<ButtonLayout
 						content='재생성하기'
 						className={state === 'success' ? 'border-primary-600 text-primary-600' : 'border-neutral-400 text-neutral-400'}
-						onClick={onClick}
+						// 로딩 중에는 클릭 방지 등의 로직을 추가할 수도 있음
+						onClick={state === 'loading' ? undefined : onStart} 
 					/>
+                    
+					{/* 다운로드 버튼 */}
 					<ButtonLayout
 						content='다운로드하기'
 						className={state === 'success' ? 'bg-primary-600 text-white' : 'bg-neutral-400 text-white'}
-						onClick={onClick}
+						onClick={state === 'success' ? onDownload : undefined}
 					/>
 				</div>
 			)}
