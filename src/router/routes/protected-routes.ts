@@ -5,6 +5,7 @@ import SettingInquiry from '@/src/pages/setting/setting-inquiry-page';
 import SettingWithdraw from '@/src/pages/setting/setting-withdraw-page';
 import RecentFitting from '@/src/pages/recent-fitting';
 import  { PATH } from '@/src/constants/path';
+import AiFittingPage from '@/src/pages/ai-fitting/ai-fitting-page';
 import OnBoardingPage from '@/src/pages/onboarding/onboarding-page';
 import OnBoardingPhotoPage from '@/src/pages/onboarding/onboarding-photo-page';
 
@@ -47,6 +48,10 @@ export const protectedRoutes = [
 	{
 		path: PATH.ONBOARDING.PHOTO,
 		Component: OnBoardingPhotoPage,
+	},
+	{
+		path: PATH.AI_FITTING.DETAIL,
+		Component: AiFittingPage,
 	},
 	// 필요하면 계속 추가
 	// { path: PATH.CLOSET, Component: ClosetPage },
