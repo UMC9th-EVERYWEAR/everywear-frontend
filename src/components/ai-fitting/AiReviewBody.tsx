@@ -22,7 +22,6 @@ interface AiReviewBodyProps {
 }
 
 const AiReviewBody = ({ 
-	isAnalysisStarted,
 	isReviewSummaryFetching,
 	isReviewFetching, 
 	summaryData, 
@@ -69,7 +68,7 @@ const AiReviewBody = ({
 							주요 리뷰 키워드
 						</span>
 
-						{!isReviewFetching && keywordData && (
+						{!isReviewFetching && (
 							<ReviewKeywordTag keywordList={keywordData} />
 						)}
 					</div>)}
@@ -90,9 +89,9 @@ const AiReviewBody = ({
 
 					{/* 데이터 있음 (props로 받은 reviewData 매핑) */}
 					{!isReviewFetching && reviewData && reviewData.length > 0 ? (
-						reviewData.map((review, index) => (
+						reviewData.map((review) => (
 							<ReviewCard
-								key={index}
+								key={review.id}
 								data={review}
 							/>
 						))

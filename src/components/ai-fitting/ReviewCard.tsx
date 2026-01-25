@@ -1,50 +1,29 @@
 import type { ReviewData } from '@/src/types/ai-fitting/review'
-import ReviewStarOff from '@/public/Ai-Fitting/ReviewStarOff.svg'
-import ReviewStarOn from '@/public/Ai-Fitting/ReviewStarOn.svg'
+import ReviewStarOff from '@/public/ai-fitting/ReviewStarOff.svg'
+import ReviewStarOn from '@/public/ai-fitting/ReviewStarOn.svg'
 import { useState, useRef, type MouseEvent } from 'react' 
 import clsx from 'clsx' 
+import { truncate } from '@/src/utils/truncate'
+import useDraggableScroll from '@/src/hooks/domain/ai-fitting'
 
 interface ReviewCardProps {
     data : ReviewData
 }
 
 const ReviewCard = ({ data } : ReviewCardProps) => {
+
 	// --- 텍스트 더보기 로직 ---
-	const [isExpanded, setIsExpanded] = useState(0);
-	const MAX_LENGTH = 95; 
-    
+	const [isExpanded, setIsExpanded] = useState(false);
+	const MAX_LENGTH = 115; 
 	const content = data.reviewBody;
 	const shouldTruncate = content.length > MAX_LENGTH;
-
-	const displayContent = (isExpanded || !shouldTruncate) 
+	const displayContent = isExpanded 
 		? content 
-		: content.slice(0, MAX_LENGTH) + '...';
+		: truncate(content, MAX_LENGTH);
 
-	// --- 3. 이미지 드래그 스크롤 로직 ---
-	const scrollRef = useRef<HTMLDivElement>(null);
-	const [isDragging, setIsDragging] = useState(false);
-	const [startX, setStartX] = useState(0);
-	const [scrollLeft, setScrollLeft] = useState(0);
-
-	const onDragStart = (e: MouseEvent<HTMLDivElement>) => {
-		setIsDragging(true);
-		if (scrollRef.current) {
-			setStartX(e.pageX - scrollRef.current.offsetLeft);
-			setScrollLeft(scrollRef.current.scrollLeft);
-		}
-	};
-
-	const onDragEnd = () => {
-		setIsDragging(false);
-	};
-
-	const onDragMove = (e: MouseEvent<HTMLDivElement>) => {
-		if (!isDragging || !scrollRef.current) return;
-		e.preventDefault(); // 텍스트 선택 등 기본 동작 방지
-		const x = e.pageX - scrollRef.current.offsetLeft;
-		const walk = (x - startX) * 1; // 스크롤 속도 조절 (1.5배)
-		scrollRef.current.scrollLeft = scrollLeft - walk;
-	};
+	// --- 3. 이미지 드래그 스크롤 로직 (커스텀 훅 사용) ---
+	// 핵심: 훅을 호출해서 필요한 것만 받아옵니다.
+	const { scrollRef, isDragging, dragEvents } = useDraggableScroll(1);
 
 	return (
 		<div className='flex flex-col gap-1 py-1.5 border-b border-solid border-neutral-100 w-full overflow-hidden'>
@@ -78,7 +57,7 @@ const ReviewCard = ({ data } : ReviewCardProps) => {
                     
 					{shouldTruncate && !isExpanded && (
 						<button 
-							onClick={() => setIsExpanded(1)}
+							onClick={() => setIsExpanded(true)}
 							className="text-regular-14 text-neutral-400 inline-block cursor-pointer ml-1"
 						>
 							더보기
@@ -89,7 +68,7 @@ const ReviewCard = ({ data } : ReviewCardProps) => {
 
 			{/* 이미지 슬라이더 (드래그 기능 추가됨) */}
 			{data.reviewImage && data.reviewImage.length > 0 && (
-			// eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
+			 
 				<div
 					ref={scrollRef}
 					className={clsx(
@@ -97,10 +76,7 @@ const ReviewCard = ({ data } : ReviewCardProps) => {
 						isDragging ? 'cursor-grabbing' : 'cursor-grab', // 드래그 시 커서 변경
 					)}
 					// 드래그 이벤트 연결
-					onMouseDown={onDragStart}
-					onMouseLeave={onDragEnd}
-					onMouseUp={onDragEnd}
-					onMouseMove={onDragMove}
+					{...dragEvents}
 					// 웹 접근성 속성
 					role="region"
 					aria-label="리뷰 이미지 슬라이더"
@@ -116,7 +92,6 @@ const ReviewCard = ({ data } : ReviewCardProps) => {
 								src={img.imgUrl}
 								alt="리뷰 이미지"
 								className="w-full h-full object-cover pointer-events-none"
-								// pointer-events-none: 이미지 자체의 드래그 방지 (필수)
 							/>
 						</div>
 					))}

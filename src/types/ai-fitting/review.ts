@@ -6,6 +6,7 @@ export interface ReviewImg {
 }
 
 export interface ReviewData {
+    id : number;
     starCount : number;
     date : string;
     itemName : string;
