@@ -155,8 +155,7 @@ Vercel에서 토큰 생성:
 **방법 1: Vercel 대시보드에서 확인**
 
 - Vercel Dashboard → 프로젝트 선택 → Settings → General
-- Project ID와 Team ID 확인
-
+- Project ID와 Team ID (이것이 `VERCEL_ORG_ID`에 해당) 확인
 **방법 2: Vercel CLI 사용**
 
 ```bash
