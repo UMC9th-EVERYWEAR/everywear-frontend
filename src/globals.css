@@ -139,6 +139,15 @@
     font-weight: 400;
   }
 
+  /* 새로운 폰트 추가 */
+   .font-anonymous {
+    font-family: "Anonymous Pro", monospace;
+  }
+
+  .font-inter {
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+  }
 
   /* pagination 위치 */
   .photo-swiper .swiper-pagination {
