@@ -48,7 +48,7 @@ const CategoryBar = ({ selected, onSelect }: CategoryBarProps) => {
 	];
 
 	return (
-		<div className='w-[375px] overflow-x-auto no-scrollbar bg-white sticky top-[45px] z-20'>
+		<div className='w-[375px] overflow-x-auto no-scrollbar bg-white sticky z-20'>
 			<div className='flex gap-[10px] p-4 items-center whitespace-nowrap'>
 				{categories.map((cat) => {
 					const isActive = selected === cat.name;
@@ -71,7 +71,8 @@ const CategoryBar = ({ selected, onSelect }: CategoryBarProps) => {
 								{cat.renderIcon(isActive)}
 							</div>
 							
-							<span className={`
+							<span
+								className={`
 								text-[12px] font-medium font-['Pretendard']
 								${cat.name === '전체' ? 'ml-[2px]' : 'ml-[-1px]'}
 							`}

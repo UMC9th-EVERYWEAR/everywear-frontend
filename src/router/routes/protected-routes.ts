@@ -7,6 +7,7 @@ import RecentFitting from '@/src/pages/recent-fitting';
 import  { PATH } from '@/src/constants/path';
 import AiFittingPage from '@/src/pages/ai-fitting/ai-fitting-page';
 import LoginPage from '@/src/pages/login/login-page';
+import Home from '@/src/pages/Home';
 
 /*
  * protectedRoutes
