@@ -34,7 +34,7 @@ const AiFittingPage = () => {
 
 	// 피팅 시작 함수(에러 상황까지 구현)
 	// 나중에 api 연결되면 api 요청으로 변환할 예정
-	const handleStartFitting = () => {
+	const handleSimulateFitting = () => {
 		setFittingState({ status: 'loading' });
 
 		// 피팅 로딩 처리
@@ -56,14 +56,14 @@ const AiFittingPage = () => {
 				setModal({ type: 'success' }); 
 			}
 		}, 10000);
-		handleStartReview();
+		handleSimulateReview();
 	};
 
-	const handleStartReview = () => {
+	const handleSimulateReview = () => {
 		setReviewState({ status : 'loading' });
 		// 리뷰 로딩 처리
 		setTimeout(() => {
-			const isReviewError = 1; 
+			const isReviewError = 0; 
 			const isSummaryError = 1;
 
 			if (isReviewError) {
@@ -81,6 +81,31 @@ const AiFittingPage = () => {
 				});
 			}
 		}, 5000);
+	}
+
+	const handleStartFitting = () => {
+		setFittingState({ status: 'loading' });
+		handleStartReview();
+	}
+
+	const handleStartReview = () => {
+		setReviewState({ status : 'loading' });
+	}
+
+	const handleSuccessFitting = () => {
+		setFittingState({ 
+			status: 'success', 
+			resultUrl: 'https://lh3.googleusercontent.com/d/1XuItc3eisxkLo6ZXqClQs-ZcsbYU0brI', 
+		});
+		setModal({ type: 'success' }); 
+		handleSuccessReview();
+	}
+
+	const handleSuccessReview = () => {
+		setReviewState({ status: 'success', keywords: MOCK_REVIEW_DATA.keywords, summary: { status : 'success', text : MOCK_REVIEW_DATA.summary }, reviews: MOCK_REVIEW_DATA.reviews });
+		setModal({
+			type: 'success',
+		})
 	}
 
 	// 에러 모달 시 확인 버튼 기능
@@ -141,7 +166,7 @@ const AiFittingPage = () => {
 				{activeTab === 'fitting' && (
 					<FittingTab
 						state={fittingState}
-						onStartFitting={handleStartFitting}
+						onStartFitting={handleSimulateFitting}
 					/>
 				)}
 

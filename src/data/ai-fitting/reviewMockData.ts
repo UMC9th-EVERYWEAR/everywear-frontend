@@ -23,8 +23,8 @@ export const MOCK_REVIEW_DATA: ReviewData = {
 			buyerWeight: 72,
 			content: '인생 바지 찾았습니다. 허벅지가 좀 있는 편인데 와이드하게 떨어져서 핏이 너무 예쁘네요. 기장도 수선 없이 딱 맞습니다. 재구매 의사 있습니다!',
 			images: [
-				{ id: 1, imgUrl: 'https://placehold.co/400x600?text=Review+Image+1' },
-				{ id: 2, imgUrl: 'https://placehold.co/400x600?text=Review+Image+2' },
+				{ id: 1, imgUrl: 'https://lh3.googleusercontent.com/d/1eiIWEzT2SD1mdYZC1uDOko1vKCyMd5w-' },
+				{ id: 2, imgUrl: 'https://lh3.googleusercontent.com/d/1eiIWEzT2SD1mdYZC1uDOko1vKCyMd5w-' },
 			],
 		},
 		{
@@ -50,7 +50,26 @@ export const MOCK_REVIEW_DATA: ReviewData = {
 			buyerWeight: 80,
 			content: '키 큰 분들에게 강추합니다. XL 시키니까 핏 딱 떨어지네요. 물빠짐도 거의 없고 튼튼해요.',
 			images: [
-				{ id: 3, imgUrl: 'https://placehold.co/400x600?text=Review+Image+3' },
+				{ id: 3, imgUrl: 'https://lh3.googleusercontent.com/d/1eiIWEzT2SD1mdYZC1uDOko1vKCyMd5w-' },
+			],
+		},
+		{
+			id: 104,
+			rating: 4,
+			date: '2026-01-25',
+			productName: '와이드 데님 팬츠',
+			productSize: 'XL',
+			gender: 'Male',
+			buyerHeight : 175,
+			buyerWeight: 75,
+			content: '170에 73키로 남성에게는 M사이즈가 정사이즈로 딱 좋았어요! 원래 L사이즈 하려다가 후기랑 보구 고른건데 M사이즈 아주 좋은 선택이였어요 오트밀 색상이 겨울엔 좀 더 따뜻한 느낌을 줄거 같아서 구매했는데 개인적으로는 네이비색상이 더 예쁘긴 하네용 ㅎ 니트 자체는 부드럽고 따뜻해서 좋아요~ 보풀이 잘 일어날지 여부는 좀 입어보고 일반후기로 올려볼게요!',
+			images: [
+				{ id : 4, imgUrl : 'https://lh3.googleusercontent.com/d/1eiIWEzT2SD1mdYZC1uDOko1vKCyMd5w-' },
+				{ id : 5, imgUrl : 'https://lh3.googleusercontent.com/d/1eiIWEzT2SD1mdYZC1uDOko1vKCyMd5w-' },
+				{ id : 6, imgUrl : 'https://lh3.googleusercontent.com/d/1eiIWEzT2SD1mdYZC1uDOko1vKCyMd5w-' },
+				{ id : 7, imgUrl : 'https://lh3.googleusercontent.com/d/1eiIWEzT2SD1mdYZC1uDOko1vKCyMd5w-' },
+				{ id : 8, imgUrl : 'https://lh3.googleusercontent.com/d/1eiIWEzT2SD1mdYZC1uDOko1vKCyMd5w-' },
+				{ id : 9, imgUrl : 'https://lh3.googleusercontent.com/d/1eiIWEzT2SD1mdYZC1uDOko1vKCyMd5w-' },
 			],
 		},
 	],
