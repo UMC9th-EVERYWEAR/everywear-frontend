@@ -60,7 +60,8 @@ const ReviewTab = ({ state }: ReviewTabProps) => {
 
 					{/* 로딩 중 */}
 					{state.status === 'loading' && (
-						<div className='flex justify-center py-10'>
+						<div className='flex flex-col items-center py-10'>
+							<span className='break-all'>최신 리뷰를 업데이트하는 중입니다. <br />1분 정도 시간이 걸릴 수 있어요!</span>
 							<LoadingSpinner size={8} />
 						</div>
 					)}

@@ -50,7 +50,7 @@ const ReviewCard = ({ data }: ReviewCardProps) => {
 
 			{/* 리뷰 본문 */}
 			<div className="relative mt-1">
-				<p className="text-regular-14 anonymous-pro-bold text-neutral-900 break-all tracking-[-1px]">
+				<p className="text-regular-14 font-anonymous text-neutral-900 break-all tracking-[-1px]">
 					{displayContent}
 					{shouldTruncate && !isExpanded && (
 						<button
