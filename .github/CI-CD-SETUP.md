@@ -88,7 +88,7 @@
 | Secret 이름  | 설명                 | 예시            |
 | ------------ | -------------------- | --------------- |
 | `FORK_OWNER` | Fork 저장소의 소유자 | `your-username` |
-| `FORK_REPO`  | Fork 저장소 이름     | `HDI-LAB`       |
+| `FORK_REPO`  | Fork 저장소 이름     | `UMC9th-EVERYWEAR`       |
 
 ### Fork 저장소에서 설정
 
@@ -109,19 +109,36 @@ Fork 저장소의 `Settings` → `Secrets and variables` → `Actions`에서 설
 
 ```text
 UPSTREAM_OWNER: your-organization-name
-UPSTREAM_REPO: HDI-LAB
+UPSTREAM_REPO: UMC9th-EVERYWEAR
 ```
 
-##### 2. **PAT_TOKEN** (Personal Access Token)
+##### 2. **PAT_TOKEN** (GitHub Personal Access Token)
 
-GitHub에서 토큰 생성:
+> ⚠️ **보안 권장 사항**  
+> Classic PAT(`repo` 전체 권한)는 권한 범위가 과도하여 보안 위험이 있으므로,  
+> **Fine-grained personal access token 사용을 권장합니다.**
 
-1. GitHub → Settings → Developer settings → Personal access tokens → Tokens (classic)
-2. "Generate new token (classic)" 클릭
-3. 필요한 권한 선택:
-   - ✅ `repo` (전체 저장소 접근 권한)
-   - ✅ `workflow` (워크플로우 수정 권한)
-4. 토큰 생성 후 복사하여 `PAT_TOKEN`으로 저장
+##### Fine-grained Personal Access Token 생성 방법 (권장)
+
+1. GitHub → **Settings → Developer settings**
+2. **Personal access tokens → Fine-grained tokens**
+3. **Generate new token** 클릭
+4. Token 설정
+   - **Token name**: 예 `github-actions-sync-and-deploy`
+   - **Expiration**: 필요에 맞게 설정 (권장: 30~90 days)
+5. **Repository access**
+   - `Only select repositories` 선택
+   - 다음 저장소 선택:
+     - Fork 저장소
+     - 원본(Upstream) 저장소
+6. **Permissions**
+   - **Contents** → Read and write  
+     (Upstream fetch, merge, push를 위해 필요)
+   - **Actions** → Read and write  
+     (GitHub Actions 워크플로우 실행 및 연계를 위해 필요)
+7. **Generate token**
+8. 생성된 토큰을 Fork 저장소의 GitHub Actions Secret `PAT_TOKEN`으로 저장
+
 
 ##### 3. **VERCEL_TOKEN**
 
@@ -285,9 +302,10 @@ Please configure these secrets in repository settings.
 
 **해결 방법**:
 
-1. PAT_TOKEN 재생성 시 필수 권한 확인:
-   - ✅ `repo` (전체)
-   - ✅ `workflow`
+1. PAT_TOKEN 재생성 시 권한 확인:
+   - (Fine-grained PAT 권장)
+     - Contents: Read and write
+     - Actions: Read and write
 2. 토큰 만료 여부 확인
 3. 새 토큰으로 교체
 
