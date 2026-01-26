@@ -29,19 +29,19 @@ export const ICON_DATA = {
   ),
 
   HomeIcon: (active: boolean) => (
-    active ? '/Svgs/LogoImages/home2.svg' : '/Svgs/LogoImages/home1.svg'
+    active ? '/Svgs/LogoImages/home-on.svg' : '/Svgs/LogoImages/home-off.svg'
   ),
 
   ProductIcon: (active: boolean) =>(
-    active ? '/Svgs/LogoImages/cloth2.svg' : '/Svgs/LogoImages/cloth1.svg'
+    active ? '/Svgs/LogoImages/clothes-on.svg' : '/Svgs/LogoImages/clothes-off.svg'
   ),
   FittingIcon: (active: boolean) =>(
-    active ? '/Svgs/LogoImages/ga2.svg' : '/Svgs/LogoImages/ga1.svg'
+    active ? '/Svgs/LogoImages/hanger-on.svg' : '/Svgs/LogoImages/hanger-off.svg'
   ),
  ClosetIcon: (active: boolean) =>(
-    active ? '/Svgs/LogoImages/cloth2.svg' : '/Svgs/LogoImages/cloth1.svg'
+    active ? '/Svgs/LogoImages/closet-on.svg' : '/Svgs/LogoImages/closet-off.svg'
   ),
-
+  
 
 };
 
