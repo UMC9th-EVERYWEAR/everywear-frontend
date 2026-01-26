@@ -54,7 +54,7 @@ const ReviewTab = ({ state }: ReviewTabProps) => {
 
 				{/* 최신 리뷰 */}
 				<div className='flex flex-col'>
-					<span className='text-primary-600 font-bold text-sm flex justify-start border-b border-solid border-neutral-100 w-full mb-2'>
+					<span className='text-primary-600 text-semibold-14 flex justify-start border-b border-solid border-neutral-100 w-full mb-2'>
 						최신 리뷰
 					</span>
 

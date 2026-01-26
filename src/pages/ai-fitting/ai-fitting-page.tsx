@@ -29,6 +29,7 @@ const AiFittingPage = () => {
 	const [modal, setModal]	 = useState<ModalState>({ type : 'none' });
 
 	// 핸들러 함수
+	// 탭 변환 핸들러
 	const handleTabChange = (newTab: TabType) => setActiveTab(newTab);
 
 	// 피팅 시작 함수(에러 상황까지 구현)
