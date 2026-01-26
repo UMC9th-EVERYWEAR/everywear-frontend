@@ -45,7 +45,7 @@
 
 #### 2️⃣ `test-secrets.yml` (Optional)
 
-- **위치**: 원본 저장소의 `.github/workflows/`
+- **위치**: Fork 저장소의 `.github/workflows/`
 - **트리거**: 수동 실행만 (`workflow_dispatch`)
 - **기능**: Secrets 설정을 디버깅하기 위한 테스트 도구
 - **사용 시점**: Secrets 설정 문제가 의심될 때만 수동 실행
