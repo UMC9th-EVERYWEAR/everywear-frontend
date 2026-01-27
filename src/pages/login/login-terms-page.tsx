@@ -2,7 +2,6 @@ import logo from '@/public/svgs/LogoImages/Everywear.svg'
 import Button from '@/src/components/common/Button';
 import TermsCheckBox, { type TermsCheckedState, type TermType } from '@/src/components/login/TermsCheckBox'
 import  { TERMS_LINK } from '@/src/constants/link';
-import { PATH } from '@/src/constants/path';
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
 

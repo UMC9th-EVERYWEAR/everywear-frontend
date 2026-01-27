@@ -11,8 +11,6 @@ export type TermType =
 
 export type TermsCheckedState = Record<TermType, boolean>;
 
-
-
 interface TermsCheckBoxProps {
   checked: boolean;
   label: string;
@@ -44,7 +42,7 @@ const TermsCheckBox = ({
 				<button
 					type="button"
 					onClick={() => window.open(link, '_blank', 'noopener,noreferrer')}
-					className="hover:underline hover:underline-offset-2 hover:decoration-neutral-700 transition"
+					className="hover:underline hover:underline-offset-2 hover:decoration-neutral-700 transition cursor-pointer"
 				>
 					{label}
 				</button>
