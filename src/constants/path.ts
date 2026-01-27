@@ -34,7 +34,7 @@ export const PATH = {
 
 	PRODUCTS: {
 		ROOT: '/products',
-		URL: '/products/url',
+		ADD: '/products/add',
 	},
 
 	RECENT_FITTING: '/recent-fitting',
