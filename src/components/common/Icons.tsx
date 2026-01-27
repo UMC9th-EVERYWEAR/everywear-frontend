@@ -14,7 +14,7 @@ export const HomeIcon = ({ size = 24, height = 24, active = false, ...props }: I
     src={ICON_DATA.HomeIcon(active)} 
     width={size} 
     height={height} 
-    alt="홈 아이콘"
+    alt="HomeIcon"
     {...props} 
   />
 );
@@ -23,7 +23,7 @@ export const ProductIcon = ({ size = 24, height = 24, active = false, ...props }
     src={ICON_DATA.ProductIcon(active)} 
     width={size} 
     height={height} 
-    alt="홈 아이콘"
+    alt="ProductIcon"
     {...props} 
   />
 );
@@ -33,7 +33,7 @@ export const FittingIcon = ({ size = 24, height = 24, active = false,...props }:
     src={ICON_DATA.FittingIcon(active)} 
     width={size} 
     height={height} 
-    alt="홈 아이콘"
+    alt="FittingIcon"
     {...props} 
   />
 );
@@ -43,7 +43,7 @@ export const ClosetIcon = ({ size = 24, height = 24, active = false,...props }: 
     src={ICON_DATA.ClosetIcon(active)} 
     width={size} 
     height={height} 
-    alt=" 아이콘"
+    alt="ClosetIcon"
     {...props} 
   />
 );

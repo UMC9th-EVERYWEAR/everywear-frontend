@@ -3,7 +3,7 @@ import SettingPage from '../../pages/setting/setting-page';
 import SettingInquiry from '@/src/pages/setting/setting-inquiry-page';
 import SettingWithdraw from '@/src/pages/setting/setting-withdraw-page';
 import ClosetPage from '@/src/pages/closet/closet-page';
-import RecentFitting from '@/src/pages/recent-fitting';
+import RecentFitting from '@/src/pages/RecentFittingPage';
 import  { PATH } from '@/src/constants/path';
 import AiFittingPage from '@/src/pages/ai-fitting/ai-fitting-page';
 import LoginPage from '@/src/pages/login/login-page';
