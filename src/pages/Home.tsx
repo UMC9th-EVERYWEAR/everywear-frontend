@@ -8,7 +8,6 @@ import ProductCard from '@/src/components/common/ProductCard';
 import RectangleIcon from '@/public/svgs/LogoImages/Rectangle.svg'; 
 import EllipseIcon from '@/public/svgs/LogoImages/Ellipse.svg';     
 import { MALL_LINKS } from '../constants/link';
-import type { MALLTYPE } from '../types/domain/mall';
 
 const products = [
 	{ id: 1, company: '무신사', name: '오버핏 후드티', price: '₩39,000', rating: 4.5, imageUrl: 'https://via.placeholder.com/300' },
@@ -40,12 +39,6 @@ const Home = () => {
 	};
 
 	const INDICATOR_MAX_DISTANCE = 37;
-  
-
-	const goMall = (mall: MALLTYPE) => {
-		const { url } = MALL_LINKS[mall];
-		window.location.href = url;
-	};
 
 	return (
 		<div className='flex flex-col w-full bg-white pb-10 min-h-[calc(100vh-101px)]'>
@@ -62,8 +55,8 @@ const Home = () => {
 
 			{/* 2. 파트너 쇼핑몰 - 크기 고정 및 9px 패딩 적용 */}
 			<section className="flex gap-2 px-6 py-4 bg-white">
-				<div
-					onClick={() => goMall('MUSINSA')}
+				<a
+					href={MALL_LINKS.MUSINSA.url}
 					className="w-[75px] h-[75px] bg-black rounded-[6px] flex items-center justify-center overflow-hidden shrink-0 cursor-pointer"
 				>
 					<img
@@ -71,9 +64,9 @@ const Home = () => {
 						alt="무신사"
 						className="w-full h-full object-contain"
 					/>
-				</div>
-				<div 
-					onClick={() => goMall('ZIGZAG')}
+				</a>
+				<a
+					href={MALL_LINKS.ZIGZAG.url}
 					className="w-[75px] h-[75px] bg-[#E592FF] rounded-[6px] flex items-center justify-center overflow-hidden shrink-0 cursor-pointer"
 				>
 					<img
@@ -81,9 +74,9 @@ const Home = () => {
 						alt="지그재그"
 						className="w-full h-full object-contain"
 					/>
-				</div>
-				<div 
-					onClick={() => goMall('CM')}
+				</a>
+				<a 
+					href={MALL_LINKS.CM.url}
 					className="w-[75px] h-[75px] bg-black rounded-[6px] flex items-center justify-center overflow-hidden shrink-0 cursor-pointer"
 				>
 					<img
@@ -91,9 +84,9 @@ const Home = () => {
 						alt="29CM"
 						className="w-full h-full object-contain p-1"
 					/> 
-				</div>
-				<div 
-					onClick={() => goMall('WCONCEPT')}
+				</a>
+				<a 
+					href={MALL_LINKS.WCONCEPT.url}
 					className="w-[75px] h-[75px] bg-white border border-[#F1F1F1] rounded-[6px] flex items-center justify-center overflow-hidden shrink-0 cursor-pointer"
 				>
 					<img
@@ -101,7 +94,7 @@ const Home = () => {
 						alt="W컨셉"
 						className="w-full h-full object-contain"
 					/>
-				</div>
+				</a>
 			</section>
 
 			{/* 3. 가상 피팅 가이드 & 상품 추가 */}
