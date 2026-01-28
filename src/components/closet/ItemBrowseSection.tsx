@@ -8,7 +8,7 @@ interface ItemBrowseSectionProps {
 }
 
 const ItemBrowseSection = ({ data } : ItemBrowseSectionProps) => {
-	const [isLoading, setIsLoading] = useState(true)
+	const [isLoading, setIsLoading] = useState(false)
 	  const MIN_PRODUCTS = 8; // 로딩시 보여줄 임시 상품 개수
 
 	if (isLoading) {
@@ -17,7 +17,6 @@ const ItemBrowseSection = ({ data } : ItemBrowseSectionProps) => {
 				{Array.from({ length: MIN_PRODUCTS }).map((_, index) => (
 					<ProductCardSkeleton
 						key={index}
-						isCloset
 					/>
 				))}
 			</div>

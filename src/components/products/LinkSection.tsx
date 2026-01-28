@@ -44,7 +44,7 @@ const LinkSection = ({
 			}
 
 			{/*loading 두 개 버전*/}
-
+			{/* 
 			{
 				loading && 
 				<Button
@@ -53,10 +53,10 @@ const LinkSection = ({
 				>
 					<LoadingSpinner size={7}/>			
 				</Button>
-			}
+			} */}
 
 			{/*loading modal*/}
-			{/* {
+			{
 				loading && 
 				<div
 					className="fixed inset-0 z-100 flex flex-col gap-5 items-center justify-center bg-black/50"
@@ -66,9 +66,12 @@ const LinkSection = ({
 						상품을 추가하고있어요!
 					</div>
 				</div>
-			} */}
+			}
 		</div>
 	);
 };
 
 export default LinkSection;
+
+
+// TODO: 모달은 api 연동 후에 제작
