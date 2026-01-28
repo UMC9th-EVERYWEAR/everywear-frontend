@@ -5,7 +5,7 @@ import React from 'react';
 interface IconProps extends React.SVGProps<SVGSVGElement> {
   size?: number;
   height?: number;
-  active?: boolean; // 활성화 여부
+  active?: boolean; 
   className?: string;
 }
 
