@@ -22,7 +22,7 @@ const LinkSection = ({
 				value={link}
 				onChange={(e) => onChangeLink(e.target.value)}
 				placeholder="링크를 넣어주세요"
-				className="w-full border rounded border-neutral-900 p-3 placeholder:text-neutral-500
+				className="w-full border-[1.5px] rounded border-neutral-900 p-3 placeholder:text-neutral-500
                    focus:outline-none focus:ring-1 focus:ring-primary-300"
 			/>
 
