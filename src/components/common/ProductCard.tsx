@@ -26,11 +26,11 @@ const StarIcon = () => (
 );
 
 // 구매하기 & AI 분석하기 버튼 CSS 변수 선언
-const ButtonClassName = 'flex justify-center w-16 p-1 tracking-[-2px] leading-4.5 \
-                          items-center border rounded-lg border-none bg-[var(--color-primary-600)] shrink-0 \
-                          text-medium-12 text-[var(--color-neutral-50)] cursor-pointer font-anonymous \
-                          hover:bg-[var(--color-primary-700)] transition-colors'
-
+const ButtonClassName = `flex justify-center w-16 p-1 tracking-[-2px] leading-4.5
+                          items-center border rounded-lg border-none bg-[var(--color-primary-600)] shrink-0
+                          text-medium-12 text-[var(--color-neutral-50)] cursor-pointer font-anonymous
+                          hover:bg-[var(--color-primary-700)] transition-colors`
+                          
 const ProductCard = ({ company, name, price, rating, imageUrl, isCloset = false }: ProductCardProps) => {
     return (
         <div className="flex flex-col items-center w-[160px] shrink-0 cursor-pointer active:scale-[0.98] transition-transform">
