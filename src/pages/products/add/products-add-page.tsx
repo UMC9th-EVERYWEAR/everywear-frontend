@@ -1,16 +1,9 @@
 
 import LinkSection from '@/src/components/products/LinkSection';
 import MallLogosSection from '@/src/components/products/MallLogos';
+import checkUrlFormat from '@/src/utils/checkUrlFormat';
 import { useState } from 'react';
 
-function checkUrlFormat(url: string) {
-	try {
-		const parsed = new URL(url.startsWith('http') ? url : `https://${url}`);
-		return /^[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)+$/.test(parsed.hostname);
-	} catch {
-		return false;
-	}
-}
 
 const ProductsAddPage = () => {
 	const [link, setLink] = useState('');

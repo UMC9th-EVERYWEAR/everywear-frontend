@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router';
 import ItemBrowseSection from '@/src/components/closet/ItemBrowseSection';
 import type { ProductDataType } from '../../closet/closet-page';
 import clo from '@/public/svgs/dummyphoto.jpeg'
+import MallGuide from '@/src/components/products/MallGuide';
 
 
 export const MOCK_PRODUCTS: ProductDataType[] = [
@@ -69,6 +70,7 @@ export const MOCK_PRODUCTS: ProductDataType[] = [
 const ProductsPage = () => {
 	const navigate = useNavigate();
 	const [selected, setSelected] = useState('전체');
+	const [showGuide, setShowGuide]  = useState(false)
   
 	const handleSelected = (category : string) => setSelected(category)
 
@@ -80,9 +82,12 @@ const ProductsPage = () => {
 		<div className="px-5 py-2.5 flex flex-col items-center">
 			<div className="w-full border-b border-neutral-200 flex justify-end max-w-md">
 
-				<span className="text-center text-primary-300 text-regular-10 cursor-pointer hover:opacity-75">
+				<button 
+					onClick={()=> setShowGuide(true)}
+					className="text-center text-primary-300 text-regular-10 cursor-pointer hover:opacity-75"
+				>
 					가상 피팅 가이드
-				</span>    
+				</button>    
 			</div>
 			<CategoryBar
 				selected={selected}
@@ -99,6 +104,10 @@ const ProductsPage = () => {
 				<ItemBrowseSection data={filteredProducts} />
 			</div>
 
+
+			{
+				showGuide && <MallGuide onClose={()=> setShowGuide(false)} />
+			}
 		</div>
 	)
 }
