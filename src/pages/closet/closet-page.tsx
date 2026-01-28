@@ -36,7 +36,7 @@ const ClosetPage = () => {
 				<ItemAddCountSection
 					category={selected}
 					count={filteredProducts.length}
-					onClick={() => navigate(PATH.PRODUCTS.URL)}
+					onClick={() => navigate(PATH.PRODUCTS.ADD)}
 				/>
 
 				<ItemBrowseSection data={filteredProducts} />
