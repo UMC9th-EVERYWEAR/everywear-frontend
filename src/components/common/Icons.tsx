@@ -2,7 +2,7 @@ import  { ICON_DATA } from '@/public/Svgs/Icons/SvgIndex';
 import React from 'react';
 
 
-interface IconProps extends React.SVGProps<SVGSVGElement> {
+interface IconProps extends React.ImgHTMLAttributes<HTMLImageElement> {
   size?: number;
   height?: number;
   active?: boolean; 
