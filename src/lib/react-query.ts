@@ -17,5 +17,10 @@ export const queryClient = new QueryClient({
       // 요청 실패 시 재시도 횟수
       retry: 1,
     },
+    // mutation 전역 설정 추가
+    mutations: {
+      // 요청 실패 시 재시도 횟수
+      retry: 1,
+    },
   },
 });

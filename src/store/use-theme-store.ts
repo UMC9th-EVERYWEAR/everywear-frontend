@@ -1,5 +1,6 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
+import { STORAGE_KEYS } from '@/src/constants/storage'; // 상수 임포트
 
 /**
  * 테마 상태 타입 정의
@@ -29,7 +30,7 @@ export const useThemeStore = create<ThemeState>()(
             })),
       }),
       {
-         name: 'theme-storage', // 로컬 스토리지에 저장될 key 이름
+         name: STORAGE_KEYS.THEME, // 피드백 반영: 외부 상수 파일의 키 사용
       }
    )
 );

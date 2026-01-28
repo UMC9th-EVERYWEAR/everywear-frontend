@@ -1,5 +1,6 @@
 import { create } from 'zustand';
-import { persist } from 'zustand/middleware';
+import { persist, createJSONStorage } from 'zustand/middleware';
+import { STORAGE_KEYS } from '@/src/constants/storage'; // 상수 임포트
 
 /**
  * 사용자 정보 타입 정의
@@ -24,8 +25,8 @@ interface AuthState {
 
 /**
  * [useAuthStore] 인증 상태를 관리하는 전역 스토어
- * - persist 미들웨어를 사용하여 로컬 스토리지(localStorage)에 자동 저장됩니다.
- * - 브라우저를 새로고침해도 로그인 상태가 유지됩니다.
+ * - 보안 강화를 위해 localStorage 대신 sessionStorage를 사용하도록 수정되었습니다.
+ * - 브라우저 탭을 닫으면 인증 정보가 만료되어 보안성이 향상됩니다.
  */
 export const useAuthStore = create<AuthState>()(
    persist(
@@ -52,7 +53,8 @@ export const useAuthStore = create<AuthState>()(
             }),
       }),
       {
-         name: 'auth-storage', // localStorage에 저장될 키 이름
+         name: STORAGE_KEYS.AUTH, // 피드백 반영: 외부 상수 파일의 키 사용
+         storage: createJSONStorage(() => sessionStorage), // 보안 피드백 반영: 세션 스토리지 사용
       }
    )
 );
