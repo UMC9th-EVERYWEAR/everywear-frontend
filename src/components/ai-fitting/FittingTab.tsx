@@ -22,7 +22,10 @@ const FittingTab = ({ state, onStartFitting }: FittingTabProps) => {
 	};
 
 	return (
-		<div className='flex flex-col gap-4'>
+		<div
+			className='flex flex-col gap-4'
+			style={{ position : 'relative' }}
+		>
 			<div className='flex flex-col gap-5'>
 				{/* idle 상태 */}
 				{state.status === 'idle' && (
@@ -55,6 +58,7 @@ const FittingTab = ({ state, onStartFitting }: FittingTabProps) => {
 				onStart={onStartFitting} // "AI 피팅하기" & "재생성하기" 클릭 시 실행
 				onDownload={handleDownload} // "다운로드하기" 클릭 시 실행
 			/>
+			
             
 			
 		</div>

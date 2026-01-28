@@ -7,8 +7,9 @@ import type { FittingState, ReviewState } from '@/src/types/ai-fitting/status';
 import { MOCK_REVIEW_DATA } from '@/src/data/ai-fitting/reviewMockData'; 
 import type { ModalState } from '@/src/types/ai-fitting/modal';
 import { Modal } from '@/src/components/common/Modal';
-
+import toast, { Toaster } from 'react-hot-toast';
 export type TabType = 'fitting' | 'review';
+
 
 // 목데이터 설정
 const itemDataExample: ItemData = {
@@ -35,6 +36,7 @@ const AiFittingPage = () => {
 	// 피팅 시작 함수(에러 상황까지 구현)
 	// 나중에 api 연결되면 api 요청으로 변환할 예정
 	const handleSimulateFitting = () => {
+		handleSuccessToast();
 		setFittingState({ status: 'loading' });
 
 		// 피팅 로딩 처리
@@ -146,10 +148,32 @@ const AiFittingPage = () => {
 		setModal({ type: 'none' });
 	};
 
+	const handleSuccessToast = () => {
+		toast('AI 피팅을 시작하겠습니다.');
+	}
+
 	return (
 		<div className='flex items-center justify-center mb-8'>
-			<div className="flex flex-col px-4 h-full w-109"> {/* 모바일 너비 고정 예시 */}
+			<div className="flex flex-col px-4 h-full w-109 relative"> {/* 모바일 너비 고정 예시 */}
                 
+				<Toaster
+					containerStyle={
+						{ 
+							position: 'absolute',
+							top: 200,
+							right: 200,
+
+						}
+					}
+					toastOptions={{
+						// 토스트 자체의 스타일 (선택사항)
+						style: {
+							background: '#333',
+							color: '#fff',
+						},
+					}}
+				/>
+
 				<TabBar
 					activeTab={activeTab}
 					onTabChange={handleTabChange}
@@ -175,6 +199,7 @@ const AiFittingPage = () => {
 						state={reviewState}
 					/>
 				)}
+
 
 				<Modal
 					isOpen={modal.type === 'success'}
