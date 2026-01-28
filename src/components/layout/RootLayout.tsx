@@ -52,8 +52,7 @@ const RootLayout = () => {
     pathname === '/';
 
 	/*  isLogin */
-	const isLoginPage =
-    ['/login'].some((pattern) => matchPath(pattern, pathname))
+	const isLoginPage = matchPath(PATH.LOGIN.ROOT, pathname);
 
 
 	return (

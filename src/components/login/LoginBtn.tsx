@@ -35,7 +35,7 @@ const LoginBtn = ({ type, onClick }: LoginBtnProps) => {
 	       >
 		<img
 			src={icon}
-			alt='icon'
+			alt=''
 		/>
 		<p>{description}</p>
 	</button>)

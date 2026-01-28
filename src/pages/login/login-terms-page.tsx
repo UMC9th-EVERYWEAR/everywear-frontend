@@ -3,24 +3,15 @@ import Button from '@/src/components/common/Button';
 import TermsCheckBox, { type TermsCheckedState, type TermType } from '@/src/components/login/TermsCheckBox'
 import  { TERMS_LINK } from '@/src/constants/link';
 import { useState } from 'react';
-import { useNavigate } from 'react-router';
 
-const TERMS_META: Record<TermType, { label: string }> = {
-	SERVICE: { label: '서비스 이용약관 동의' },
-	PRIVACY: { label: '개인정보 수집 및 이용 동의' },
-	PHOTO: { label: '사진 정보 피팅 이용 동의' },
-	PRODUCT: { label: '상품 정보 수집 및 분석 동의' },
-};
-
-const TERM_LINK_MAP: Record<TermType, string> = {
-	SERVICE: TERMS_LINK.SERVICE_TERMS.url,
-	PRIVACY: TERMS_LINK.PRIVACY.url,
-	PHOTO: TERMS_LINK.PHOTO.url,
-	PRODUCT: TERMS_LINK.PRODUCT.url,
+const TERMS_CONFIG: Record<TermType, { label: string; url: string }> = {
+	SERVICE: { label: '서비스 이용약관 동의', url: TERMS_LINK.SERVICE_TERMS.url },
+	PRIVACY: { label: '개인정보 수집 및 이용 동의', url: TERMS_LINK.PRIVACY.url },
+	PHOTO: { label: '사진 정보 피팅 이용 동의', url: TERMS_LINK.PHOTO.url },
+	PRODUCT: { label: '상품 정보 수집 및 분석 동의', url: TERMS_LINK.PRODUCT.url },
 };
 
 const LoginTermsPage = () => {
-	    const navigate = useNavigate(); 
 
 	const [checked, setChecked] = useState<TermsCheckedState>({
 		SERVICE: false,
@@ -55,7 +46,7 @@ const LoginTermsPage = () => {
 
 	return(
 		<div className='w-full flex flex-col items-center pt-32 gap-13'>
-			<div className='flex flex-col tems-center w-65'>
+			<div className='flex flex-col items-center w-65'>
 
 
 				<img
@@ -77,13 +68,13 @@ const LoginTermsPage = () => {
 				<div className="h-px w-full  bg-neutral-200" />
 
 				{/* 개별 약관 */}
-				{(Object.keys(TERMS_META) as TermType[]).map((key) => (
+				{(Object.keys(TERMS_CONFIG) as TermType[]).map((key) => (
 					<TermsCheckBox
 						key={key}
 						checked={checked[key]}
-						label={TERMS_META[key].label}
+						label={TERMS_CONFIG[key].label}
 						required
-						link={TERM_LINK_MAP[key]}
+						link={TERMS_CONFIG[key].url}
 						onClick={() => toggleOne(key)}
 					/>
 				))}

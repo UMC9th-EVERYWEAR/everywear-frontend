@@ -33,7 +33,7 @@ const TermsCheckBox = ({
 			>
 				<img
 					src={checked ? checkBox : nonCheckBox}
-					alt="check"
+					alt={checked ? 'checkBox' : 'nonCheckBox'}
 				/>
 			</button>
 
