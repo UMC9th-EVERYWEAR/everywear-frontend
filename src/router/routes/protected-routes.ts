@@ -3,9 +3,11 @@ import SettingPage from '../../pages/setting/setting-page';
 import SettingInquiry from '@/src/pages/setting/setting-inquiry-page';
 import SettingWithdraw from '@/src/pages/setting/setting-withdraw-page';
 import ClosetPage from '@/src/pages/closet/closet-page';
-import RecentFitting from '@/src/pages/recent-fitting';
+import RecentFitting from '@/src/pages/RecentFittingPage';
 import  { PATH } from '@/src/constants/path';
 import AiFittingPage from '@/src/pages/ai-fitting/ai-fitting-page';
+import OnBoardingPage from '@/src/pages/onboarding/onboarding-page';
+import OnBoardingPhotoPage from '@/src/pages/onboarding/onboarding-photo-page';
 import LoginPage from '@/src/pages/login/login-page';
 import Home from '@/src/pages/Home';
 
@@ -40,6 +42,14 @@ export const protectedRoutes = [
 	{ 
 		path: PATH.RECENT_FITTING,
 		Component: RecentFitting,
+	},
+	{
+		path: PATH.ONBOARDING.ROOT,
+		Component: OnBoardingPage,
+	},
+	{
+		path: PATH.ONBOARDING.PHOTO,
+		Component: OnBoardingPhotoPage,
 	},
 	{
 		path: PATH.AI_FITTING.DETAIL,
