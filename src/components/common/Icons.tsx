@@ -2,38 +2,48 @@ import  { ICON_DATA } from '@/public/Svgs/Icons/SvgIndex';
 import React from 'react';
 
 
-interface IconProps extends React.SVGProps<SVGSVGElement> {
+interface IconProps extends React.ImgHTMLAttributes<HTMLImageElement> {
   size?: number;
+  height?: number;
+  active?: boolean; 
+  className?: string;
 }
 
-export const HomeIcon = ({ size = 16, height = 15.75, ...props }: IconProps) => (
-	<ICON_DATA.HomeIcon
-		width={size}
-		height={height}
-		{...props}
-	/>
+export const HomeIcon = ({ size = 24, height = 24, active = false, ...props }: IconProps) => (
+  <img 
+    src={ICON_DATA.HomeIcon(active)} 
+    width={size} 
+    height={height} 
+    alt="HomeIcon"
+    {...props} 
+  />
+);
+export const ProductIcon = ({ size = 24, height = 24, active = false, ...props }: IconProps) => (
+	<img 
+    src={ICON_DATA.ProductIcon(active)} 
+    width={size} 
+    height={height} 
+    alt="ProductIcon"
+    {...props} 
+  />
 );
 
-export const ProductIcon = ({ size = 18, height = 16, ...props }: IconProps) => (
-	<ICON_DATA.ProductIcon
-		width={size}
-		height={height}
-		{...props}
-	/>
+export const FittingIcon = ({ size = 24, height = 24, active = false,...props }: IconProps) => (
+	<img 
+    src={ICON_DATA.FittingIcon(active)} 
+    width={size} 
+    height={height} 
+    alt="FittingIcon"
+    {...props} 
+  />
 );
 
-export const FittingIcon = ({ size = 19.998, height = 16, ...props }: IconProps) => (
-	<ICON_DATA.FittingIcon
-		width={size}
-		height={height}
-		{...props}
-	/>
-);
-
-export const ClosetIcon = ({ size = 13.412, height = 15.85, ...props }: IconProps) => (
-	<ICON_DATA.ClosetIcon
-		width={size}
-		height={height}
-		{...props}
-	/>
+export const ClosetIcon = ({ size = 24, height = 24, active = false,...props }: IconProps) => (
+	<img 
+    src={ICON_DATA.ClosetIcon(active)} 
+    width={size} 
+    height={height} 
+    alt="ClosetIcon"
+    {...props} 
+  />
 );
