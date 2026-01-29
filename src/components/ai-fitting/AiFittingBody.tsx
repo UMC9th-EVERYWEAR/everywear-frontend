@@ -1,3 +1,4 @@
+import { cn } from '@/src/utils/cn';
 import AiFittingFrame from './AiFittingFrame';
 
 interface AiFittingBodyProps {
@@ -35,8 +36,8 @@ const AiFittingBody = ({ isFittingFetching, isFittingPending, imageUrlExample, h
 
 				{/* AI 피팅하기 버튼 */}
 				<button
-					className='p-[10px] w-full h-[48px] flex justify-center items-center
-                 bg-primary-600 border rounded-[10px] text-regular-16 text-[#F0F2F7] cursor-pointer'
+					className={cn('p-[10px] w-full h-[48px] flex justify-center items-center bg-primary-600\
+						 border rounded-[10px] text-regular-16 text-neutral-50 cursor-pointer')}
 					onClick={handleFittingStarted}
 				>AI 피팅하기</button>
 			</div>}
