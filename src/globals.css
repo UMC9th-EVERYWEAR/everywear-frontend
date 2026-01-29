@@ -9,6 +9,7 @@
 
   body {
     font-family: var(--font-pretendard);
+    scrollbar-gutter: stable;
   }
 }
 .text-bold-24 {
@@ -29,10 +30,12 @@
   --color-neutral-100: #eaecf0;
   --color-neutral-50:  #f0f2f7;
 
+  --color-primary-700: #2C3374;
   --color-primary-600: #3b4599;
   --color-primary-300: #8d98ff;
 
   --color-onboarding-photo: #FAFAFA;
+  --color-onboarding: #F0F7FF;
 
 
   --shadow-0: 0px 0px 0px rgba(0, 0, 0, 0.05);
@@ -44,15 +47,13 @@
 }
 
 @layer utilities {
-
-  .font-head02-bold-20 {
-    font-family: 'PretendardBold', sans-serif;
-    font-size: 2rem;
-    font-weight: 700;
-    line-height: normal;
-    letter-spacing: -0.6px;
-  }
-  
+  .no-scrollbar {
+		-ms-overflow-style: none; /* IE and Edge */
+		scrollbar-width: none; /* Firefox */
+	}
+	.no-scrollbar::-webkit-scrollbar {
+		display: none; /* Chrome, Safari, Opera */
+	}
   .text-bold-24 {
     font-size: 24px;
     font-weight: 700;
@@ -92,6 +93,7 @@
     font-size: 16px;
     font-weight: 600;
   }
+
 
   .text-medium-20 {
     font-size: 20px;
@@ -143,6 +145,18 @@
     font-weight: 400;
   }
 
+  /* =========================
+    SWIPER
+     ========================= */
+  /* 새로운 폰트 추가 */
+   .font-anonymous {
+    font-family: "Anonymous Pro", monospace;
+  }
+
+  .font-inter {
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+  }
 
   /* pagination 위치 */
   .photo-swiper .swiper-pagination {
@@ -150,12 +164,43 @@
   }
 
   /* dot 기본 스타일 */
-.photo-swiper .swiper-pagination-bullet {
-  @apply !w-2 !h-2 !rounded-full !opacity-100 !bg-[#D9D9D9];
-}
+  .photo-swiper .swiper-pagination-bullet {
+    @apply !w-2 !h-2 !rounded-full !opacity-100 !bg-[#D9D9D9];
+  }
 
   /* dot 활성화 */
   .photo-swiper .swiper-pagination-bullet-active {
     @apply !bg-primary-600 !w-2.5 !h-2.5 ;
   }
+  /* =========================
+    ANIMATION
+     ========================= */
+
+    @keyframes frame-in {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  @keyframes guide-in {
+    0% {
+      opacity: 0;
+      transform: translateY(-30px); /* -10 */
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-frame-in {
+    animation: frame-in 1.5s forwards;
+  }
+  .animate-guide-in {
+    animation: guide-in 0.8s ease-out forwards;
+  }
+
 }

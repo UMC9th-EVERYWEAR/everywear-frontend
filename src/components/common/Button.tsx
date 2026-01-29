@@ -28,12 +28,13 @@ export const Button = ({
 	};
 
 	const variantStyles = {
-		filled: 'bg-[#3B4599] text-[#F0F2F7] hover:bg-[#2C3374] cursor-pointer',
-		outlined: 'bg-white text-[#3B4599] border-[1.5px] border-[#3B4599] hover:bg-[#F5F6FA] cursor-pointer',
-		hover: 'bg-[#2C3374] text-[#F0F2F7] cursor-pointer',
-	};
+    filled: 'bg-[var(--color-primary-600)] text-[var(--color-neutral-50)] hover:bg-[var(--color-primary-700)] cursor-pointer transition-colors duration-200',
+    outlined: 'bg-white text-[var(--color-primary-600)] border-[1.5px] border-[var(--color-primary-600)] hover:bg-[var(--color-primary-600)] hover:text-[var(--color-neutral-50)] cursor-pointer transition-colors duration-200',
+    hover: 'bg-[var(--color-primary-700)] text-[var(--color-neutral-50)] cursor-pointer transition-colors duration-200',
+};
 
-	const disabledStyle = 'bg-[#A0A7B2] text-white cursor-not-allowed';
+// 비활성화 스타일
+const disabledStyle = 'bg-[var(--color-neutral-400)] text-white cursor-not-allowed';
 
 	const fullClassName = `
     ${baseStyle}
