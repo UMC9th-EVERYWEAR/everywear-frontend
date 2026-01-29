@@ -29,7 +29,7 @@ export const Navbar = () => {
 					>
 						<div className="flex items-center justify-center h-[20px]">
 							{/* isActive를 props로 넘겨서 아이콘 색상을 바꿀 수 있다면 전달 */}
-							<Icon isActive={isActive} /> 
+							<Icon active={isActive} /> 
 						</div>
 						<span className="text-regular-10 mt-[2px] font-medium leading-none text-center">
 							{label}

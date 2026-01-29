@@ -10,9 +10,9 @@ import EllipseIcon from '@/public/svgs/LogoImages/Ellipse.svg';
 import { MALL_LINKS } from '../constants/link';
 
 const products = [
-	{ id: 1, company: '무신사', name: '오버핏 후드티', price: '₩39,000', rating: 4.5, imageUrl: 'https://via.placeholder.com/300' },
-	{ id: 2, company: '지그재그', name: '와이드 슬랙스', price: '₩49,000', rating: 4.2, imageUrl: 'https://via.placeholder.com/300' },
-	{ id: 3, company: '29CM', name: '니트 가디건', price: '₩59,000', rating: 4.8, imageUrl: 'https://via.placeholder.com/300' },
+	{ id: 1, company: '무신사', name: '오버핏 후드티', price: 39000, rating: 4.5, imageUrl: 'https://via.placeholder.com/300' },
+	{ id: 2, company: '지그재그', name: '와이드 슬랙스', price: 49000, rating: 4.2, imageUrl: 'https://via.placeholder.com/300' },
+	{ id: 3, company: '29CM', name: '니트 가디건', price: 59000, rating: 4.8, imageUrl: 'https://via.placeholder.com/300' },
 ];
 
 const Home = () => {
@@ -45,19 +45,19 @@ const Home = () => {
       
 			{/* 1. 상단 섹션 */}
 			<section className='px-4 pt-10 pb-2'> 
-				<h2 className='text-[#000000] text-[20px] font-[500] leading-normal mt-1'>
+				<h2 className='text-[var(--color-neutral-900)] text-medium-16 font-bold mt-1'>
 					파트너 쇼핑몰
 				</h2>
-				<p className="text-[#596373] text-[12px] font-[400] leading-[150%] tracking-[-0.36px]">
+				<p className="text-[var(--color-neutral-700)] text-regular-12 tracking-[-0.36px]">
 					유명 브랜드 가상 피팅가이드를 확인해보세요
 				</p>
 			</section>
 
-			{/* 2. 파트너 쇼핑몰 - 크기 고정 및 9px 패딩 적용 */}
+			{/* 2. 파트너 쇼핑몰 */}
 			<section className="flex gap-2 px-6 py-4 bg-white">
 				<a
-					href={MALL_LINKS.MUSINSA.url}
-					className="w-[75px] h-[75px] bg-black rounded-[6px] flex items-center justify-center overflow-hidden shrink-0 cursor-pointer"
+					href={MALL_LINKS.MUSINSA.url}				
+					className="w-[75px] h-[75px] bg-black rounded-[6px] flex items-center justify-center overflow-hidden shrink-0"
 				>
 					<img
 						src={MusinsaLogo}
@@ -67,7 +67,7 @@ const Home = () => {
 				</a>
 				<a
 					href={MALL_LINKS.ZIGZAG.url}
-					className="w-[75px] h-[75px] bg-[#E592FF] rounded-[6px] flex items-center justify-center overflow-hidden shrink-0 cursor-pointer"
+					className="w-[75px] h-[75px] bg-[#E592FF] rounded-[6px] flex items-center justify-center overflow-hidden shrink-0"
 				>
 					<img
 						src={ZigzagLogo}
@@ -75,9 +75,9 @@ const Home = () => {
 						className="w-full h-full object-contain"
 					/>
 				</a>
-				<a 
-					href={MALL_LINKS.CM.url}
-					className="w-[75px] h-[75px] bg-black rounded-[6px] flex items-center justify-center overflow-hidden shrink-0 cursor-pointer"
+				<a
+					href={MALL_LINKS.CM.url}				
+					className="w-[75px] h-[75px] bg-black rounded-[6px] flex items-center justify-center overflow-hidden shrink-0"
 				>
 					<img
 						src={Logo29cm}
@@ -85,9 +85,9 @@ const Home = () => {
 						className="w-full h-full object-contain p-1"
 					/> 
 				</a>
-				<a 
-					href={MALL_LINKS.WCONCEPT.url}
-					className="w-[75px] h-[75px] bg-white border border-[#F1F1F1] rounded-[6px] flex items-center justify-center overflow-hidden shrink-0 cursor-pointer"
+				<a
+					href={MALL_LINKS.WCONCEPT.url}				
+					className="w-[75px] h-[75px] bg-white border border-[var(--color-neutral-100)] rounded-[6px] flex items-center justify-center overflow-hidden shrink-0"
 				>
 					<img
 						src={WLogo}
@@ -99,10 +99,9 @@ const Home = () => {
 
 			{/* 3. 가상 피팅 가이드 & 상품 추가 */}
 			<section className="flex flex-col px-4 mt-4 gap-4">
-				<span className="self-center text-center text-[#8D98FF] text-[10px] font-[400] leading-[150%] tracking-[-0.3px] cursor-pointer">
+				<span className="self-center text-center text-[var(--color-primary-300)] text-regular-10 tracking-[-0.3px] cursor-pointer">
 					유명 브랜드 가상 피팅 가이드
 				</span>
-
 
 				<div className="w-full">
 					<Button
@@ -112,18 +111,17 @@ const Home = () => {
 						상품 추가하기
 					</Button>
 				</div>
-
 			</section>
 
 
-			{/* 4. 상품 둘러보기 섹션 - 3개 노출 버전 */}
+			{/* 4. 상품 둘러보기 섹션 */}
 			<section className="mt-10">
 				<div className="px-4 mb-4">
 					<div className="flex justify-between items-end">
-						<h3 className="text-[#2A323F] text-[20px] font-[500] leading-[150%] tracking-[-0.6px]">상품 둘러보기</h3>
-						<span className="text-[12px] text-[#2A323F] font-medium cursor-pointer mb-1">전체보기 →</span>
+						<h3 className="text-[var(--color-neutral-900)] text-medium-16 font-bold tracking-[-0.6px]">상품 둘러보기</h3>
+						<span className="text-medium-12 text-[var(--color-neutral-900)] cursor-pointer mb-1">전체보기 →</span>
 					</div>
-					<p className="text-[#596373] text-[12px] font-[400] mt-[-4px]">다양한 쇼핑몰의 상품을 한 곳에서 확인하세요</p>
+					<p className="text-[var(--color-neutral-700)] text-regular-12 mt-[-4px]">다양한 쇼핑몰의 상품을 한 곳에서 확인하세요</p>
 				</div>
   
 				<div 
@@ -141,7 +139,7 @@ const Home = () => {
 					))}
 				</div>
 
-				{/* 4번 인디케이터 (기존 로직 유지) */}
+				{/* 4번 인디케이터 */}
 				<div className="flex justify-center items-center mt-2 h-[12px]">
 					<div className="relative flex items-center justify-center w-[55px] h-[6px]">
 						<img
@@ -158,33 +156,33 @@ const Home = () => {
 					</div>
 				</div>
 			</section>
+
 			{/* 5. 최근 피팅 내역 섹션 */}
 			<section className="mt-12 pb-10">
 				<div className="px-4 mb-4">
 					<div className="flex justify-between items-end">
-						<h3 className="text-[#2A323F] text-[20px] font-[500] leading-[150%] tracking-[-0.6px]">최근 피팅 내역</h3>
-						<span className="text-[12px] text-[#000000] font-medium cursor-pointer mb-1">전체보기 →</span>
+						<h3 className="text-[var(--color-neutral-900)] text-medium-16 font-bold tracking-[-0.6px]">최근 피팅 내역</h3>
+						<span className="text-medium-12 text-[var(--color-neutral-900)] cursor-pointer mb-1">전체보기 →</span>
 					</div>
-					<p className="text-[#596373] text-[12px] font-[400] mt-[-4px]">최근 피팅 내역을 확인해보세요</p>
+					<p className="text-[var(--color-neutral-700)] text-regular-12 mt-[-4px]">최근 피팅 내역을 확인해보세요</p>
 				</div>
 
 				<div 
 					ref={fittingScrollRef}
 					onScroll={handleFittingScroll}
-					className="flex gap-[83px] overflow-x-auto no-scrollbar pb-4 px-4"
-				>{/* 현재 flex gap-[83px] 로 화면 비율에 맞게 설정 진행. */}
+					className="flex gap-[83px] overflow-x-auto no-scrollbar pb-4 px-4" 
+				>
 					{[1, 2, 3].map((i) => (
 						<div 
 							key={i} 
-							className="min-w-[137px] h-[182px] bg-[#D2D2D2] rounded-[10px] flex items-center justify-center shrink-0 cursor-pointer active:opacity-80 transition-opacity"
+							className="min-w-[137px] h-[182px] bg-[var(--color-neutral-1000)] rounded-[10px] flex items-center justify-center shrink-0 cursor-pointer active:opacity-80 transition-opacity"
 						>
-							{/* 중앙 + 아이콘 */}
-							<span className="text-2xl text-neutral-500 font-light">+</span>
+							<span className="text-2xl text-[var(--color-neutral-700)] font-light">+</span>
 						</div>
 					))}
 				</div>
 
-				{/* 5번 인디케이터*/}
+				{/* 5번 인디케이터 */}
 				<div className="flex justify-center items-center mt-2 h-[12px]">
 					<div className="relative flex items-center justify-center w-[55px] h-[6px]">
 						<img
