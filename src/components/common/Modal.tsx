@@ -1,7 +1,7 @@
 interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
-  title: string;
+  title?: string;       
   text?: string;
   btn1Text: string;
   btn1Action: () => void;
@@ -27,16 +27,19 @@ export const Modal = ({
             onClick={onClose}
         >
             <div
-                className="flex w-[220px] p-[20px] flex-col items-center gap-[16px] rounded-[12px] bg-white shadow-[var(--shadow-12)]"
+                className="flex w-[303px] p-[20px] flex-col items-center gap-[16px] rounded-[12px] bg-white shadow-12"
                 onClick={(e) => e.stopPropagation()}
             >
                 <div className="flex flex-col items-center gap-[8px] text-center w-full">
-                    <h3 className="text-regular-16 font-bold text-[var(--color-neutral-900)]">
-                        {title}
-                    </h3>
+                    {/* title 조건부 렌더링 적용 */}
+                    {title && (
+                        <h3 className="text-regular-16 font-bold text-neutral-900">
+                            {title}
+                        </h3>
+                    )}
 
                     {text && (
-                        <p className="text-regular-14 text-[var(--color-neutral-600)]">
+                        <p className="text-regular-14 text-neutral-600 leading-tight">
                             {text}
                         </p>
                     )}
@@ -45,16 +48,18 @@ export const Modal = ({
                 <div className="flex gap-[10px] w-full">
                     {btn2Text && btn2Action && (
                         <button
+                            type="button"
                             onClick={btn2Action}
-                            className="flex-1 h-[40px] bg-[var(--color-neutral-100)] text-[var(--color-neutral-500)] rounded-[8px] text-medium-14 font-bold cursor-pointer hover:bg-[var(--color-neutral-200)] transition-colors"
+                            className="flex-1 h-[40px] bg-neutral-100 text-neutral-500 rounded-[8px] text-medium-14 cursor-pointer hover:bg-neutral-200 transition-colors active:scale-95"
                         >
                             {btn2Text}
                         </button>
                     )}
 
                     <button
+                        type="button"
                         onClick={btn1Action}
-                        className="flex-1 h-[40px] bg-[var(--color-primary-600)] text-[var(--color-neutral-50)] rounded-[8px] text-medium-14 font-bold cursor-pointer hover:bg-[var(--color-primary-700)] transition-colors"
+                        className="flex-1 h-[40px] bg-primary-600 text-neutral-50 rounded-[8px] text-medium-14 cursor-pointer hover:bg-primary-700 transition-colors active:scale-95"
                     >
                         {btn1Text}
                     </button>

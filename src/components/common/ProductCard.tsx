@@ -71,7 +71,7 @@ const ProductCard = ({ company, name, price, rating, imageUrl, isCloset = false 
                 </h3>
 
                 {/* 가격 */}
-                <p className="overflow-hidden text-[var(--color-neutral-900)] text-medium-12 leading-[18px] whitespace-nowrap font-anonymous">
+                <p className="overflow-hidden text-[var(--color-neutral-900)] text-medium-12 leading-[18px] whitespace-nowrap">
                     {formatPrice(price)}원
                 </p>
 

@@ -45,7 +45,7 @@ const Home = () => {
       
       {/* 1. 상단 섹션 */}
       <section className='px-4 pt-10 pb-2'> 
-        <h2 className='text-[var(--color-neutral-900)] text-medium-16 font-bold mt-1'>
+        <h2 className='text-[var(--color-neutral-900)] text-medium-16 mt-1'>
           파트너 쇼핑몰
         </h2>
         <p className="text-[var(--color-neutral-700)] text-regular-12 tracking-[-0.36px]">
