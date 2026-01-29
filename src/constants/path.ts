@@ -32,8 +32,7 @@ export const PATH = {
 	ONBOARDING:{
 		ROOT: '/onboarding',
 		PHOTO: '/onboarding/photo',
-	},
-
+	},	
 	
 	HOME: '/home',
 
