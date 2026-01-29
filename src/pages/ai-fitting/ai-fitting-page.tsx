@@ -7,9 +7,8 @@ import type { FittingState, ReviewState } from '@/src/types/ai-fitting/status';
 import { MOCK_REVIEW_DATA } from '@/src/data/ai-fitting/reviewMockData'; 
 import type { ModalState } from '@/src/types/ai-fitting/modal';
 import { Modal } from '@/src/components/common/Modal';
-import toast, { Toaster } from 'react-hot-toast';
 export type TabType = 'fitting' | 'review';
-
+import toast, { Toaster } from 'react-hot-toast';
 
 // 목데이터 설정
 const itemDataExample: ItemData = {
