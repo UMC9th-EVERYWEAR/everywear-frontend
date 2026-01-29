@@ -32,7 +32,7 @@ const ButtonClassName = 'flex justify-center w-16 p-1  tracking-[-2px] leading-4
 
 const ProductCard = ({ company, name, price, rating, imageUrl, isCloset = false }: ProductCardProps) => {
 	return (
-		<div className="flex flex-col items-center w-[160px] shrink-0 cursor-pointer active:scale-[0.98] transition-transform hover:scale-105">
+		<div className="flex flex-col items-center w-[160px] shrink-0 cursor-pointer active:scale-[0.98] transition-transform">
       
 			{/* 1. 이미지 영역 (137 x 178) */}
 			<div className="w-full h-[178px] rounded-[10px] overflow-hidden bg-[#F2F2F2]">

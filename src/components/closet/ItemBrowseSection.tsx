@@ -30,7 +30,7 @@ const ItemBrowseSection = ({ data } : ItemBrowseSectionProps) => {
 					상품이 없습니다.
 				</div>
 			) : 
-				<div className='mx-5 grid grid-cols-2 gap-2 place-items-center'>
+				<div className='mx-5 grid grid-cols-2 gap-2.5 place-items-center'>
 					{data.map((product) => (
 						<ProductCard
 							key={product.id} // 리스트 렌더링엔 key가 필수
