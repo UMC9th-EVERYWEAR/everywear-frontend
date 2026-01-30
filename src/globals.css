@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@plugin "tailwindcss-animate";
 
 
 
@@ -33,6 +34,8 @@
 
   --color-onboarding-photo: #FAFAFA;
   --color-onboarding: #F0F7FF;
+
+  --color-toast-background: #797979;
 
 
   --shadow-0: 0px 0px 0px rgba(0, 0, 0, 0.05);

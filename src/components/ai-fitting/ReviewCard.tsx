@@ -4,7 +4,7 @@ import ReviewStarOn from '@/public/ai-fitting/ReviewStarOn.svg';
 import { useState } from 'react';
 import clsx from 'clsx';
 import { truncate } from '@/src/utils/truncate';
-import useDraggableScroll from '@/src/hooks/domain/ai-fitting';
+import useDraggableScroll from '@/src/hooks/domain/ai-fitting/useDraggableScroll';
 
 interface ReviewCardProps {
     data: ReviewItem; 

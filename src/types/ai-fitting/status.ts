@@ -15,25 +15,18 @@ export type FittingState =
 
 export type FittingStateStatus = 'idle' | 'loading' | 'success' | 'error';
 
-// 리뷰 요약 에러
-export type ReviewSummaryErrorReason = 'INSUFFICIENT_REVIEWS' | 'GENERATION_FAILED'; 
-// 'INSUFFICIENT_REVIEWS' : 리뷰 수가 부족해 요약 불가
-// 'GENERATION_FAILED' : AI 요약 생성 실패
-
 // 리뷰 요약 상태
 export type ReviewSummaryState = 
   | { status: 'loading' }                     // 요약 로딩 중 (옵션)
   | { status: 'success'; text: string }       // 성공 시 요약문
-  | { status: 'error'; error: ReviewSummaryErrorReason }; // 요약만 실패
+  | { status: 'error'; error: 'INSUFFICIENT_REVIEWS' }; // 요약만 실패 / INSUFFICIENT_REVIEWS : 리뷰 수가 부족함
 
-// [C] 리뷰 "불러오기" 치명적 에러 (목록 자체를 못 가져옴)
-export type ReviewErrorReason = 'NETWORK_ERROR' | 'SERVER_ERROR';
 
 // [D] 리뷰 탭 전체 상태 (최상위 상태)
 export type ReviewState = 
   | { status: 'idle' }
   | { status: 'loading' } // 전체 화면 로딩 (스피너)
-  | { status: 'fatal_error'; error: ReviewErrorReason } // 치명적 에러 (재시도 버튼 등 필요)
+  | { status: 'error'; error: 'SERVER_ERROR' } // 리뷰 가져오기 실패 / SERVER_ERROR : 서버 에러
   | { 
       status: 'success'; 
       reviews: ReviewItem[];        // 리뷰 목록 (무조건 존재)
