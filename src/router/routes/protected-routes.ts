@@ -63,6 +63,7 @@ export const protectedRoutes = [
 		path: PATH.CLOSET,
 		Component: ClosetPage,
 	},
+
 	// 필요하면 계속 추가
 	// { path: PATH.CLOSET, Component: ClosetPage },
 	// { path: PATH.PRODUCTS.ROOT, Component: ProductsPage },
