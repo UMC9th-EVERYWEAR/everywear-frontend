@@ -34,6 +34,10 @@
   --color-primary-600: #3b4599;
   --color-primary-300: #8d98ff;
 
+  --color-onboarding-photo: #FAFAFA;
+  --color-onboarding: #F0F7FF;
+
+
   --shadow-0: 0px 0px 0px rgba(0, 0, 0, 0.05);
   --shadow-4: 0px 2px 6px rgba(0, 0, 0, 0.10);
   --shadow-8: 0px 2px 5px rgba(0, 0, 0, 0.15);
@@ -90,6 +94,7 @@
     font-weight: 600;
   }
 
+
   .text-medium-20 {
     font-size: 20px;
     font-weight: 500;
@@ -140,6 +145,9 @@
     font-weight: 400;
   }
 
+  /* =========================
+    SWIPER
+     ========================= */
   /* 새로운 폰트 추가 */
    .font-anonymous {
     font-family: "Anonymous Pro", monospace;
@@ -164,4 +172,35 @@
   .photo-swiper .swiper-pagination-bullet-active {
     @apply !bg-primary-600 !w-2.5 !h-2.5 ;
   }
+  /* =========================
+    ANIMATION
+     ========================= */
+
+    @keyframes frame-in {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  @keyframes guide-in {
+    0% {
+      opacity: 0;
+      transform: translateY(-30px); /* -10 */
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-frame-in {
+    animation: frame-in 1.5s forwards;
+  }
+  .animate-guide-in {
+    animation: guide-in 0.8s ease-out forwards;
+  }
+
 }

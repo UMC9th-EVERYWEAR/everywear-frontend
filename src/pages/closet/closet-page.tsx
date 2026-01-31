@@ -13,6 +13,8 @@ export interface ProductDataType extends ProductCardProps {
 
 const MOCK_PRODUCTS: ProductDataType[] = [];
 
+
+
 const ClosetPage = () => {
 	const navigate = useNavigate();
 	const [selected, setSelected] = useState('전체');
