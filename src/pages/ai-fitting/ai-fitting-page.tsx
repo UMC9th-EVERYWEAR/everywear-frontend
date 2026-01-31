@@ -51,7 +51,6 @@ const AiFittingPage = () => {
 	const handleStartFitting = () => {
 		createToast({ message: 'AI 피팅을 시작하겠습니다.' });
 		setFittingState({ status: 'loading' });
-		setReviewState({ status: 'loading' });
 	}
 
 	const handleStartReview = () => {
@@ -122,20 +121,21 @@ const AiFittingPage = () => {
 	// TODO : api 연결로 대체
 	const handleSimulateFitting = (errorReason? : FittingErrorReason) => {
 		handleStartFitting();
+		handleStartReview();
 		setTimeout(() => {
 			handleSuccessFitting();
-		}, 1000);
+		}, 10000);
 		setTimeout(() => {
 			handleSuccessReview();
 		}, 1000);
 		setTimeout(() => {
 			handleSuccessSummary();
-		}, 1000);
+		}, 2000);
 	}
 
 	return (
 		<div className='flex items-center justify-center mb-8'>
-			<div className="flex flex-col px-4 h-full w-109 relative">
+			<div className="flex flex-col px-4 h-full w-full max-w-109 relative">
                 
 				<ToastContainer>
 					{toasts.map((toast) => (
@@ -166,6 +166,8 @@ const AiFittingPage = () => {
 					<FittingTab
 						state={fittingState}
 						handleStartFitting={handleSimulateFitting}
+						handleRestartFitting={handleStartFitting}
+						
 					/>
 				)}
 

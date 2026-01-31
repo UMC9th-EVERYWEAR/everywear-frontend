@@ -6,9 +6,10 @@ import type { FittingData } from '@/src/types/ai-fitting/data';
 interface FittingTabProps {
     state: FittingState;
     handleStartFitting: () => void; 
+	handleRestartFitting: () => void;
 }
 
-const FittingTab = ({ state, handleStartFitting }: FittingTabProps) => {
+const FittingTab = ({ state, handleStartFitting, handleRestartFitting }: FittingTabProps) => {
 	// 목데이터
 	const imageUrlExample : FittingData = 'https://lh3.googleusercontent.com/d/1XuItc3eisxkLo6ZXqClQs-ZcsbYU0brI';
 
@@ -24,7 +25,6 @@ const FittingTab = ({ state, handleStartFitting }: FittingTabProps) => {
 	return (
 		<div
 			className='flex flex-col gap-4'
-			style={{ position : 'relative' }}
 		>
 			<div className='flex flex-col gap-5'>
 				{/* idle 상태 */}
@@ -56,6 +56,7 @@ const FittingTab = ({ state, handleStartFitting }: FittingTabProps) => {
 			<FittingButton
 				state={state.status}
 				onStart={handleStartFitting} // "AI 피팅하기" & "재생성하기" 클릭 시 실행
+				onRestart={handleRestartFitting}
 				onDownload={handleDownload} // "다운로드하기" 클릭 시 실행
 			/>
 			

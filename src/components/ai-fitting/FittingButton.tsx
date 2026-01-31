@@ -3,11 +3,12 @@ import ButtonLayout from './ButtonLayout';
 
 interface FittingButtonProps {
     state: FittingStateStatus;
-    onStart: () => void;    // 피팅 시작 & 재생성
+    onStart: () => void;    // 피팅 시작
+	onRestart: () => void;
     onDownload: () => void; // 다운로드
 }
 
-const FittingButton = ({ state, onStart, onDownload } : FittingButtonProps) => {
+const FittingButton = ({ state, onStart, onDownload, onRestart } : FittingButtonProps) => {
 	return (
 		<>
 			{/* 1. IDLE 상태: 피팅 시작 버튼 */}
@@ -27,7 +28,7 @@ const FittingButton = ({ state, onStart, onDownload } : FittingButtonProps) => {
 						content='재생성하기'
 						className={state === 'success' ? 'border-primary-600 text-primary-600' : 'border-neutral-400 text-neutral-400'}
 						// 로딩 중에는 클릭 방지 등의 로직을 추가할 수도 있음
-						onClick={state === 'loading' ? undefined : onStart}
+						onClick={state === 'loading' ? undefined : onRestart}
 						disabled={state === 'loading'}
 					/>
                     

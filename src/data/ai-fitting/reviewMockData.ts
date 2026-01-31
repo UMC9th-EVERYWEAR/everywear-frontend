@@ -5,10 +5,10 @@ export const MOCK_REVIEW_DATA: ReviewData = {
 	summary: '구매자들의 85%가 사이즈가 정사이즈라고 응답했습니다. 주로 재질의 탄탄함과 마감 처리에 대한 만족도가 높으며, 기장은 키 175cm 기준 발목을 살짝 덮는 정도입니다. 배송은 평균 2일 이내로 빠른 편입니다.',
   
 	keywords: [
-		{ id: 1, label: '핏이 예뻐요' },
-		{ id: 2, label: '신축성 좋음' },
-		{ id: 3, label: '재질이 탄탄함' },
-		{ id: 4, label: '가성비 최고' },
+		{ id: 1, label: '핏 좋음' },
+		{ id: 2, label: '품질 우수' },
+		{ id: 3, label: '가성비' },
+		{ id: 4, label: '배송 느림' },
 	],
 
 	reviews: [
