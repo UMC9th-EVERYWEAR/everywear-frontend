@@ -12,7 +12,7 @@ const ItemAddCountSection = ({ category, count, onClick } : ItemAddCountSectionP
 			<button
 				className='w-18 h-6 px-1.75 py-1.25 flex justify-center 
                 items-center border rounded-sm border-none bg-primary-600 shrink-0 
-                font-inter text-regular-12 text-white cursor-pointer'
+                font-inter text-regular-12 text-white cursor-pointer hover:opacity-85'
 				onClick={onClick}
 			>+ 상품추가</button>
 		</div>

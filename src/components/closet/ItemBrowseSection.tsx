@@ -1,11 +1,28 @@
 import type { ProductDataType } from '@/src/pages/closet/closet-page';
 import ProductCard from '../common/ProductCard';
+import { useState } from 'react';
+import ProductCardSkeleton from '../common/ProductCardSkeleton';
 
 interface ItemBrowseSectionProps {
     data : ProductDataType[]
 }
 
 const ItemBrowseSection = ({ data } : ItemBrowseSectionProps) => {
+	const [isLoading, setIsLoading] = useState(false)
+	  const MIN_PRODUCTS = 8; // 로딩시 보여줄 임시 상품 개수
+
+	if (isLoading) {
+		return (
+			<div className="mx-5 grid grid-cols-2 gap-2 place-items-center">
+				{Array.from({ length: MIN_PRODUCTS }).map((_, index) => (
+					<ProductCardSkeleton
+						key={index}
+					/>
+				))}
+			</div>
+		);
+	}
+	
 	return (
 		<>
 			{data.length === 0 ? (
@@ -13,7 +30,7 @@ const ItemBrowseSection = ({ data } : ItemBrowseSectionProps) => {
 					상품이 없습니다.
 				</div>
 			) : 
-				<div className='grid grid-cols-2 gap-4 place-items-center'>
+				<div className='mx-5 grid grid-cols-2 gap-2.5 place-items-center'>
 					{data.map((product) => (
 						<ProductCard
 							key={product.id} // 리스트 렌더링엔 key가 필수
