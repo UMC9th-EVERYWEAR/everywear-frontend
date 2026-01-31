@@ -177,6 +177,13 @@
     )
 }
 
+.bg-phone-two-gradient {
+  background: linear-gradient(
+    in oklab,
+    #FFFFFF 0%, #C9CEF6 67%
+  )
+}
+
   /* =========================
     SWIPER
      ========================= */
@@ -223,20 +230,40 @@
     transform: translateY(-50%);
   }
 
+  .callout-bracket-only {
+    position: relative;
+    width: 24px;
+    height: 1.5px;
+    background: var(--color-primary-600);
+    transform: translateY(-50%);
+  }
+
   /* 점 */
   .callout-bracket::before {
     content: "";
     position: absolute;
     top: 50%;
     left: calc(100% + 12px);
-    width: 7px;
-    height: 7px;
+    width: 6px;
+    height: 6px;
     background: var(--color-primary-600);
     border-radius: 9999px;
     transform: translateY(-50%);
   }
 
-      /* =========================
+   .callout-bracket-only::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 98%;
+    width: 6px;
+    height: 6px;
+    background: var(--color-primary-600);
+    border-radius: 9999px;
+    transform: translateY(-50%);
+  }
+
+    /* =========================
     ANIMATION
      ========================= */
 
