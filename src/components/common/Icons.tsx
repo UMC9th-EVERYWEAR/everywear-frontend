@@ -28,7 +28,7 @@ export const ProductIcon = ({ size = 24, height = 24, active = false, ...props }
   />
 );
 
-export const FittingIcon = ({ size = 24, height = 24, active = false,...props }: IconProps) => (
+export const FittingIcon = ({ size = 24, height = 24, active = false, ...props }: IconProps) => (
 	<img 
     src={ICON_DATA.FittingIcon(active)} 
     width={size} 
@@ -38,7 +38,7 @@ export const FittingIcon = ({ size = 24, height = 24, active = false,...props }:
   />
 );
 
-export const ClosetIcon = ({ size = 24, height = 24, active = false,...props }: IconProps) => (
+export const ClosetIcon = ({ size = 24, height = 24, active = false, ...props }: IconProps) => (
 	<img 
     src={ICON_DATA.ClosetIcon(active)} 
     width={size} 

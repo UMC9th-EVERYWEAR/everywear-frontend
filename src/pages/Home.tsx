@@ -43,15 +43,15 @@ const Home = () => {
 	return (
 		<div className='flex flex-col w-full bg-white pb-10 min-h-[calc(100vh-101px)]'>
       
-			{/* 1. 상단 섹션 */}
-			<section className='px-4 pt-10 pb-2'> 
-				<h2 className='text-[var(--color-neutral-900)] text-medium-16 font-bold mt-1'>
-					파트너 쇼핑몰
-				</h2>
-				<p className="text-[var(--color-neutral-700)] text-regular-12 tracking-[-0.36px]">
-					유명 브랜드 가상 피팅가이드를 확인해보세요
-				</p>
-			</section>
+      {/* 1. 상단 섹션 */}
+      <section className='px-4 pt-10 pb-2'> 
+        <h2 className='text-[var(--color-neutral-900)] text-medium-16 mt-1'>
+          파트너 쇼핑몰
+        </h2>
+        <p className="text-[var(--color-neutral-700)] text-regular-12 tracking-[-0.36px]">
+          유명 브랜드 가상 피팅가이드를 확인해보세요
+        </p>
+      </section>
 
 			{/* 2. 파트너 쇼핑몰 */}
 			<section className="flex gap-2 px-6 py-4 bg-white">
