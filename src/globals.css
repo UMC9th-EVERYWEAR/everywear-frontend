@@ -36,7 +36,8 @@
 
   --color-onboarding: #F0F7FF;
 
-
+  --color-landing-shadow: #BDC3FB;
+  
   --shadow-0: 0px 0px 0px rgba(0, 0, 0, 0.05);
   --shadow-4: 0px 2px 6px rgba(0, 0, 0, 0.10);
   --shadow-8: 0px 2px 5px rgba(0, 0, 0, 0.15);
@@ -119,6 +120,11 @@
     font-weight: 500;
   }
 
+  .text-medium-10 {
+    font-size: 12px;
+    font-weight: 500;
+  }
+
   .text-regular-18 {
     font-size: 18px;
     font-weight: 400;
@@ -163,6 +169,14 @@
   );
 }
 
+.bg-phone-gradient {
+  background:
+  radial-gradient(
+      farthest-corner circle in oklab,
+      #BDC3FB 10%, #FFFFFF 55%
+    )
+}
+
   /* =========================
     SWIPER
      ========================= */
@@ -182,7 +196,47 @@
   .photo-swiper .swiper-pagination-bullet-active {
     @apply !bg-primary-600 !w-2.5 !h-2.5 ;
   }
+
   /* =========================
+    Callout Bracket COMPONENT
+     ========================= */
+  
+  .callout-bracket {
+    position: relative;
+    width: 14px;
+    height: 100%;
+    border-right: 1.5px solid var(--color-primary-600);
+    border-top: 1.5px solid var(--color-primary-600);
+    border-bottom: 1.5px solid var(--color-primary-600);
+    border-radius: 0 4px 4px 0;
+  }
+
+  /* 가로 라인 */
+  .callout-bracket::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 100%;
+    width: 12px;
+    height: 1.5px;
+    background: var(--color-primary-600);
+    transform: translateY(-50%);
+  }
+
+  /* 점 */
+  .callout-bracket::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: calc(100% + 12px);
+    width: 7px;
+    height: 7px;
+    background: var(--color-primary-600);
+    border-radius: 9999px;
+    transform: translateY(-50%);
+  }
+
+      /* =========================
     ANIMATION
      ========================= */
 

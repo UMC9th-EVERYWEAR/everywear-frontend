@@ -1,9 +1,13 @@
-import HeroSection from '@/src/components/landing/HeroSection'
+// import HeroSection from '@/src/components/landing/HeroSection'
+import IntroSection from '@/src/components/landing/IntroSection'
 
 const LadingPage = () => {
 	return (
-		<div className="bg-brand-gradient w-full min-h-screen pt-35 flex flex-col items-center">
-			<HeroSection />
+		<div className="w-full min-h-screen flex flex-col items-center">
+			{/* <HeroSection /> */}
+			<IntroSection />
+			<IntroSection />
+
 		</div>
 	)
 }
