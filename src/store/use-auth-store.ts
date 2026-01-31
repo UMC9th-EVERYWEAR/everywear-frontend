@@ -1,58 +1,65 @@
 import { create } from 'zustand';
-import { persist } from 'zustand/middleware';
+import { persist, createJSONStorage } from 'zustand/middleware';
 
-/**
- * 사용자 정보 타입 정의
- */
 interface User {
-   id: string;
-   name: string;
-   email: string;
-   profileImage?: string;
+  id: string;
+  name: string;
+  email: string;
+  profileImage?: string;
 }
 
-/**
- * 인증 관련 전역 상태 타입
- */
 interface AuthState {
-   isLoggedIn: boolean;     // 로그인 여부
-   user: User | null;       // 사용자 정보 (미로그인 시 null)
-   accessToken: string | null; // API 요청용 토큰
-   login: (user: User, token: string) => void; // 로그인 액션
-   logout: () => void;      // 로그아웃 액션 (상태 초기화)
+  isLoggedIn: boolean;
+  user: User | null;
+  accessToken: string | null;
+  // login 시 rememberMe 인자를 추가로 받습니다.
+  login: (user: User, token: string, rememberMe: boolean) => void;
+  logout: () => void;
 }
 
 /**
- * [useAuthStore] 인증 상태를 관리하는 전역 스토어
- * - persist 미들웨어를 사용하여 로컬 스토리지(localStorage)에 자동 저장됩니다.
- * - 브라우저를 새로고침해도 로그인 상태가 유지됩니다.
+ * [useAuthStore] 인증 상태 관리 스토어
+ * - 기본값으로 sessionStorage를 사용합니다 (브라우저 닫으면 로그아웃).
+ * - 로그인 시 '상태 유지'를 체크하면 localStorage로 전환됩니다.
  */
 export const useAuthStore = create<AuthState>()(
-   persist(
-      (set) => ({
-         // 초기 상태
-         isLoggedIn: false,
-         user: null,
-         accessToken: null,
+  persist(
+    (set) => ({
+      isLoggedIn: false,
+      user: null,
+      accessToken: null,
 
-         // 로그인: 사용자 정보와 토큰을 저장하고 로그인 상태를 true로 변경
-         login: (user, token) =>
-            set({
-               isLoggedIn: true,
-               user,
-               accessToken: token,
-            }),
+      login: (user, token, rememberMe) => {
+        // 1. 선택에 따라 저장소 타겟 결정
+        const targetStorage = rememberMe ? localStorage : sessionStorage;
+        
+        // 2. Zustand의 persist 옵션을 런타임에 변경
+        useAuthStore.persist.setOptions({
+          storage: createJSONStorage(() => targetStorage),
+        });
 
-         // 로그아웃: 모든 인증 상태를 초기값으로 리셋
-         logout: () =>
-            set({
-               isLoggedIn: false,
-               user: null,
-               accessToken: null,
-            }),
-      }),
-      {
-         name: 'auth-storage', // localStorage에 저장될 키 이름
-      }
-   )
+        // 3. 상태 업데이트
+        set({
+          isLoggedIn: true,
+          user,
+          accessToken: token,
+        });
+      },
+
+      logout: () => {
+        set({
+          isLoggedIn: false,
+          user: null,
+          accessToken: null,
+        });
+        // 로그아웃 시 저장된 정보 완전 삭제
+        useAuthStore.persist.clearStorage();
+      },
+    }),
+    {
+      name: 'auth-storage',
+      // 초기값은 더 안전한 sessionStorage로 시작.
+      storage: createJSONStorage(() => sessionStorage),
+    }
+  )
 );
