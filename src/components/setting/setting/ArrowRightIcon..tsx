@@ -1,4 +1,4 @@
-import arrowRight from '@/public/svgs/arrow-right.svg'
+import arrowRight from '@/public/svgs/setting/arrow-right.svg';
 import { cn } from '@/src/utils/cn';
 
 interface ArrowRightIconProps {
