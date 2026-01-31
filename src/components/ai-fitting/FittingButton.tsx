@@ -14,7 +14,7 @@ const FittingButton = ({ state, onStart, onDownload } : FittingButtonProps) => {
 			{state === 'idle' && (
 				<ButtonLayout
 					content='AI 피팅하기'
-					className='bg-primary-600 text-white'
+					className='bg-primary-600 text-white hover:bg-primary-700 transition-colors'
 					onClick={onStart} // 부모의 handleStartFitting 실행
 				/>
 			)}
@@ -27,14 +27,16 @@ const FittingButton = ({ state, onStart, onDownload } : FittingButtonProps) => {
 						content='재생성하기'
 						className={state === 'success' ? 'border-primary-600 text-primary-600' : 'border-neutral-400 text-neutral-400'}
 						// 로딩 중에는 클릭 방지 등의 로직을 추가할 수도 있음
-						onClick={state === 'loading' ? undefined : onStart} 
+						onClick={state === 'loading' ? undefined : onStart}
+						disabled={state === 'loading'}
 					/>
                     
 					{/* 다운로드 버튼 */}
 					<ButtonLayout
 						content='다운로드하기'
-						className={state === 'success' ? 'bg-primary-600 text-white' : 'bg-neutral-400 text-white'}
+						className={state === 'success' ? 'bg-primary-600 text-white hover:bg-primary-700 transition-colors' : 'bg-neutral-400 text-white'}
 						onClick={state === 'success' ? onDownload : undefined}
+						disabled={state === 'loading'}
 					/>
 				</div>
 			)}

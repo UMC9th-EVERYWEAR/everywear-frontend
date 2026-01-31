@@ -2,26 +2,30 @@ import ReviewKeywordTag from './ReviewKeywordList';
 import ReviewCard from './ReviewCard';
 import type { ReviewState } from '@/src/types/ai-fitting/status';
 import { LoadingSpinner } from './LoadingSpinner';
+import { cn } from '@/src/utils/cn';
+import RotateIcon from '@/public/ai-fitting/RotateIcon.svg';
 
 interface ReviewTabProps {
    state: ReviewState;
+   handleStartReview: () => void;
+   
 }
 
-const ReviewTab = ({ state }: ReviewTabProps) => {
+const ReviewTab = ({ state, handleStartReview }: ReviewTabProps) => {
 	
 	return (
-		<div className='flex flex-col items-center mb-[34px]'>
+		<div className='flex flex-col items-center mb-32'>
 			<div className='w-full'>
                 
 				{/* AI 리뷰 요약 */}
-				<div className='bg-[#E3E6FE] border border-none rounded-xl p-[10px] flex flex-col'>
-					<span className='font-bold text-sm text-primary-600 mb-1'>AI 리뷰 요약</span>
+				<div className='bg-[#E3E6FE] border border-none rounded-xl px-2.5 py-1.5 flex flex-col gap-1'>
+					<span className='text-bold-16 text-primary-600'>AI 리뷰 요약</span>
                     
 					{/* 로딩 중일 때 */}
 					{/* AI 리뷰 가져오기 로딩중 또는 AI 리뷰는 가져왔지만 요약이 로딩중일때 */}
 					{(state.status === 'loading' || state.status === 'success' && state.summary.status === 'loading') && (
-						<div className="w-full flex items-center min-h-[42px]">
-							<div className="w-[36.5px] flex justify-center items-center flex-shrink-0">
+						<div className="w-full flex items-center min-h-10">
+							<div className="w-[36.5px] flex justify-center items-center shrink-0">
 								<LoadingSpinner size={5}/>
 							</div>
 							<span className='ml-2 flex flex-1 text-regular-14 break-keep'>
@@ -32,8 +36,34 @@ const ReviewTab = ({ state }: ReviewTabProps) => {
 
 					{/* AI 리뷰 가져오기 성공 & 요약 성공 */}
 					{state.status === 'success' && state.summary.status === 'success' && (
-						<div className='w-full flex min-h-[42px] text-regular-14 text-neutral-900'>
+						<div className='w-full flex min-h-10 text-regular-14 text-neutral-900'>
 							{state.summary.text}
+						</div>
+					)}
+
+					{/* AI 리뷰 가져오기 실패 or 요약 실패 */}
+					{(state.status === 'error' || (state.status === 'success' && state.summary.status === 'error')) && (
+						<div className={cn('mb-2.5 gap-4 flex flex-col w-full')}>
+							<div className={cn('flex flex-col')}>
+								<span className={cn('text-regular-14 leading-5.2 tracking-[-0.42px] items-center justify-center flex')}>
+									리뷰를 요약하는 데 실패했습니다. 
+								</span>
+								<span className={cn('text-regular-14 leading-5.2 tracking-[-0.42px] items-center justify-center flex')}>
+									재시도하려면 아래 버튼을 클릭하세요. 
+								</span>
+							</div>
+							<div className={cn('flex w-full items-center justify-center')}>
+								<button
+									className='p-2.5 bg-review-rotate rounded-full cursor-pointer shadow-2'
+									onClick={handleStartReview}
+								>
+									<img
+										src={RotateIcon}
+										alt='새로고침 버튼'
+									/>
+								</button>
+
+							</div>
 						</div>
 					)}
 
@@ -44,7 +74,7 @@ const ReviewTab = ({ state }: ReviewTabProps) => {
 				{/* 주요 리뷰 키워드 */}
 				{state.status === 'success'  && (
 					<div className='flex flex-col my-1.5'>
-						<span className='text-primary-600 font-bold text-sm flex justify-start mb-1'>
+						<span className='text-primary-600 text-bold-16 flex justify-start mb-1'>
 							주요 리뷰 키워드
 						</span>
 
@@ -54,14 +84,17 @@ const ReviewTab = ({ state }: ReviewTabProps) => {
 
 				{/* 최신 리뷰 */}
 				<div className='flex flex-col'>
-					<span className='text-primary-600 text-semibold-14 flex justify-start border-b border-solid border-neutral-100 w-full mb-2'>
+					<span className='text-primary-600 text-bold-16 flex justify-start border-b border-solid border-neutral-100 w-full'>
 						최신 리뷰
 					</span>
 
 					{/* 로딩 중 */}
 					{state.status === 'loading' && (
-						<div className='flex flex-col items-center py-10'>
-							<span className='break-all'>최신 리뷰를 업데이트하는 중입니다. <br />1분 정도 시간이 걸릴 수 있어요!</span>
+						<div className='flex flex-col items-center gap-2.5'>
+							<div className='flex flex-col'>
+								<span className='break-all flex justify-center'>최신 리뷰를 업데이트하는 중입니다.</span>
+								<span className={cn('break-all flex justify-center')}>1분 정도 시간이 걸릴 수 있어요!</span>
+							</div>
 							<LoadingSpinner size={8} />
 						</div>
 					)}
@@ -75,6 +108,7 @@ const ReviewTab = ({ state }: ReviewTabProps) => {
 							/>
 						))
 					) : (
+
 					// 로딩 끝났는데 데이터가 없을 때
 						state.status === 'success' && (
 							<div className='py-4 text-center text-neutral-400 text-sm'>

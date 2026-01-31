@@ -39,6 +39,7 @@ const customTwMerge = extendTailwindMerge({
 				'text-medium-16',
 				'text-medium-14',
 				'text-medium-12',
+				'text-medium-10',
 				'text-regular-18',
 				'text-regular-16',
 				'text-regular-14',

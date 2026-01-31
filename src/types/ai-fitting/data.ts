@@ -20,7 +20,7 @@ export interface ReviewItem {
   date: string;
   productName: string; 
   productSize: string; 
-  gender: string;
+  gender: '남성' | '여성';
   buyerHeight: number; 
   buyerWeight: number; 
   content: string;     

@@ -5,10 +5,10 @@ import type { FittingData } from '@/src/types/ai-fitting/data';
 
 interface FittingTabProps {
     state: FittingState;
-    onStartFitting: () => void; 
+    handleStartFitting: () => void; 
 }
 
-const FittingTab = ({ state, onStartFitting }: FittingTabProps) => {
+const FittingTab = ({ state, handleStartFitting }: FittingTabProps) => {
 	// 목데이터
 	const imageUrlExample : FittingData = 'https://lh3.googleusercontent.com/d/1XuItc3eisxkLo6ZXqClQs-ZcsbYU0brI';
 
@@ -55,7 +55,7 @@ const FittingTab = ({ state, onStartFitting }: FittingTabProps) => {
 
 			<FittingButton
 				state={state.status}
-				onStart={onStartFitting} // "AI 피팅하기" & "재생성하기" 클릭 시 실행
+				onStart={handleStartFitting} // "AI 피팅하기" & "재생성하기" 클릭 시 실행
 				onDownload={handleDownload} // "다운로드하기" 클릭 시 실행
 			/>
 			

@@ -2,9 +2,9 @@ import type { ReviewItem } from '@/src/types/ai-fitting/data'; // 경로 수정 
 import ReviewStarOff from '@/public/ai-fitting/ReviewStarOff.svg';
 import ReviewStarOn from '@/public/ai-fitting/ReviewStarOn.svg';
 import { useState } from 'react';
-import clsx from 'clsx';
 import { truncate } from '@/src/utils/truncate';
 import useDraggableScroll from '@/src/hooks/domain/ai-fitting/useDraggableScroll';
+import { cn } from '@/src/utils/cn';
 
 interface ReviewCardProps {
     data: ReviewItem; 
@@ -35,11 +35,11 @@ const ReviewCard = ({ data }: ReviewCardProps) => {
 						/>
 					))}
 				</div>
-				<span className="text-neutral-400 font-medium text-[10px] ml-1">{data.date}</span>
+				<span className="text-neutral-400 text-medium-10 ml-1">{data.date}</span>
 			</div>
 
 			{/* 상품 정보 */}
-			<div className="py-3.25 pl-3.25 bg-neutral-50 border rounded-xs border-black/10 gap-0.75 flex flex-col anonymous-pro-regular text-regular-14">
+			<div className="py-3.25 pl-3.25 bg-neutral-50 border rounded-xs border-black/10 gap-0.75 flex flex-col text-regular-14">
 				<span>
 					구매 정보 : {data.productName} • {data.productSize}
 				</span>
@@ -49,8 +49,8 @@ const ReviewCard = ({ data }: ReviewCardProps) => {
 			</div>
 
 			{/* 리뷰 본문 */}
-			<div className="relative mt-1">
-				<p className="text-regular-14 font-anonymous text-neutral-900 break-all tracking-[-1px]">
+			<div className="relative">
+				<p className={cn('text-regular-14 text-neutral-900 break-all tracking-[-0.42px]')}>
 					{displayContent}
 					{shouldTruncate && !isExpanded && (
 						<button
@@ -67,8 +67,8 @@ const ReviewCard = ({ data }: ReviewCardProps) => {
 			{data.images && data.images.length > 0 && ( // reviewImage -> images
 				<div
 					ref={scrollRef}
-					className={clsx(
-						'flex gap-2 overflow-x-auto scrollbar-hide focus:outline-none mt-2',
+					className={cn(
+						'flex gap-2 overflow-x-auto scrollbar-hide focus:outline-none',
 						isDragging ? 'cursor-grabbing' : 'cursor-grab',
 					)}
 					{...dragEvents}

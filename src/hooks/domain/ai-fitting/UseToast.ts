@@ -6,7 +6,7 @@ interface ToastType {
 }
 
 // id는 useToast에서 추가하므로 id는 뺀 타입 생성
-type ToastInput = Omit<ToastType, 'id'>;
+export type ToastInput = Omit<ToastType, 'id'>;
 
 function useToast() {
 	const [toasts, setToasts] = useState<ToastType[]>([]);

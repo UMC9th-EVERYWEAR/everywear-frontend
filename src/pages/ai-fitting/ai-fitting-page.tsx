@@ -1,14 +1,15 @@
-import { useState, useMemo, useEffect } from 'react';
+import { useState } from 'react';
 import TabBar from '@/src/components/ai-fitting/TabBar';
 import FittingItemInfo, { type ItemData } from '@/src/components/ai-fitting/FittingItemInfo';
 import FittingTab from '@/src/components/ai-fitting/FittingTab';
 import ReviewTab from '@/src/components/ai-fitting/ReviewTab'; 
-import type { FittingState, ReviewState } from '@/src/types/ai-fitting/status';
+import type { FittingErrorReason, FittingState, ReviewState } from '@/src/types/ai-fitting/status';
 import { MOCK_REVIEW_DATA } from '@/src/data/ai-fitting/reviewMockData'; 
 import Toast from '@/src/components/common/Toast';
 import ToastContainer from '@/src/components/common/ToastContainer';
 import useToast from '@/src/hooks/domain/ai-fitting/UseToast';
 import type { ModalState } from '@/src/types/ai-fitting/modal';
+import { Modal } from '@/src/components/common/Modal';
 
 export type TabType = 'fitting' | 'review';
 
@@ -41,9 +42,6 @@ const AiFittingPage = () => {
 
 	const handleBuy = () => setModal({ type: 'buy' });
 
-	const handleToastFittingFailure = () => createToast({ message: 'AI 피팅을 실패했습니다.' })
-	const handleToastReviewFailure = () => createToast({ message: 'AI 리뷰 요약을 실패했습니다.' })
-
 	// TODO: 쇼핑몰 이동 시 기기 내 설치된 앱이 열리도록 기능 구현
 	const handleGoToShop = () => {
 		window.open(itemDataExample.buyUrl, '_blank', 'noopener,noreferrer');
@@ -53,6 +51,10 @@ const AiFittingPage = () => {
 	const handleStartFitting = () => {
 		createToast({ message: 'AI 피팅을 시작하겠습니다.' });
 		setFittingState({ status: 'loading' });
+		setReviewState({ status: 'loading' });
+	}
+
+	const handleStartReview = () => {
 		setReviewState({ status: 'loading' });
 	}
 
@@ -96,10 +98,39 @@ const AiFittingPage = () => {
 				},
 			};
 		});
+		createToast({ message : '리뷰 수가 부족하여 AI 리뷰 요약이 불가능합니다.' })
+
 	};
 
 	const handleErrorReview = () => {
 		setReviewState({ status: 'error', error: 'SERVER_ERROR' });
+	}
+
+	const handleErrorFitting = ( errorReason  : FittingErrorReason) => {
+		setFittingState({ status: 'error', error: errorReason })
+		createToast({ message: 'AI 피팅을 실패했습니다.' })
+		if (errorReason === 'INVALID_PRODUCT_IMAGE') createToast({ message: '피팅이 불가능한 상품입니다.' });
+		else if (errorReason === 'INVALID_USER_IMAGE') createToast({ message: '가이드에 맞는 대표사진으로 변경해주세요.' });
+		else if (errorReason === 'UNKNOWN_ERROR') createToast({ message: '예상치 못한 오류가 발생했습니다.' })
+	}
+
+	const handleGeneralModalClose = () => {
+		setModal({ type: 'none' });
+	};
+
+	// AI 피팅 시뮬레이터 함수
+	// TODO : api 연결로 대체
+	const handleSimulateFitting = (errorReason? : FittingErrorReason) => {
+		handleStartFitting();
+		setTimeout(() => {
+			handleSuccessFitting();
+		}, 1000);
+		setTimeout(() => {
+			handleSuccessReview();
+		}, 1000);
+		setTimeout(() => {
+			handleErrorSummary();
+		}, 1000);
 	}
 
 	return (
@@ -120,6 +151,8 @@ const AiFittingPage = () => {
 				<TabBar
 					activeTab={activeTab}
 					onTabChange={handleTabChange}
+					isIdle={fittingState.status === 'idle' && reviewState.status === 'idle' }
+					onIdleToast={createToast}
 				/>
 
 				<FittingItemInfo
@@ -132,15 +165,38 @@ const AiFittingPage = () => {
 				{activeTab === 'fitting' && (
 					<FittingTab
 						state={fittingState}
-						onStartFitting={handleSimulateFitting}
+						handleStartFitting={handleSimulateFitting}
 					/>
 				)}
 
 				{activeTab === 'review' && (
 					<ReviewTab
 						state={reviewState}
+						handleStartReview={handleStartReview}
 					/>
 				)}
+
+				<Modal
+					isOpen={modal.type === 'buy'}
+					onClose={handleGeneralModalClose}
+					text='해당 쇼핑몰로 이동하시겠습니까?'
+					btn1Text="이동하기"
+					btn1Action={handleGoToShop}
+					btn2Text='취소'
+					btn2Action={handleGeneralModalClose}
+				/>
+
+
+
+				<Modal
+					isOpen={modal.type === 'heart'}
+					onClose={handleGeneralModalClose}
+					text='내 옷장에 추가되었습니다'
+					btn1Text="확인"
+					btn1Action={handleGeneralModalClose}
+				/>
+
+
 			</div>
 		</div>
 	);
