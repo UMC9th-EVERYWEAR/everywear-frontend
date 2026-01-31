@@ -14,16 +14,15 @@ const IntroAIFittingSection = () => {
 
 			<div className='relative flex w-93.75 h-full'> {/* 반응형할거면 바꿔야함*/}
 				<div className="absolute top-0 left-7 flex items-center justify-center">
-
 					{/* image */}
 					<img
 						src={intro2}
-						alt="intro1"
+						alt="intro2"
 						className="relative object-cover z-20"
 					/>			
 				</div>
 
-				<div className='absolute top-12 right-3.5 flex flex-col'> {/* 갭이 다다른걸 고려할건지 생각해봐야함*/} 
+				<div className='absolute top-12 right-3.5 flex flex-col'> 
 					<Callout
 						height={33}
 						marginBottom={5}

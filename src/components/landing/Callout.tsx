@@ -1,7 +1,7 @@
 import { cn } from '@/src/utils/cn';
 import React from 'react';
 interface CalloutProps {
-  children: React.ReactNode;
+  children: React.ReactNode; 
   height: number;
 	isLine?: boolean;
 	marginBottom?: number;
@@ -9,7 +9,7 @@ interface CalloutProps {
 
 const Callout = ({ children, height, isLine, marginBottom }: CalloutProps) => (
 	<div
-		className={cn('flex items-center gap-6',
+		className={cn('flex items-center gap-5.5',
 		)
 		}
 		style={{ height , marginBottom }}
