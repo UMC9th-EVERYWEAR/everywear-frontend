@@ -4,15 +4,48 @@ import type { ReviewState } from '@/src/types/ai-fitting/status';
 import { LoadingSpinner } from './LoadingSpinner';
 import { cn } from '@/src/utils/cn';
 import RotateIcon from '@/public/ai-fitting/RotateIcon.svg';
+import { useEffect, useState } from 'react';
 
 interface ReviewTabProps {
-   state: ReviewState;
-   handleStartReview: () => void;
-   
+    state: ReviewState;
+    handleStartReview: () => void;
 }
 
 const ReviewTab = ({ state, handleStartReview }: ReviewTabProps) => {
-	
+	// 15초 타이머 상태
+	const [showResult, setShowResult] = useState(false);
+
+	// 의존성 배열 문제를 해결하기 위해 상태값 미리 추출
+	const summaryStatus = state.status === 'success' ? state.summary.status : undefined;
+
+	useEffect(() => {
+		let timer: ReturnType<typeof setTimeout>;
+
+		if (state.status === 'success' && summaryStatus === 'success') {
+			timer = setTimeout(() => {
+				setShowResult(true);
+			}, 15000);
+		}
+
+		return () => {
+			clearTimeout(timer);
+			setShowResult(false);
+		};
+	}, [state.status, summaryStatus]); 
+
+
+	// 리뷰 요약 로딩 상태 계산
+	const isSummaryLoading = state.status === 'loading' || 
+                             (state.status === 'success' && state.summary.status === 'loading') || 
+                             (state.status === 'success' && state.summary.status === 'success' && !showResult);
+
+	// 리뷰 요약 성공 상태 여부 (boolean)
+	const isSummaryVisible = state.status === 'success' && state.summary.status === 'success' && showResult;
+
+	// 리뷰 데이터 로드 성공 여부
+	const isGlobalSuccess = state.status === 'success'; 
+
+
 	return (
 		<div className='flex flex-col items-center mb-32'>
 			<div className='w-full'>
@@ -21,9 +54,8 @@ const ReviewTab = ({ state, handleStartReview }: ReviewTabProps) => {
 				<div className='bg-[#E3E6FE] border border-none rounded-xl px-2.5 py-1.5 flex flex-col gap-1'>
 					<span className='text-bold-16 text-primary-600'>AI 리뷰 요약</span>
                     
-					{/* 로딩 중일 때 */}
-					{/* AI 리뷰 가져오기 로딩중 또는 AI 리뷰는 가져왔지만 요약이 로딩중일때 */}
-					{(state.status === 'loading' || state.status === 'success' && state.summary.status === 'loading') && (
+					{/* 로딩 표시 */}
+					{isSummaryLoading && (
 						<div className="w-full flex items-center min-h-10">
 							<div className="w-[36.5px] flex justify-center items-center shrink-0">
 								<LoadingSpinner size={5}/>
@@ -34,14 +66,13 @@ const ReviewTab = ({ state, handleStartReview }: ReviewTabProps) => {
 						</div>
 					)}
 
-					{/* AI 리뷰 가져오기 성공 & 요약 성공 */}
-					{state.status === 'success' && state.summary.status === 'success' && (
+					{isSummaryVisible && state.status === 'success' && state.summary.status === 'success' && (
 						<div className='w-full flex min-h-10 text-regular-14 text-neutral-900'>
 							{state.summary.text}
 						</div>
 					)}
 
-					{/* AI 리뷰 가져오기 실패 or 요약 실패 */}
+					{/* 에러 처리 */}
 					{(state.status === 'error' || (state.status === 'success' && state.summary.status === 'error')) && (
 						<div className={cn('mb-2.5 gap-4 flex flex-col w-full')}>
 							<div className={cn('flex flex-col')}>
@@ -62,24 +93,21 @@ const ReviewTab = ({ state, handleStartReview }: ReviewTabProps) => {
 										alt='새로고침 버튼'
 									/>
 								</button>
-
 							</div>
 						</div>
 					)}
-
-					
 				</div>
 
 
 				{/* 주요 리뷰 키워드 */}
-				{state.status === 'success'  && (
+				{isGlobalSuccess && (
 					<div className='flex flex-col my-1.5'>
 						<span className='text-primary-600 text-bold-16 flex justify-start mb-1'>
 							주요 리뷰 키워드
 						</span>
-
 						<ReviewKeywordTag keywordList={state.keywords} />
-					</div>)}
+					</div>
+				)}
 
 
 				{/* 최신 리뷰 */}
@@ -88,7 +116,6 @@ const ReviewTab = ({ state, handleStartReview }: ReviewTabProps) => {
 						최신 리뷰
 					</span>
 
-					{/* 로딩 중 */}
 					{state.status === 'loading' && (
 						<div className='flex flex-col items-center gap-2.5'>
 							<div className='flex flex-col'>
@@ -99,8 +126,7 @@ const ReviewTab = ({ state, handleStartReview }: ReviewTabProps) => {
 						</div>
 					)}
 
-					{/* 데이터 있음 (props로 받은 reviewData 매핑) */}
-					{state.status === 'success' && state.reviews.length > 0 ? (
+					{isGlobalSuccess && state.reviews.length > 0 ? (
 						state.reviews.map((review) => (
 							<ReviewCard
 								key={review.id}
@@ -108,9 +134,7 @@ const ReviewTab = ({ state, handleStartReview }: ReviewTabProps) => {
 							/>
 						))
 					) : (
-
-					// 로딩 끝났는데 데이터가 없을 때
-						state.status === 'success' && (
+						isGlobalSuccess && (
 							<div className='py-4 text-center text-neutral-400 text-sm'>
 								리뷰가 없습니다.
 							</div>

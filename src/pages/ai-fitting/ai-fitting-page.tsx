@@ -129,7 +129,7 @@ const AiFittingPage = () => {
 			handleSuccessReview();
 		}, 1000);
 		setTimeout(() => {
-			handleErrorSummary();
+			handleSuccessSummary();
 		}, 1000);
 	}
 
