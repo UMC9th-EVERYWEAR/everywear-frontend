@@ -5,14 +5,14 @@ import Callout from './Callout'
 const IntroConnectSection = () => {
 	return(
 		<div
-			className='flex flex-col items-center w-full min-h-screen pt-10 gap-20'
+			className='flex flex-col items-center justify-center w-full min-h-screen gap-10'
 		>
 			<SectionTitle
 				sectionTitle='스마트 쇼핑 연결'
 				sectionDescription='원하는 상품을 쉽고 빠르고 확인해보세요!'
 			/>
 
-			<div className='relative flex w-93.75 h-full'> {/* 반응형할거면 바꿔야함*/}
+			<div className='relative flex w-93.75 h-100'> {/* 반응형할거면 바꿔야함*/}
 				<div className="absolute top-0 left-11 flex items-center justify-center">
 
 					{/* gradient */}

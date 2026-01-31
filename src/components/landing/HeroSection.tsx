@@ -3,7 +3,7 @@ import everywear from '@/public/svgs/LogoImages/Everywear.svg'
 import iphone from '@/public/svgs/landing/iPhone.svg'
 const HeroSection = () => {
 	return(
-		<div className='bg-brand-gradient min-h-screen pt-35 flex flex-col items-center w-full'>
+		<div className='bg-brand-gradient min-h-screen pt-10 flex flex-col items-center  justify-center w-full'>
 
 			<div className='flex gap-2.5 items-center mb-2'>
 				<img 

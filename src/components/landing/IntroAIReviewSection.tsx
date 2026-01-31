@@ -5,14 +5,14 @@ import Callout from './Callout'
 const IntroAIReviewSection = () => {
 	return(
 		<div
-			className='flex flex-col items-center w-full min-h-screen pt-10 gap-20 bg-landing-back'
+			className='flex flex-col items-center justify-center w-full min-h-screen pt-10 gap-10 bg-landing-back'
 		>
 			<SectionTitle
 				sectionTitle='AI 리뷰 요약'
 				sectionDescription='최신 리뷰의 핵심 정보를 빠르게 파악할 수 있어요!'
 			/>
 
-			<div className='relative flex w-93.75 h-full'> {/* 반응형할거면 바꿔야함*/}
+			<div className='relative flex w-93.75 h-80'> {/* 반응형할거면 바꿔야함*/}
 				<div className="absolute top-0 left-1 flex items-center justify-center">
 
 					{/* image */}

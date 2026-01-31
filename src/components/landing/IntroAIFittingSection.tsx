@@ -5,14 +5,14 @@ import Callout from './Callout'
 const IntroAIFittingSection = () => {
 	return(
 		<div
-			className='flex flex-col items-center w-full min-h-screen pt-10 gap-10 bg-phone-two-gradient'
+			className='flex flex-col items-center justify-center w-full min-h-screen pt-10 gap-10 bg-phone-two-gradient'
 		>
 			<SectionTitle
 				sectionTitle='AI 가상 피팅'
 				sectionDescription='모델 핏 말고 내 핏, EVERY WEAR를 통해 확인하세요!'
 			/>
 
-			<div className='relative flex w-93.75 h-full'> {/* 반응형할거면 바꿔야함*/}
+			<div className='relative flex w-93.75 h-118'> {/* 반응형할거면 바꿔야함*/}
 				<div className="absolute top-0 left-7 flex items-center justify-center">
 					{/* image */}
 					<img
