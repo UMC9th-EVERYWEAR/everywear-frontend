@@ -10,8 +10,8 @@ const NAV_ITEMS = [
 ];
 
 export const Navbar = () => {
-    const navigate = useNavigate(); //이동을 위한 함수
-    const location = useLocation(); //현재 경로를 가져오는 함수
+	const navigate = useNavigate(); //이동을 위한 함수
+	const location = useLocation(); //현재 경로를 가져오는 함수
 
 	return (
 		<nav className="sticky bottom-0 flex w-full h-[50px] px-4 justify-between items-center bg-white border-t border-neutral-100 shadow-[var(--shadow-4)] z-10">

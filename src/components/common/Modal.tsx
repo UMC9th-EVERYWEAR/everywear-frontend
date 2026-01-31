@@ -10,16 +10,16 @@ interface ModalProps {
 }
 
 export const Modal = ({
-    isOpen,
-    onClose,
-    title,
-    text,
-    btn1Text,
-    btn1Action,
-    btn2Text,
-    btn2Action,
+	isOpen,
+	onClose,
+	title,
+	text,
+	btn1Text,
+	btn1Action,
+	btn2Text,
+	btn2Action,
 }: ModalProps) => {
-    if (!isOpen) return null;
+	if (!isOpen) return null;
 
     return (
         <div
