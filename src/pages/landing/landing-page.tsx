@@ -3,6 +3,7 @@ import HowItWorksSection from '@/src/components/landing/HowItWorksSection'
 import IntroAIFittingSection from '@/src/components/landing/IntroAIFittingSection'
 import IntroAIReviewSection from '@/src/components/landing/IntroAIReviewSection'
 import IntroConnectSection from '@/src/components/landing/IntroConnectSection'
+import LandingFooter from '@/src/components/landing/LandingFooter'
 
 const LadingPage = () => {
 	return (
@@ -14,6 +15,7 @@ const LadingPage = () => {
 			<IntroAIReviewSection /> */}
 			{/* how work */}
 			<HowItWorksSection />
+			<LandingFooter />
 
 		</div>
 	)

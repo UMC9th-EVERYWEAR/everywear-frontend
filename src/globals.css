@@ -187,6 +187,15 @@
   )
 }
 
+
+.bg-landing-footer-gradient {
+  background: linear-gradient(
+    to top in oklab,
+    #FFFFFF 60%, 76%, var(--color-landing-how-it-works) 94%
+  )
+}
+
+
   /* =========================
     SWIPER
      ========================= */
