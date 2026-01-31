@@ -77,7 +77,7 @@ const ReviewTab = ({ state, handleStartReview }: ReviewTabProps) => {
 						<div className={cn('mb-2.5 gap-4 flex flex-col w-full')}>
 							<div className={cn('flex flex-col')}>
 								<span className={cn('text-regular-14 leading-5.2 tracking-[-0.42px] items-center justify-center flex')}>
-									리뷰를 요약하는 데 실패했습니다. 
+									{state.status === 'error' ? '리뷰를 불러오는 데 실패했습니다.' : '리뷰를 요약하는 데 실패했습니다.'}
 								</span>
 								<span className={cn('text-regular-14 leading-5.2 tracking-[-0.42px] items-center justify-center flex')}>
 									재시도하려면 아래 버튼을 클릭하세요. 

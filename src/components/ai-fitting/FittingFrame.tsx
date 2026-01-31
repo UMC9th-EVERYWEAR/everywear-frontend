@@ -38,13 +38,20 @@ const FittingFrame = ({ type = 'BEFORE', imgUrl, state }: FittingFrameProps) => 
 						</span>
 						<LoadingSpinner size={10} />
 					</div>
+				) : state.status === 'error' && type === 'AFTER' ? (
+					<div className="flex flex-col justify-center items-center gap-4 h-121">
+						<span className="text-regular-16 text-neutral-900">
+							피팅 이미지 생성에 실패했습니다.
+						</span>
+					</div>
 				) : (
-					
-					<img
-						src={imgUrl}
-						alt={`피팅 ${type} 이미지`}
-						className="w-full h-full object-cover"
-					/>
+					imgUrl && (
+						<img
+							src={imgUrl}
+							alt={`피팅 ${type} 이미지`}
+							className="w-full h-full object-cover"
+						/>
+					)
 				)}
 				{state.status === 'idle' && (
 					<button
