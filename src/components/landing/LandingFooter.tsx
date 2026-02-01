@@ -3,11 +3,17 @@ import every from '@/public/svgs/LogoImages/every-logo.svg'
 import wear from '@/public/svgs/LogoImages/wear-logo.svg'
 import FooterNameSection from './FooterNameSection'
 import Button from '../common/Button'
+import { useNavigate } from 'react-router'
+import { PATH } from '@/src/constants/path'
 
 
 
 
 const LandingFooter = () => {
+	const navigate = useNavigate();
+	const goLogin = () => {
+		navigate(PATH.LOGIN)
+	}
 	return(
 		<div
 			className='flex flex-col items-center gap-8 h-full pt-15 pb-20 bg-landing-footer-gradient w-full'
@@ -37,7 +43,10 @@ const LandingFooter = () => {
 
 			<div className='flex flex-col items-center gap-1'>
 				<p className='text-primary-600 text-medium-12 text-center'>지금 바로 시작하세요!</p>
-				<Button size='lg'>무료로 시작하기</Button> {/* 버튼 컴포넌트에 bold가 없는 이슈 */}
+				<Button
+					size='lg'
+					onClick={goLogin}
+				>무료로 시작하기</Button> {/* 버튼 컴포넌트에 bold가 없는 이슈 */}
 			</div>
 		</div>
 	)
