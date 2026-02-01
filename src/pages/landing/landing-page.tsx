@@ -33,7 +33,7 @@ const LadingPage = () => {
 				scrollEnabled ? 'overflow-y-scroll' : 'overflow-hidden',
 			)}
 		>
-			{/* Hero (처음만 보여줌) */}
+			{/* Hero  */}
 			<section
 				// ref={heroRef}
 				className="h-screen snap-start overflow-y-hidden"
@@ -58,9 +58,9 @@ const LadingPage = () => {
 			  >
 				<HowItWorksSection />
 
-				<ScrollAnimationContainer>
-					<LandingFooter />
-				</ScrollAnimationContainer>
+				{/* <ScrollAnimationContainer> */}
+				<LandingFooter />
+				{/* </ScrollAnimationContainer> */}
 			</section>
 
 		</div>

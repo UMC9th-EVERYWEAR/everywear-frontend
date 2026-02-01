@@ -101,7 +101,7 @@ const HowItWorksStep = ({ step }: HowItWorksStepProps) => {
 
 			<ScrollAnimationContainer
 				isFadeInRight
-				baseDelay={0.5}
+				baseDelay={0}
 				stepDelay={1}
 			>
 				<div className='flex flex-col gap-1.5 w-31'>
