@@ -2,6 +2,7 @@ import type { ProductDataType } from '@/src/pages/closet/closet-page';
 import ProductCard from '../common/ProductCard';
 import { useState } from 'react';
 import ProductCardSkeleton from '../common/ProductCardSkeleton';
+import {  ProductIcon } from '../common/Icons';
 
 interface ItemBrowseSectionProps {
     data : ProductDataType[]
@@ -26,8 +27,19 @@ const ItemBrowseSection = ({ data } : ItemBrowseSectionProps) => {
 	return (
 		<>
 			{data.length === 0 ? (
-				<div className="flex items-center justify-center text-neutral-500 text-medium-15 h-[75vh]">
-					상품이 없습니다.
+				<div className="flex flex-col items-center justify-center text-neutral-500 text-medium-15 h-[75vh]">
+
+					<ProductIcon
+						size={200}
+						active={false}
+					/>
+					<span className='text-medium-20 mb-3'>아직 피팅할 상품이 없어요</span>
+					<p className='text-medium-14'>
+						관심 있는 상품을 추가하고
+					</p>
+					<p className='text-medium-14'>
+						AI 피팅으로 스타일을 미리 확인해 보세요.					
+					</p>
 				</div>
 			) : 
 				<div className='mx-5 grid grid-cols-2 gap-2.5 place-items-center'>

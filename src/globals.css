@@ -232,6 +232,16 @@
     }
   }
 
+
+@keyframes clothes-motion {
+  0% {margin-top: 0px;}
+	20% {margin-top: 10px;}
+	40% {margin-top: 0px;}
+	60% {margin-top: 10px;}
+	80% {margin-top: 0px;}
+	100% {margin-top: 0px;}
+}
+
   .animate-frame-in {
     animation: frame-in 1.5s forwards;
   }
@@ -239,4 +249,6 @@
     animation: guide-in 0.8s ease-out forwards;
   }
 
-
+ .animate-clothes-motion  {
+    animation: clothes-motion  1.3s linear 0s infinite;
+  }
