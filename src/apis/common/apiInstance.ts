@@ -1,4 +1,5 @@
 import { ENV_CONFIG } from '@/src/constants/config';
+import { PATH } from '@/src/constants/path';
 import { createStorage, STORAGE_KEY, TOKEN_STORAGE_TYPE } from '@/src/utils/createStorage';
 import axios, { type InternalAxiosRequestConfig } from 'axios';
 
@@ -129,7 +130,7 @@ axiosInstance.interceptors.response.use(
 		} catch (refreshError) {
 			console.error('토큰 갱신 실패:', refreshError);
 			accessTokenStorage.removeItem();
-			window.location.href = '/login';
+			window.location.href = PATH.LOGIN.ROOT;
 			return Promise.reject(refreshError);
 		}
 	},
