@@ -57,6 +57,17 @@
 	.no-scrollbar::-webkit-scrollbar {
 		display: none; /* Chrome, Safari, Opera */
 	}
+
+  /* 스크롤은 유지 + 스크롤바만 숨김 */
+.scrollbar-hide {
+  -ms-overflow-style: none; /* IE, Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none; /* Chrome, Safari */
+}
+
   .text-bold-24 {
     font-size: 24px;
     font-weight: 700;

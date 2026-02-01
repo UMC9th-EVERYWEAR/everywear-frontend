@@ -2,9 +2,15 @@ import intro3 from '@/public/svgs/landing/intro3.svg'
 import SectionTitle from './SectionTitle'
 import Callout from './Callout'
 
-const IntroAIReviewSection = () => {
+interface IntroAIReviewSectionProps {
+  onNext: () => void
+}
+
+
+const IntroAIReviewSection = ({ onNext }: IntroAIReviewSectionProps) => {
 	return(
-		<div
+		<button
+			onClick={onNext}
 			className='flex flex-col items-center justify-center w-full min-h-screen pt-10 gap-10 bg-landing-back'
 		>
 			<SectionTitle
@@ -51,7 +57,7 @@ const IntroAIReviewSection = () => {
 			</div>
 
 			
-		</div>
+		</button>
 	)
 }
 export default IntroAIReviewSection

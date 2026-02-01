@@ -1,9 +1,18 @@
 import logo from '@/public/logo.svg'
 import everywear from '@/public/svgs/LogoImages/Everywear.svg'
 import iphone from '@/public/svgs/landing/iPhone.svg'
-const HeroSection = () => {
+
+
+interface HeroSectionProps {
+  onNext: () => void
+}
+
+const HeroSection = ({ onNext }: HeroSectionProps) => {
 	return(
-		<div className='bg-brand-gradient min-h-screen pt-10 flex flex-col items-center  justify-center w-full'>
+		<button
+			onClick={onNext}		
+			className='bg-brand-gradient min-h-screen pt-10 flex flex-col items-center  justify-center w-full'
+		>
 
 			<div className='flex gap-2.5 items-center mb-2'>
 				<img 
@@ -25,7 +34,7 @@ const HeroSection = () => {
 				alt='iphone' 
 			/>
 
-		</div>
+		</button>
 	)
 }
 export default HeroSection
