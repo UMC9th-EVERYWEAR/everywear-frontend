@@ -1,12 +1,15 @@
 import SettingPhotoPage from '@/src/pages/setting/setting-photo-page';
-import Home from '../../pages/Home';
 import SettingPage from '../../pages/setting/setting-page';
 import SettingInquiry from '@/src/pages/setting/setting-inquiry-page';
 import SettingWithdraw from '@/src/pages/setting/setting-withdraw-page';
-import RecentFitting from '@/src/pages/recent-fitting';
+import ClosetPage from '@/src/pages/closet/closet-page';
+import RecentFitting from '@/src/pages/RecentFittingPage';
 import  { PATH } from '@/src/constants/path';
 import AiFittingPage from '@/src/pages/ai-fitting/ai-fitting-page';
 import LoginTermsPage from '@/src/pages/login/login-terms-page';
+import OnBoardingPage from '@/src/pages/onboarding/onboarding-page';
+import OnBoardingPhotoPage from '@/src/pages/onboarding/onboarding-photo-page';
+import Home from '@/src/pages/Home';
 
 /*
  * protectedRoutes
@@ -41,12 +44,24 @@ export const protectedRoutes = [
 		Component: RecentFitting,
 	},
 	{
+		path: PATH.ONBOARDING.ROOT,
+		Component: OnBoardingPage,
+	},
+	{
+		path: PATH.ONBOARDING.PHOTO,
+		Component: OnBoardingPhotoPage,
+	},
+	{
 		path: PATH.AI_FITTING.DETAIL,
 		Component: AiFittingPage,
 	},
 	{
 		path: PATH.LOGIN.TERMS,
 		Component: LoginTermsPage,
+	},
+	{
+		path: PATH.CLOSET,
+		Component: ClosetPage,
 	},
 	// 필요하면 계속 추가
 	// { path: PATH.CLOSET, Component: ClosetPage },

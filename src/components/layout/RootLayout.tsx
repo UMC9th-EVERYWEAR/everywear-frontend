@@ -37,7 +37,7 @@ const RootLayout = () => {
 		{ pattern: PATH.SETTING.WITHDRAW, title: '회원탈퇴' },
 		{ pattern: PATH.LOGIN.TERMS, title: '뒤로가기' },
 
-
+		{ pattern: PATH.ONBOARDING.PHOTO, title: '사진 가이드' },
 	] as const;
 
 	/*  getHeaderTitle: pathname으로 title 뽑는 함수 */
