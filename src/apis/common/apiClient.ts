@@ -1,17 +1,8 @@
-// apiClient.ts는 axiosInstance와 swagger Api를 연결하는 역할을 한다.
 
-/* 사용 예시
-import { apiClient } from '@/apis/common/apiClient';
-
-export const getProducts = async () => {
-  const res = await apiClient.getProducts();
-  return res.data.result;
-};
-*/
-
-// import { Api } from '@/apis/generated';
-import { axiosInstance } from '@/src/apis/common/apiInstance';
+import { Api } from '@/src/apis/generated';
+import { ENV_CONFIG } from '@/src/constants/config';
 
 export const apiClient = new Api({
-	axiosInstance,
+	baseURL: ENV_CONFIG.SERVER.API_URL,
+	withCredentials: true,
 });
