@@ -27,6 +27,7 @@ const customTwMerge = extendTailwindMerge({
 	extend: {
 		classGroups : {
 			'font-size' : [
+				'text-not-found',
 				'text-bold-24',
 				'text-bold-20',
 				'text-bold-18',

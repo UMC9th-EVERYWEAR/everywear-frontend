@@ -62,6 +62,12 @@
 	.no-scrollbar::-webkit-scrollbar {
 		display: none; /* Chrome, Safari, Opera */
 	}
+
+  .text-not-found {
+    font-size: 60px;
+    font-weight: 700;
+  }
+
   .text-bold-24 {
     font-size: 24px;
     font-weight: 700;
