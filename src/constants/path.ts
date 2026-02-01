@@ -1,25 +1,3 @@
-/**
- * Route Path Map (React Router)
- *
- * /login                 → pages/login/LoginPage.tsx
- * /home                  → pages/home/HomePage.tsx
- *
- * /products              → pages/products/ProductsPage.tsx
- * /products/url          → pages/products/ProductsUrlPage.tsx
- *
- * /recent-fitting        → pages/recent-fitting/RecentFittingPage.tsx
- *
- * /ai-fitting            → pages/ai-fitting/AiFittingPage.tsx
- * /ai-fitting/:id        → pages/ai-fitting/AiFittingDetailPage.tsx
- *
- * /closet                → pages/closet/ClosetPage.tsx
- *
- * /setting               → pages/setting/SettingPage.tsx
- * /setting/logout        → pages/setting/LogoutPage.tsx
- * /setting/withdraw      → pages/setting/WithdrawPage.tsx
- * /setting/change-photo  → pages/setting/ChangePhotoPage.tsx
- */
-
 //  라우트 문자열을 상수로 관리해서 오타/불일치 방지
 //  URL 변경 시 한 곳(PATH)만 수정하면 전체 반영되도록 하기 위함
 //  Link/navigate/route 등록에서 같은 path를 재사용해 일관성 유지
@@ -29,17 +7,20 @@
 
 export const PATH = {
 	LANDING: '/',
-	LOGIN: '/login',
+	LOGIN: {
+		ROOT: '/login',
+		TERMS: '/login/terms',
+	},
 	ONBOARDING:{
 		ROOT: '/onboarding',
 		PHOTO: '/onboarding/photo',
-	},
-
+	},	
+	
 	HOME: '/home',
 
 	PRODUCTS: {
 		ROOT: '/products',
-		URL: '/products/url',
+		ADD: '/products/add',
 	},
 
 	RECENT_FITTING: '/recent-fitting',
@@ -61,17 +42,17 @@ export const PATH = {
 /* hideHeaderRoutes: 헤더 숨길 라우트 목록 */
 export const hideHeaderPatterns = [
 	PATH.LANDING,
+	PATH.LOGIN.ROOT,
 	PATH.ONBOARDING.ROOT,
-	PATH.LOGIN,
-
 ];	
 
 /* hideNavRoutes: Nav 숨길 라우트 목록 */ 
 export const hideNavPatterns = [
 	PATH.LANDING,
+	PATH.LOGIN.ROOT,
+	PATH.LOGIN.TERMS,
 	PATH.ONBOARDING.ROOT,
 	PATH.ONBOARDING.PHOTO,
-	PATH.LOGIN,
 	PATH.SETTING.ROOT,
 	PATH.SETTING.CHANGE_PHOTO,
 	PATH.SETTING.WITHDRAW,
@@ -83,3 +64,12 @@ export const fullscreenPatterns = [
 	PATH.LOGIN,
 	PATH.LANDING,
 ]
+
+/*전역에서 사용하는 SVG 아이콘 경로 상수 모음*/
+ 
+export const ICON_PATHS = {
+	// 설정(톱니바퀴) 아이콘
+	SETTINGS: 'M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.1a2 2 0 0 1-1-1.72v-.51a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z',
+	// 뒤로가기 화살표
+	BACK: 'M9 1L1 9L9 17',
+} as const;

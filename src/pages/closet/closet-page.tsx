@@ -13,6 +13,8 @@ export interface ProductDataType extends ProductCardProps {
 
 const MOCK_PRODUCTS: ProductDataType[] = [];
 
+
+
 const ClosetPage = () => {
 	const navigate = useNavigate();
 	const [selected, setSelected] = useState('전체');
@@ -36,7 +38,7 @@ const ClosetPage = () => {
 				<ItemAddCountSection
 					category={selected}
 					count={filteredProducts.length}
-					onClick={() => navigate(PATH.PRODUCTS.URL)}
+					onClick={() => navigate(PATH.PRODUCTS.ADD)}
 				/>
 
 				<ItemBrowseSection data={filteredProducts} />

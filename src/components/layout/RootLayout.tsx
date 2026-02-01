@@ -3,7 +3,11 @@ import Header from './Header';
 import { Navbar } from './Navbar';
 import { Modal } from '../common/Modal';
 import { useMemo, useState } from 'react';
+<<<<<<< HEAD
 import { fullscreenPatterns, hideHeaderPatterns, hideNavPatterns, PATH } from '@/src/constants/path';
+=======
+import { hideHeaderPatterns, hideNavPatterns, PATH } from '@/src/constants/path';
+>>>>>>> develop
 import { cn } from '@/src/utils/cn';
 
 const RootLayout = () => {
@@ -35,7 +39,9 @@ const RootLayout = () => {
 		{ pattern: PATH.SETTING.CHANGE_PHOTO, title: '기본 사진 변경' },
 		{ pattern: PATH.SETTING.INQUIRY, title: '1:1 문의하기' },
 		{ pattern: PATH.SETTING.WITHDRAW, title: '회원탈퇴' },
+		{ pattern: PATH.LOGIN.TERMS, title: '뒤로가기' },
 
+		{ pattern: PATH.ONBOARDING.PHOTO, title: '사진 가이드' },
 	] as const;
 
 	/*  getHeaderTitle: pathname으로 title 뽑는 함수 */
