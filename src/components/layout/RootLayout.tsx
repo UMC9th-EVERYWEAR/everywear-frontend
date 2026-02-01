@@ -4,6 +4,7 @@ import { Navbar } from './Navbar';
 import { Modal } from '../common/Modal';
 import { useMemo, useState } from 'react';
 import { hideHeaderPatterns, hideNavPatterns, PATH } from '@/src/constants/path';
+import { cn } from '@/src/utils/cn';
 
 const RootLayout = () => {
 	const { pathname } = useLocation();
@@ -22,6 +23,8 @@ const RootLayout = () => {
 		matchPath(pattern, pathname),
 	), [pathname]);
 
+
+
 	/* HEADER_TITLE_MAP: 추후 헤더 타이틀 동적 변경 */
 	const HEADER_TITLE_MAP = [
 		{ pattern: PATH.RECENT_FITTING, title: '최근 피팅 내역' },
@@ -32,6 +35,8 @@ const RootLayout = () => {
 		{ pattern: PATH.SETTING.CHANGE_PHOTO, title: '기본 사진 변경' },
 		{ pattern: PATH.SETTING.INQUIRY, title: '1:1 문의하기' },
 		{ pattern: PATH.SETTING.WITHDRAW, title: '회원탈퇴' },
+		{ pattern: PATH.LOGIN.TERMS, title: '뒤로가기' },
+
 		{ pattern: PATH.ONBOARDING.PHOTO, title: '사진 가이드' },
 	] as const;
 
@@ -46,11 +51,18 @@ const RootLayout = () => {
     ['/home'].some((pattern) => matchPath(pattern, pathname)) ||
     pathname === '/';
 
+	/*  isLogin */
+	const isLoginPage = matchPath(PATH.LOGIN.ROOT, pathname);
+
 
 	return (
 		/* 1. h-screen과 overflow-hidden으로 전체 바구니 크기를 화면에 딱 맞춤 */
 		<div className='h-screen w-full bg-gray-50 flex justify-center overflow-hidden'>
-			<div className='flex flex-col max-w-2xl w-full h-full bg-white relative'>
+			<div
+				className={cn('flex flex-col w-full  bg-white relative',
+					isLoginPage ? '' : 'max-w-2xl', // 추후에는 모든 페이지로 확장 (반응형)
+				)}
+			>
 
 				{/* 2. 헤더 (고정) */}
 				{!shouldHideHeader && (

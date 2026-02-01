@@ -18,11 +18,11 @@ export const router = createBrowserRouter([
 		children: [
 			...publicRoutes, // 인증 필요 없는 페이지들(/login 등)
 			{
-      Component: ProtectedRoute,
-      children: [
-        ...protectedRoutes, 
-      ],
-    },
+				Component: ProtectedRoute,
+				children: [
+					...protectedRoutes, 
+				],
+			},
 
 			// 3. 잘못된 주소 접근 시
 			{ path: '*', Component: NotFoundPage },
