@@ -60,6 +60,13 @@ export interface ReviewDTO {
   images?: string[];
 }
 
+export interface ApiResponseMapStringObject {
+  isSuccess?: boolean;
+  code?: string;
+  message?: string;
+  result?: Record<string, any>;
+}
+
 /** 상품 등록 요청 (무신사/지그재그/29cm/W컨셉 URL 자동 감지) */
 export interface ImportDTO {
   /**
@@ -93,6 +100,7 @@ export interface ApiResponseFittingApplyResult {
 export interface FittingApplyResult {
   /** @format int64 */
   fittingId?: number;
+  fittingResultImageUrl?: string;
 }
 
 export interface ApiResponseTokenRefreshResponse {
@@ -124,13 +132,6 @@ export interface LikeToggleDTO {
   is_liked?: boolean;
 }
 
-export interface ApiResponseMapStringObject {
-  isSuccess?: boolean;
-  code?: string;
-  message?: string;
-  result?: Record<string, any>;
-}
-
 export interface ApiResponseUserResponse {
   isSuccess?: boolean;
   code?: string;
@@ -151,6 +152,26 @@ export interface UserResponse {
   createdAt?: string;
   /** @format date-time */
   updatedAt?: string;
+}
+
+export interface UserImgQuery {
+  /** @format int64 */
+  profileImageId?: number;
+  imageUrl?: string;
+  representative?: boolean;
+}
+
+export interface AiReviewDTO {
+  summary?: string;
+  keywords?: string[];
+  message?: string;
+}
+
+export interface ApiResponseAiReviewDTO {
+  isSuccess?: boolean;
+  code?: string;
+  message?: string;
+  result?: AiReviewDTO;
 }
 
 export interface ApiResponseProductListResponse {
@@ -193,9 +214,16 @@ export interface FittingSummary {
   /** @format int64 */
   fittingId?: number;
   fittingResultImage?: string;
-  isLiked?: boolean;
   /** @format date-time */
   createdAt?: string;
+  product?: ProductBrief;
+}
+
+export interface ProductBrief {
+  /** @format int64 */
+  productId?: number;
+  productName?: string;
+  isLiked?: boolean;
 }
 
 export interface ApiResponseFittingDetail {
@@ -208,12 +236,23 @@ export interface ApiResponseFittingDetail {
 export interface FittingDetail {
   /** @format int64 */
   fittingId?: number;
-  fittingResultImage?: string;
-  isLiked?: boolean;
-  productName?: string;
-  productCategory?: string;
+  beforeImageUrl?: string;
+  afterImageUrl?: string;
   /** @format date-time */
   createdAt?: string;
+  product?: ProductSummary;
+}
+
+export interface ProductSummary {
+  /** @format int64 */
+  productId?: number;
+  siteName?: string;
+  productName?: string;
+  price?: string;
+  /** @format float */
+  rating?: number;
+  purchaseUrl?: string;
+  isLiked?: boolean;
 }
 
 export enum UserResponseSocialTypeEnum {

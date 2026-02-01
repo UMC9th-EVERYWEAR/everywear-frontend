@@ -1,11 +1,13 @@
 // @ts-nocheck
 import {
+  ApiResponseAiReviewDTO,
   ApiResponseFittingApplyResult,
   ApiResponseFittingDetail,
   ApiResponseImportDTO,
   ApiResponseLikeToggleDTO,
   ApiResponseListFittingSummary,
   ApiResponseLong,
+  ApiResponseMapStringObject,
   ApiResponseProductListResponse,
   ApiResponseString,
   ApiResponseTokenRefreshResponse,
@@ -15,6 +17,7 @@ import {
   CrawlReviewDTO,
   FittingRequest,
   ImportDTO,
+  UserImgQuery,
   VerifyAndSavePayload,
 } from "./data-contracts";
 import { ContentType, HttpClient, RequestParams } from "./http-client";
@@ -78,6 +81,40 @@ export class Api<
       secure: true,
       type: ContentType.Json,
       format: "json",
+      ...params,
+    });
+  /**
+   * @description 특정 상품에 대해 이미 생성된 AI 요약과 키워드를 조회합니다.
+   *
+   * @tags Review
+   * @name GetAiReview
+   * @summary AI 리뷰 조회
+   * @request GET:/api/review/ai/{productId}
+   * @secure
+   * @response `200` `ApiResponseAiReviewDTO` OK
+   */
+  getAiReview = (productId: number, params: RequestParams = {}) =>
+    this.request<ApiResponseAiReviewDTO, any>({
+      path: `/api/review/ai/${productId}`,
+      method: "GET",
+      secure: true,
+      ...params,
+    });
+  /**
+   * @description 특정 상품의 모든 리뷰를 ChatGPT로 요약하고 키워드 4개를 추출합니다.
+   *
+   * @tags Review
+   * @name GenerateAiReview
+   * @summary 특정 상품의 AI 리뷰 및 키워드 생성
+   * @request POST:/api/review/ai/{productId}
+   * @secure
+   * @response `200` `ApiResponseMapStringObject` OK
+   */
+  generateAiReview = (productId: number, params: RequestParams = {}) =>
+    this.request<ApiResponseMapStringObject, any>({
+      path: `/api/review/ai/${productId}`,
+      method: "POST",
+      secure: true,
       ...params,
     });
   /**
@@ -182,6 +219,23 @@ export class Api<
   getMyInfo = (params: RequestParams = {}) =>
     this.request<ApiResponseUserResponse, any>({
       path: `/api/user/me`,
+      method: "GET",
+      secure: true,
+      ...params,
+    });
+  /**
+   * @description 사용자의 모든 프로필사진들을 조회합니다.
+   *
+   * @tags user-img-controller
+   * @name GetProfileImages
+   * @summary 프로필 사진 조회 by 임준서(개발 완료)
+   * @request GET:/api/user-images
+   * @secure
+   * @response `200` `(UserImgQuery)[]` OK
+   */
+  getProfileImages = (params: RequestParams = {}) =>
+    this.request<UserImgQuery[], any>({
+      path: `/api/user-images`,
       method: "GET",
       secure: true,
       ...params,
@@ -473,6 +527,23 @@ export class Api<
     this.request<ApiResponseProductListResponse, any>({
       path: `/api/closet/bottom`,
       method: "GET",
+      secure: true,
+      ...params,
+    });
+  /**
+   * @description 사용자가 선택한 프로필사진을 삭제합니다.
+   *
+   * @tags user-img-controller
+   * @name DeleteProfileImage
+   * @summary 프로필 사진 삭제 by 임준서(개발 완료)
+   * @request DELETE:/api/user-images/{imageId}
+   * @secure
+   * @response `200` `any` OK
+   */
+  deleteProfileImage = (imageId: number, params: RequestParams = {}) =>
+    this.request<any, any>({
+      path: `/api/user-images/${imageId}`,
+      method: "DELETE",
       secure: true,
       ...params,
     });
