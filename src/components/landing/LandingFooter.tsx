@@ -10,7 +10,7 @@ import Button from '../common/Button'
 const LandingFooter = () => {
 	return(
 		<div
-			className='flex flex-col items-center gap-8 h-full pt-15 pb-7 bg-landing-footer-gradient w-full'
+			className='flex flex-col items-center gap-8 h-full pt-15 pb-20 bg-landing-footer-gradient w-full'
 		>
 			<div className='flex justify-center items-center w-full gap-6.5 '>
 				<div className='flex gap-2.5 items-center mb-2'>

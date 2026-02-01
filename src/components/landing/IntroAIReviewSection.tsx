@@ -1,6 +1,7 @@
 import intro3 from '@/public/svgs/landing/intro3.svg'
 import SectionTitle from './SectionTitle'
 import Callout from './Callout'
+import ScrollAnimationContainer from '../onboarding/onboarding/ScrollAnimationContainer'
 
 interface IntroAIReviewSectionProps {
   onNext: () => void
@@ -29,7 +30,12 @@ const IntroAIReviewSection = ({ onNext }: IntroAIReviewSectionProps) => {
 					/>			
 				</div>
 
-				<div className='absolute top-13 right-3.5 flex flex-col'>
+
+				<ScrollAnimationContainer
+					className='absolute top-13 right-3.5 flex flex-col'
+					baseDelay={0.3}
+					stepDelay={0.6}
+				>							
 					<Callout
 						height={41}
 						marginBottom={4}
@@ -53,9 +59,8 @@ const IntroAIReviewSection = ({ onNext }: IntroAIReviewSectionProps) => {
 						AI 리뷰 요약을 기다리는 동안 <br />
 						최신 리뷰를 미리 확인할 수 있어요!
 					</Callout>
-				</div>
+				</ScrollAnimationContainer>
 			</div>
-
 			
 		</button>
 	)

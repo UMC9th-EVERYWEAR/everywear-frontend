@@ -1,6 +1,7 @@
 import intro2 from '@/public/svgs/landing/intro2.svg'
 import SectionTitle from './SectionTitle'
 import Callout from './Callout'
+import ScrollAnimationContainer from '../onboarding/onboarding/ScrollAnimationContainer'
 
 const IntroAIFittingSection = () => {
 	return(
@@ -22,7 +23,11 @@ const IntroAIFittingSection = () => {
 					/>			
 				</div>
 
-				<div className='absolute top-12 right-3.5 flex flex-col'> 
+				<ScrollAnimationContainer
+					className='absolute top-12 right-3.5 flex flex-col'
+					baseDelay={0.3}
+					stepDelay={0.6}
+				>			
 					<Callout
 						height={33}
 						marginBottom={5}
@@ -39,7 +44,6 @@ const IntroAIFittingSection = () => {
 					<Callout
 						height={155}
 						marginBottom={20}
-
 					>
 						피팅 결과				
 					</Callout>
@@ -47,7 +51,6 @@ const IntroAIFittingSection = () => {
 						height={0}
 						isLine
 						marginBottom={21}
-
 					>
 						가상 피팅 이미지를 재생성할 수 있어요!
 					</Callout>
@@ -57,7 +60,7 @@ const IntroAIFittingSection = () => {
 					>
 						피팅 결과 이미지를 저장할 수 있어요!					
 					</Callout>
-				</div>
+				</ScrollAnimationContainer>
 			</div>
 
 			

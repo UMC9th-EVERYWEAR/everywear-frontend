@@ -1,6 +1,8 @@
 import logo from '@/public/logo.svg'
 import everywear from '@/public/svgs/LogoImages/Everywear.svg'
 import iphone from '@/public/svgs/landing/iPhone.svg'
+import { cn } from '@/src/utils/cn'
+import { useEffect, useState } from 'react'
 
 
 interface HeroSectionProps {
@@ -8,6 +10,13 @@ interface HeroSectionProps {
 }
 
 const HeroSection = ({ onNext }: HeroSectionProps) => {
+	const [showArrow, setShowArrow]= useState(false)
+
+	useEffect(() => {
+		const timer = setTimeout(() => setShowArrow(true), 2000)
+		return () => clearTimeout(timer)
+	}, [])
+
 	return(
 		<button
 			onClick={onNext}		
@@ -33,6 +42,14 @@ const HeroSection = ({ onNext }: HeroSectionProps) => {
 				src={iphone}
 				alt='iphone' 
 			/>
+
+			<div
+				className={cn('animate-infinite-fade text-semibold-20  text-primary-600',
+					!showArrow && 'animation-paused',
+				)}
+			>
+				화면을 클릭하세요!
+			</div>
 
 		</button>
 	)

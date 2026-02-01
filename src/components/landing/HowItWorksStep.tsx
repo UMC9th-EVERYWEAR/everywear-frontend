@@ -10,6 +10,7 @@ import phoneDetailHighlight3 from '@/public/svgs/landing/how-work3-1.svg'
 
 import phoneMockup4 from '@/public/svgs/landing/intro2.svg'
 import phoneDetailHighlight4 from '@/public/svgs/landing/how-work4-1.svg'
+import ScrollAnimationContainer from '../onboarding/onboarding/ScrollAnimationContainer'
 
 export type STEPKEY = 'STEP1' | 'STEP2' | 'STEP3' | 'STEP4';
 
@@ -37,7 +38,7 @@ const STEP_CONFIG: Record<
 		description2: '원하는 상품을 찾습니다.',
 		phoneMockup: phoneMockup1,
 		phoneDetailHighlight: phoneDetailHighlight1,
-		positionTop: 4.2,
+		positionTop: 4,
 		positionLeft: 0.5,
 		detailWidth: 1.3,
 	},
@@ -47,7 +48,7 @@ const STEP_CONFIG: Record<
 		description2: '링크를 붙여넣습니다.',
 		phoneMockup: phoneMockup2,
 		phoneDetailHighlight: phoneDetailHighlight2,
-		positionTop: 8,
+		positionTop: 7.8,
 		positionLeft: 0.55,
 		detailWidth: 1.35,
 	},
@@ -57,7 +58,7 @@ const STEP_CONFIG: Record<
 		description2: 'AI 분석을 요청합니다.',
 		phoneMockup: phoneMockup3,
 		phoneDetailHighlight: phoneDetailHighlight3,
-		positionTop: 6.5,
+		positionTop: 6.3,
 		positionLeft: 0.2,
 		detailWidth: 1.4,
 
@@ -67,7 +68,7 @@ const STEP_CONFIG: Record<
 		description: 'AI분석 결과를 확인합니다.',
 		phoneMockup: phoneMockup4,
 		phoneDetailHighlight: phoneDetailHighlight4,
-		positionTop: 18.8,
+		positionTop: 18.6,
 		positionLeft: 0.65,
 		detailWidth: 1.35,
 	},
@@ -80,7 +81,7 @@ const HowItWorksStep = ({ step }: HowItWorksStepProps) => {
 
 	return(
 
-		<div className='flex w-77 items-center justify-center h-full gap-5.5'> {/* 반응형할거면 바꿔야함*/}
+		<div className='flex w-77 items-center justify-center h-full gap-5.5 mb-10'> {/* 반응형할거면 바꿔야함*/}
 				
 			<div className="relative">
 				{/* image */}
@@ -97,16 +98,25 @@ const HowItWorksStep = ({ step }: HowItWorksStepProps) => {
 				/>			
 			</div>
 
-			<div className='flex flex-col gap-1.5 w-31'>
-				<p className='underline underline-offset-4  decoration-[1.5px] text-medium-12 text-landing-how-it-works-step'> 
-					STEP<span className='text-medium-14'>{title}</span>
-				</p>
 
-				<p className='text-medium-12 text-nowrap'> {/* TODO: medium-10으로 수정 */}
-					{description} <br />
-					{description2 && description2}				
-				</p>
-			</div>
+			<ScrollAnimationContainer
+				isFadeInRight
+				baseDelay={0.5}
+				stepDelay={1}
+			>
+				<div className='flex flex-col gap-1.5 w-31'>
+					<p className='underline underline-offset-4  decoration-[1.5px] text-medium-12 text-landing-how-it-works-step'> 
+						STEP<span className='text-medium-14'>{title}</span>
+					</p>
+
+					<p className='text-medium-12 text-nowrap'> {/* TODO: medium-10으로 수정 */}
+						{description} <br />
+						{description2 && description2}				
+					</p>
+				</div>
+			</ScrollAnimationContainer>
+
+
 		</div>			
 	)
 }

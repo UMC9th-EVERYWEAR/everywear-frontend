@@ -1,6 +1,7 @@
 import intro1 from '@/public/svgs/landing/intro1.svg'
 import SectionTitle from './SectionTitle'
 import Callout from './Callout'
+import ScrollAnimationContainer from '../onboarding/onboarding/ScrollAnimationContainer'
 
 const IntroConnectSection = () => {
 	return(
@@ -26,16 +27,23 @@ const IntroConnectSection = () => {
 					/>			
 				</div>
 
-				<div className='absolute top-18 right-4 flex flex-col gap-2.5'>
-					<Callout height={56}>
+				<ScrollAnimationContainer
+					className='absolute top-18 right-4 flex flex-col gap-2'
+					baseDelay={0.3}
+					stepDelay={0.6}
+				>
+	
+					{/* <div className='absolute top-18 right-4 flex flex-col gap-2'> */}
+					<Callout height={40}>
 						원하는 쇼핑몰에 들어가서<br />
 						상품의 링크를 복사해주세요!
 					</Callout>
-					<Callout height={43}>
+					<Callout height={38}>
 						복사한 링크를 넣어주면 <br />
 						상품을 추가할 수 있어요!					
 					</Callout>
-				</div>
+					{/* </div> */}
+				</ScrollAnimationContainer>
 			</div>
 
 			
