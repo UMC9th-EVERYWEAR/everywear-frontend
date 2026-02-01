@@ -3,11 +3,7 @@ import Header from './Header';
 import { Navbar } from './Navbar';
 import { Modal } from '../common/Modal';
 import { useMemo, useState } from 'react';
-<<<<<<< HEAD
 import { fullscreenPatterns, hideHeaderPatterns, hideNavPatterns, PATH } from '@/src/constants/path';
-=======
-import { hideHeaderPatterns, hideNavPatterns, PATH } from '@/src/constants/path';
->>>>>>> develop
 import { cn } from '@/src/utils/cn';
 
 const RootLayout = () => {

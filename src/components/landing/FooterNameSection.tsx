@@ -40,7 +40,7 @@ const FooterNameSection = () => {
 				part='FE'
 				names={feName}
 			  /><NameRow
-				part='PM'
+				part='BE'
 				names={beName}
 			    />
 		</div>

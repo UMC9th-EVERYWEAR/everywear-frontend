@@ -61,7 +61,7 @@ export const hideNavPatterns = [
 ];
 /* fullscreenPatterns: 화면을 전체로 사용하는 라우트 */
 export const fullscreenPatterns = [
-	PATH.LOGIN,
+	PATH.LOGIN.ROOT,
 	PATH.LANDING,
 ]
 
