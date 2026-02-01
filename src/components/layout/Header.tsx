@@ -8,7 +8,7 @@ interface HeaderProps {
 }
 
 const Header = ({ type, title = 'EVERY WEAR', onBack }: HeaderProps) => {
-    const navigate = useNavigate();
+	const navigate = useNavigate();
 
     // 뒤로가기 로직: 부모의 onBack이 있으면 실행, 없으면 이전 페이지로 이동
     const handleBack = () => {
