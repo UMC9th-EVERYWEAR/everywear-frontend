@@ -1,7 +1,14 @@
-type StorageType = 'local' | 'session'; // 로컬스토리지와 세션스토리지 모두 사용하므로 타입으로 구분
+export const STORAGE_KEY = {
+	accessToken: 'accessToken',
+};
+
+export const TOKEN_STORAGE_TYPE: 'local' | 'session' = 'local';
+
+
+export type StorageType = 'local' | 'session'; // 로컬스토리지와 세션스토리지 모두 사용하므로 타입으로 구분
 
 // 스토리지 안에 어떤 값이 있는지 제너릭으로 판단 => T 사용
-export const useStorage = <T>(key: string, type: StorageType = 'local') => {
+export const createStorage = <T>(key: string, type: StorageType = 'local') => {
 	// 서버에는 window가 없으므로 window.localStorage 사용 시 런타임 에러 발생
 	// 브라우저가 아니라면 undefined로 맞다면 local, session으로 storage 구분
 	const storage =
