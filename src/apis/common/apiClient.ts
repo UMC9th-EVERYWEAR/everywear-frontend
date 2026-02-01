@@ -1,5 +1,5 @@
 import { ENV_CONFIG } from '@/src/constants/config';
-import { createStorage, STORAGE_KEY, TOKEN_STORAGE_TYPE } from '@/src/utils/useStorage';
+import { createStorage, STORAGE_KEY, TOKEN_STORAGE_TYPE } from '@/src/utils/createStorage';
 import axios, { type InternalAxiosRequestConfig } from 'axios';
 
 // 백엔드에서 내려주는 액세스 토큰 데이터 형식
