@@ -8,7 +8,8 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "prepare": "lefthook install"
+    "prepare": "lefthook install",
+    "api:gen": "node scripts/generate-api.cjs"
   },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
@@ -41,6 +42,7 @@
     "eslint-plugin-react-refresh": "^0.4.24",
     "globals": "^16.5.0",
     "lefthook": "^2.0.15",
+    "swagger-typescript-api": "^13.2.16",
     "typescript": "~5.9.3",
     "typescript-eslint": "^8.46.4",
     "vite": "^7.2.4",
