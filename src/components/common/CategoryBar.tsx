@@ -48,43 +48,44 @@ const CategoryBar = ({ selected, onSelect }: CategoryBarProps) => {
 	];
 
 	return (
-		<div className='w-[375px] overflow-x-auto no-scrollbar bg-white sticky z-20'>
-			<div className='flex gap-[10px] p-4 items-center whitespace-nowrap'>
-				{categories.map((cat) => {
-					const isActive = selected === cat.name;
-					
-					return (
-						<button
-							key={cat.name}
-							onClick={() => onSelect(cat.name)} // 3. 클릭 시 부모의 상태 변경 함수 호출
-							className={`
-								flex items-center justify-center min-w-[60px] p-[10px] 
-								rounded-full gap-0 border box-border cursor-pointer
-								transition-all duration-200
-								${isActive 
-								? 'bg-[#3B4599] text-white font-bold border-[#3B4599]'
-								: 'bg-[rgba(255,255,255,0.50)] text-[#596373] border-[#C7CBD2]'
-								}
-							`}
-						>
-							<div className='flex items-center justify-center shrink-0'>
-								{cat.renderIcon(isActive)}
-							</div>
-							
-							<span
-								className={`
-								text-[12px] font-medium font-['Pretendard']
-								${cat.name === '전체' ? 'ml-[2px]' : 'ml-[-1px]'}
-							`}
-							>
-								{cat.name}
-							</span>
-						</button>
-					);
-				})}
-			</div>
-		</div>
-	);
+    <div className='w-[375px] overflow-x-auto no-scrollbar bg-[var(--color-neutral-50)] sticky z-20'>
+        <div className='flex gap-[10px] p-4 items-center whitespace-nowrap'>
+            {categories.map((cat) => {
+                const isActive = selected === cat.name;
+                
+                return (
+                    <button
+                        key={cat.name}
+                        onClick={() => onSelect(cat.name)}
+                        className={`
+                            flex items-center justify-center min-w-[60px] p-[10px] 
+                            rounded-full gap-0 border box-border cursor-pointer
+                            transition-all duration-200
+                            ${isActive 
+                                ? 'bg-[var(--color-primary-600)] text-[var(--color-neutral-50)] border-[var(--color-primary-600)]'
+                                : 'bg-white text-[var(--color-neutral-700)] border-[var(--color-neutral-300)]'
+                            }
+                        `}
+                    >
+                        <div className='flex items-center justify-center shrink-0'>
+                            {cat.renderIcon(isActive)}
+                        </div>
+                        
+                        <span
+                            className={`
+                                text-medium-12
+                                ${isActive ? 'font-bold' : ''}
+                                ${cat.name === '전체' ? 'ml-[2px]' : 'ml-[-1px]'}
+                            `}
+                        >
+                            {cat.name}
+                        </span>
+                    </button>
+                );
+            })}
+        </div>
+    </div>
+);
 };
 
 export default CategoryBar;
