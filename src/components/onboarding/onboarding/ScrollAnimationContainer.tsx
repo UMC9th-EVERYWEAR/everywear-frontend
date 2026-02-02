@@ -8,6 +8,8 @@ type PropsType = {
   baseDelay?: number; // 시작 딜레이 (초)
   stepDelay?: number; // 아이템 간 간격 (초)
   lastDelay?: number; // 마지막 요소 전용 딜레이 (초)
+	isFadeInRight?: boolean;
+	isFadeInLeft?: boolean;
   onLastVisible? : () => void;
 };
 
@@ -18,10 +20,13 @@ const ScrollAnimationContainer = ({
 	baseDelay = 0,
 	stepDelay = 0.15,
 	lastDelay,
+	isFadeInRight,
+	isFadeInLeft,
 	onLastVisible,
 }: PropsType) => {	
 	const { ref, isInViewport } = useScrollAnimation();
 	const count = React.Children.count(children);
+	const animation = isFadeInLeft ? 'animate-fade-in-left' : isFadeInRight ? 'animate-fade-in-right' : 'animate-frame-in';
 
 	return (
 		<div
@@ -42,7 +47,7 @@ const ScrollAnimationContainer = ({
 						}}
 						className={cn(
 							'opacity-0',
-							isInViewport && 'animate-frame-in',
+							isInViewport && `${animation}`,
 						)}
 						onAnimationEnd={() => {
 							if (isLast) onLastVisible?.();

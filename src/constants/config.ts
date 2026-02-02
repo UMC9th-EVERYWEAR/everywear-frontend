@@ -13,4 +13,8 @@ export const ENV_CONFIG = {
 	IMGBB: {
 		API_KEY: import.meta.env.VITE_IMGBB_API_KEY as string,
 	},
+
+	SERVER: {
+		API_URL: import.meta.env.VITE_SERVER_API_URL as string,
+	},
 } as const;

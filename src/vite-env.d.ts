@@ -9,3 +9,11 @@ declare module 'swiper/css/pagination';
 declare module 'swiper/css/navigation';
 declare module 'swiper/react'
 declare module 'swiper/modules'
+
+interface ImportMetaEnv {
+  readonly VITE_SERVER_API_URL: string;
+}
+
+interface ImportMeta {
+  readonly env: ImportMetaEnv;
+}
