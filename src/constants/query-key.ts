@@ -8,15 +8,14 @@ export const QUERY_KEYS = {
   // 인증 및 유저 관련
   AUTH: {
     ALL: ['auth'] as const,
-    USER: ['auth', 'user'] as const, // 내 정보 조회 (getMyInfo)
+    USER: ['auth', 'user'] as const,
     SESSION: ['auth', 'session'] as const,
   },
 
   // 상품 관련 (무신사, 지그재그 등)
   PRODUCT: {
     ALL: ['product'] as const,
-    LIST: ['product', 'list'] as const, // 전체 상품 조회
-    DETAIL: (productId: number) => ['product', 'detail', productId] as const,
+    LIST: ['product', 'list'] as const,
     CATEGORY: (category: string) => ['product', 'category', category] as const,
     LIKE: ['product', 'like'] as const,
   },
@@ -24,21 +23,23 @@ export const QUERY_KEYS = {
   // 리뷰 및 크롤링 관련
   REVIEW: {
     ALL: ['review'] as const,
-    LIST: (productId: number) => ['review', 'list', productId] as const,
+    AI: (productId: number) => ['review', 'ai', productId] as const, //AI리뷰랑 최신리뷰 구분
+    RECENT: (productId: number) => ['review', 'recent', productId] as const,
     STATUS: (productId: number) => ['review', 'status', productId] as const,
   },
 
-  // 피팅 관련
+  // 가상 피팅 관련
   FITTING: {
     ALL: ['fitting'] as const,
-    LIST: ['fitting', 'list'] as const,
+    SESSION: ['fitting', 'session'] as const, 
     RECENT: ['fitting', 'recent'] as const,
     DETAIL: (fittingId: number) => ['fitting', 'detail', fittingId] as const,
   },
 
-  // 옷장 관련
+  // 내 옷장 관련
   CLOSET: {
     ALL: ['closet'] as const,
+    LIST: ['closet', 'list'] as const,
     CATEGORY: (category: string) => ['closet', 'category', category] as const,
   },
 } as const;
