@@ -1,4 +1,4 @@
-import plusIcon from '@/public/svgs/plus-icon.svg';
+import plusIcon from '@/public/svgs/setting/plus-icon.svg';
 import type { PhotoItem } from '@/src/types/schemas/setting/setting-photo';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination } from 'swiper/modules';

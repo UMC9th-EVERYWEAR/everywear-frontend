@@ -43,12 +43,20 @@
   --color-onboarding-photo: #FAFAFA;
   --color-onboarding: #F0F7FF;
 
+<<<<<<< HEAD
+  --color-landing-shadow: #BDC3FB;
+  --color-landing-back: #C9CEF6;
+  --color-landing-how-it-works: #E1E3F7;
+  --color-landing-how-it-works-step: #3745C3;
+  
+=======
   --color-toast-background: #797979;
   --color-review-rotate: #C7CBEC;
   --color-review-summary: #E3E6FE;
   --color-fitting-company: #767676;
 
 
+>>>>>>> develop
   --shadow-0: 0px 0px 0px rgba(0, 0, 0, 0.05);
   --shadow-2: 0px 2px 2px rgba(0, 0, 0, 0.25);
   --shadow-4: 0px 2px 6px rgba(0, 0, 0, 0.10);
@@ -66,6 +74,16 @@
 	.no-scrollbar::-webkit-scrollbar {
 		display: none; /* Chrome, Safari, Opera */
 	}
+    /* 스크롤은 유지 + 스크롤바만 숨김 */
+  .scrollbar-hide {
+    -ms-overflow-style: none; /* IE, Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none; /* Chrome, Safari */
+  }
+
   .text-bold-24 {
     font-size: 24px;
     font-weight: 700;
@@ -166,18 +184,53 @@
     font-weight: 400;
   }
 
+  .font-anonymous {
+   font-family: "Anonymous Pro", monospace;
+ }
+
+ .font-inter {
+   font-family: "Inter", sans-serif;
+   font-optical-sizing: auto;
+ }
+
+
+.bg-brand-gradient {
+  background: linear-gradient(
+    195deg,
+    var(--color-primary-300) 0%,
+    #f5f7ff 45%,
+    var(--color-primary-600) 100%
+  );
+}
+
+.bg-phone-gradient {
+  background:
+  radial-gradient(
+      farthest-corner circle in oklab,
+      #BDC3FB 10%, #FFFFFF 55%
+    )
+}
+
+.bg-phone-two-gradient {
+  background: linear-gradient(
+    in oklab,
+    #FFFFFF 0%, var(--color-landing-back) 67%
+  )
+}
+
+
+.bg-landing-footer-gradient {
+  background: linear-gradient(
+    to top in oklab,
+    #FFFFFF 60%, 76%, var(--color-landing-how-it-works) 94%
+  )
+}
+
+
   /* =========================
     SWIPER
      ========================= */
   /* 새로운 폰트 추가 */
-   .font-anonymous {
-    font-family: "Anonymous Pro", monospace;
-  }
-
-  .font-inter {
-    font-family: "Inter", sans-serif;
-    font-optical-sizing: auto;
-  }
 
     /* 반응형을 위한 추가 */
 
@@ -222,6 +275,78 @@
 @custom-variant desktop (min-width: var(--breakpoint-desktop));
 
   /* =========================
+    Callout Bracket COMPONENT
+     ========================= */
+  
+  .callout-bracket {
+    position: relative;
+    width: 16px;
+    height: 100%;
+    border-right: 1.5px solid var(--color-primary-600);
+    border-top: 1.5px solid var(--color-primary-600);
+    border-bottom: 1.5px solid var(--color-primary-600);
+    border-radius: 0 4px 4px 0;
+  }
+
+  /* 가로 라인 */
+  .callout-bracket::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 100%;
+    width: 12px;
+    height: 1.5px;
+    background: var(--color-primary-600);
+    transform: translateY(-50%);
+  }
+
+  .callout-bracket-only {
+    position: relative;
+    width: 24px;
+    height: 1.5px;
+    background: var(--color-primary-600);
+    transform: translateY(-50%);
+  }
+
+  /* 점 */
+  .callout-bracket::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: calc(100% + 12px);
+    width: 6px;
+    height: 6px;
+    background: var(--color-primary-600);
+    border-radius: 9999px;
+    transform: translateY(-50%);
+  }
+
+   .callout-bracket-only::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 98%;
+    width: 6px;
+    height: 6px;
+    background: var(--color-primary-600);
+    border-radius: 9999px;
+    transform: translateY(-50%);
+  }
+
+
+  .arrow-text {
+  content: "";
+  display: block;
+  width: 15px;
+  height: 15px;
+  color: var(--color-primary-600);
+  border-left: 4px solid currentColor;
+  border-bottom: 4px solid currentColor;
+  transform: rotate(-45deg);
+  margin: 0 auto 6px;
+}
+
+    /* =========================
     ANIMATION
      ========================= */
 
@@ -245,11 +370,138 @@
     }
   }
 
+  @keyframes fade-in-right {
+    0% {
+        opacity: 0;
+        transform: translate3d(100%, 0, 0);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateZ(0);
+    }
+}
+
+  @-webkit-keyframes fade-in-right {
+      0% {
+          opacity: 0;
+          transform: translate3d(100%, 0, 0);
+      }
+
+      to {
+          opacity: 1;
+          transform: translateZ(0);
+      }
+  }
+
+  @keyframes fade-in-left {
+      0% {
+          opacity: 0;
+          transform: translate3d(-100%, 0, 0);
+      }
+
+      to {
+          opacity: 1;
+          transform: translateZ(0);
+      }
+  }
+
+  @-webkit-keyframes fade-in-left {
+      0% {
+          opacity: 0;
+          transform: translate3d(-100%, 0, 0);
+      }
+
+      to {
+          opacity: 1;
+          transform: translateZ(0);
+      }
+  }
+
+
+  @keyframes infinite-slide-original {
+      0% {
+          transform: translateX(0);
+      }
+
+      50% {
+          transform: translateX(-100%);
+      }
+      50.1% {
+          transform: translateX(100%);
+      }
+      100% {
+          transform: translateX(0);
+      }
+  }
+    @keyframes infinite-slide-copy {
+      0% {
+          transform: translateX(0);
+      }
+      100% {
+          transform: translateX(-200%);
+      }
+  }
+
+      @keyframes infinite-fade {
+      0% {
+            opacity: 0;      
+      }
+      50% {
+            opacity: 1;      
+      }   
+      100% {
+            opacity: 0;      
+      }
+  }
+
+
+
   .animate-frame-in {
     animation: frame-in 1.5s forwards;
+  }
+
+  .animate-infinite-fade {
+    animation: infinite-fade 2s infinite;
   }
   .animate-guide-in {
     animation: guide-in 0.8s ease-out forwards;
   }
+
+  .animate-fade-in-right{
+    position: relative;
+    animation: fade-in-right 3s forwards;
+    -webkit-animation: fade-in-right 3s forwards;
+}
+
+  .animate-fade-in-left {
+    position: relative;
+    animation: fade-in-left 3s forwards;
+    -webkit-animation: fade-in-left 3s forwards;
+}
+
+  .animation-paused {
+    animation-play-state: paused;
+  }
+  
+  .animation-infinite-slide-original {
+    animation: infinite-slide-original 20s linear infinite;
+  }
+  .animation-infinite-slide-copy {
+    animation: infinite-slide-copy 20s linear infinite;
+  }
+
+
+  .animation-infinite-slide-original,
+  .animation-infinite-slide-copy {
+    will-change: transform;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+  .animation-infinite-slide-original,
+  .animation-infinite-slide-copy {
+    animation: none;
+  }
+}
 
 
