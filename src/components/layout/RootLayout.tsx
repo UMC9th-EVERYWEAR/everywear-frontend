@@ -3,7 +3,7 @@ import Header from './Header';
 import { Navbar } from './Navbar';
 import { Modal } from '../common/Modal';
 import { useMemo, useState } from 'react';
-import { hideHeaderPatterns, hideNavPatterns, PATH } from '@/src/constants/path';
+import { fullscreenPatterns, hideHeaderPatterns, hideNavPatterns, PATH } from '@/src/constants/path';
 import { cn } from '@/src/utils/cn';
 
 const RootLayout = () => {
@@ -51,16 +51,17 @@ const RootLayout = () => {
     ['/home'].some((pattern) => matchPath(pattern, pathname)) ||
     pathname === '/';
 
-	/*  isLogin */
-	const isLoginPage = matchPath(PATH.LOGIN.ROOT, pathname);
+	const isFullscreen = fullscreenPatterns.some((path) =>
+		matchPath(path, pathname),
+	)
 
 
 	return (
 		/* 1. h-screen과 overflow-hidden으로 전체 바구니 크기를 화면에 딱 맞춤 */
 		<div className='h-screen w-full bg-gray-50 flex justify-center overflow-hidden'>
 			<div
-				className={cn('flex flex-col w-full  bg-white relative',
-					isLoginPage ? '' : 'max-w-2xl', // 추후에는 모든 페이지로 확장 (반응형)
+				className={cn('flex flex-col w-full h-full bg-white relative',
+					isFullscreen ? '' : 'max-w-2xl ',  // 추후에는 모든 페이지로 확장 (반응형)
 				)}
 			>
 

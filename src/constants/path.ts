@@ -1,25 +1,3 @@
-/**
- * Route Path Map (React Router)
- *
- * /login                 → pages/login/LoginPage.tsx
- * /home                  → pages/home/HomePage.tsx
- *
- * /products              → pages/products/ProductsPage.tsx
- * /products/url          → pages/products/ProductsUrlPage.tsx
- *
- * /recent-fitting        → pages/recent-fitting/RecentFittingPage.tsx
- *
- * /ai-fitting            → pages/ai-fitting/AiFittingPage.tsx
- * /ai-fitting/:id        → pages/ai-fitting/AiFittingDetailPage.tsx
- *
- * /closet                → pages/closet/ClosetPage.tsx
- *
- * /setting               → pages/setting/SettingPage.tsx
- * /setting/logout        → pages/setting/LogoutPage.tsx
- * /setting/withdraw      → pages/setting/WithdrawPage.tsx
- * /setting/change-photo  → pages/setting/ChangePhotoPage.tsx
- */
-
 //  라우트 문자열을 상수로 관리해서 오타/불일치 방지
 //  URL 변경 시 한 곳(PATH)만 수정하면 전체 반영되도록 하기 위함
 //  Link/navigate/route 등록에서 같은 path를 재사용해 일관성 유지
@@ -28,6 +6,7 @@
 
 
 export const PATH = {
+	LANDING: '/',
 	LOGIN: {
 		ROOT: '/login',
 		TERMS: '/login/terms',
@@ -63,12 +42,14 @@ export const PATH = {
 
 /* hideHeaderRoutes: 헤더 숨길 라우트 목록 */
 export const hideHeaderPatterns = [
+	PATH.LANDING,
 	PATH.LOGIN.ROOT,
 	PATH.ONBOARDING.ROOT,
 ];	
 
 /* hideNavRoutes: Nav 숨길 라우트 목록 */ 
 export const hideNavPatterns = [
+	PATH.LANDING,
 	PATH.LOGIN.ROOT,
 	PATH.LOGIN.TERMS,
 	PATH.ONBOARDING.ROOT,
@@ -79,6 +60,11 @@ export const hideNavPatterns = [
 	PATH.SETTING.INQUIRY,
 	PATH.AI_FITTING.DETAIL,
 ];
+/* fullscreenPatterns: 화면을 전체로 사용하는 라우트 */
+export const fullscreenPatterns = [
+	PATH.LOGIN.ROOT,
+	PATH.LANDING,
+]
 
 /*전역에서 사용하는 SVG 아이콘 경로 상수 모음*/
  

@@ -1,4 +1,4 @@
-import arrowRight from '@/public/svgs/arrow-right.svg';
+import arrowRight from '@/public/svgs/setting/arrow-right.svg';
 import { ArrowRightIcon } from './ArrowRightIcon.';
 import ToggleBtn from './ToggleBtn';
 import type { UserResponseSocialTypeEnum } from '@/src/apis/generated';

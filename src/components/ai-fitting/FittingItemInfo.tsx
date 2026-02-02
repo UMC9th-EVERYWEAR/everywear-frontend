@@ -39,7 +39,7 @@ const FittingItemInfo = ({ data, isHearted, handleHeart, handleBuy }: FittingIte
 				<div className='flex flex-col'> 
 					{/* 쇼핑몰 정보 & 별점 */}
 					<div className='flex justify-between items-center'>
-						<p className='text-[#767676] text-regular-12'>{data.company}</p>
+						<p className='text-fitting-company text-regular-12'>{data.company}</p>
 						<div className='flex items-center gap-0.5'>
 							<img
 								className='h-4 w-4'
