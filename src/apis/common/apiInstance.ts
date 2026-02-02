@@ -84,13 +84,13 @@ axiosInstance.interceptors.response.use(
 		const originalRequest : CustomInternalAxiosRequestConfig = error.config;
 
 		if ( !error.response || error.response.status !== 401 || originalRequest._retry) {
-			// window.location.href = '/login';
+			window.location.href = PATH.LOGIN.ROOT;
 			return Promise.reject(error);
 		}
 
 		if (originalRequest.url?.includes('/api/auth/refresh')) {
 			accessTokenStorage.removeItem();
-			window.location.href = '/login';
+			window.location.href = PATH.LOGIN.ROOT;
 			return Promise.reject(error);
 		}
 
