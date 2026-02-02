@@ -1,10 +1,5 @@
-import dummy from '@/public/svgs/setting/dummyphoto.jpeg'
 import checkMarked from '@/public/svgs/onboarding/checkbox-marked.svg';
 import noCheckMarked from '@/public/svgs/onboarding/close-box.svg';
-// import badImg from '@/public/svgs/onboarding/single-bad.svg'
-// import goodImg from '@/public/svgs/onboarding/single-shot.svg'
-
-
 import { cn } from '@/src/utils/cn';
 
 
@@ -33,17 +28,19 @@ interface GuidePhotoProps {
   rule?: PhotoGuideRule;
   variant?: GuideVariant;
 	hasText?: boolean;
+	imageSrc?: string;
 }
 
 const GuidePhoto = ({
 	rule,
 	variant = 'GOOD',
 	hasText = false,
+	imageSrc,
 }: GuidePhotoProps) => {	
 	const message = GUIDE_MESSAGES[rule ?? 'SIMPLE_POSE'][variant];
 	return (
 		<div
-			className={cn(' overflow-hidden rounded-md flex flex-col',
+			className={cn('overflow-hidden rounded-md flex flex-col',
 				hasText ? 'h-50' : 'h-20 w-17',
 			)}
 		>
@@ -54,7 +51,7 @@ const GuidePhoto = ({
 				}
 			>
 				<img
-					src={dummy}
+					src={imageSrc}
 					alt='guide'
 					className="w-full h-full object-cover"
 				/>

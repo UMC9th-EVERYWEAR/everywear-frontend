@@ -63,6 +63,7 @@ export const hideNavPatterns = [
 export const fullscreenPatterns = [
 	PATH.LOGIN.ROOT,
 	PATH.LANDING,
+	PATH.ONBOARDING.ROOT,
 ]
 
 /*전역에서 사용하는 SVG 아이콘 경로 상수 모음*/
