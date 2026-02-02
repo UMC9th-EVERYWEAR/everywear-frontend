@@ -1,5 +1,9 @@
 import { cn } from '@/src/utils/cn';
 
+const VARIANTS = {
+	
+}
+
 interface ButtonLayoutProps {
     className: string;
     content: string;
