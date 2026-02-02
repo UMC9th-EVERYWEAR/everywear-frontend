@@ -27,7 +27,7 @@ let refreshPromise : Promise<string> | null = null;
 
 // storage 타입만 바꿔주면 local / session 자동 전환
 // 액세스토큰 스토리지 미리 지정
-const accessTokenStorage = createStorage<string>(
+export const accessTokenStorage = createStorage<string>(
 	STORAGE_KEY.accessToken,
 	TOKEN_STORAGE_TYPE,
 );
