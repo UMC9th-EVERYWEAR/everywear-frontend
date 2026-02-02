@@ -1,45 +1,9 @@
-import { refreshToken } from '@/src/apis/domain';
-import { PATH } from '@/src/constants/path';
-import { useAuthStore } from '@/src/store/use-auth-store';
-import { useEffect } from 'react';
-import { useNavigate } from 'react-router';
+
+import { useMe } from '@/src/hooks/service/auth/useMe';
+
 
 const OAuthCallbackPage = () => {
-	const navigate = useNavigate();
-	const login = useAuthStore((state)=> state.login)
-
-
-	useEffect(() => {
-		const run = async () => {
-			try {
-				// 1. 쿠키 기반 accessToken 재발급
-				const accessToken = await refreshToken();
-
-				if (!accessToken) {
-					throw new Error('accessToken 발급 실패');
-				}
-
-				// 2.  Zustand에 accessToken 저장
-				login(
-					{
-						id: 'temp',      // 다음 단계에서 /me로 교체
-						name: '사용자',
-						email: '',
-					},
-					accessToken,
-					true,
-				);
-
-				// 3. 약관 / 로그인 페이지으로 이동
-				navigate(PATH.LOGIN.TERMS, { replace: true });
-			} catch (e) {
-				console.error('OAuth 콜백 처리 실패', e);
-				navigate(PATH.LOGIN.ROOT, { replace: true });
-			}
-		};
-
-		run();
-	}, [login, navigate]);
+	useMe();
 	return <div>로그인 처리 중입니다...</div>;
 };
 

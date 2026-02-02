@@ -11,21 +11,6 @@ export const useMe = () => {
 		queryFn: async () => {
 			const me = await getMyInfo();
 
-			// export interface UserResponse {
-			//   /** @format int64 */
-			//   userId?: number;
-			//   name?: string;
-			//   email?: string;
-			//   socialType?: UserResponseSocialTypeEnum;
-			//   isActive?: UserResponseIsActiveEnum;
-			//   isAgreed?: boolean;
-			//   alarmOnoff?: boolean;
-			//   /** @format date-time */
-			//   createdAt?: string;
-			//   /** @format date-time */
-			//   updatedAt?: string;
-			// }
-
 			// 서버에서 받은 진짜 유저 정보로 Zustand 갱신
 			login(
 				{
@@ -36,11 +21,7 @@ export const useMe = () => {
         accessToken!,
         true,
 			);
-
 			return me;
 		},
-		enabled: !!accessToken, // ✅ accessToken 있을 때만 호출
-		staleTime: 1000 * 60 * 5, // 5분
-		retry: false,
 	});
 };
