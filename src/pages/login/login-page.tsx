@@ -1,19 +1,25 @@
 import logo from '@/public/svgs/LogoImages/Everywear.svg'
-import LoginBtn, { type LoginType } from '@/src/components/login/LoginBtn'
+import LoginBtn from '@/src/components/login/LoginBtn'
 import { ENV_CONFIG } from '@/src/constants/config';
+import { PATH } from '@/src/constants/path';
+import { useNavigate } from 'react-router';
+export type LoginType = keyof typeof OAUTH_AUTHORIZATION_PATH;
+
+const OAUTH_AUTHORIZATION_PATH = {
+	KAKAO: '/oauth2/authorization/kakao',
+	GOOGLE: '/oauth2/authorization/google',
+} as const;
+
 
 const LoginPage = () => {
+	const navigate = useNavigate();
 
 	const handleLogin = (type:LoginType ) => {
-		if(type === 'KAKAO'){
-			window.location.href = `${ENV_CONFIG.SERVER.API_URL}/oauth2/authorization/kakao`;
-		
-		}if(type === 'GOOGLE'){
-			window.location.href = `${ENV_CONFIG.SERVER.API_URL}/oauth2/authorization/google`;
-		}
+		const path = OAUTH_AUTHORIZATION_PATH[type];
+		window.location.href = `${ENV_CONFIG.SERVER.SERVER_API_URL}${path}`;
 		
 		// TODO: 로그인 후 약관 or 홈페이지 이동 구현
-		// navigate(PATH.LOGIN.CALLBACK);
+		navigate(PATH.LOGIN.CALLBACK);
 
 	}
 

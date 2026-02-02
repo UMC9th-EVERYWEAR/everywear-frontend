@@ -1,9 +1,9 @@
 
-import { useMe } from '@/src/hooks/service/auth/useMe';
+import { useLogin } from '@/src/hooks/service/auth/useLogin';
 
 
 const OAuthCallbackPage = () => {
-	useMe();
+	useLogin();
 	return <div>로그인 처리 중입니다...</div>;
 };
 

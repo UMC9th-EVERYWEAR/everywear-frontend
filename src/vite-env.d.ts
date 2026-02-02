@@ -18,6 +18,7 @@ interface ImportMetaEnv {
 
   readonly VITE_IMGBB_API_KEY: string;
   readonly VITE_SERVER_API_URL: string;
+  readonly VITE_KAKAO_LOCAL_REDIRECT_URI: string;
 }
 
 interface ImportMeta {

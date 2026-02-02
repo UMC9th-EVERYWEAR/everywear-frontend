@@ -78,5 +78,4 @@ export const protectedRoutes = [
 		path: PATH.LOGIN.CALLBACK,
 		Component: OAuthCallbackPage,
 	},
-
 ];

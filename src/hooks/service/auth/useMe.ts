@@ -1,27 +1,13 @@
 import { useQuery } from '@tanstack/react-query';
 import { getMyInfo } from '@/src/apis/domain/user';
-import { useAuthStore } from '@/src/store/use-auth-store';
 
-export const useMe = () => {
-	const accessToken = useAuthStore((state) => state.accessToken);
-	const login = useAuthStore((state) => state.login);
-
+export const useMe = (enabled: boolean = true) => {
 	return useQuery({
 		queryKey: ['me'],
-		queryFn: async () => {
-			const me = await getMyInfo();
-
-			// 서버에서 받은 진짜 유저 정보로 Zustand 갱신
-			login(
-				{
-					id: me?.userId ?? 0,
-					name: me?.name ?? '',
-					email: me?.email ?? '',
-				},
-        accessToken!,
-        true,
-			);
-			return me;
-		},
+		queryFn: getMyInfo,
+		staleTime: 5 * 60 * 1000, // 5분간 데이터를 fresh로 유지
+		gcTime: 10 * 60 * 1000, // 10분간 캐시 유지
+		retry: 1, // 인증 실패 시 재시도 횟수 제한
+		enabled, // 조건부 활성화
 	});
 };

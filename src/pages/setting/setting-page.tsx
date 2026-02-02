@@ -61,13 +61,13 @@ const SettingPage = () => {
 					onToggle={toggleNotification}
 				/>
 				<SupportSection
-					onInquiry={() => navigate(PATH.SETTING.INQUIRY)}
+					onInquiry={goInquiry}
 				/>
 			</div>
 		</div>
 
 		<FooterActions
-			onLogout={goInquiry}
+			onLogout={() => setOpenLogoutSetting(true)}
 			onWithdraw={goWithdraw}
 		/>
 

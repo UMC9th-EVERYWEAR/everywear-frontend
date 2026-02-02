@@ -2,7 +2,9 @@ import logo from '@/public/svgs/LogoImages/Everywear.svg'
 import Button from '@/src/components/common/Button';
 import TermsCheckBox, { type TermsCheckedState, type TermType } from '@/src/components/login/TermsCheckBox'
 import  { TERMS_LINK } from '@/src/constants/link';
+import { PATH } from '@/src/constants/path';
 import { useState } from 'react';
+import { useNavigate } from 'react-router';
 
 const TERMS_CONFIG: Record<TermType, { label: string; url: string }> = {
 	SERVICE: { label: '서비스 이용약관 동의', url: TERMS_LINK.SERVICE_TERMS.url },
@@ -12,6 +14,7 @@ const TERMS_CONFIG: Record<TermType, { label: string; url: string }> = {
 };
 
 const LoginTermsPage = () => {
+	const navigate = useNavigate();
 
 	const [checked, setChecked] = useState<TermsCheckedState>({
 		SERVICE: false,
@@ -88,7 +91,7 @@ const LoginTermsPage = () => {
 			>
 				<Button
 					disabled={!isAllChecked}
-					// onClick={()=>navigate(PATH.ONBOARDING.ROOT)}
+					onClick={()=>navigate(PATH.ONBOARDING.ROOT)}
 				>로그인하기</Button>
 			</div>
 

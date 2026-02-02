@@ -31,7 +31,7 @@ export const PATH = {
 	LOGIN: {
 		ROOT: '/login',
 		TERMS: '/login/terms',
-		CALLBACK: '/login/oauth-callback',
+		CALLBACK: '/undefined/oauth2/authorization/kakao',
 	},
 	ONBOARDING:{
 		ROOT: '/onboarding',

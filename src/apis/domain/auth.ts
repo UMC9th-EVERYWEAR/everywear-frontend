@@ -6,7 +6,7 @@ export const refreshToken = async () => {
 	return data.result?.accessToken;
 };
 
-export const logout = async () => {
+export const userLogout = async () => {
 	await apiClient.logout();
 };
 
