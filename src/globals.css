@@ -43,20 +43,17 @@
   --color-onboarding-photo: #FAFAFA;
   --color-onboarding: #F0F7FF;
 
-<<<<<<< HEAD
   --color-landing-shadow: #BDC3FB;
   --color-landing-back: #C9CEF6;
   --color-landing-how-it-works: #E1E3F7;
   --color-landing-how-it-works-step: #3745C3;
   
-=======
   --color-toast-background: #797979;
   --color-review-rotate: #C7CBEC;
   --color-review-summary: #E3E6FE;
   --color-fitting-company: #767676;
 
 
->>>>>>> develop
   --shadow-0: 0px 0px 0px rgba(0, 0, 0, 0.05);
   --shadow-2: 0px 2px 2px rgba(0, 0, 0, 0.25);
   --shadow-4: 0px 2px 6px rgba(0, 0, 0, 0.10);
@@ -74,6 +71,11 @@
 	.no-scrollbar::-webkit-scrollbar {
 		display: none; /* Chrome, Safari, Opera */
 	}
+
+  .text-not-found {
+    font-size: 60px;
+    font-weight: 700;
+  }
     /* 스크롤은 유지 + 스크롤바만 숨김 */
   .scrollbar-hide {
     -ms-overflow-style: none; /* IE, Edge */
@@ -370,6 +372,16 @@
     }
   }
 
+
+@keyframes clothes-motion {
+  0% {margin-top: 0px;}
+	20% {margin-top: 10px;}
+	40% {margin-top: 0px;}
+	60% {margin-top: 10px;}
+	80% {margin-top: 0px;}
+	100% {margin-top: 0px;}
+}
+
   @keyframes fade-in-right {
     0% {
         opacity: 0;
@@ -468,6 +480,9 @@
     animation: guide-in 0.8s ease-out forwards;
   }
 
+ .animate-clothes-motion  {
+    animation: clothes-motion  1.3s linear 0s infinite;
+  }
   .animate-fade-in-right{
     position: relative;
     animation: fade-in-right 3s forwards;
