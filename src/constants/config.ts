@@ -16,9 +16,8 @@ export const ENV_CONFIG = {
 
 	SERVER: {
 		API_URL: import.meta.env.VITE_LOCAL_API_BASE_URL as string,
-		SERVER_API_URL: import.meta.env.VITE_SERVER_API_URL as string,
+		BASE_URL: import.meta.env.VITE_SERVER_API_URL as string,
 		DEV_ACCESS_TOKEN: import.meta.env.VITE_DEV_ACCESS_TOKEN as string,
-		KAKAO_LOCAL_REDIRECT_URI: import.meta.env.VITE_KAKAO_LOCAL_REDIRECT_URI as string,
 	},
 
 } as const;
