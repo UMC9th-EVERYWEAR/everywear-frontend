@@ -58,10 +58,6 @@ export const protectedRoutes = [
 		Component: AiFittingPage,
 	},
 	{
-		path: PATH.LOGIN.TERMS,
-		Component: LoginTermsPage,
-	},
-	{
 		path: PATH.CLOSET,
 		Component: ClosetPage,
 	},
@@ -73,7 +69,5 @@ export const protectedRoutes = [
 		path: PATH.PRODUCTS.ADD,
 		Component: ProductsAddPage,
 	},
-	// 필요하면 계속 추가
-	// { path: PATH.CLOSET, Component: ClosetPage },
-	// { path: PATH.PRODUCTS.ROOT, Component: ProductsPage },
+
 ];

@@ -2,7 +2,10 @@ import logo from '@/public/svgs/LogoImages/Everywear.svg'
 import Button from '@/src/components/common/Button';
 import TermsCheckBox, { type TermsCheckedState, type TermType } from '@/src/components/login/TermsCheckBox'
 import  { TERMS_LINK } from '@/src/constants/link';
+import { PATH } from '@/src/constants/path';
+import { useLogin } from '@/src/hooks/service/auth/useLogin';
 import { useState } from 'react';
+import { useNavigate } from 'react-router';
 
 const TERMS_CONFIG: Record<TermType, { label: string; url: string }> = {
 	SERVICE: { label: '서비스 이용약관 동의', url: TERMS_LINK.SERVICE_TERMS.url },
@@ -12,6 +15,7 @@ const TERMS_CONFIG: Record<TermType, { label: string; url: string }> = {
 };
 
 const LoginTermsPage = () => {
+	const navigate = useNavigate();
 
 	const [checked, setChecked] = useState<TermsCheckedState>({
 		SERVICE: false,
@@ -43,6 +47,17 @@ const LoginTermsPage = () => {
 		}));
 	};
 
+	const { mutate: login, isPending: loginPending, isError } = useLogin();
+
+	const handleLogin = () => {
+		login(undefined, {
+			onSuccess: () => {
+				navigate(PATH.ONBOARDING.ROOT);
+			},
+		});
+	};
+
+	if(isError) navigate(PATH.LOGIN.ROOT)
 
 	return(
 		<div className='w-full flex flex-col items-center pt-32 gap-13'>
@@ -87,8 +102,8 @@ const LoginTermsPage = () => {
   `}
 			>
 				<Button
-					disabled={!isAllChecked}
-					// onClick={()=>navigate(PATH.ONBOARDING.ROOT)}
+					disabled={!isAllChecked || loginPending}
+					onClick={handleLogin}
 				>로그인하기</Button>
 			</div>
 

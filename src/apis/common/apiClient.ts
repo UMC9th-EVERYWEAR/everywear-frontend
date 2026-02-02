@@ -1,12 +1,8 @@
 
 import { Api } from '@/src/apis/generated';
-import { ENV_CONFIG } from '@/src/constants/config';
 import { axiosInstance } from './apiInstance';
 
-export const apiClient = new Api({
-	baseURL: ENV_CONFIG.SERVER.API_URL,
-	withCredentials: true,
-});
+export const apiClient = new Api();
 
 
 apiClient.instance = axiosInstance;

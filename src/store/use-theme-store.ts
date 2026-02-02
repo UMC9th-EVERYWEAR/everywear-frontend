@@ -18,19 +18,19 @@ interface ThemeState {
  * - 재방문 시에도 이전 설정을 그대로 유지합니다.
  */
 export const useThemeStore = create<ThemeState>()(
-   persist(
-      (set) => ({
-         // 기본값: 라이트 모드
-         theme: 'light', 
+	persist(
+		(set) => ({
+			// 기본값: 라이트 모드
+			theme: 'light', 
 
-         // 테마 전환 로직: light ↔ dark 스위칭
-         toggleTheme: () =>
-            set((state) => ({
-               theme: state.theme === 'light' ? 'dark' : 'light',
-            })),
-      }),
-      {
-         name: STORAGE_KEYS.THEME, // 피드백 반영: 외부 상수 파일의 키 사용
-      }
-   )
+			// 테마 전환 로직: light ↔ dark 스위칭
+			toggleTheme: () =>
+				set((state) => ({
+					theme: state.theme === 'light' ? 'dark' : 'light',
+				})),
+		}),
+		{
+			name: STORAGE_KEYS.THEME, // 피드백 반영: 외부 상수 파일의 키 사용
+		},
+	),
 );

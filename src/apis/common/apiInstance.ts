@@ -27,7 +27,7 @@ let refreshPromise : Promise<string> | null = null;
 
 // storage 타입만 바꿔주면 local / session 자동 전환
 // 액세스토큰 스토리지 미리 지정
-const accessTokenStorage = createStorage<string>(
+export const accessTokenStorage = createStorage<string>(
 	STORAGE_KEY.accessToken,
 	TOKEN_STORAGE_TYPE,
 );
@@ -58,13 +58,16 @@ export const axiosInstance = axios.create({
 
 axiosInstance.interceptors.request.use(
 	(config) => {
+		 console.log(
+      `🌐 API 요청: ${config.method?.toUpperCase()} ${config.url}`);
 		// 리프레시 요청에는 Autorization 헤더를 넣지 않도록 제어 => 헤더 제어
 		if (config.url?.includes('/api/auth/refresh')) {
 			return config;
 		}
 
-		const accessToken = accessTokenStorage.getItem();
-
+		// const accessToken = accessTokenStorage.getItem(); // ⭐️ 배포한 후 나중에 이 부분 꼭 바꾸기
+		const accessToken = ENV_CONFIG.isDev ?  ENV_CONFIG.SERVER.DEV_ACCESS_TOKEN : accessTokenStorage.getItem()
+		
 		// AccessToken이 있을 때만 헤더 주입
 		if (accessToken) {
 			config.headers.Authorization = `Bearer ${accessToken}`;
@@ -81,12 +84,13 @@ axiosInstance.interceptors.response.use(
 		const originalRequest : CustomInternalAxiosRequestConfig = error.config;
 
 		if ( !error.response || error.response.status !== 401 || originalRequest._retry) {
+			window.location.href = PATH.LOGIN.ROOT;
 			return Promise.reject(error);
 		}
 
 		if (originalRequest.url?.includes('/api/auth/refresh')) {
 			accessTokenStorage.removeItem();
-			window.location.href = '/login';
+			window.location.href = PATH.LOGIN.ROOT;
 			return Promise.reject(error);
 		}
 
