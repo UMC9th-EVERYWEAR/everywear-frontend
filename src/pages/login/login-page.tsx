@@ -1,24 +1,19 @@
 import logo from '@/public/svgs/LogoImages/Everywear.svg'
 import LoginBtn, { type LoginType } from '@/src/components/login/LoginBtn'
-import { PATH } from '@/src/constants/path';
-import { useNavigate } from 'react-router';
+import { ENV_CONFIG } from '@/src/constants/config';
 
 const LoginPage = () => {
 
-	const navigate = useNavigate();
-
 	const handleLogin = (type:LoginType ) => {
 		if(type === 'KAKAO'){
-			console.log('kakaologin')
-			// TODO: kakaologin 구현
-			
+			window.location.href = `${ENV_CONFIG.SERVER.API_URL}/oauth2/authorization/kakao`;
+		
 		}if(type === 'GOOGLE'){
-			console.log('googlelogin')
-			// TODO: googlelogin 구현
+			window.location.href = `${ENV_CONFIG.SERVER.API_URL}/oauth2/authorization/google`;
 		}
 		
 		// TODO: 로그인 후 약관 or 홈페이지 이동 구현
-		navigate(PATH.LOGIN.TERMS);
+		// navigate(PATH.LOGIN.CALLBACK);
 
 	}
 

@@ -12,6 +12,7 @@ import OnBoardingPhotoPage from '@/src/pages/onboarding/onboarding-photo-page';
 import Home from '@/src/pages/Home';
 import ProductsPage from '@/src/pages/products/products/products-page';
 import ProductsAddPage from '@/src/pages/products/add/products-add-page';
+import OAuthCallbackPage from '@/src/pages/login/login-callback-page';
 
 /*
  * protectedRoutes
@@ -73,7 +74,9 @@ export const protectedRoutes = [
 		path: PATH.PRODUCTS.ADD,
 		Component: ProductsAddPage,
 	},
-	// 필요하면 계속 추가
-	// { path: PATH.CLOSET, Component: ClosetPage },
-	// { path: PATH.PRODUCTS.ROOT, Component: ProductsPage },
+	{
+		path: PATH.LOGIN.CALLBACK,
+		Component: OAuthCallbackPage,
+	},
+
 ];
