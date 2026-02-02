@@ -19,7 +19,7 @@ const LoginPage = () => {
 		window.location.href = `${ENV_CONFIG.SERVER.BASE_URL}${path}`;
 		
 		// TODO: 로그인 후 약관 or 홈페이지 이동 구현
-		navigate(PATH.LOGIN.CALLBACK);
+		navigate(PATH.LOGIN.TERMS);
 
 	}
 

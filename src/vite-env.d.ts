@@ -11,6 +11,10 @@ declare module 'swiper/react'
 declare module 'swiper/modules'
 
 interface ImportMetaEnv {
+  readonly MODE: 'development' | 'production' | string;
+  readonly DEV: boolean;
+  readonly PROD: boolean;
+
 
   readonly VITE_EMAILJS_SERVICE_ID: string;
   readonly VITE_EMAILJS_TEMPLATE_ID: string;
@@ -18,6 +22,11 @@ interface ImportMetaEnv {
 
   readonly VITE_IMGBB_API_KEY: string;
   readonly VITE_SERVER_API_URL: string;
+  readonly VITE_LOCAL_API_BASE_URL: string;
+  readonly VITE_DEV_ACCESS_TOKEN: string;
+
+  
+
 }
 
 interface ImportMeta {

@@ -2,6 +2,10 @@
 // import.meta.env를 여기저기서 직접 쓰지 않기 위해
 
 export const ENV_CONFIG = {
+	MODE: import.meta.env.MODE,
+	isDev: import.meta.env.DEV,
+	isProd: import.meta.env.PROD,
+
 	// EmailJS
 	EMAILJS: {
 		SERVICE_ID: import.meta.env.VITE_EMAILJS_SERVICE_ID as string,

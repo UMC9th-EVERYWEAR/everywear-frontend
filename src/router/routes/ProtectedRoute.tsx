@@ -1,16 +1,22 @@
 import { Navigate, Outlet } from 'react-router';
 import { PATH } from '../../constants/path';
+import { useMe } from '@/src/hooks/service/auth/useMe';
 /*
  * 인증이 필요한 라우트를 감싸는 Guard 컴포넌트
  * 인증 안 된 경우 login으로 보내고, 인증 된 경우 Outlet으로 자식 라우트 렌더
  */
 export default function ProtectedRoute() {
 	// TODO: Api 연결 시에는 apiclient에서 인증 상태를 확인하도록 변경
-	const isAuthed = true; // 임시: 항상 인증된 상태로 가정
+	const { data, isLoading, isError } = useMe();
+	
+	if (isLoading) {
+		return null; // 애니메이션 구현
+	}
 
-	if (!isAuthed) {
+	// 인증 실패 (401)
+	if (isError || !data) {
 		return <Navigate
-			to={PATH.LOGIN}
+			to={PATH.LOGIN.ROOT}
 			replace
 		       />;
 	}

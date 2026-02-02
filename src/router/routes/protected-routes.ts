@@ -12,7 +12,6 @@ import OnBoardingPhotoPage from '@/src/pages/onboarding/onboarding-photo-page';
 import Home from '@/src/pages/Home';
 import ProductsPage from '@/src/pages/products/products/products-page';
 import ProductsAddPage from '@/src/pages/products/add/products-add-page';
-import OAuthCallbackPage from '@/src/pages/login/login-callback-page';
 
 /*
  * protectedRoutes
@@ -59,10 +58,6 @@ export const protectedRoutes = [
 		Component: AiFittingPage,
 	},
 	{
-		path: PATH.LOGIN.TERMS,
-		Component: LoginTermsPage,
-	},
-	{
 		path: PATH.CLOSET,
 		Component: ClosetPage,
 	},
@@ -74,8 +69,5 @@ export const protectedRoutes = [
 		path: PATH.PRODUCTS.ADD,
 		Component: ProductsAddPage,
 	},
-	{
-		path: PATH.LOGIN.CALLBACK,
-		Component: OAuthCallbackPage,
-	},
+
 ];

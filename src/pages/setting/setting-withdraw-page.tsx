@@ -6,12 +6,18 @@ import completeCheck from '@/public/svgs/complete-check.svg'
 
 import Button from '@/src/components/common/Button';
 import { Modal } from '@/src/components/common/Modal';
+import { useMe } from '@/src/hooks/service/auth/useMe';
 import { useWithdraw } from '@/src/hooks/service/auth/useWithdraw';
 import { useState } from 'react';
 const SettingWithdraw = () => {
 	const [isConfirmed, setIsConfirmed] = useState(false);
 	const [openWithdraw, setOpenWithdraw] = useState(false)
 	const { withdraw, isLoading : withdrawLoading } = useWithdraw();
+	const { data, isLoading: meLoading } = useMe();
+
+	if(meLoading) 	{
+		return <>로딩</>
+	}
 
 	const handleWithdraw = async () => {
 		if (withdrawLoading) return;
@@ -29,12 +35,11 @@ const SettingWithdraw = () => {
 		setIsConfirmed((prev)=> !prev)
 	}
 
-	const userName = '홍길동'; // TODO: 나중엔 데이터로 가져옴
 	return <div className='mx-4 mt-3.5 text-neutral-900 h-screen overflow-hidden flex flex-col items-center'>
 		<div className='w-full flex-1 flex flex-col items-center'>
 
 
-			<div className='text-medium-16 mb-5 w-75'>{userName}님, 탈퇴하기 전에 꼭 확인해주세요</div>
+			<div className='text-medium-16 mb-5 w-75'>{data?.name}님, 탈퇴하기 전에 꼭 확인해주세요</div>
 			<div className=" border border-primary-300 py-4 px-2.5  rounded-lg flex items-start gap-3 w-75">
 				<img
 					src={blueCheck}
@@ -42,7 +47,7 @@ const SettingWithdraw = () => {
 				/>
 				<div className='text-regular-14'>
 					<p>찜한 상품, 상품 정보 등</p>
-					<p>{userName}님 소중한 기록이 모두 사라져요</p>
+					<p>{data?.name}님 소중한 기록이 모두 사라져요</p>
 					<p className="text-[#6E6E6E] text-regular-12">탈퇴하면 되돌릴 수 없어요</p>
 				</div>
 			</div>

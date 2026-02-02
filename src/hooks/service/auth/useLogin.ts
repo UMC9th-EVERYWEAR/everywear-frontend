@@ -1,20 +1,16 @@
-import { useQuery } from '@tanstack/react-query';
+import { useMutation } from '@tanstack/react-query';
 import { getMyInfo } from '@/src/apis/domain/user';
 import { useAuthStore } from '@/src/store/use-auth-store';
-import { useNavigate } from 'react-router';
-import { PATH } from '@/src/constants/path';
+import { ENV_CONFIG } from '@/src/constants/config';
+
 
 export const useLogin = () => {
-	const accessToken = useAuthStore((state) => state.accessToken);
 	const login = useAuthStore((state) => state.login);
-	const navigate = useNavigate();
+	const accessToken = useAuthStore((state) => state.accessToken);
 
-	return useQuery({
-		queryKey: ['me'], //TODO: 쿼리 수정
-		queryFn: async () => {
-			const me = await getMyInfo();
-
-			// 서버에서 받은 진짜 유저 정보로 Zustand 갱신
+	return useMutation({
+		mutationFn: getMyInfo, // 로그인 직후 /me 확인
+		onSuccess: (me) => {
 			login(
 				{
 					id: me?.userId ?? 0,
@@ -24,8 +20,15 @@ export const useLogin = () => {
         accessToken!,
         true,
 			);
-			navigate(PATH.LOGIN.TERMS)
-			return me;
+
+			if (ENV_CONFIG.isDev) {
+				console.log('[DEV] login success 💻', me);
+			}
+
+			//  배포 모드 전용 로직
+			if (ENV_CONFIG.isProd) {
+				console.log('[Prod] login success 🚀', me);
+			}
 		},
 	});
 };
