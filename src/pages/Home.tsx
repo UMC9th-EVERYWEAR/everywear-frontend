@@ -9,6 +9,7 @@ import RectangleIcon from '@/public/svgs/LogoImages/Rectangle.svg';
 import EllipseIcon from '@/public/svgs/LogoImages/Ellipse.svg';     
 import { MALL_LINKS } from '../constants/link';
 
+
 const products = [
 	{ id: 1, company: '무신사', name: '오버핏 후드티', price: 39000, rating: 4.5, imageUrl: 'https://via.placeholder.com/300' },
 	{ id: 2, company: '지그재그', name: '와이드 슬랙스', price: 49000, rating: 4.2, imageUrl: 'https://via.placeholder.com/300' },
