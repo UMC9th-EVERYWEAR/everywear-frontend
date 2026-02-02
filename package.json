@@ -46,6 +46,7 @@
     "globals": "^16.5.0",
     "lefthook": "^2.0.15",
     "swagger-typescript-api": "^13.2.16",
+    "tailwindcss-animate": "^1.0.7",
     "typescript": "~5.9.3",
     "typescript-eslint": "^8.46.4",
     "vite": "^7.2.4",

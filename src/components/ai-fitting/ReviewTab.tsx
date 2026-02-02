@@ -51,7 +51,7 @@ const ReviewTab = ({ state, handleStartReview }: ReviewTabProps) => {
 			<div className='w-full'>
                 
 				{/* AI 리뷰 요약 */}
-				<div className='bg-[#E3E6FE] border border-none rounded-xl px-2.5 py-1.5 flex flex-col gap-1'>
+				<div className='bg-review-summary border border-none rounded-xl px-2.5 py-1.5 flex flex-col gap-1'>
 					<span className='text-bold-16 text-primary-600'>AI 리뷰 요약</span>
                     
 					{/* 로딩 표시 */}
@@ -126,7 +126,7 @@ const ReviewTab = ({ state, handleStartReview }: ReviewTabProps) => {
 						</div>
 					)}
 
-					{isGlobalSuccess && state.reviews.length > 0 ? (
+					{isGlobalSuccess && (state.reviews.length > 0 ? (
 						state.reviews.map((review) => (
 							<ReviewCard
 								key={review.id}
@@ -134,12 +134,12 @@ const ReviewTab = ({ state, handleStartReview }: ReviewTabProps) => {
 							/>
 						))
 					) : (
-						isGlobalSuccess && (
-							<div className='py-4 text-center text-neutral-400 text-sm'>
-								리뷰가 없습니다.
-							</div>
-						)
-					)}
+						
+						<div className='py-4 text-center text-neutral-400 text-sm'>
+							리뷰가 없습니다.
+						</div>
+						
+					))}
 				</div>
 			</div>
 		</div>
