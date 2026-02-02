@@ -21,6 +21,7 @@ export default defineConfig(({ mode }) => {
 						target: 'http://dev-app-alb-160354142.ap-northeast-2.elb.amazonaws.com',
 						changeOrigin: true,
 						secure: false,
+						ws: false,
 					},
 				},
 

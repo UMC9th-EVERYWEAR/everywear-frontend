@@ -2,7 +2,6 @@ import { UserResponseSocialTypeEnum } from '@/src/apis/generated';
 import AccountSection from '@/src/components/setting/setting/AccountSection';
 import FooterActions from '@/src/components/setting/setting/FooterActions';
 import LogoutModal from '@/src/components/setting/setting/LogooutModal';
-import NotificationSection from '@/src/components/setting/setting/Notification';
 import SupportSection from '@/src/components/setting/setting/SupportSection';
 import  { PATH } from '@/src/constants/path';
 import { useMe } from '@/src/hooks/service/auth/useMe';
@@ -47,11 +46,6 @@ const SettingPage = () => {
 					toggleLoginSetting={toggleLoginSetting}
 					socialType={socialLogin ?? 'KAKAO'}
 					onChangePhoto={goChangePhoto}
-				/>
-				
-				<NotificationSection
-					enabled={isNotificationEnabled}
-					onToggle={toggleNotification}
 				/>
 				<SupportSection
 					onInquiry={goInquiry}
