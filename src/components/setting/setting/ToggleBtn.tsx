@@ -2,7 +2,7 @@ import { cn } from '@/src/utils/cn';
 
 interface ToggleProps {
   checked: boolean;
-  onChange: () => void;
+  onChange?: () => void;
   className?: string;
   disabled?: boolean;
   srLabel?: string; // 접근성 label (screen reader)

@@ -242,11 +242,10 @@
     }
   }
 
+
   .animate-frame-in {
     animation: frame-in 1.5s forwards;
   }
   .animate-guide-in {
     animation: guide-in 0.8s ease-out forwards;
   }
-
-
