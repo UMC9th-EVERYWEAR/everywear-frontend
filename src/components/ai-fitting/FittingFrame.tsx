@@ -30,7 +30,7 @@ const FittingFrame = ({ type = 'BEFORE', imgUrl, state }: FittingFrameProps) => 
 			}
 
 			{/* 이미지 본문 */}
-			<div className="w-full border rounded-xl flex flex-col justify-center items-center overflow-hidden gap-2">
+			<div className="w-full border-none rounded-xl flex flex-col justify-center items-center overflow-hidden gap-2">
 				{state.status === 'loading' && type === 'AFTER' ? (
 					<div className="flex flex-col justify-center items-center gap-4 h-121">
 						<span className="text-regular-16 text-neutral-900">
