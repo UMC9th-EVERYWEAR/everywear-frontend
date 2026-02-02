@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@plugin "tailwindcss-animate";
 
 
 
@@ -12,10 +13,7 @@
     scrollbar-gutter: stable;
   }
 }
-.text-bold-24 {
-  font-size: 24px;
-  font-weight: 700;
-}
+
 
 @theme {
   --breakpoint-*: initial;
@@ -45,12 +43,22 @@
   --color-onboarding-photo: #FAFAFA;
   --color-onboarding: #F0F7FF;
 
+<<<<<<< HEAD
   --color-landing-shadow: #BDC3FB;
   --color-landing-back: #C9CEF6;
   --color-landing-how-it-works: #E1E3F7;
   --color-landing-how-it-works-step: #3745C3;
   
+=======
+  --color-toast-background: #797979;
+  --color-review-rotate: #C7CBEC;
+  --color-review-summary: #E3E6FE;
+  --color-fitting-company: #767676;
+
+
+>>>>>>> develop
   --shadow-0: 0px 0px 0px rgba(0, 0, 0, 0.05);
+  --shadow-2: 0px 2px 2px rgba(0, 0, 0, 0.25);
   --shadow-4: 0px 2px 6px rgba(0, 0, 0, 0.10);
   --shadow-8: 0px 2px 5px rgba(0, 0, 0, 0.15);
   --shadow-12: 0px 0px 8px rgba(0, 0, 0, 0.15);
@@ -116,6 +124,10 @@
     font-weight: 600;
   }
 
+  .text-semibold-14 {
+    font-size: 14px;
+    font-weight: 600;
+  }
 
   .text-medium-20 {
     font-size: 20px;
@@ -143,7 +155,7 @@
   }
 
   .text-medium-10 {
-    font-size: 12px;
+    font-size: 10px;
     font-weight: 500;
   }
 
