@@ -2,7 +2,7 @@ import { Modal } from '@/src/components/common/Modal';
 import Banner from '@/src/components/setting/setting-photo/Banners';
 import CheckItem from '@/src/components/setting/setting-photo/CheckItem';
 import InfoBox from '@/src/components/setting/setting-photo/InfoBox';
-import dummy from '@/public/svgs/dummyphoto.jpeg';
+import dummy from '@/public/svgs/setting/dummyphoto.jpeg';
 
 import type { PhotoItem } from '@/src/types/schemas/setting/setting-photo';
 import { useState } from 'react';

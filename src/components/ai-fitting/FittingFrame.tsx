@@ -13,7 +13,7 @@ interface FittingFrameProps {
 const FittingFrame = ({ type = 'BEFORE', imgUrl, state }: FittingFrameProps) => {
 	return (
 		<div
-			className="w-full px-2.5 py-4 border rounded-xl border-solid border-neutral-200 
+			className="w-full px-2.5 py-4 border rounded-xl border-neutral-200 
 		 flex flex-col bg-white items-center gap-2"
 		>
 			{state.status !== 'idle' && 
@@ -30,7 +30,7 @@ const FittingFrame = ({ type = 'BEFORE', imgUrl, state }: FittingFrameProps) => 
 			}
 
 			{/* 이미지 본문 */}
-			<div className="w-full border border-none rounded-xl flex flex-col justify-center items-center overflow-hidden gap-2">
+			<div className="w-full border-none rounded-xl flex flex-col justify-center items-center overflow-hidden gap-2">
 				{state.status === 'loading' && type === 'AFTER' ? (
 					<div className="flex flex-col justify-center items-center gap-4 h-121">
 						<span className="text-regular-16 text-neutral-900">
@@ -56,7 +56,7 @@ const FittingFrame = ({ type = 'BEFORE', imgUrl, state }: FittingFrameProps) => 
 				{state.status === 'idle' && (
 					<button
 						className={cn('w-[50%] p-2.5 flex justify-center items-center border\
-						 rounded-[10px] border-solid border-primary-600 text-regular-16\
+						 rounded-[10px] border-primary-600 text-regular-16\
 						 cursor-pointer text-primary-600')}
 					>
 						사진 변경하기

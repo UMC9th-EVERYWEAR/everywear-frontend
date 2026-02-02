@@ -9,11 +9,11 @@ import { cn } from '@/src/utils/cn';
 interface ReviewCardProps {
     data: ReviewItem; 
 }
+const MAX_LENGTH = 115;
 
 const ReviewCard = ({ data }: ReviewCardProps) => {
 	// 텍스트 3줄 제한 및 더보기 버튼 여부
 	const [isExpanded, setIsExpanded] = useState(false);
-	const MAX_LENGTH = 115;
 	const content = data.content; // reviewBody -> content
 	const shouldTruncate = content.length > MAX_LENGTH;
 	const displayContent = isExpanded ? content : truncate(content, MAX_LENGTH);

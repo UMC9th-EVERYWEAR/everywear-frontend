@@ -1,7 +1,7 @@
 import { cn } from '@/src/utils/cn';
 import React, { useEffect, useMemo } from 'react';
-import cameraIcon from '@/public/svgs/camera-icon.svg';
-import closeIcon from '@/public/svgs/blue-close-icon.svg';
+import cameraIcon from '@/public/svgs/setting/camera-icon.svg';
+import closeIcon from '@/public/svgs/setting/blue-close-icon.svg';
 
 
 type AttachmentPickerProps = {

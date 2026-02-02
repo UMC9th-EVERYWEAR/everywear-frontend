@@ -7,31 +7,31 @@ interface CategoryBarProps {
 }
 
 // 아이콘 컴포넌트들은 그대로 유지 (ESLint 규칙에 맞춰 홑따옴표로 수정)
-const AllIcon = ({ isActive }: { isActive: boolean }) => (
+export const AllIcon = ({ isActive }: { isActive: boolean }) => (
 	<div className='flex items-center justify-center w-[16px] h-[16px] px-[2px] py-[2px]'>
 		{ICON_DATA.AllIcon(isActive)}
 	</div>
 );
 
-const TopIcon = ({ isActive }: { isActive: boolean }) => (
+export const TopIcon = ({ isActive }: { isActive: boolean }) => (
 	<div className='flex items-center justify-center w-[16px] h-[16px] px-[1.33px] py-[2px]'>
 		{ICON_DATA.TopIcon(isActive)}
 	</div>
 );
 
-const BottomIcon = ({ isActive }: { isActive: boolean }) => (
+export const BottomIcon = ({ isActive }: { isActive: boolean }) => (
 	<div className='flex items-center justify-center w-[16px] h-[16px] px-[2.66px] py-[0.62px]'>
 		{ICON_DATA.BottomIcon(isActive)}
 	</div>
 );
 
-const OuterIcon = ({ isActive }: { isActive: boolean }) => (
+export const OuterIcon = ({ isActive }: { isActive: boolean }) => (
 	<div className='flex items-center justify-center w-[18px] h-[18px] px-[1.65px] py-[2.25px]'>
 		{ICON_DATA.OuterIcon(isActive)}
 	</div>
 );
 
-const DressIcon = ({ isActive }: { isActive: boolean }) => (
+export const DressIcon = ({ isActive }: { isActive: boolean }) => (
 	<div className='flex items-center justify-center w-[16px] h-[16px] px-[1.79px] py-[0.78px]'>
 		{ICON_DATA.DressIcon(isActive)}
 	</div>
@@ -48,44 +48,44 @@ const CategoryBar = ({ selected, onSelect }: CategoryBarProps) => {
 	];
 
 	return (
-    <div className='w-[375px] overflow-x-auto no-scrollbar bg-[var(--color-neutral-50)] sticky z-20'>
-        <div className='flex gap-[10px] p-4 items-center whitespace-nowrap'>
-            {categories.map((cat) => {
-                const isActive = selected === cat.name;
+		<div className='w-[375px] overflow-x-auto no-scrollbar bg-[var(--color-neutral-50)] sticky z-20'>
+			<div className='flex gap-[10px] p-4 items-center whitespace-nowrap'>
+				{categories.map((cat) => {
+					const isActive = selected === cat.name;
                 
-                return (
-                    <button
-                        key={cat.name}
-                        onClick={() => onSelect(cat.name)}
-                        className={`
+					return (
+						<button
+							key={cat.name}
+							onClick={() => onSelect(cat.name)}
+							className={`
                             flex items-center justify-center min-w-[60px] p-[10px] 
                             rounded-full gap-0 border box-border cursor-pointer
                             transition-all duration-200
                             ${isActive 
-                                ? 'bg-[var(--color-primary-600)] text-[var(--color-neutral-50)] border-[var(--color-primary-600)]'
-                                : 'bg-white text-[var(--color-neutral-700)] border-[var(--color-neutral-300)]'
+								? 'bg-[var(--color-primary-600)] text-[var(--color-neutral-50)] border-[var(--color-primary-600)]'
+								: 'bg-white text-[var(--color-neutral-700)] border-[var(--color-neutral-300)]'
                             }
                         `}
-                    >
-                        <div className='flex items-center justify-center shrink-0'>
-                            {cat.renderIcon(isActive)}
-                        </div>
+						>
+							<div className='flex items-center justify-center shrink-0'>
+								{cat.renderIcon(isActive)}
+							</div>
                         
-                        <span
-                            className={`
+							<span
+								className={`
                                 text-medium-12
                                 ${isActive ? 'font-bold' : ''}
                                 ${cat.name === '전체' ? 'ml-[2px]' : 'ml-[-1px]'}
                             `}
-                        >
-                            {cat.name}
-                        </span>
-                    </button>
-                );
-            })}
-        </div>
-    </div>
-);
+							>
+								{cat.name}
+							</span>
+						</button>
+					);
+				})}
+			</div>
+		</div>
+	);
 };
 
 export default CategoryBar;

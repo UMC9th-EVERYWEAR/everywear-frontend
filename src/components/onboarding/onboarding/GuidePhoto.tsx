@@ -1,4 +1,4 @@
-import dummy from '@/public/svgs/dummyphoto.jpeg'
+import dummy from '@/public/svgs/setting/dummyphoto.jpeg'
 import checkMarked from '@/public/svgs/onboarding/checkbox-marked.svg';
 import noCheckMarked from '@/public/svgs/onboarding/close-box.svg';
 // import badImg from '@/public/svgs/onboarding/single-bad.svg'

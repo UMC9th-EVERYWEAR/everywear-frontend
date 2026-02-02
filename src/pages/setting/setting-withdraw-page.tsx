@@ -1,7 +1,7 @@
 
-import blueCheck from '@/public/svgs/check-blue-icon.svg'
-import unCheck from '@/public/svgs/check-incomplete.svg'
-import completeCheck from '@/public/svgs/complete-check.svg'
+import blueCheck from '@/public/svgs/setting/check-blue-icon.svg'
+import unCheck from '@/public/svgs/setting/check-incomplete.svg'
+import completeCheck from '@/public/svgs/setting/complete-check.svg'
 
 
 import Button from '@/src/components/common/Button';

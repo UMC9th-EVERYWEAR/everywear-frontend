@@ -1,4 +1,4 @@
-import checkIcon from '@/public/svgs/check-icon.svg';
+import checkIcon from '@/public/svgs/setting/check-icon.svg';
 
 interface CheckItemProps {
   text: string;

@@ -1,5 +1,6 @@
 import Button from '@/src/components/common/Button';
-import { LoadingSpinner } from '../ai-fitting/LoadingSpinner';
+import { ICON_DATA } from '@/public/Svgs/Icons/SvgIndex';
+import { useRotatingIcon } from '@/src/hooks/domain/products/useRotatingIcon';
 
 interface LinkSectionProps {
   link: string;
@@ -9,6 +10,14 @@ interface LinkSectionProps {
   onSubmit: () => void;
 }
 
+const LOADING_ICONS = [
+	ICON_DATA.TopIcon,
+	ICON_DATA.BottomIcon,
+	ICON_DATA.OuterIcon,
+	ICON_DATA.DressIcon,
+];
+
+
 const LinkSection = ({
 	link,
 	loading,
@@ -16,6 +25,12 @@ const LinkSection = ({
 	onChangeLink,
 	onSubmit,
 }: LinkSectionProps) => {
+	const RotatingIcon = useRotatingIcon(
+		LOADING_ICONS,
+		2000,     // 2초
+		loading ?? false,  // 로딩 중일 때만
+	);
+
 	return (
 		<div className="relative mt-6 flex w-75 flex-col gap-6 items-center">
 			<input
@@ -43,27 +58,16 @@ const LinkSection = ({
 				</Button>
 			}
 
-			{/*loading 두 개 버전*/}
-			{/* 
-			{
-				loading && 
-				<Button
-					disabled={!isValidLink}
-					onClick={onSubmit}
-				>
-					<LoadingSpinner size={7}/>			
-				</Button>
-			} */}
-
-			{/*loading modal*/}
 			{
 				loading && 
 				<div
-					className="fixed inset-0 z-100 flex flex-col gap-5 items-center justify-center bg-black/50"
+					className="fixed inset-0 z-100 flex flex-col gap-20 items-center justify-center bg-black/50"
 				>				
-					<LoadingSpinner size={20} />
-					<div className='text-bold-20'>
-						상품을 추가하고있어요!
+					<div className="scale-900 animate-clothes-motion transition-opacity duration-300">
+						{RotatingIcon(true)}
+					</div>
+					<div className='text-bold-20 flex text-white'>
+						상품을 옷장에 담고 있어요
 					</div>
 				</div>
 			}

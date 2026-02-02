@@ -9,11 +9,11 @@ import './index.css'
 import App from './App.tsx'
 
 createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    {/*queryClient를 앱 전체에 주입*/}
-    <QueryClientProvider client={queryClient}>
-      <App />
-      <ReactQueryDevtools initialIsOpen={false} />
-    </QueryClientProvider>
-  </StrictMode>,
+	<StrictMode>
+		{/*queryClient를 앱 전체에 주입*/}
+		<QueryClientProvider client={queryClient}>
+			<App />
+			<ReactQueryDevtools initialIsOpen={false} />
+		</QueryClientProvider>
+	</StrictMode>,
 )
