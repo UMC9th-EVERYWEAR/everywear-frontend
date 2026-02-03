@@ -1,4 +1,5 @@
 import { formatPrice } from '@/src/utils/formatPrice';
+import { useNavigate } from 'react-router';
 
 export interface ProductCardProps {
     id: number; 
@@ -31,9 +32,22 @@ const ButtonClassName = `flex justify-center w-16 p-1 tracking-[-2px] leading-4.
                           text-medium-12 text-[var(--color-neutral-50)] cursor-pointer font-anonymous
                           hover:bg-[var(--color-primary-700)] transition-colors`
                           
-const ProductCard = ({ company, name, price, rating, imageUrl, isCloset = false }: ProductCardProps) => {
+const ProductCard = ({ 
+    id, // 👈 id 추가
+    company, 
+    name, 
+    price, 
+    rating = 0, // 👈 기본값 설정해두면 편해요
+    imageUrl, 
+    isCloset = false 
+}: ProductCardProps) => {
+    const navigate = useNavigate(); // 페이지 이동을 위해 추가
+
     return (
-        <div className="flex flex-col items-center w-[160px] shrink-0 cursor-pointer active:scale-[0.98] transition-transform">
+        <div 
+            onClick={() => navigate(`/products/${id}`)} // 👈 카드 클릭 시 상세페이지 이동!
+            className="flex flex-col items-center w-[160px] shrink-0 cursor-pointer active:scale-[0.98] transition-transform"
+        >
       
             {/* 1. 이미지 영역 (137 x 178) */}
             <div className="w-full h-[178px] rounded-[10px] overflow-hidden bg-[var(--color-neutral-100)]">
