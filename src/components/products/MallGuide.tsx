@@ -11,7 +11,7 @@ interface MallGuideProps {
 const MallGuide = ({ onClose }: MallGuideProps) => {
 	const [step, setStep] = useState<number>(1)
 	return(
-		<div		className="fixed inset-0 z-100 flex items-center justify-center bg-black/50">
+		<div className="fixed inset-0 z-100 flex items-center justify-center bg-neutral-500">
 			{
 				step === 1 && 
 				<button
@@ -20,6 +20,7 @@ const MallGuide = ({ onClose }: MallGuideProps) => {
 					<img
 						src={step1}
 						alt='step1'
+						className='w-full'
 					/>
 				</button>
 			}			

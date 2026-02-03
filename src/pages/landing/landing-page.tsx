@@ -4,7 +4,6 @@ import IntroAIFittingSection from '@/src/components/landing/IntroAIFittingSectio
 import IntroAIReviewSection from '@/src/components/landing/IntroAIReviewSection'
 import IntroConnectSection from '@/src/components/landing/IntroConnectSection'
 import LandingFooter from '@/src/components/landing/LandingFooter'
-import ScrollAnimationContainer from '@/src/components/onboarding/onboarding/ScrollAnimationContainer'
 import { cn } from '@/src/utils/cn'
 import { useRef, useState } from 'react'
 
