@@ -3,7 +3,8 @@ import { useRef, useState  } from 'react';
 import { getWebcamStream } from '@/src/utils/getWebcam';
 
 export const usePhotoInput = () => {
-	const [photo, setPhoto] = useState<string | null>(null);
+	const [file, setFile] = useState<File | null>(null);
+	const [previewUrl, setPreviewUrl] = useState<string | null>(null);
 	const [isCamera, setIsCamera] = useState(false);
 
 	const videoRef = useRef<HTMLVideoElement | null>(null);
@@ -18,9 +19,11 @@ export const usePhotoInput = () => {
 	const handleChangeFile = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const file = e.target.files?.[0];
 		if (!file) return;
+		
+		setFile(file);
 
 		const previewUrl = URL.createObjectURL(file);
-		setPhoto(previewUrl);
+		setPreviewUrl(previewUrl);
 		e.target.value = '';
 	};
 
@@ -45,12 +48,13 @@ export const usePhotoInput = () => {
 		canvas.height = video.videoHeight;
 		ctx.drawImage(video, 0, 0);
 
-		setPhoto(canvas.toDataURL('image/png'));
+		setPreviewUrl(canvas.toDataURL('image/png'));
 		setIsCamera(false);
 	};
 
 	return {
-		photo,
+		file,
+		previewUrl,
 		isCamera,
 		videoRef,
 		canvasRef,

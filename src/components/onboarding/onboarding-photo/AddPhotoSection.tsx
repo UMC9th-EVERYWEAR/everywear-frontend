@@ -2,8 +2,12 @@
 import Button from '@/src/components/common/Button';
 import PhotoBtn, { type PhotoBtnType } from './PhotoBtn';
 import { cn } from '@/src/utils/cn';
-import React from 'react';
 import { usePhotoInput } from '@/src/hooks/domain/onboarding/usePhotoInput';
+import { useVerifyAndSaveProfileImage } from '@/src/hooks/service/user/useVerifyAndSaveProfileImage';
+import imageCompression from 'browser-image-compression';
+import { useState } from 'react';
+import VerifyingSection from './VerifyingSection';
+
 
 interface AddPhotoSectionProps {
   setShowGuide: () => void;
@@ -13,7 +17,8 @@ interface AddPhotoSectionProps {
 
 const AddPhotoSection = ({ setShowGuide } : AddPhotoSectionProps) => {
 	const {
-		photo,
+		file,
+		previewUrl,
 		isCamera,
 		videoRef,
 		canvasRef,
@@ -23,14 +28,36 @@ const AddPhotoSection = ({ setShowGuide } : AddPhotoSectionProps) => {
 		handleChangeFile,
 		capturePhoto,
 	} = usePhotoInput();
+	const [isVerify, setIsVerify] = useState(true)
 
 	const handleClick = (type: PhotoBtnType) => {
 		if (type === 'CAMERA') openCamera();
 		if (type === 'GALLERY') openFilePicker();
 	};
 
+	const { mutate: verifyAndSave, isPending } =
+  useVerifyAndSaveProfileImage();
+
+	const handleConfirm = async () => {
+		if (!file) return;
+		setIsVerify(true);
+		console.log('원본 파일 용량(MB):', (file.size / 1024 / 1024).toFixed(2));
+		const resizingBlob = await imageCompression(file, { maxSizeMB: 0.5 });
+		const resizingFile = new File([resizingBlob], file.name, { type: file.type });
+		verifyAndSave(resizingFile);
+		console.log(
+			'리사이징 파일 용량(MB):',
+			(resizingFile.size / 1024 / 1024).toFixed(2),
+		);
+	};
+
+
 	return(
 		<>
+			{
+				!isVerify &&
+		(<>
+					
 			{
 				!isCamera && 
 				<div className="px-5 p-4 flex justify-center flex-col items-center">
@@ -47,9 +74,9 @@ const AddPhotoSection = ({ setShowGuide } : AddPhotoSectionProps) => {
 
 							<div className="border-dashed border w-full border-neutral-500 rounded-lg h-84 bg-onboarding-photo flex justify-center items-center text-neutral-600 overflow-hidden">
 								{/* 사진을 추가해주세요! 등 멘트 수정 필요해보임 */}
-								{photo && 
+								{previewUrl && 
 								<img
-									src={photo} 
+									src={previewUrl} 
 									alt='fitting-photo'
 									className='w-full h-full border object-cover'
 								/>
@@ -74,31 +101,10 @@ const AddPhotoSection = ({ setShowGuide } : AddPhotoSectionProps) => {
 								onChange={handleChangeFile}
 							/>
 						</div>
-						<Button disabled={!photo}>확인하기</Button>
-
-						{/*btn 디자인 후보들 */}
-
-						{/*btn1 */}
-						{/* <div className='absolute bottom-0 -mx-5 bg-white w-full h-30 flex justify-center items-center '>
-							<button
-								onClick={handleCapture}
-								className='bg-primary-600 rounded-full w-15 h-15 flex justify-center items-center'
-							>
-								<div
-									className='bg-primary-600 border-white border-[1.5px] rounded-full w-13 h-13'
-								></div>
-							</button>
-						</div> */}
-						{/*btn2 */}
-						{/* <button
-							onClick={handleCapture}
-							className='absolute bottom-20 left-1/2 -translate-x-1/2 bg-white rounded-full w-15 h-15 flex justify-center items-center'
-						>
-							<div
-								className='bg-white border-primary-600 border-[1.5px] rounded-full w-13 h-13'
-							></div>
-						</button> */}
-
+						<Button
+							onClick={handleConfirm}
+							disabled={!previewUrl || isPending}
+						>{isPending ? '로딩 중' : '확인하기'}</Button>
 					</div>
 				</div>
 			}
@@ -134,7 +140,11 @@ const AddPhotoSection = ({ setShowGuide } : AddPhotoSectionProps) => {
 					className="hidden"
 				/>
 			</div>
-		
+		</> ) 
+			}
+			{
+				isVerify && <VerifyingSection previewUrl={previewUrl} />
+			}
 		</>
 	)
 }

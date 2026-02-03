@@ -51,6 +51,8 @@
   --color-review-rotate: #C7CBEC;
   --color-review-summary: #E3E6FE;
   --color-fitting-company: #767676;
+  --color-verifying-border: #C4DEFF;
+  --color-verifying: #E7F1FF;
 
 
   --shadow-0: 0px 0px 0px rgba(0, 0, 0, 0.05);
@@ -371,6 +373,17 @@
     }
   }
 
+  @keyframes text-fade-slide {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 
 @keyframes clothes-motion {
   0% {margin-top: 0px;}
@@ -511,6 +524,9 @@
     will-change: transform;
   }
 
+  .animate-text-change {
+  animation: text-fade-slide 0.25s ease-out;
+}
   @media (prefers-reduced-motion: reduce) {
   .animation-infinite-slide-original,
   .animation-infinite-slide-copy {

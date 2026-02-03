@@ -20,8 +20,8 @@ import type {
   UserImgQuery,
   VerifyAndSavePayload,
 } from "./data-contracts";
-import { HttpClient } from "./http-client";
-import type { RequestParams, ContentType } from "./http-client";
+import { HttpClient, ContentType } from "./http-client";
+import type { RequestParams } from "./http-client";
 
 export class Api<
   SecurityDataType = unknown,

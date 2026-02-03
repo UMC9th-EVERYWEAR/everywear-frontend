@@ -78,15 +78,43 @@ axiosInstance.interceptors.request.use(
 );
 
 axiosInstance.interceptors.response.use(
-	(response) => response,
+	(response) => {
+		console.log(
+      `🌐 API 응답 성공: ${response.config.method?.toUpperCase()} ${response.config.url}`,
+      {
+      	status: response.status,
+      	statusText: response.statusText,
+      	headers: response.headers,
+      	cookies: document.cookie,
+      	data: response.data,
+      },
+		);
+		return response;
+	},
+
+	
 	async (error) => {
-		console.log('401 감지됨', error.config.url);
+		 console.error(
+      `🌐 API 에러: ${error.config?.method?.toUpperCase()} ${error.config?.url}`,
+      {
+      	status: error.response?.status,
+      	statusText: error.response?.statusText,
+      	message: error.message,
+      	responseData: error.response?.data,
+      	responseHeaders: error.response?.headers,
+      	cookies: document.cookie,
+      	requestHeaders: error.config?.headers,
+      },
+		);
+
+    
 		const originalRequest : CustomInternalAxiosRequestConfig = error.config;
 
 		if ( !error.response || error.response.status !== 401 || originalRequest._retry) {
-			window.location.href = PATH.LOGIN.ROOT;
+			// window.location.href = PATH.LOGIN.ROOT;
 			return Promise.reject(error);
 		}
+
 
 		if (originalRequest.url?.includes('/api/auth/refresh')) {
 			accessTokenStorage.removeItem();
