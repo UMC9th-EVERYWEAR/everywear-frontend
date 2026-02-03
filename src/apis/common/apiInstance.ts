@@ -134,7 +134,7 @@ axiosInstance.interceptors.response.use(
 		} catch (refreshError) {
 			console.error('토큰 갱신 실패:', refreshError);
 			accessTokenStorage.removeItem();
-			// window.location.href = PATH.LOGIN.ROOT;
+			window.location.href = PATH.LOGIN.ROOT;
 			return Promise.reject(refreshError);
 		}
 	},

@@ -1,5 +1,6 @@
 
 import { accessTokenStorage } from '@/src/apis/common/apiInstance';
+import Loading from '@/src/components/common/Loading';
 import { PATH } from '@/src/constants/path';
 import { useLogin } from '@/src/hooks/service/auth/useLogin';
 import { useEffect } from 'react';
@@ -15,7 +16,11 @@ const OAuthCallbackPage = () => {
 	useEffect(() => {
 		const accessToken = searchParams.get('accessToken');
 
-		if (!accessToken) return;
+		if (!accessToken) {
+			navigate(PATH.LOGIN.ROOT);
+			return;
+		}
+
 		accessTokenStorage.setItem(accessToken)
 
 		  login(undefined, {
@@ -29,7 +34,7 @@ const OAuthCallbackPage = () => {
 		});
 	}, [searchParams, login, navigate]);
 
-	return <div>로그인 처리 중입니다...</div>;
+	return <Loading />
 };
 
 export default OAuthCallbackPage;
