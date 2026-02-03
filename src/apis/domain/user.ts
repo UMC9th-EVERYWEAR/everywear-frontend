@@ -22,12 +22,17 @@ export const deleteProfileImage = async (imageId: number) => {
 export const verifyAndSaveProfileImage = async (file: File) => {
 	const formData = new FormData();
 	formData.append('image', file);
-
-	const { data } = await apiClient.verifyAndSave(
+	try{
+		const { data } = await apiClient.verifyAndSave(
     formData as unknown as VerifyAndSavePayload,
     {
-    	timeout: 30000, // 요청 30초로 늘림
+    	timeout: 50000, // 요청 1분으로 늘림
     },
-	);
-	return data;
+		);
+		return data;
+	}
+	catch (error) {
+		console.error('🔥 ', error);
+		throw error; 
+	}
 };

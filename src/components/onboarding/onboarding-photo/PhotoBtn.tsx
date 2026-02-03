@@ -39,7 +39,7 @@ const PhotoBtn = ({ btnType, handleClick }: PhotoBtnProps) => {
 		<div className="max-w-42 w-full">
 			<button
 				onClick={() => handleClick(btnType)}
-				className="w-full border border-primary-600 rounded-lg py-4 flex gap-2.5 justify-center cursor-pointer hover:bg-primary-600/10"
+				className="w-full border border-primary-600 rounded-lg py-4 flex gap-2.5 justify-center cursor-pointer hover:border-2 hover:-mb-1"
 			> 
 				{ }
 				{/* <video

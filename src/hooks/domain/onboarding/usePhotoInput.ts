@@ -59,6 +59,7 @@ export const usePhotoInput = () => {
 		videoRef,
 		canvasRef,
 		fileInputRef,
+		setFile,
 		openCamera,
 		openFilePicker,
 		handleChangeFile,

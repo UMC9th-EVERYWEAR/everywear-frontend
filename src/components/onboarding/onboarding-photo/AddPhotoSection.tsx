@@ -3,7 +3,6 @@ import Button from '@/src/components/common/Button';
 import PhotoBtn, { type PhotoBtnType } from './PhotoBtn';
 import { cn } from '@/src/utils/cn';
 import { usePhotoInput } from '@/src/hooks/domain/onboarding/usePhotoInput';
-import { useVerifyAndSaveProfileImage } from '@/src/hooks/service/user/useVerifyAndSaveProfileImage';
 import imageCompression from 'browser-image-compression';
 import { useState } from 'react';
 import VerifyingSection from './VerifyingSection';
@@ -23,6 +22,7 @@ const AddPhotoSection = ({ setShowGuide } : AddPhotoSectionProps) => {
 		videoRef,
 		canvasRef,
 		fileInputRef,
+		setFile,
 		openCamera,
 		openFilePicker,
 		handleChangeFile,
@@ -35,16 +35,15 @@ const AddPhotoSection = ({ setShowGuide } : AddPhotoSectionProps) => {
 		if (type === 'GALLERY') openFilePicker();
 	};
 
-	const { mutate: verifyAndSave, isPending } =
-  useVerifyAndSaveProfileImage();
+	
 
 	const handleConfirm = async () => {
 		if (!file) return;
-		setIsVerify(true);
 		console.log('원본 파일 용량(MB):', (file.size / 1024 / 1024).toFixed(2));
 		const resizingBlob = await imageCompression(file, { maxSizeMB: 0.5 });
-		const resizingFile = new File([resizingBlob], file.name, { type: file.type });
-		verifyAndSave(resizingFile);
+		const resizingFile = new File([resizingBlob], file.name, { type: resizingBlob.type });
+		setFile(resizingFile);
+		setIsVerify(true);
 		console.log(
 			'리사이징 파일 용량(MB):',
 			(resizingFile.size / 1024 / 1024).toFixed(2),
@@ -103,8 +102,8 @@ const AddPhotoSection = ({ setShowGuide } : AddPhotoSectionProps) => {
 						</div>
 						<Button
 							onClick={handleConfirm}
-							disabled={!previewUrl || isPending}
-						>{isPending ? '로딩 중' : '확인하기'}</Button>
+							disabled={!previewUrl}
+						>{'확인하기'}</Button>
 					</div>
 				</div>
 			}
@@ -143,7 +142,11 @@ const AddPhotoSection = ({ setShowGuide } : AddPhotoSectionProps) => {
 		</> ) 
 			}
 			{
-				isVerify && <VerifyingSection previewUrl={previewUrl ?? ''} />
+				isVerify && <VerifyingSection
+					previewUrl={previewUrl ?? ''}
+					resizingPhoto={file} 
+					setIsVerify={setIsVerify}
+				            />
 			}
 		</>
 	)

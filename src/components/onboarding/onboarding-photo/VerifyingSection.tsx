@@ -1,57 +1,107 @@
 // import { LoadingSpinner } from '../../ai-fitting/LoadingSpinner';
+import React, { useMemo } from 'react';
 import FittingResultPreview, { type FittingStatus } from './FittingResultPreview';
 import FittingProgressBox from './FittingProgressBox';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import VerifySteps, { type StepStatus } from './VerifySteps';
 import Button from '../../common/Button';
 import TipSection from './TipSection';
+import { useVerifyAndSaveProfileImage } from '@/src/hooks/service/user/useVerifyAndSaveProfileImage';
+import LoadingGuide from './LoadingGuide';
+import type { AxiosError } from 'axios';
+
+type VerifyPhase = 'IDLE' | 'VERIFYING' | 'SUCCESS' | 'FAIL';
+type VerifyErrorType = 'INVALID_IMAGE' | 'SERVER_ERROR' | null;
 
 
 interface VerifyingSectionProps {
-previewUrl: string;
+	previewUrl: string;
+	resizingPhoto: File | null ;
+	setIsVerify: React.Dispatch<React.SetStateAction<boolean>>
+
 }
 
 
-const VerifyingSection = ({ previewUrl } : VerifyingSectionProps)  => {
-	const [status, setStatus] = useState<FittingStatus>('LOADING')
-	const [stepStatus, setStepStatus] = useState<StepStatus[]>([
-		'LOADING', // 신체 인식
-		'WAIT',
-		'WAIT',
-	]);
+const VerifyingSection = ({ previewUrl, resizingPhoto, setIsVerify } : VerifyingSectionProps)  => {
+
+	const [stepIndex, setStepIndex] = useState<number | null>(null);
+
+	const requestedRef = useRef(false);
+
+
+	const { mutateAsync, isPending } = useVerifyAndSaveProfileImage();
+
+
+
+	const [phase, setPhase] = useState<VerifyPhase>('VERIFYING');
+	const [errorType, setErrorType] = useState<VerifyErrorType>(null);
 
 	useEffect(() => {
-		const timers: number[] = [];
-		// 서버 상태에 따라 변경
-		// 1단계 → 2단계
-		timers.push(
-			window.setTimeout(() => {
-				setStepStatus(['SUCCESS', 'LOADING', 'WAIT']);
-			}, 6000),
-		);
+		if (!resizingPhoto || requestedRef.current) return;
+		requestedRef.current = true;
 
-		// 2단계 → 3단계
-		timers.push(
-			window.setTimeout(() => {
-				setStepStatus(['SUCCESS', 'SUCCESS', 'LOADING']);
-			}, 12000),
-		);
 
-		// 3단계 결과
-		timers.push(
-			window.setTimeout(() => {
-				setStepStatus(['SUCCESS', 'SUCCESS', 'SUCCESS']); // or FAIL
-				setStatus('SUCCESS')
-			}, 18000),
-		);
+		(async () => {
+			try {
+				await mutateAsync(resizingPhoto);
+				setPhase('SUCCESS');
+			} catch (error) {
+				const status = (error as AxiosError)?.response?.status;
 
-		return () => timers.forEach(clearTimeout);
-	}, []);
+				if (status === 400) {
+					setErrorType('INVALID_IMAGE');
+				} else if (status === 500) {
+					setErrorType('SERVER_ERROR');
+				}
 
-	if(!previewUrl)
+				setPhase('FAIL');
+			}
+		})();
+	}, [resizingPhoto, mutateAsync]);
+
+
+
+	useEffect(() => {
+		if (phase !== 'VERIFYING') return;
+
+		const t1 = window.setTimeout(() => setStepIndex(1), 8000);
+		const t2 = window.setTimeout(() => setStepIndex(2), 11000);
+
+		return () => {
+			clearTimeout(t1);
+			clearTimeout(t2);
+		};
+	}, [phase]);
+
+
+
+	  // 전체 상태
+	const status: FittingStatus =
+    phase === 'VERIFYING'
+    	? 'LOADING'
+    	: phase === 'SUCCESS'
+    		? 'SUCCESS'
+    		: 'FAIL';
+
+
+	// 단계별 상태
+	const stepStatus: StepStatus[] = useMemo(() => {
+		if (phase === 'FAIL') return ['FAIL', 'FAIL', 'FAIL'];
+		if (phase === 'SUCCESS') return ['SUCCESS', 'SUCCESS', 'SUCCESS'];
+
+		return [
+			stepIndex === null ? 'LOADING' : 'SUCCESS',
+			stepIndex !== null && stepIndex >= 1 ? 'SUCCESS' : 'WAIT',
+			stepIndex !== null && stepIndex >= 2 ? 'LOADING' : 'WAIT',
+		];
+	}, [phase, stepIndex]);
+
+
+	if(!previewUrl || !resizingPhoto)
 		return(
 			<>사진이없어요</>
 		)
+
 
 	return (
 		<div className="min-h-screen flex flex-col items-center py-4 px-2.5 text-center">
@@ -59,16 +109,7 @@ const VerifyingSection = ({ previewUrl } : VerifyingSectionProps)  => {
 
 			<div className='flex flex-col gap-8'>
 
-
-				<div className="w-full text-start px-3 flex flex-col -mb-2">
-					<p className="text-medium-20 text-neutral-900">
-						가상 피팅 테스트
-					</p>
-
-					<p className="text-regular-14 text-neutral-500">
-						업로드한 사진이 가상 피팅에 적합한지 확인하고 있어요			
-					</p>
-				</div>
+				<LoadingGuide />
 
 				<FittingResultPreview
 					originalImageUrl={previewUrl}
@@ -81,12 +122,25 @@ const VerifyingSection = ({ previewUrl } : VerifyingSectionProps)  => {
 				{
 					status === 'SUCCESS' && 
 					<div className='flex flex-col gap-2 -mt-4 animate-frame-in'>
-						<Button size='lg'>이 사진으로 피팅하기</Button>
+						<Button						
+							size='lg'
+						>이 사진으로 피팅하기</Button>
 						<Button
+							disabled={isPending}
 							size='lg'
 							variant='outlined'
+							onClick={()=> setIsVerify(false)}
 						>사진 변경하기</Button>
 					</div>
+				}
+				{		
+					(errorType === 'INVALID_IMAGE' || errorType === 'SERVER_ERROR') && 
+					<Button
+						size='lg'
+						onClick={()=> setIsVerify(false)}
+					>다른 사진 선택하기
+					</Button>
+
 				}
   
 				{
