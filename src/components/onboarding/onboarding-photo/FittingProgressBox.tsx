@@ -1,5 +1,8 @@
 import loadingIcon from '@/public/svgs/onboarding/loadingOne.svg';
+import checkMarked from '@/public/svgs/login/check-box.svg';
+import noCheckMarked from '@/public/svgs/onboarding/close-box.svg';
 import type { FittingStatus } from './FittingResultPreview';
+import { cn } from '@/src/utils/cn';
 
 interface FittingProgressBoxProps {
   status: FittingStatus;
@@ -10,22 +13,35 @@ const FittingProgressBox = ({ status }: FittingProgressBoxProps) => {
 		LOADING: {
 			title: '분석 진행 중',
 			desc: ['AI가 사진을 분석하고 있습니다.', '잠시만 기다려주세요.'],
+			color: 'border-verifying-border bg-verifying',
+			icon:loadingIcon,
 		},
+
 		SUCCESS: {
 			title: '피팅 분석 완료',
 			desc: ['사진 분석이 완료되었습니다.', '가상 피팅을 시작할 수 있어요.'],
+			color: 'border-verifying-border bg-verifying',
+			icon:checkMarked,
 		},
 		FAIL: {
 			title: '분석 실패',
 			desc: ['사진 분석에 실패했습니다.', '다른 사진으로 다시 시도해주세요.'],
+			color: 'border-verifying-fail-border bg-verifying-fail',
+			icon:noCheckMarked,
+
+
 		},
 	}[status];
 
 	return (
-		<div className="bg-verifying w-87 rounded-lg px-3 py-4 border border-verifying-border">
+		<div
+			className={cn('w-87 rounded-lg px-3 py-4 border',
+				content.color,
+			)}
+		>
 			<div className="flex gap-4 items-center">
 				<img
-					src={loadingIcon}
+					src={content.icon}
 					alt="status"
 					className="w-5 h-5"
 				/>

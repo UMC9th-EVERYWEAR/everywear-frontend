@@ -29,5 +29,5 @@ export const verifyAndSaveProfileImage = async (file: File) => {
     	timeout: 30000, // 요청 30초로 늘림
     },
 	);
-	return data.result;
+	return data;
 };

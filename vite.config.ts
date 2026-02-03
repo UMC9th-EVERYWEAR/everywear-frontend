@@ -11,6 +11,9 @@ export default defineConfig(({ mode }) => {
 			tsconfigPaths(),
 		],
 
+		define: {
+			global: 'window',
+		},
 
 		// 이 설정은 브라우저가 localhost로만 요청하게 해서 CORS를 피하고,
 		// Vite가 대신 dev 백엔드로 요청을 전달하게 만들기 위한 장치
@@ -29,6 +32,7 @@ export default defineConfig(({ mode }) => {
 					protocol: 'ws',
 					host: 'localhost',
 					port: 5173,
+					clientPort: 5173,
 				},
 			}),
 		},

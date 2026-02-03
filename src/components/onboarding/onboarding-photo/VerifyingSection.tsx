@@ -1,5 +1,4 @@
 // import { LoadingSpinner } from '../../ai-fitting/LoadingSpinner';
-import dummy from '@/public/svgs/setting/dummyphoto.jpeg'
 import FittingResultPreview, { type FittingStatus } from './FittingResultPreview';
 import FittingProgressBox from './FittingProgressBox';
 import { useEffect, useState } from 'react';
@@ -14,7 +13,7 @@ previewUrl: string;
 
 
 const VerifyingSection = ({ previewUrl } : VerifyingSectionProps)  => {
-	const [status, setStatus] = useState<FittingStatus>('SUCCESS')
+	const [status, setStatus] = useState<FittingStatus>('LOADING')
 	const [stepStatus, setStepStatus] = useState<StepStatus[]>([
 		'LOADING', // 신체 인식
 		'WAIT',
@@ -49,6 +48,10 @@ const VerifyingSection = ({ previewUrl } : VerifyingSectionProps)  => {
 		return () => timers.forEach(clearTimeout);
 	}, []);
 
+	if(!previewUrl)
+		return(
+			<>사진이없어요</>
+		)
 
 	return (
 		<div className="min-h-screen flex flex-col items-center py-4 px-2.5 text-center">
@@ -57,7 +60,7 @@ const VerifyingSection = ({ previewUrl } : VerifyingSectionProps)  => {
 			<div className='flex flex-col gap-8'>
 
 
-				<div className="w-full text-start px-3 flex flex-col">
+				<div className="w-full text-start px-3 flex flex-col -mb-2">
 					<p className="text-medium-20 text-neutral-900">
 						가상 피팅 테스트
 					</p>
@@ -68,7 +71,7 @@ const VerifyingSection = ({ previewUrl } : VerifyingSectionProps)  => {
 				</div>
 
 				<FittingResultPreview
-					originalImageUrl={dummy}
+					originalImageUrl={previewUrl}
 					status={status}
 				/>
 

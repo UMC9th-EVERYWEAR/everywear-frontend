@@ -1,5 +1,4 @@
 import { useMutation } from '@tanstack/react-query';
-import { useNavigate } from 'react-router';
 import { verifyAndSaveProfileImage } from '@/src/apis/domain';
 import { queryClient } from '@/src/lib/react-query';
 

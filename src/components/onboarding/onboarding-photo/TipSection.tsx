@@ -1,6 +1,6 @@
 const TipSection = () => {
 	return(
-		<div className="bg-verifying text-neutral-900 rounded-lg border-verifying-border border py-4 px-5 animate-frame-in">
+		<div className="bg-verifying text-neutral-600 rounded-lg border-verifying-border border py-4 px-5 animate-frame-in">
 			<p className="w-full text-start">
 				더 나은 피팅을 위한 팁
 			</p>

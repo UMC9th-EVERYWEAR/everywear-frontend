@@ -51,8 +51,11 @@
   --color-review-rotate: #C7CBEC;
   --color-review-summary: #E3E6FE;
   --color-fitting-company: #767676;
+
   --color-verifying-border: #C4DEFF;
   --color-verifying: #E7F1FF;
+  --color-verifying-fail: #FEF2F2;
+  --color-verifying-fail-border: #FFC3C3;
 
 
   --shadow-0: 0px 0px 0px rgba(0, 0, 0, 0.05);
