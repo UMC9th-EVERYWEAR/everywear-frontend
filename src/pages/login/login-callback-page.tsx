@@ -1,9 +1,34 @@
 
+import { accessTokenStorage } from '@/src/apis/common/apiInstance';
+import { PATH } from '@/src/constants/path';
 import { useLogin } from '@/src/hooks/service/auth/useLogin';
+import { useEffect } from 'react';
+import { useNavigate, useSearchParams } from 'react-router';
 
 
 const OAuthCallbackPage = () => {
-	useLogin();
+	const [searchParams] = useSearchParams();
+	const { mutate: login } = useLogin();
+	const navigate = useNavigate();
+
+	
+	useEffect(() => {
+		const accessToken = searchParams.get('accessToken');
+
+		if (!accessToken) return;
+		accessTokenStorage.setItem(accessToken)
+
+		  login(undefined, {
+			onSuccess: () => {
+				navigate(PATH.LOGIN.TERMS);
+				
+			},
+			onError: () => {
+				navigate(PATH.LOGIN.ROOT);
+			},
+		});
+	}, [searchParams, login, navigate]);
+
 	return <div>로그인 처리 중입니다...</div>;
 };
 

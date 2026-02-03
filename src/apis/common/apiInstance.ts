@@ -65,8 +65,8 @@ axiosInstance.interceptors.request.use(
 			return config;
 		}
 
-		// const accessToken = accessTokenStorage.getItem(); // ⭐️ 배포한 후 나중에 이 부분 꼭 바꾸기
-		const accessToken = ENV_CONFIG.isDev ?  ENV_CONFIG.SERVER.DEV_ACCESS_TOKEN : accessTokenStorage.getItem()
+
+		const accessToken =  accessTokenStorage.getItem()
 		
 		// AccessToken이 있을 때만 헤더 주입
 		if (accessToken) {
@@ -134,7 +134,7 @@ axiosInstance.interceptors.response.use(
 		} catch (refreshError) {
 			console.error('토큰 갱신 실패:', refreshError);
 			accessTokenStorage.removeItem();
-			window.location.href = PATH.LOGIN.ROOT;
+			// window.location.href = PATH.LOGIN.ROOT;
 			return Promise.reject(refreshError);
 		}
 	},
