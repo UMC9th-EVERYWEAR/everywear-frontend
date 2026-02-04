@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router'; // 1. 이동을 위한 navigate 추가
-import { useQueryClient } from '@tanstack/react-query'; // 2. 데이터 갱신을 위한 훅 추가
+import { useNavigate } from 'react-router'; 
+import { useQueryClient } from '@tanstack/react-query'; 
 import LinkSection from '@/src/components/products/LinkSection';
 import MallLogosSection from '@/src/components/products/MallLogos';
 import checkUrlFormat from '@/src/utils/checkUrlFormat';
@@ -10,8 +10,8 @@ const ProductsAddPage = () => {
   const [link, setLink] = useState('');
   const [loading, setLoading] = useState(false);
   
-  const navigate = useNavigate(); // navigate 선언
-  const queryClient = useQueryClient(); // queryClient 선언
+  const navigate = useNavigate(); 
+  const queryClient = useQueryClient(); 
 
   const isValidLink = checkUrlFormat(link);
 
@@ -26,15 +26,12 @@ const ProductsAddPage = () => {
         product_url: link,
       });
 
-      // ✅ 3. 홈 화면의 상품 목록 쿼리를 무효화 (새로고침 효과)
-      // useHomeQueries.ts에서 정의한 쿼리 키를 넣어주세요.
       await queryClient.invalidateQueries({ queryKey: ['home', 'products'] });
-      // 만약 전체 상품 목록 키가 ['products', 'list']라면 그것도 같이 해주면 좋습니다.
       await queryClient.invalidateQueries({ queryKey: ['products', 'list'] });
 
       alert('상품이 옷장에 성공적으로 담겼습니다!');
       
-      // ✅ 4. 홈 화면으로 이동
+      // 작업이 끝나면 홈 화면으로 이동
       navigate('/home'); 
 
     } catch (error) {

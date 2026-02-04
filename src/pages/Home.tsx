@@ -1,11 +1,11 @@
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router';
+import { useQueryClient } from '@tanstack/react-query';
 import { Button } from '@/src/components/common/Button';
 import MusinsaLogo from '@/public/svgs/LogoImages/MusinsaLogo.svg';
 import ZigzagLogo from '@/public/svgs/LogoImages/ZigzagLogo.png';
 import Logo29cm from '@/public/svgs/LogoImages/29cmLogo.svg';
 import WLogo from '@/public/svgs/LogoImages/WLogo.svg';
-import EverywearLogo from '@/public/svgs/LogoImages/Everywear.svg'; // 로고 추가
 import ProductCard from '@/src/components/common/ProductCard';
 import RectangleIcon from '@/public/svgs/LogoImages/Rectangle.svg'; 
 import EllipseIcon from '@/public/svgs/LogoImages/Ellipse.svg';     
@@ -14,6 +14,13 @@ import { useRecentFittingsQuery, useHomeProductsQuery } from '@/src/hooks/querie
 
 const Home = () => {
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
+
+  // 💡 홈 진입 시 데이터를 항상 최신으로 유지하기 위한 무효화 처리
+  useEffect(() => {
+    queryClient.invalidateQueries({ queryKey: ['homeProducts'] });
+    queryClient.invalidateQueries({ queryKey: ['recentFittings'] });
+  }, [queryClient]);
 
   const { data: recentFittings, isLoading: isFittingLoading } = useRecentFittingsQuery();
   const { data: homeProducts, isLoading: isProductLoading } = useHomeProductsQuery();
@@ -47,6 +54,7 @@ const Home = () => {
 
   return (
     <div className='flex flex-col w-full bg-white pb-10 min-h-[calc(100vh-101px)]'>
+      
 
       {/* 1. 파트너 쇼핑몰 타이틀 */}
       <section className='px-4 pt-6 pb-2'> 
@@ -126,7 +134,6 @@ const Home = () => {
             productsList.map((product: any) => (
               <div key={product.product_id || product.productId} className="min-w-[140px] shrink-0">
                 <ProductCard 
-                  // 💡 중요: 서버 필드명(product_id)에 맞춰 전달하여 에러 방지
                   id={product.product_id || product.productId}
                   company={product.brand_name || product.brandName || '브랜드 정보 없음'}
                   name={product.product_name || product.name || '상품명 없음'}
@@ -170,7 +177,7 @@ const Home = () => {
             </h3>
             <span 
                 className="text-medium-12 text-[var(--color-neutral-900)] cursor-pointer mb-1 hover:text-[var(--color-primary-600)] transition-colors"
-                onClick={() => navigate('/fitting-history')} 
+                onClick={() => navigate('/recent-fitting')} 
             >
                 자세히보기 →
             </span>
@@ -194,7 +201,7 @@ const Home = () => {
               <div 
                 key={fitting.id} 
                 className="min-w-[137px] h-[182px] bg-neutral-100 rounded-[10px] overflow-hidden shrink-0 cursor-pointer active:opacity-80 transition-opacity"
-                onClick={() => navigate(`/ai-fitting/${fitting.id}`)} // 피팅 내역 클릭 시에도 이동
+                onClick={() => navigate(`/ai-fitting/${fitting.id}`)}
               >
                 <img 
                   src={fitting.fitting_image_url || fitting.imageUrl} 

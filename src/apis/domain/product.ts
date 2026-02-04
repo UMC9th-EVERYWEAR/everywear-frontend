@@ -12,11 +12,10 @@ export const getTopProducts = async () => {
 };
 
 export const importProduct = async (payload: ImportDTO) => {
-    // 넉넉하게 30초(30000)를 줍니다.
     const { data } = await apiClient.importProduct(payload, { 
-        timeout: 30000
+        timeout: 30000 //30초로 설정 진행
     });
-    console.log("서버 응답 데이터:", data); // 응답이 오는지 직접 확인용
+    console.log("서버 응답 데이터:", data);
     return data.result;
 };
 

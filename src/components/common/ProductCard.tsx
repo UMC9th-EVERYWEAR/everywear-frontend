@@ -1,4 +1,3 @@
-import { formatPrice } from '@/src/utils/formatPrice';
 import { useNavigate } from 'react-router';
 
 export interface ProductCardProps {
