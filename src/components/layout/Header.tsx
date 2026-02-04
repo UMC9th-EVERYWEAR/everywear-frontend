@@ -8,7 +8,6 @@ interface HeaderProps {
   onBack?: () => void;  
 }
 
-// ✅ 타이틀 기본값도 상수가 있다면 대체하는 것이 좋습니다.
 const Header = ({ type, title = 'EVERY WEAR', onBack }: HeaderProps) => {
     const navigate = useNavigate();
 
@@ -32,7 +31,6 @@ const Header = ({ type, title = 'EVERY WEAR', onBack }: HeaderProps) => {
                     <button 
                         className="text-primary-600 transition-opacity active:opacity-50 cursor-pointer"
                         aria-label="설정"
-                        /* ✅ 문자열 '/setting' 대신 PATH 상수를 사용합니다 */
                         onClick={() => navigate(PATH.SETTING.ROOT)} >
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -74,7 +72,6 @@ const Header = ({ type, title = 'EVERY WEAR', onBack }: HeaderProps) => {
                             />
                         </svg>
                     </button>
-                    {/* ✅ font-pretandard 적용 및 폰트 스타일 통일 */}
                     <h2 className="text-primary-600 text-medium-16 tracking-[-0.48px] font-bold font-pretandard">
                         {title}
                     </h2>

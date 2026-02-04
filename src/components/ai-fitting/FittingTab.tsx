@@ -54,6 +54,7 @@ const FittingTab = ({ state, handleStartFitting, handleRestartFitting }: Fitting
 							state={state}
 							type='AFTER'
 							imgUrl={state.status === 'success' ? state.resultUrl : undefined}
+							
 						/>
 					</>
 				)}
