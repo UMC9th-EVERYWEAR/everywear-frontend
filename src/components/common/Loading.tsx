@@ -11,23 +11,23 @@ const LOADING_ICONS = [
 ];
 
 
-const LoadingPage = () => {
+const Loading = () => {
 
 	const RotatingIcon = useRotatingIcon(
 		LOADING_ICONS,
 		2000,     // 2초
 		true,
 	);
-	
+  
 	return(
 		<div 
 			className="min-h-screen flex items-center justify-center"
 		>
-			<div className="scale-900 animate-clothes-motion transition-opacity duration-300">
-				{RotatingIcon(true)}
+			<div className="scale-800 animate-clothes-motion transition-opacity duration-300 mb-20">
+				{RotatingIcon(false)}
 			</div>
 		</div>
 	)
 }
 
-export default LoadingPage
+export default Loading
