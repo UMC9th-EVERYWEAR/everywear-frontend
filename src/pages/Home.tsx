@@ -18,8 +18,8 @@ const Home = () => {
 
   // 💡 홈 진입 시 데이터를 항상 최신으로 유지하기 위한 무효화 처리
   useEffect(() => {
-    queryClient.invalidateQueries({ queryKey: ['homeProducts'] });
-    queryClient.invalidateQueries({ queryKey: ['recentFittings'] });
+    queryClient.invalidateQueries({ queryKey: ['products', 'list'] });
+    queryClient.invalidateQueries({ queryKey: ['fitting', 'recent'] });
   }, [queryClient]);
 
   const { data: recentFittings, isLoading: isFittingLoading } = useRecentFittingsQuery();
