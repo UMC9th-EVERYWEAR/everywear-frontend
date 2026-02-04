@@ -15,3 +15,10 @@ export const getFittingDetail = async (fittingId: number) => {
 	const { data } = await apiClient.getFittingDetail(fittingId);
 	return data.result;
 };
+
+export const getHomeRecentFittings = async () => {
+	const { data } = await apiClient.getRecentFittings();
+	return data.result;
+};
+
+

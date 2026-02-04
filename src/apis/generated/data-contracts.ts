@@ -121,6 +121,30 @@ export interface ApiResponseString {
   result?: string;
 }
 
+export interface AlarmToggleResponse {
+  alarmOn?: boolean;
+  message?: string;
+}
+
+export interface ApiResponseAlarmToggleResponse {
+  isSuccess?: boolean;
+  code?: string;
+  message?: string;
+  result?: AlarmToggleResponse;
+}
+
+export interface AgreeToggleResponse {
+  isAgreed?: boolean;
+  message?: string;
+}
+
+export interface ApiResponseAgreeToggleResponse {
+  isSuccess?: boolean;
+  code?: string;
+  message?: string;
+  result?: AgreeToggleResponse;
+}
+
 export interface ApiResponseLikeToggleDTO {
   isSuccess?: boolean;
   code?: string;
@@ -132,22 +156,22 @@ export interface LikeToggleDTO {
   is_liked?: boolean;
 }
 
-export interface ApiResponseUserResponse {
+export interface ApiResponseUserResponseDto {
   isSuccess?: boolean;
   code?: string;
   message?: string;
-  result?: UserResponse;
+  result?: UserResponseDto;
 }
 
-export interface UserResponse {
+export interface UserResponseDto {
   /** @format int64 */
   userId?: number;
   name?: string;
   email?: string;
-  socialType?: UserResponseSocialTypeEnum;
-  isActive?: UserResponseIsActiveEnum;
+  socialType?: UserResponseDtoSocialTypeEnum;
+  isActive?: UserResponseDtoIsActiveEnum;
   isAgreed?: boolean;
-  alarmOnoff?: boolean;
+  alarmOn?: boolean;
   /** @format date-time */
   createdAt?: string;
   /** @format date-time */
@@ -255,13 +279,13 @@ export interface ProductSummary {
   isLiked?: boolean;
 }
 
-export enum UserResponseSocialTypeEnum {
+export enum UserResponseDtoSocialTypeEnum {
   KAKAO = "KAKAO",
   GOOGLE = "GOOGLE",
   NAVER = "NAVER",
 }
 
-export enum UserResponseIsActiveEnum {
+export enum UserResponseDtoIsActiveEnum {
   ACTIVE = "ACTIVE",
   INACTIVE = "INACTIVE",
   DELETED = "DELETED",
