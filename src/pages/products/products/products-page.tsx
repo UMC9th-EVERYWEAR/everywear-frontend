@@ -26,7 +26,7 @@ const ProductsPage = () => {
 
 	return(
 		<div className="px-5 py-2.5 flex flex-col items-center">
-			<div className="w-full border-b border-neutral-200 flex justify-end max-w-md">
+			<div className="w-full border-neutral-200 flex justify-end max-w-md">
 
 				<button 
 					onClick={()=> setShowGuide(true)}

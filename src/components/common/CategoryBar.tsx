@@ -39,53 +39,53 @@ export const DressIcon = ({ isActive }: { isActive: boolean }) => (
 
 // 2. 부모로부터 selected와 onSelect를 받음
 const CategoryBar = ({ selected, onSelect }: CategoryBarProps) => {
-	const categories = [
-		{ name: '전체', renderIcon: (active: boolean) => <AllIcon isActive={active} /> },
-		{ name: '상의', renderIcon: (active: boolean) => <TopIcon isActive={active} /> },
-		{ name: '하의', renderIcon: (active: boolean) => <BottomIcon isActive={active} /> },
-		{ name: '아우터', renderIcon: (active: boolean) => <OuterIcon isActive={active} /> },
-		{ name: '원피스', renderIcon: (active: boolean) => <DressIcon isActive={active} /> },
-	];
+    const categories = [
+        { name: '전체', renderIcon: (active: boolean) => <AllIcon isActive={active} /> },
+        { name: '상의', renderIcon: (active: boolean) => <TopIcon isActive={active} /> },
+        { name: '하의', renderIcon: (active: boolean) => <BottomIcon isActive={active} /> },
+        { name: '아우터', renderIcon: (active: boolean) => <OuterIcon isActive={active} /> },
+        { name: '원피스', renderIcon: (active: boolean) => <DressIcon isActive={active} /> },
+    ];
 
-	return (
-		<div className='w-[375px] overflow-x-auto no-scrollbar bg-[var(--color-neutral-50)] sticky z-20'>
-			<div className='flex gap-[10px] p-4 items-center whitespace-nowrap'>
-				{categories.map((cat) => {
-					const isActive = selected === cat.name;
+    return (
+        <div className='w-[375px] overflow-x-auto no-scrollbar bg-white sticky z-20'>
+            <div className='flex gap-[10px] p-4 items-center whitespace-nowrap'>
+                {categories.map((cat) => {
+                    const isActive = selected === cat.name;
                 
-					return (
-						<button
-							key={cat.name}
-							onClick={() => onSelect(cat.name)}
-							className={`
+                    return (
+                        <button
+                            key={cat.name}
+                            onClick={() => onSelect(cat.name)}
+                            className={`
                             flex items-center justify-center min-w-[60px] p-[10px] 
                             rounded-full gap-0 border box-border cursor-pointer
                             transition-all duration-200
                             ${isActive 
-								? 'bg-[var(--color-primary-600)] text-[var(--color-neutral-50)] border-[var(--color-primary-600)]'
-								: 'bg-white text-[var(--color-neutral-700)] border-[var(--color-neutral-300)]'
+                                ? 'bg-[var(--color-primary-600)] text-[var(--color-neutral-50)] border-[var(--color-primary-600)]'
+                                : 'bg-white text-[var(--color-neutral-700)] border-[var(--color-neutral-300)]'
                             }
                         `}
-						>
-							<div className='flex items-center justify-center shrink-0'>
-								{cat.renderIcon(isActive)}
-							</div>
+                        >
+                            <div className='flex items-center justify-center shrink-0'>
+                                {cat.renderIcon(isActive)}
+                            </div>
                         
-							<span
-								className={`
+                            <span
+                                className={`
                                 text-medium-12
                                 ${isActive ? 'font-bold' : ''}
                                 ${cat.name === '전체' ? 'ml-[2px]' : 'ml-[-1px]'}
                             `}
-							>
-								{cat.name}
-							</span>
-						</button>
-					);
-				})}
-			</div>
-		</div>
-	);
+                            >
+                                {cat.name}
+                            </span>
+                        </button>
+                    );
+                })}
+            </div>
+        </div>
+    );
 };
 
 export default CategoryBar;
