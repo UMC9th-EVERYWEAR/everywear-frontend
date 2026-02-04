@@ -11,6 +11,7 @@ import RectangleIcon from '@/public/svgs/LogoImages/Rectangle.svg';
 import EllipseIcon from '@/public/svgs/LogoImages/Ellipse.svg';     
 import { MALL_LINKS } from '../constants/link';
 import { useRecentFittingsQuery, useHomeProductsQuery } from '@/src/hooks/queries/useHomeQueries';
+import { QUERY_KEYS } from '../constants/query-key';
 
 const Home = () => {
   const navigate = useNavigate();
@@ -18,8 +19,8 @@ const Home = () => {
 
   // 💡 홈 진입 시 데이터를 항상 최신으로 유지하기 위한 무효화 처리
   useEffect(() => {
-    queryClient.invalidateQueries({ queryKey: ['homeProducts'] });
-    queryClient.invalidateQueries({ queryKey: ['recentFittings'] });
+    queryClient.invalidateQueries({ queryKey: QUERY_KEYS.PRODUCT.LIST });
+    queryClient.invalidateQueries({ queryKey: QUERY_KEYS.FITTING.RECENT });
   }, [queryClient]);
 
   const { data: recentFittings, isLoading: isFittingLoading } = useRecentFittingsQuery();
