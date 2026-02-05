@@ -7,6 +7,7 @@ import 'swiper/css/pagination';
 import { cn } from '@/src/utils/cn';
 import {  useEffect, useRef } from 'react';
 import { SETTING_IMAGES } from '@/src/constants/images';
+import type { Swiper as SwiperClass } from 'swiper/types';
 interface BannerProps {
 	photoItems?: PhotoItem[];
 	setPhotoItems?: (items: PhotoItem[]) => void;
@@ -121,10 +122,11 @@ const Banner = ({ activeRealIndex, photoItems, setPhotoItems, setActiveRealIndex
 					640: {  spaceBetween: 16 },
 				}}
 				className="photo-swiper pb-6 h-106.75"
-				//@ts-ignore
-				onSwiper={(swiper) => setActiveRealIndex(swiper.realIndex)}
-				//@ts-ignore
-				onSlideChange={(swiper) => setActiveRealIndex(swiper.realIndex)}
+				onSwiper={(swiper: SwiperClass) => {
+					setActiveRealIndex(swiper.realIndex);
+				}}
+				  onSlideChange={(swiper: SwiperClass) => {
+					setActiveRealIndex(swiper.realIndex)}}
 				loop
 			>
 				{photoItems?.map((item, idx) => (

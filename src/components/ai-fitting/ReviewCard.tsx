@@ -73,7 +73,7 @@ const ReviewCard = ({ data }: ReviewCardProps) => {
 					{...dragEvents}
 					role="region"
 					aria-label="리뷰 이미지 슬라이더"
-					tabIndex={0}
+					// tabIndex={0}
 				>
 					{data.images.map((img) => (
 						<div

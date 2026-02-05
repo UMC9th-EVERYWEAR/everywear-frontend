@@ -1,4 +1,4 @@
-import { LOGO_IMAGES } from "@/src/constants/images";
+import { LOGO_IMAGES } from '@/src/constants/images';
 
 
 const mallLogos = [
