@@ -18,7 +18,7 @@ export const getFittingDetail = async (fittingId: number) => {
 
 export const getHomeRecentFittings = async () => {
 	const { data } = await apiClient.getRecentFittings();
-	return data.result;
+	return data.result ?? [];
 };
 
 
