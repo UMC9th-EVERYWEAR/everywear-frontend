@@ -4,7 +4,7 @@ export const SVG_ICON_DATA = {
 All: (isActive: boolean) => (
 		<svg
 			xmlns='http://www.w3.org/2000/svg'
-			width='12'
+			width='14'
 			height='16'
 			viewBox='0 0 12 12'
 			fill='none'
