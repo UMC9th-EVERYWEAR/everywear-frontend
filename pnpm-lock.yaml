@@ -3090,13 +3090,8 @@ snapshots:
   browserslist@4.28.1:
     dependencies:
       baseline-browser-mapping: 2.9.19
-<<<<<<< HEAD
       caniuse-lite: 1.0.30001767
       electron-to-chromium: 1.5.283
-=======
-      caniuse-lite: 1.0.30001766
-      electron-to-chromium: 1.5.267
->>>>>>> develop
       node-releases: 2.0.27
       update-browserslist-db: 1.2.3(browserslist@4.28.1)
 
@@ -3253,11 +3248,7 @@ snapshots:
       es-errors: 1.3.0
       gopd: 1.2.0
 
-<<<<<<< HEAD
   electron-to-chromium@1.5.283: {}
-=======
-  electron-to-chromium@1.5.267: {}
->>>>>>> develop
 
   emoji-regex@8.0.0: {}
 
