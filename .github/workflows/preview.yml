@@ -1,0 +1,80 @@
+name: Vercel Preview Deployment
+
+env:
+  VERCEL_ORG_ID: ${{secrets.VERCEL_ORG_ID}}
+  VERCEL_PROJECT_ID: ${{secrets.VERCEL_PROJECT_ID}}
+
+on:
+  push:
+    branches:
+      - develop
+  pull_request:
+    branches:
+      - develop
+    types: [closed]
+
+
+
+jobs:
+  Deploy-Preview:
+    runs-on: ubuntu-latest
+
+    # # PR이 merge된 경우에만 실행
+    if: github.event_name == 'pull_request' && github.event.pull_request.merged == true || github.event_name == 'push'
+    
+
+
+    steps:
+      # 1. 코드 체크아웃
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          ref: develop
+      
+      # 2. pnpm 설정
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+            version: 10
+      
+      # 3. Node.js 설정(pnpm 캐싱 포함)
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+            node-version: 22
+            cache: "pnpm"
+      
+      # 4. 의존성 설치
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+      
+      # # 5. 린트 검사
+      # - name: Run lint
+      #   run: pnpm run lint
+      #   continue-on-error: true
+
+      # # 6. 테스트 실행
+      # - name: Run tests
+      #   run: pnpm tests
+
+      # 7. Vercel CLI 설치
+      - name: Install Vercel CLI
+        run: pnpm add -g vercel@latest
+      
+      # 8. Vercel 환경변수 다운로드
+      - name: Pull Vercel Environment Information
+        run: vercel pull --yes --environment=preview --token=${{secrets.VERCEL_TOKEN}}
+      
+      # 9. 프로젝트 빌드
+      - name: Build Project Artifacts
+        # run: vercel build --token=${{secrets.VERCEL_TOKEN}}
+        run: vercel build --token=${{secrets.VERCEL_TOKEN}}
+
+      # 10. Vercel에 배포 (prebuilt 사용)
+      # --prebuilt : 이미 빌드된 .vercel/output 폴더를 업로드만 진행
+      # 사용 이유
+      # 1. 소스코드 보안 : vercel에 소스코드 전송 X
+      # 2. 커스텀 검증 : 빌드 전에 린트, 테스트 등 먼저 진행 O
+      # 3. 빌드 환경 제어 : Github Actions의 빌드 환경 직접 관리 O
+      - name: Deploy Project Artifacts to Vercel
+        run: vercel deploy --prebuilt --token=${{secrets.VERCEL_TOKEN}}

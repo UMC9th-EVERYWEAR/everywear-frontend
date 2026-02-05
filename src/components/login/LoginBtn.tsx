@@ -1,5 +1,4 @@
-import kakaoIcon from '@/public/svgs/login/kakao-icon.svg'
-import googleIcon from '@/public/svgs/login/google-icon.svg'
+import { LOGIN_IMAGES } from '@/src/constants/images';
 import { cn } from '@/src/utils/cn'
 
 export type LoginType = 'KAKAO' | 'GOOGLE' // TODO: 나중에 설정페이지에서 재사용하도록 수정
@@ -11,11 +10,11 @@ icon: string,
 description: string
 }> = {
 	KAKAO :{
-		icon: kakaoIcon,
+		icon: LOGIN_IMAGES.KAKAO_ICON,
 		description: '카카오로 로그인',
 	},
 	GOOGLE :{
-		icon: googleIcon,
+		icon: LOGIN_IMAGES.GOOGLE_ICON,
 		description: 'Google로 로그인',
 	},
 }

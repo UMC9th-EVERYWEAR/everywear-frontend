@@ -1,13 +1,11 @@
-import MusinsaLogo from '@/public/svgs/LogoImages/MusinsaLogo.svg';
-import ZigzagLogo from '@/public/svgs/LogoImages/ZigzagLogo.png';
-import Logo29cm from '@/public/svgs/LogoImages/29cmLogo.svg';
-import WLogo from '@/public/svgs/LogoImages/WLogo.svg';
+import { LOGO_IMAGES } from "@/src/constants/images";
+
 
 const mallLogos = [
-	{ src: MusinsaLogo, alt: '무신사', imgClassName: 'w-full h-full object-cover', wrapperClassName: 'bg-black' },
-	{ src: ZigzagLogo, alt: '지그재그', imgClassName: 'w-full h-full object-cover', wrapperClassName: 'bg-black' },
-	{ src: Logo29cm, alt: '29CM', imgClassName: 'w-full h-full object-cover pb-1.5 pr-1', wrapperClassName: 'bg-black' },
-	{ src: WLogo, alt: 'W컨셉', imgClassName: 'w-full h-full object-contain', wrapperClassName: 'bg-white shadow-8' },
+	{ src: LOGO_IMAGES.MUSINSA, alt: '무신사', imgClassName: 'w-full h-full object-cover', wrapperClassName: 'bg-black' },
+	{ src: LOGO_IMAGES.ZIGZAG, alt: '지그재그', imgClassName: 'w-full h-full object-cover', wrapperClassName: 'bg-black' },
+	{ src: LOGO_IMAGES.LOGO_29CM, alt: '29CM', imgClassName: 'w-full h-full object-cover pb-1.5 pr-1', wrapperClassName: 'bg-black' },
+	{ src: LOGO_IMAGES.W_LOGO, alt: 'W컨셉', imgClassName: 'w-full h-full object-contain', wrapperClassName: 'bg-white shadow-8' },
 ];
 
 

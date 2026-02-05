@@ -1,6 +1,6 @@
-import logo from '@/public/svgs/LogoImages/Everywear.svg'
 import Button from '@/src/components/common/Button';
 import TermsCheckBox, { type TermsCheckedState, type TermType } from '@/src/components/login/TermsCheckBox'
+import { LOGO_IMAGES } from '@/src/constants/images';
 import  { TERMS_LINK } from '@/src/constants/link';
 import { PATH } from '@/src/constants/path';
 import { useLogin } from '@/src/hooks/service/auth/useLogin';
@@ -65,7 +65,7 @@ const LoginTermsPage = () => {
 
 
 				<img
-					src={logo}
+					src={LOGO_IMAGES.EVERYWEAR}
 					alt='logo'
 					className='w-full px-6 mb-5'
 				/>

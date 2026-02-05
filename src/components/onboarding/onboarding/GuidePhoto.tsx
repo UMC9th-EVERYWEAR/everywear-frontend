@@ -1,10 +1,4 @@
-import dummy from '@/public/svgs/setting/dummyphoto.jpeg'
-import checkMarked from '@/public/svgs/onboarding/checkbox-marked.svg';
-import noCheckMarked from '@/public/svgs/onboarding/close-box.svg';
-// import badImg from '@/public/svgs/onboarding/single-bad.svg'
-// import goodImg from '@/public/svgs/onboarding/single-shot.svg'
-
-
+import { LOGIN_IMAGES, ONBOARDING_IMAGES } from '@/src/constants/images';
 import { cn } from '@/src/utils/cn';
 
 
@@ -54,12 +48,12 @@ const GuidePhoto = ({
 				}
 			>
 				<img
-					src={dummy}
+					src={LOGIN_IMAGES.CHECK_BOX}
 					alt='guide'
 					className="w-full h-full object-cover"
 				/>
 				<img	
-					src={variant === 'GOOD' ? checkMarked : noCheckMarked}
+					src={variant === 'GOOD' ? ONBOARDING_IMAGES.CHECKBOX_MARKED : ONBOARDING_IMAGES.CHECKBOX_MARKED_CLOSE}
 					alt='check'
 					className={cn('absolute right-2 bottom-2',
 						hasText ? 'w-6' : 'w-4.5')
