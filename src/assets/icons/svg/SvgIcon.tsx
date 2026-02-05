@@ -1,5 +1,7 @@
+import React from 'react';
+
 export const SVG_ICON_DATA = {
-All: (isActive: boolean) => (
+	All: (isActive: boolean) => (
 		<svg
 			xmlns='http://www.w3.org/2000/svg'
 			width='12'
@@ -28,7 +30,7 @@ All: (isActive: boolean) => (
 			/>
 		</svg>
 	),
-  Bottom: (isActive: boolean) => (
+	Bottom: (isActive: boolean) => (
 		<svg
 			xmlns='http://www.w3.org/2000/svg'
 			width='12'
@@ -74,10 +76,22 @@ All: (isActive: boolean) => (
 		</svg>
 	),
 
-  Etc: (isActive: boolean) => (
-<svg viewBox="0 0 16 16" width='20' height='16' fill="none" xmlns="http://www.w3.org/2000/svg"  anim:transform-origin="50% 50%" >
-        <path id="Vector" d="M8.00667 4.86621H8M8.00667 7.99954H8M8.00667 11.1329H8"       stroke={isActive ? '#FFFFFF' : '#596373'} stroke-width="2.6" stroke-linecap="round" ></path>
-</svg>
+	Etc: (isActive: boolean) => (
+		<svg
+			viewBox="0 0 16 16"
+			width='20'
+			height='16'
+			fill="none"
+			xmlns="http://www.w3.org/2000/svg"
+		>
+			<path
+				id="Vector"
+				d="M8.00667 4.86621H8M8.00667 7.99954H8M8.00667 11.1329H8"
+				stroke={isActive ? '#FFFFFF' : '#596373'}
+				strokeWidth="2.6"
+				strokeLinecap="round"
+			></path>
+		</svg>
 
 	),
 

@@ -1,4 +1,4 @@
-import  { ONBOARDING_IMAGES } from "@/src/constants/images";
+import  { ONBOARDING_IMAGES } from '@/src/constants/images';
 
 
 export type PhotoBtnType =

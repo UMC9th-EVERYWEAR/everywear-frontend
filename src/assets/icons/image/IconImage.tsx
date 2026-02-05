@@ -1,4 +1,5 @@
-import { type ImageIconKey, IMAGE_ICON_DATA } from "./ImageIcons";
+import { type ImageIconKey, IMAGE_ICON_DATA } from './ImageIcons';
+import React from 'react';
 
 interface IconImageProps
   extends React.ImgHTMLAttributes<HTMLImageElement> {
@@ -8,16 +9,16 @@ interface IconImageProps
 }
 
 export const IconImage = ({
-  name,
-  active = false,
-  size = 24,
-  ...props
+	name,
+	active = false,
+	size = 24,
+	...props
 }: IconImageProps) => (
-  <img
-    src={IMAGE_ICON_DATA[name](active)}
-    width={size}
-    height={size}
-    alt={name}
-    {...props}
-  />
+	<img
+		src={IMAGE_ICON_DATA[name](active)}
+		width={size}
+		height={size}
+		alt={name}
+		{...props}
+	/>
 );

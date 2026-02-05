@@ -22,11 +22,11 @@ export const Modal = ({
 	if (!isOpen) return null;
 
 	return (
-		<div
+		<button
 			className="fixed inset-0 z-[100] flex items-center justify-center bg-black/50"
 			onClick={onClose}
 		>
-			<div
+			<button
 				className="flex w-[303px] p-[20px] flex-col items-center gap-[16px] rounded-[12px] bg-white shadow-12"
 				onClick={(e) => e.stopPropagation()}
 			>
@@ -64,7 +64,7 @@ export const Modal = ({
 						{btn1Text}
 					</button>
 				</div>
-			</div>
-		</div>
+			</button>
+		</button>
 	);
 };

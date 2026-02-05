@@ -1,4 +1,4 @@
-import { LOGIN_IMAGES } from "@/src/constants/images";
+import { LOGIN_IMAGES } from '@/src/constants/images';
 
 
 
