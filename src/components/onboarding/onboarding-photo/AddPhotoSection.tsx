@@ -2,7 +2,6 @@
 import Button from '@/src/components/common/Button';
 import PhotoBtn, { type PhotoBtnType } from './PhotoBtn';
 import { cn } from '@/src/utils/cn';
-import React from 'react';
 import { usePhotoInput } from '@/src/hooks/domain/onboarding/usePhotoInput';
 
 interface AddPhotoSectionProps {
