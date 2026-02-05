@@ -1,5 +1,5 @@
 // 로딩 시 보여줄거임
-import { ICON_DATA } from '@/public/Svgs/Icons/SvgIndex';
+import { ICON_DATA } from '../../assets/icons/SvgIndex';
 import { useRotatingIcon } from '@/src/hooks/domain/products/useRotatingIcon';
 
 

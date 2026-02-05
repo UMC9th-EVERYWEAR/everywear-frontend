@@ -1,5 +1,5 @@
 import Button from '@/src/components/common/Button';
-import { ICON_DATA } from '@/public/Svgs/Icons/SvgIndex';
+import { ICON_DATA } from '../../assets/icons/SvgIndex
 import { useRotatingIcon } from '@/src/hooks/domain/products/useRotatingIcon';
 
 interface LinkSectionProps {

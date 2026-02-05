@@ -3,8 +3,8 @@ import ReviewCard from './ReviewCard';
 import type { ReviewState } from '@/src/types/ai-fitting/status';
 import { LoadingSpinner } from './LoadingSpinner';
 import { cn } from '@/src/utils/cn';
-import RotateIcon from '@/public/ai-fitting/RotateIcon.svg';
 import { useEffect, useState } from 'react';
+import { AI_FITTING_IMAGES } from '@/src/constants/images';
 
 interface ReviewTabProps {
     state: ReviewState;
@@ -89,7 +89,7 @@ const ReviewTab = ({ state, handleStartReview }: ReviewTabProps) => {
 									onClick={handleStartReview}
 								>
 									<img
-										src={RotateIcon}
+										src={AI_FITTING_IMAGES.ROTATE_ICON}
 										alt='새로고침 버튼'
 									/>
 								</button>

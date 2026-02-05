@@ -1,4 +1,4 @@
-import { ICON_DATA } from '../../../public/Svgs/Icons/SvgIndex';
+import { ICON_DATA } from '../../assets/icons/SvgIndex';
 
 // 1. Props 타입 정의
 interface CategoryBarProps {

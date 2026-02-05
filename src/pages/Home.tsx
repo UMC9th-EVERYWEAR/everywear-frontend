@@ -2,7 +2,7 @@ import { useRef, useState } from 'react';
 import { Button } from '@/src/components/common/Button';
 import MusinsaLogo from '@/public/svgs/LogoImages/MusinsaLogo.svg';
 import ZigzagLogo from '@/public/svgs/LogoImages/ZigzagLogo.png';
-import Logo29cm from '@/public/svgs/LogoImages/29cmLogo.svg';
+import Logo29cm from '../assets/icons/Iconages/29cmLogo.svg';
 import WLogo from '@/public/svgs/LogoImages/WLogo.svg';
 import ProductCard from '@/src/components/common/ProductCard';
 import RectangleIcon from '@/public/svgs/LogoImages/Rectangle.svg'; 
