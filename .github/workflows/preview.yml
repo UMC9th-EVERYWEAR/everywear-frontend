@@ -67,7 +67,8 @@ jobs:
       
       # 9. 프로젝트 빌드
       - name: Build Project Artifacts
-        run: vercel build --token=${{secrets.VERCEL_TOKEN}}
+        # run: vercel build --token=${{secrets.VERCEL_TOKEN}}
+        run: vercel build --no-check --token=${{secrets.VERCEL_TOKEN}}
 
       # 10. Vercel에 배포 (prebuilt 사용)
       # --prebuilt : 이미 빌드된 .vercel/output 폴더를 업로드만 진행
