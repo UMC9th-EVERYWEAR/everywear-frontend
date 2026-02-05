@@ -1,5 +1,5 @@
 // @ts-nocheck
-import { ApiResponseMapStringObject } from "./data-contracts";
+import type { ApiResponseMapStringObject } from "./data-contracts";
 import { HttpClient } from "./http-client";
 import type { RequestParams } from "./http-client";
 
