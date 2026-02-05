@@ -44,7 +44,7 @@ jobs:
         run: pnpm run lint
 
       # 6. 테스트 실행
-      - nmae: Run tests
+      - name: Run tests
         run: pnpm tests
 
       # 7. Vercel CLI 설치
