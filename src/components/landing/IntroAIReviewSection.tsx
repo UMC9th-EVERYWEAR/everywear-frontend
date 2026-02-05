@@ -1,7 +1,7 @@
-import intro3 from '@/public/svgs/landing/intro3.svg'
 import SectionTitle from './SectionTitle'
 import Callout from './Callout'
 import ScrollAnimationContainer from '../onboarding/onboarding/ScrollAnimationContainer'
+import { LANDING_IMAGES } from '@/src/constants/images'
 
 interface IntroAIReviewSectionProps {
   onNext: () => void
@@ -24,7 +24,7 @@ const IntroAIReviewSection = ({ onNext }: IntroAIReviewSectionProps) => {
 
 					{/* image */}
 					<img
-						src={intro3}
+						src={LANDING_IMAGES.INTRO_3}
 						alt="intro3"
 						className="relative w-45 h-80 object-contain z-20"
 					/>			

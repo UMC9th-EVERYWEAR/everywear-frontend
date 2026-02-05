@@ -1,7 +1,7 @@
-import intro2 from '@/public/svgs/landing/intro2.svg'
 import SectionTitle from './SectionTitle'
 import Callout from './Callout'
 import ScrollAnimationContainer from '../onboarding/onboarding/ScrollAnimationContainer'
+import { LANDING_IMAGES } from '@/src/constants/images'
 
 const IntroAIFittingSection = () => {
 	return(
@@ -17,7 +17,7 @@ const IntroAIFittingSection = () => {
 				<div className="absolute top-0 left-7 flex items-center justify-center">
 					{/* image */}
 					<img
-						src={intro2}
+						src={LANDING_IMAGES.INTRO_2}
 						alt="intro2"
 						className="relative object-cover z-20"
 					/>			

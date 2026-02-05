@@ -1,7 +1,4 @@
-
-import cameraIcon from '@/public/svgs/onboarding/camera-blue.svg';
-import galleryIcon from '@/public/svgs/onboarding/gallerly.svg';
-
+import  { ONBOARDING_IMAGES } from "@/src/constants/images";
 
 
 export type PhotoBtnType =
@@ -18,11 +15,11 @@ const PHOTO_BTN_CONFIG: Record<
 > = {
 	CAMERA: {
 		title: '사진 촬영',
-		icon: cameraIcon, 
+		icon: ONBOARDING_IMAGES.CAMERA_BLUE, 
 	},
 	GALLERY: {
 		title: '갤러리에서 선택',
-		icon: galleryIcon,
+		icon: ONBOARDING_IMAGES.GALLERY,
 	},
 };
 

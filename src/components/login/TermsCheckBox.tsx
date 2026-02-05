@@ -1,5 +1,5 @@
-import checkBox from '@/public/svgs/login/check-box.svg'
-import nonCheckBox from '@/public/svgs/login/no-check-box.svg'
+import { LOGIN_IMAGES } from "@/src/constants/images";
+
 
 
 export type TermType =
@@ -32,7 +32,7 @@ const TermsCheckBox = ({
 				className="cursor-pointer"
 			>
 				<img
-					src={checked ? checkBox : nonCheckBox}
+					src={checked ? LOGIN_IMAGES.CHECK_BOX : LOGIN_IMAGES.NO_CHECK_BOX}
 					alt={checked ? 'checkBox' : 'nonCheckBox'}
 				/>
 			</button>

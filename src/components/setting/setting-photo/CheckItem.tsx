@@ -1,4 +1,4 @@
-import checkIcon from '@/public/svgs/setting/check-icon.svg';
+import { SETTING_IMAGES } from '@/src/constants/images';
 
 interface CheckItemProps {
   text: string;
@@ -9,7 +9,7 @@ const CheckItem = ({ text, className }: CheckItemProps) => {
 	return (
 		<div className={`flex gap-0.5 ${className ?? ''}`}>
 			<img
-				src={checkIcon}
+				src={SETTING_IMAGES.CHECK}
 				alt="check icon"
 				className="inline-block align-middle"
 			/>

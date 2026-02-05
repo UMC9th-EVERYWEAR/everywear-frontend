@@ -1,4 +1,4 @@
-import arrowRight from '@/public/svgs/setting/arrow-right.svg';
+import { SETTING_IMAGES } from '@/src/constants/images';
 import { cn } from '@/src/utils/cn';
 
 interface ArrowRightIconProps {
@@ -9,7 +9,7 @@ interface ArrowRightIconProps {
 export const ArrowRightIcon = ({ className, rotated }: ArrowRightIconProps) => {
 	return (
 		<img
-			src={arrowRight}
+			src={SETTING_IMAGES.ARROW_RIGHT}
 			alt="arrow right"
 			className={cn(
 				'cursor-pointer transition-transform duration-200',

@@ -1,10 +1,11 @@
-export const ICON_DATA = {
-	// '전체' 아이콘
-	AllIcon: (isActive: boolean) => (
+import path from "path";
+
+export const SVG_ICON_DATA = {
+All: (isActive: boolean) => (
 		<svg
 			xmlns='http://www.w3.org/2000/svg'
-			width='14'
-			height='12'
+			width='12'
+			height='16'
 			viewBox='0 0 12 12'
 			fill='none'
 		>
@@ -14,12 +15,12 @@ export const ICON_DATA = {
 			/>
 		</svg>
 	),
-	// '상의' 아이콘
-	TopIcon: (isActive: boolean) => (
+
+	Top: (isActive: boolean) => (
 		<svg
 			xmlns='http://www.w3.org/2000/svg'
 			width='14'
-			height='12'
+			height='16'
 			viewBox='0 0 14 12'
 			fill='none'
 		>
@@ -29,11 +30,11 @@ export const ICON_DATA = {
 			/>
 		</svg>
 	),
-	BottomIcon: (isActive: boolean) => (
+  Bottom: (isActive: boolean) => (
 		<svg
 			xmlns='http://www.w3.org/2000/svg'
-			width='11'
-			height='15'
+			width='12'
+			height='16'
 			viewBox='0 0 11 15'
 			fill='none'
 		>
@@ -43,11 +44,11 @@ export const ICON_DATA = {
 			/>
 		</svg>
 	),
-	OuterIcon: (isActive: boolean) => (
+	Outer: (isActive: boolean) => (
 		<svg
 			xmlns='http://www.w3.org/2000/svg'
-			width='15'
-			height='14'
+			width='14'
+			height='16'
 			viewBox='0 0 15 14'
 			fill='none'
 		>
@@ -59,11 +60,12 @@ export const ICON_DATA = {
 			/>
 		</svg>
 	),
-	DressIcon: (isActive: boolean) => (
+
+	Dress: (isActive: boolean) => (
 		<svg
 			xmlns='http://www.w3.org/2000/svg'
-			width='13'
-			height='14'
+			width='14'
+			height='16'
 			viewBox='0 0 13 14'
 			fill='none'
 		>
@@ -74,23 +76,14 @@ export const ICON_DATA = {
 		</svg>
 	),
 
-	HomeIcon: (active: boolean) => (
-		active ? '/svgs/LogoImages/home-on.svg' : '/svgs/LogoImages/home-off.svg'
+  Etc: (isActive: boolean) => (
+<svg viewBox="0 0 16 16" width='20' height='16' fill="none" xmlns="http://www.w3.org/2000/svg"  anim:transform-origin="50% 50%" >
+        <path id="Vector" d="M8.00667 4.86621H8M8.00667 7.99954H8M8.00667 11.1329H8"       stroke={isActive ? '#FFFFFF' : '#596373'} stroke-width="2.6" stroke-linecap="round" ></path>
+</svg>
+
 	),
 
-	ProductIcon: (active: boolean) =>(
-		active ? '/svgs/LogoImages/clothes-on.svg' : '/svgs/LogoImages/clothes-off.svg'
-	),
-	FittingIcon: (active: boolean) =>(
-		active ? '/svgs/LogoImages/hanger-on.svg' : '/svgs/LogoImages/hanger-off.svg'
-	),
-	ClosetIcon: (active: boolean) =>(
-		active ? '/svgs/LogoImages/closet-on.svg' : '/svgs/LogoImages/closet-off.svg'
-	),
-  
+} as const;
 
-};
-
-
-
-export type IconKey = keyof typeof ICON_DATA;
+export type SvgIconKey = keyof typeof SVG_ICON_DATA;
+export type SvgIconFn = (active: boolean) => React.ReactElement;

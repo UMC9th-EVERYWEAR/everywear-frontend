@@ -1,9 +1,9 @@
-import camera from '@/public/svgs/onboarding/camera-blue.svg'
 import Button from '@/src/components/common/Button'
 import OnboardingNotice from '@/src/components/onboarding/onboarding/OnboardingNotice'
 import OnboardingTip from '@/src/components/onboarding/onboarding/OnboardingTip'
 import ScrollAnimationContainer from './ScrollAnimationContainer'
 import { useState } from 'react'
+import { ONBOARDING_IMAGES } from '@/src/constants/images'
 
 interface OnboardingSectionProps {
   setIsGuide : () => void
@@ -17,7 +17,7 @@ const OnboardingSection = ({ setIsGuide } : OnboardingSectionProps) => {
 		<div className='flex flex-col items-center max-w-109'>
 
 			<img
-				src={camera}
+				src={ONBOARDING_IMAGES.CAMERA_BLUE}
 				alt='camera'
 				width={55}
 			/>

@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router';
 import { ICON_PATHS } from '../../constants/path'; 
+import { LOGO_IMAGES } from '@/src/constants/images';
 
 interface HeaderProps {
   type: 'main' | 'sub'; 
@@ -25,7 +26,7 @@ const Header = ({ type, title = 'EVERY WEAR', onBack }: HeaderProps) => {
                 /* 1. 메인 헤더 레이아웃*/
                 <div className="flex justify-between items-end w-full pb-1">
                     <img 
-                        src="../../public/svgs/LogoImages/Everywear.svg" 
+                        src={LOGO_IMAGES.EVERYWEAR}
                         alt="Everywear" 
                         className="h-[18px] w-auto object-contain"
                     />
