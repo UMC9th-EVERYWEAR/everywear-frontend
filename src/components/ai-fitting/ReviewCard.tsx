@@ -1,10 +1,9 @@
 import type { ReviewItem } from '@/src/types/ai-fitting/data'; // 경로 수정 필요
-import ReviewStarOff from '@/public/ai-fitting/ReviewStarOff.svg';
-import ReviewStarOn from '@/public/ai-fitting/ReviewStarOn.svg';
 import { useState } from 'react';
 import { truncate } from '@/src/utils/truncate';
 import useDraggableScroll from '@/src/hooks/domain/ai-fitting/useDraggableScroll';
 import { cn } from '@/src/utils/cn';
+import  { AI_FITTING_IMAGES } from '@/src/constants/images';
 
 interface ReviewCardProps {
     data: ReviewItem; 
@@ -30,7 +29,7 @@ const ReviewCard = ({ data }: ReviewCardProps) => {
 					{Array.from({ length: 5 }).map((_, index) => (
 						<img
 							key={index}
-							src={index < data.rating ? ReviewStarOn : ReviewStarOff} // starCount -> rating
+							src={index < data.rating ?  AI_FITTING_IMAGES.REVIEW_STAR_ON : AI_FITTING_IMAGES.REVIEW_STAR_OFF} // starCount -> rating
 							alt="별점"
 						/>
 					))}
@@ -74,7 +73,7 @@ const ReviewCard = ({ data }: ReviewCardProps) => {
 					{...dragEvents}
 					role="region"
 					aria-label="리뷰 이미지 슬라이더"
-					tabIndex={0}
+					// tabIndex={0}
 				>
 					{data.images.map((img) => (
 						<div

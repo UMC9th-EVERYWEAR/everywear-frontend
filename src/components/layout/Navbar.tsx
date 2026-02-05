@@ -1,13 +1,13 @@
 import { useNavigate, useLocation } from 'react-router'; 
-import { HomeIcon, ProductIcon, FittingIcon, ClosetIcon } from '../common/Icons';
 import { PATH } from '@/src/constants/path';
+import { IconImage } from '@/src/assets/icons';
 
 const NAV_ITEMS = [
-	{ id: 'home', label: '홈', Icon: HomeIcon, path: PATH.HOME }, 
-	{ id: 'product', label: '전체 상품', Icon: ProductIcon, path: PATH.PRODUCTS.ROOT },
-	{ id: 'fitting', label: '최근 피팅', Icon: FittingIcon, path: PATH.RECENT_FITTING },
-	{ id: 'closet', label: '내 옷장', Icon: ClosetIcon, path: PATH.CLOSET },
-];
+	{ id: 'home', label: '홈', Icon: 'Home', path: PATH.HOME }, 
+	{ id: 'product', label: '전체 상품', Icon: 'Product', path: PATH.PRODUCTS.ROOT },
+	{ id: 'fitting', label: '최근 피팅', Icon: 'Fitting', path: PATH.RECENT_FITTING },
+	{ id: 'closet', label: '내 옷장', Icon: 'Closet', path: PATH.CLOSET },
+] as const;
 
 export const Navbar = () => {
 	const navigate = useNavigate(); //이동을 위한 함수
@@ -29,7 +29,11 @@ export const Navbar = () => {
 					>
 						<div className="flex items-center justify-center h-[20px]">
 							{/* isActive를 props로 넘겨서 아이콘 색상을 바꿀 수 있다면 전달 */}
-							<Icon active={isActive} /> 
+									<IconImage
+												name={Icon}
+												size={20}
+												active={isActive} 
+													/>
 						</div>
 						<span className="text-regular-10 mt-[2px] font-medium leading-none text-center">
 							{label}

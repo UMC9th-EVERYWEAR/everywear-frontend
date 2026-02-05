@@ -1,7 +1,6 @@
 import { cn } from '@/src/utils/cn';
 import React, { useEffect, useMemo } from 'react';
-import cameraIcon from '@/public/svgs/setting/camera-icon.svg';
-import closeIcon from '@/public/svgs/setting/blue-close-icon.svg';
+import { SETTING_IMAGES } from '@/src/constants/images';
 
 
 type AttachmentPickerProps = {
@@ -87,7 +86,7 @@ const AttachmentPicker = ({ max = 5, files, onChangeFiles }: AttachmentPickerPro
 							)}
 						>
 							<img
-								src={closeIcon}
+								src={SETTING_IMAGES.BLUE_CLOSE}
 								alt="close"
 								className="h-1.5"
 							/>
@@ -105,7 +104,7 @@ const AttachmentPicker = ({ max = 5, files, onChangeFiles }: AttachmentPickerPro
 				>
 
 					<img
-						src={cameraIcon}
+						src={SETTING_IMAGES.CAMERA}
 						alt="camera"
 						className="w-6.5 h-6"
 					/>

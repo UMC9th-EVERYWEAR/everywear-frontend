@@ -1,4 +1,4 @@
-import { UserResponseSocialTypeEnum } from '@/src/apis/generated';
+import { UserResponseDtoSocialTypeEnum } from '@/src/apis/generated';
 import AccountSection from '@/src/components/setting/setting/AccountSection';
 import FooterActions from '@/src/components/setting/setting/FooterActions';
 import LogoutModal from '@/src/components/setting/setting/LogooutModal';
@@ -11,14 +11,14 @@ const SettingPage = () => {
 	const [openLoginSetting, setOpenLoginSetting] = useState(false);
 	const [openLogoutSetting, setOpenLogoutSetting] = useState(false);
 	
-	const [isNotificationEnabled, setIsNotificationEnabled] = useState(false);
+	// const [isNotificationEnabled, setIsNotificationEnabled] = useState(false);
 
 
 	const toggleLoginSetting = () =>
 		setOpenLoginSetting((prev) => !prev);
 
-	const toggleNotification = () =>
-		setIsNotificationEnabled((prev) => !prev);
+	// const toggleNotification = () =>
+	// 	setIsNotificationEnabled((prev) => !prev);
 
 	const navigate = useNavigate();
 	const goChangePhoto = () => {
@@ -36,7 +36,7 @@ const SettingPage = () => {
 
 	const meData = useMe();
 	const socialLogin =
-  meData.data?.socialType ?? UserResponseSocialTypeEnum.KAKAO;
+  meData.data?.socialType ?? UserResponseDtoSocialTypeEnum.KAKAO;
 	
 	return <div className="mt-5 mx-4 w-[calc(100%-32px)]">
 		<div className='text-neutral-900  mb-7 '>

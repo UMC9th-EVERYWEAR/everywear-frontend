@@ -18,6 +18,10 @@
 #       run: bundle audit
 #
 # pre-commit:
+#  commands:
+#    lint:
+#      glob: "*.{js,ts,jsx,tsx}"
+#      run: npx eslint {staged_files}
 #   parallel: true
 #   jobs:
 #     - run: yarn eslint {staged_files}
