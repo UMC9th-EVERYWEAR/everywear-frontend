@@ -4,7 +4,7 @@ pre-commit:
   commands:
     eslint:
       glob: '*.{js,ts,jsx,tsx}'
-      run: npx eslint {staged_files} --fix
+      run: pnpm eslint {staged_files} --fix
       stage_fixed: true
     # prettier:
     #   glob: '*.{js,ts,jsx,tsx,json,yaml,md,prettierrc}'
