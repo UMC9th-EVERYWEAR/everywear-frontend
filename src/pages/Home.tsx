@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react';
 import { Button } from '@/src/components/common/Button';
-import MusinsaLogo from '@/public/svgs/LogoImages/MusinsaLogo.svg';
+// import MusinsaLogo from '@/public/svgs/LogoImages/MusinsaLogo.svg';
 import ZigzagLogo from '@/public/svgs/LogoImages/ZigzagLogo.png';
 import Logo29cm from '@/public/svgs/LogoImages/29cmLogo.svg';
 import WLogo from '@/public/svgs/LogoImages/WLogo.svg';
@@ -44,15 +44,15 @@ const Home = () => {
 	return (
 		<div className='flex flex-col w-full bg-white pb-10 min-h-[calc(100vh-101px)]'>
       
-      {/* 1. 상단 섹션 */}
-      <section className='px-4 pt-10 pb-2'> 
-        <h2 className='text-[var(--color-neutral-900)] text-medium-16 mt-1'>
-          파트너 쇼핑몰
-        </h2>
-        <p className="text-[var(--color-neutral-700)] text-regular-12 tracking-[-0.36px]">
-          유명 브랜드 가상 피팅가이드를 확인해보세요
-        </p>
-      </section>
+			{/* 1. 상단 섹션 */}
+			<section className='px-4 pt-10 pb-2'> 
+				<h2 className='text-[var(--color-neutral-900)] text-medium-16 mt-1'>
+					파트너 쇼핑몰
+				</h2>
+				<p className="text-[var(--color-neutral-700)] text-regular-12 tracking-[-0.36px]">
+					유명 브랜드 가상 피팅가이드를 확인해보세요
+				</p>
+			</section>
 
 			{/* 2. 파트너 쇼핑몰 */}
 			<section className="flex gap-2 px-6 py-4 bg-white">
@@ -61,7 +61,7 @@ const Home = () => {
 					className="w-[75px] h-[75px] bg-black rounded-[6px] flex items-center justify-center overflow-hidden shrink-0"
 				>
 					<img
-						src={MusinsaLogo}
+						src="/svgs/LogoImages/MusinsaLogo.svg"
 						alt="무신사"
 						className="w-full h-full object-contain"
 					/>
