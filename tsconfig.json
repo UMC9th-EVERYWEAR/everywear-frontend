@@ -8,12 +8,7 @@
     "paths": {
       "@/src/*": ["./src/*"],
       "@/public/*": ["./public/*"]
-    },
-    // 1. 선언해놓고 안 쓴 변수 오류 무시 (TS6133 해결)
-    "noUnusedLocals": false,
-    "noUnusedParameters": false,
-
-    // 2. 타입이 명시되지 않은 'any' 타입 오류 무시 (TS7006 해결)
-    "noImplicitAny": false
+    }
+    
   }
 }
