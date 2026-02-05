@@ -1,19 +1,33 @@
 import { defineConfig } from 'vite'
 import tailwindcss from '@tailwindcss/vite'
 import tsconfigPaths from 'vite-tsconfig-paths'
+import path from 'path'
+import { fileURLToPath } from 'url' // 👈 [1] 이 줄 추가
+
+// [2] ESM 환경에서 __dirname 구현하기
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
 
 export default defineConfig(({ mode }) => {
 	const isDev = mode === 'development';
 
-	return{
+	return {
 		plugins: [
 			tailwindcss(),
 			tsconfigPaths(),
 		],
 
+		// 👇 [3] 중요! alias는 반드시 resolve 객체 안에 있어야 합니다.
+		resolve: {
+			alias: [
+				// "@/public"은 진짜 public 폴더를 가리키도록 설정
+				{ find: '@/public', replacement: path.resolve(__dirname, 'public') },
+                
+				// "@"는 src 폴더를 가리키도록 설정
+				{ find: '@', replacement: path.resolve(__dirname, 'src') },
+			],
+		},
 
-		// 이 설정은 브라우저가 localhost로만 요청하게 해서 CORS를 피하고,
-		// Vite가 대신 dev 백엔드로 요청을 전달하게 만들기 위한 장치
 		server: {
 			...(isDev && {
 				proxy: {
