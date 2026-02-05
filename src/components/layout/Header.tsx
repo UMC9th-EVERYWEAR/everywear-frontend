@@ -31,9 +31,9 @@ const Header = ({ type, title = 'EVERY WEAR', onBack }: HeaderProps) => {
                         className="h-[18px] w-auto object-contain"
                     />
                     <button 
-                        className="text-primary-600 transition-opacity active:opacity-50 cursor-pointer"
-                        aria-label="설정"
-                    >
+                            className="text-primary-600 transition-opacity active:opacity-50 cursor-pointer"
+                            aria-label="설정"
+                            onClick={() => navigate('/setting')} >
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             width="24"

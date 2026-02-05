@@ -23,7 +23,7 @@ export const MALL_LINKS = {
 	ZIGZAG:
 	{
 		label: '지그재그',
-		url: 'https://zigzag.onelink.me/9c0A',
+		url: 'https://zigzag.kr/',
 	},
 	MUSINSA:
 	{
@@ -33,12 +33,12 @@ export const MALL_LINKS = {
 	CM:
 	{
 		label: '29CM',
-		url: 'https://29cm.onelink.me/0M6z',
+		url: 'https://29cm.co.kr/',
 	},
 	WCONCEPT:
 	{
 		label: 'W컨셉',
-		url: 'https://wconcept.onelink.me/3h7P',
+		url: 'https://wconcept.co.kr',
 	},
 } as const;
 
