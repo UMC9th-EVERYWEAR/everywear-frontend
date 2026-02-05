@@ -1,5 +1,3 @@
-import path from "path";
-
 export const SVG_ICON_DATA = {
 All: (isActive: boolean) => (
 		<svg

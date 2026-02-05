@@ -13,3 +13,11 @@ export const userLogout = async () => {
 export const withdraw = async () => {
 	await apiClient.withdraw();
 };
+
+export const toggleAlarm = async () => {
+	await apiClient.toggleAlarm();
+};
+
+export const toggleAgree = async () => {
+	await apiClient.toggleAlarm();
+};
