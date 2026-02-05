@@ -7,7 +7,6 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import { cn } from '@/src/utils/cn';
 import {  useEffect, useRef } from 'react';
-
 interface BannerProps {
 	photoItems?: PhotoItem[];
 	setPhotoItems?: (items: PhotoItem[]) => void;
@@ -122,7 +121,9 @@ const Banner = ({ activeRealIndex, photoItems, setPhotoItems, setActiveRealIndex
 					640: {  spaceBetween: 16 },
 				}}
 				className="photo-swiper pb-6 h-106.75"
+				//@ts-ignore
 				onSwiper={(swiper) => setActiveRealIndex(swiper.realIndex)}
+				//@ts-ignore
 				onSlideChange={(swiper) => setActiveRealIndex(swiper.realIndex)}
 				loop
 			>

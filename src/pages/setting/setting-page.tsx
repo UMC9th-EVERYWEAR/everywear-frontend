@@ -11,14 +11,14 @@ const SettingPage = () => {
 	const [openLoginSetting, setOpenLoginSetting] = useState(false);
 	const [openLogoutSetting, setOpenLogoutSetting] = useState(false);
 	
-	const [isNotificationEnabled, setIsNotificationEnabled] = useState(false);
+	// const [isNotificationEnabled, setIsNotificationEnabled] = useState(false);
 
 
 	const toggleLoginSetting = () =>
 		setOpenLoginSetting((prev) => !prev);
 
-	const toggleNotification = () =>
-		setIsNotificationEnabled((prev) => !prev);
+	// const toggleNotification = () =>
+	// 	setIsNotificationEnabled((prev) => !prev);
 
 	const navigate = useNavigate();
 	const goChangePhoto = () => {

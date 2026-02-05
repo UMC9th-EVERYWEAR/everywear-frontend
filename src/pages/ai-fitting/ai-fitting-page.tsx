@@ -3,7 +3,7 @@ import TabBar from '@/src/components/ai-fitting/TabBar';
 import FittingItemInfo, { type ItemData } from '@/src/components/ai-fitting/FittingItemInfo';
 import FittingTab from '@/src/components/ai-fitting/FittingTab';
 import ReviewTab from '@/src/components/ai-fitting/ReviewTab'; 
-import type { FittingErrorReason, FittingState, ReviewState } from '@/src/types/ai-fitting/status';
+import type { FittingState, ReviewState } from '@/src/types/ai-fitting/status';
 import { MOCK_REVIEW_DATA } from '@/src/data/ai-fitting/reviewMockData'; 
 import Toast from '@/src/components/common/Toast';
 import ToastContainer from '@/src/components/common/ToastContainer';
@@ -85,33 +85,33 @@ const AiFittingPage = () => {
 		});
 	};
 
-	const handleErrorSummary = () => {
-		setReviewState((prev) => {
-			if (prev.status !== 'success') return prev;
+	// const handleErrorSummary = () => {
+	// 	setReviewState((prev) => {
+	// 		if (prev.status !== 'success') return prev;
 
-			return {
-				...prev,
-				summary: { 
-					status: 'error', 
-					error: 'INSUFFICIENT_REVIEWS', 
-				},
-			};
-		});
-		createToast({ message : '리뷰 수가 부족하여 AI 리뷰 요약이 불가능합니다.' })
+	// 		return {
+	// 			...prev,
+	// 			summary: { 
+	// 				status: 'error', 
+	// 				error: 'INSUFFICIENT_REVIEWS', 
+	// 			},
+	// 		};
+	// 	});
+	// 	createToast({ message : '리뷰 수가 부족하여 AI 리뷰 요약이 불가능합니다.' })
 
-	};
+	// };
 
-	const handleErrorReview = () => {
-		setReviewState({ status: 'error', error: 'SERVER_ERROR' });
-	}
+	// const handleErrorReview = () => {
+	// 	setReviewState({ status: 'error', error: 'SERVER_ERROR' });
+	// }
 
-	const handleErrorFitting = ( errorReason  : FittingErrorReason) => {
-		setFittingState({ status: 'error', error: errorReason })
-		createToast({ message: 'AI 피팅을 실패했습니다.' })
-		if (errorReason === 'INVALID_PRODUCT_IMAGE') createToast({ message: '피팅이 불가능한 상품입니다.' });
-		else if (errorReason === 'INVALID_USER_IMAGE') createToast({ message: '가이드에 맞는 대표사진으로 변경해주세요.' });
-		else if (errorReason === 'UNKNOWN_ERROR') createToast({ message: '예상치 못한 오류가 발생했습니다.' })
-	}
+	// const handleErrorFitting = ( errorReason  : FittingErrorReason) => {
+	// 	setFittingState({ status: 'error', error: errorReason })
+	// 	createToast({ message: 'AI 피팅을 실패했습니다.' })
+	// 	if (errorReason === 'INVALID_PRODUCT_IMAGE') createToast({ message: '피팅이 불가능한 상품입니다.' });
+	// 	else if (errorReason === 'INVALID_USER_IMAGE') createToast({ message: '가이드에 맞는 대표사진으로 변경해주세요.' });
+	// 	else if (errorReason === 'UNKNOWN_ERROR') createToast({ message: '예상치 못한 오류가 발생했습니다.' })
+	// }
 
 	const handleGeneralModalClose = () => {
 		setModal({ type: 'none' });
@@ -119,7 +119,7 @@ const AiFittingPage = () => {
 
 	// AI 피팅 시뮬레이터 함수
 	// TODO : api 연결로 대체
-	const handleSimulateFitting = (errorReason? : FittingErrorReason) => {
+	const handleSimulateFitting = () => {
 		handleStartFitting();
 		handleStartReview();
 		setTimeout(() => {
