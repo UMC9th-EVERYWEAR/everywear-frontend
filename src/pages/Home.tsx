@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react';
 import { Button } from '@/src/components/common/Button';
-// import MusinsaLogo from '@/public/svgs/LogoImages/MusinsaLogo.svg';
+import MusinsaLogo from '@/public/svgs/LogoImages/MusinsaLogo.svg';
 import ZigzagLogo from '@/public/svgs/LogoImages/ZigzagLogo.png';
 import Logo29cm from '@/public/svgs/LogoImages/29cmLogo.svg';
 import WLogo from '@/public/svgs/LogoImages/WLogo.svg';
@@ -61,7 +61,7 @@ const Home = () => {
 					className="w-[75px] h-[75px] bg-black rounded-[6px] flex items-center justify-center overflow-hidden shrink-0"
 				>
 					<img
-						src="/svgs/LogoImages/MusinsaLogo.svg"
+						src={MusinsaLogo}
 						alt="무신사"
 						className="w-full h-full object-contain"
 					/>
