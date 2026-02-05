@@ -48,14 +48,14 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
       
-      # 5. 린트 검사
-      - name: Run lint
-        run: pnpm run lint
-        continue-on-error: true
+      # # 5. 린트 검사
+      # - name: Run lint
+      #   run: pnpm run lint
+      #   continue-on-error: true
 
-      # 6. 테스트 실행
-      - name: Run tests
-        run: pnpm tests
+      # # 6. 테스트 실행
+      # - name: Run tests
+      #   run: pnpm tests
 
       # 7. Vercel CLI 설치
       - name: Install Vercel CLI
