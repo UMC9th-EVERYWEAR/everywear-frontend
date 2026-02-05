@@ -9,7 +9,8 @@ interface ItemBrowseSectionProps {
 }
 
 const ItemBrowseSection = ({ data } : ItemBrowseSectionProps) => {
-	const [isLoading, setIsLoading] = useState(false)
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
+	const [isLoading, _setIsLoading] = useState(false)
 	  const MIN_PRODUCTS = 8; // 로딩시 보여줄 임시 상품 개수
 
 	if (isLoading) {
