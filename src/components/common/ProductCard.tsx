@@ -73,7 +73,7 @@ const ProductCard = ({
             >
                 {/* 회사명 & 별점 */}
                 <div className="flex justify-between items-center text-regular-10">
-                    <span className="text-[var(--color-neutral-500)] font-anonymous truncate max-w-[70px]">
+                    <span className="text-[var(--color-neutral-500)] font-pretandard truncate max-w-[70px]">
                         {company || "브랜드"}
                     </span>
                     <div className="flex items-center">
