@@ -1,4 +1,3 @@
-import plusIcon from '@/public/svgs/setting/plus-icon.svg';
 import type { PhotoItem } from '@/src/types/schemas/setting/setting-photo';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination } from 'swiper/modules';
@@ -7,7 +6,7 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import { cn } from '@/src/utils/cn';
 import {  useEffect, useRef } from 'react';
-
+import { SETTING_IMAGES } from '@/src/constants/images';
 interface BannerProps {
 	photoItems?: PhotoItem[];
 	setPhotoItems?: (items: PhotoItem[]) => void;
@@ -74,7 +73,7 @@ const Banner = ({ activeRealIndex, photoItems, setPhotoItems, setActiveRealIndex
 						className="w-full h-full aspect-square rounded-lg bg-neutral-50 flex items-center justify-center cursor-pointer hover:opacity-75"
 					>
 						<img
-							src={plusIcon}
+							src={SETTING_IMAGES.PLUS}
 							alt="add"
 							className='rounded'
 						/>
@@ -122,7 +121,9 @@ const Banner = ({ activeRealIndex, photoItems, setPhotoItems, setActiveRealIndex
 					640: {  spaceBetween: 16 },
 				}}
 				className="photo-swiper pb-6 h-106.75"
+				//@ts-ignore
 				onSwiper={(swiper) => setActiveRealIndex(swiper.realIndex)}
+				//@ts-ignore
 				onSlideChange={(swiper) => setActiveRealIndex(swiper.realIndex)}
 				loop
 			>
