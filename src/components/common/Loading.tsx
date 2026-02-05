@@ -1,13 +1,15 @@
 // 로딩 시 보여줄거임
-import { ICON_DATA } from '../../assets/icons/SvgIndex';
+import { SVG_ICON_DATA, type SvgIconFn } from '@/src/assets/icons';
 import { useRotatingIcon } from '@/src/hooks/domain/products/useRotatingIcon';
 
 
-const LOADING_ICONS = [
-	ICON_DATA.TopIcon,
-	ICON_DATA.BottomIcon,
-	ICON_DATA.OuterIcon,
-	ICON_DATA.DressIcon,
+
+
+const LOADING_ICONS: SvgIconFn[] = [
+  SVG_ICON_DATA.Top,
+  SVG_ICON_DATA.Bottom,
+  SVG_ICON_DATA.Outer,
+  SVG_ICON_DATA.Dress,
 ];
 
 

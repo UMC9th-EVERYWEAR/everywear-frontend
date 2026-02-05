@@ -1,6 +1,6 @@
 import Button from '@/src/components/common/Button';
-import { ICON_DATA } from '../../assets/icons/SvgIndex
 import { useRotatingIcon } from '@/src/hooks/domain/products/useRotatingIcon';
+import { SVG_ICON_DATA, type SvgIconFn } from '@/src/assets/icons';
 
 interface LinkSectionProps {
   link: string;
@@ -10,11 +10,11 @@ interface LinkSectionProps {
   onSubmit: () => void;
 }
 
-const LOADING_ICONS = [
-	ICON_DATA.TopIcon,
-	ICON_DATA.BottomIcon,
-	ICON_DATA.OuterIcon,
-	ICON_DATA.DressIcon,
+const LOADING_ICONS: SvgIconFn[] = [
+	SVG_ICON_DATA.Top,
+	SVG_ICON_DATA.Bottom,
+	SVG_ICON_DATA.Outer,
+	SVG_ICON_DATA.Dress,
 ];
 
 

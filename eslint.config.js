@@ -27,6 +27,10 @@ export default defineConfig([
       react.configs.flat.recommended,
 
     ],
+    env: {
+    browser: true,
+    node: true,
+  },
     languageOptions: {
       ecmaVersion: 2020,     
       ...react.configs.flat.recommended.languageOptions,

@@ -1,13 +1,8 @@
 import { useRef, useState } from 'react';
 import { Button } from '@/src/components/common/Button';
-import MusinsaLogo from '@/public/svgs/LogoImages/MusinsaLogo.svg';
-import ZigzagLogo from '@/public/svgs/LogoImages/ZigzagLogo.png';
-import Logo29cm from '../assets/icons/Iconages/29cmLogo.svg';
-import WLogo from '@/public/svgs/LogoImages/WLogo.svg';
 import ProductCard from '@/src/components/common/ProductCard';
-import RectangleIcon from '@/public/svgs/LogoImages/Rectangle.svg'; 
-import EllipseIcon from '@/public/svgs/LogoImages/Ellipse.svg';     
 import { MALL_LINKS } from '../constants/link';
+import { LOGO_IMAGES } from '../constants/images';
 
 
 const products = [
@@ -61,7 +56,7 @@ const Home = () => {
 					className="w-[75px] h-[75px] bg-black rounded-[6px] flex items-center justify-center overflow-hidden shrink-0"
 				>
 					<img
-						src={MusinsaLogo}
+						src={LOGO_IMAGES.MUSINSA}
 						alt="무신사"
 						className="w-full h-full object-contain"
 					/>
@@ -71,7 +66,7 @@ const Home = () => {
 					className="w-[75px] h-[75px] bg-[#E592FF] rounded-[6px] flex items-center justify-center overflow-hidden shrink-0"
 				>
 					<img
-						src={ZigzagLogo}
+						src={LOGO_IMAGES.ZIGZAG}
 						alt="지그재그"
 						className="w-full h-full object-contain"
 					/>
@@ -81,7 +76,7 @@ const Home = () => {
 					className="w-[75px] h-[75px] bg-black rounded-[6px] flex items-center justify-center overflow-hidden shrink-0"
 				>
 					<img
-						src={Logo29cm}
+						src={LOGO_IMAGES.LOGO_29CM}
 						alt="29CM"
 						className="w-full h-full object-contain p-1"
 					/> 
@@ -91,7 +86,7 @@ const Home = () => {
 					className="w-[75px] h-[75px] bg-white border border-[var(--color-neutral-100)] rounded-[6px] flex items-center justify-center overflow-hidden shrink-0"
 				>
 					<img
-						src={WLogo}
+						src={LOGO_IMAGES.W_LOGO}
 						alt="W컨셉"
 						className="w-full h-full object-contain"
 					/>
@@ -144,12 +139,12 @@ const Home = () => {
 				<div className="flex justify-center items-center mt-2 h-[12px]">
 					<div className="relative flex items-center justify-center w-[55px] h-[6px]">
 						<img
-							src={RectangleIcon}
+							src={LOGO_IMAGES.RECTANGLE}
 							alt=""
 							className="absolute w-full h-full object-contain"
 						/>
 						<img 
-							src={EllipseIcon} 
+							src={LOGO_IMAGES.ELLIPSE} 
 							alt="" 
 							className="absolute w-auto h-full object-contain transition-transform duration-75 ease-out" 
 							style={{ transform: `translateX(${(productScrollRatio * INDICATOR_MAX_DISTANCE) - (INDICATOR_MAX_DISTANCE/2)}px)` }}
@@ -187,12 +182,12 @@ const Home = () => {
 				<div className="flex justify-center items-center mt-2 h-[12px]">
 					<div className="relative flex items-center justify-center w-[55px] h-[6px]">
 						<img
-							src={RectangleIcon}
+							src={LOGO_IMAGES.RECTANGLE}
 							alt=""
 							className="absolute w-full h-full object-contain"
 						/>
 						<img 
-							src={EllipseIcon} 
+							src={LOGO_IMAGES.ELLIPSE} 
 							alt="" 
 							className="absolute w-auto h-full object-contain transition-transform duration-75 ease-out" 
 							style={{ transform: `translateX(${(fittingScrollRatio * INDICATOR_MAX_DISTANCE) - (INDICATOR_MAX_DISTANCE/2)}px)` }}

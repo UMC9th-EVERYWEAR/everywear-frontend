@@ -47,8 +47,10 @@ export const LOGIN_IMAGES = {
 
 // logo
 export const LOGO_IMAGES = {
+	HANEGER_LOGO: 'svgs/LogoImages/hanger-logo.svg',
 	EVERYWEAR: '/svgs/LogoImages/Everywear.svg',
 	EVERY_LOGO: '/svgs/LogoImages/every-logo.svg',
+	WEAR_LOGO: '/svgs/LogoImages/wear-logo.svg',
 
 	MUSINSA: '/svgs/LogoImages/MusinsaLogo.svg',
 	ZIGZAG: '/svgs/LogoImages/ZigzagLogo.png',
@@ -67,27 +69,28 @@ export const LOGO_IMAGES = {
 	CLOSET_ON: '/svgs/LogoImages/closet-on.svg',
 	CLOSET_OFF: '/svgs/LogoImages/closet-off.svg',
 
-	WEAR_LOGO: '/svgs/LogoImages/wear-logo.svg',
 } as const;
 
 // onboarding
 export const ONBOARDING_IMAGES = {
-	SINGLE_SHOT: '/svgs/onboarding/single-shot.svg',
-	SINGLE_BAD: '/svgs/onboarding/single-bad.svg',
+  ACCURACY_ICON: '/svgs/onboarding/accuracy-icon.svg',
+  CAMERA_BLUE: '/svgs/onboarding/camera-blue.svg',
+  CART_ICON: '/svgs/onboarding/cart-icon.svg',
+  CHECKBOX_MARKED: '/svgs/onboarding/checkbox-marked.svg',
+  CHECKBOX_MARKED_CLOSE: '/svgs/onboarding/close-box.svg',
+  GALLERY: '/svgs/onboarding/gallerly.svg',
+  LOCK_ICON: '/svgs/onboarding/lock-icon.svg',
 } as const;
 
 // setting
 export const SETTING_IMAGES = {
-	ARROW_RIGHT: '/svgs/setting/arrow-right.svg',
-	BLUE_CLOSE_ICON: '/svgs/setting/blue-close-icon.svg',
-	CAMERA_ICON: '/svgs/setting/camera-icon.svg',
-
-	CHECK_ICON: '/svgs/setting/check-icon.svg',
-	CHECK_BLUE_ICON: '/svgs/setting/check-blue-icon.svg',
-	CHECK_INCOMPLETE: '/svgs/setting/check-incomplete.svg',
-	COMPLETE_CHECK: '/svgs/setting/complete-check.svg',
-
-	PLUS_ICON: '/svgs/setting/plus-icon.svg',
-
-	DUMMY_PHOTO: '/svgs/setting/dummyphoto.jpeg',
+  ARROW_RIGHT: '/svgs/setting/arrow-right.svg',
+  BLUE_CLOSE: '/svgs/setting/blue-close-icon.svg',
+  CAMERA: '/svgs/setting/camera-icon.svg',
+  CHECK_BLUE: '/svgs/setting/check-blue-icon.svg',
+  CHECK: '/svgs/setting/check-icon.svg',
+  CHECK_INCOMPLETE: '/svgs/setting/check-incomplete.svg',
+  COMPLETE_CHECK: '/svgs/setting/complete-check.svg',
+  PLUS: '/svgs/setting/plus-icon.svg',
+  DUMMY_PHOTO: '/svgs/setting/dummyphoto.jpeg',
 } as const;

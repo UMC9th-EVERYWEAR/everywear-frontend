@@ -2,16 +2,14 @@ import { Modal } from '@/src/components/common/Modal';
 import Banner from '@/src/components/setting/setting-photo/Banners';
 import CheckItem from '@/src/components/setting/setting-photo/CheckItem';
 import InfoBox from '@/src/components/setting/setting-photo/InfoBox';
-import dummy from '@/public/svgs/setting/dummyphoto.jpeg';
-
 import type { PhotoItem } from '@/src/types/schemas/setting/setting-photo';
 import { useState } from 'react';
 import { cn } from '@/src/utils/cn';
 // 더미 데이터
 const PHOTO_ITEMS_DUMMY: PhotoItem[] = [
-	{ isDefault: true, imageUrl: dummy },
-	{ isDefault: false, imageUrl: dummy },
-	{ isDefault: false, imageUrl: dummy },
+	{ isDefault: true, imageUrl: '' },
+	{ isDefault: false, imageUrl: '' },
+	{ isDefault: false, imageUrl: '' },
 	{ isDefault: false, imageUrl: '' },
 	{ isDefault: false, imageUrl: '' }, //  이미지 없음 => AddCard 렌더링
 ];
