@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 
 
 interface HeroSectionProps {
-  onNext: () => void
+  onNext?: () => void
 }
 
 const HeroSection = ({ onNext }: HeroSectionProps) => {

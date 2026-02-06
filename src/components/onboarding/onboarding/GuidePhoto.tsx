@@ -20,6 +20,7 @@ interface GuidePhotoProps {
   variant?: GuideVariant;
 	hasText?: boolean;
 	message?: string;
+	imageSrc?: string;
 }
 
 const GuidePhoto = ({
@@ -33,7 +34,7 @@ const GuidePhoto = ({
 
 	return (
 		<div
-			className={cn(' overflow-hidden rounded-md flex flex-col',
+			className={cn('overflow-hidden rounded-md flex flex-col',
 				hasText ? 'h-50' : 'h-20 w-17',
 			)}
 		>

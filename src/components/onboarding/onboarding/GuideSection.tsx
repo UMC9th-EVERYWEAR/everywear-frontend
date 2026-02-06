@@ -2,6 +2,7 @@ import { PATH } from '@/src/constants/path';
 import { useNavigate } from 'react-router';
 import Button from '../../common/Button';
 import GuidePhoto from './GuidePhoto';
+
 import { cn } from '@/src/utils/cn';
 import { ONBOARDING_GUIDE_IMAGES } from '@/src/constants/images';
 

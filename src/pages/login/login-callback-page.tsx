@@ -23,15 +23,7 @@ const OAuthCallbackPage = () => {
 
 		accessTokenStorage.setItem(accessToken)
 
-		  login(undefined, {
-			onSuccess: () => {
-				// navigate(PATH.LOGIN.TERMS);
-				
-			},
-			onError: () => {
-				// navigate(PATH.LOGIN.ROOT);
-			},
-		});
+		  login();
 	}, [searchParams, login, navigate]);
 
 	return <Loading />
