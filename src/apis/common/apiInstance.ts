@@ -78,7 +78,14 @@ axiosInstance.interceptors.request.use(
 );
 
 axiosInstance.interceptors.response.use(
-	(response) => response,
+	(response) =>  {if (ENV_CONFIG.isDev) {
+		console.log(
+        `📦 API 응답: ${response.config.method?.toUpperCase()} ${response.config.url}`,
+        response.data.result,
+		);
+	}
+	return response;
+	},
 	async (error) => {
 		console.log('401 감지됨', error.config.url);
 		const originalRequest : CustomInternalAxiosRequestConfig = error.config;

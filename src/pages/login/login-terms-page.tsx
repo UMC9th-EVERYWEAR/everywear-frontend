@@ -4,7 +4,8 @@ import { LOGO_IMAGES } from '@/src/constants/images';
 import  { TERMS_LINK } from '@/src/constants/link';
 import { PATH } from '@/src/constants/path';
 import { useLogin } from '@/src/hooks/service/auth/useLogin';
-import { useState } from 'react';
+import { useToggleAgree } from '@/src/hooks/service/user/useToggle';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
 
 const TERMS_CONFIG: Record<TermType, { label: string; url: string }> = {
@@ -46,15 +47,17 @@ const LoginTermsPage = () => {
 			[key]: !prev[key],
 		}));
 	};
+	const { mutate: toggleAgree, isPending: togglepending } = useToggleAgree();
+	const { mutate: login, isError } = useLogin();
 
-	const { mutate: login, isPending: loginPending, isError } = useLogin();
+	useEffect(()=> {
+		login();
+	},[login])
 
 	const handleLogin = () => {
-		login(undefined, {
-			onSuccess: () => {
-				navigate(PATH.ONBOARDING.ROOT);
-			},
-		});
+		toggleAgree(undefined, {
+			// onSuccess: () => navigate(PATH.ONBOARDING.ROOT),
+		})
 	};
 
 	if(isError) navigate(PATH.LOGIN.ROOT)
@@ -102,7 +105,7 @@ const LoginTermsPage = () => {
   `}
 			>
 				<Button
-					disabled={!isAllChecked || loginPending}
+					disabled={!isAllChecked || togglepending}
 					onClick={handleLogin}
 				>로그인하기</Button>
 			</div>
