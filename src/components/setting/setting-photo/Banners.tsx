@@ -1,4 +1,3 @@
-import type { PhotoItem } from '@/src/types/setting/setting-photo';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination } from 'swiper/modules';
 import React from 'react';
@@ -8,9 +7,11 @@ import { cn } from '@/src/utils/cn';
 import {  useEffect, useRef } from 'react';
 import { SETTING_IMAGES } from '@/src/constants/images';
 import type { Swiper as SwiperClass } from 'swiper/types';
+import type { UserImgQuery } from '@/src/apis/generated';
+
 interface BannerProps {
-	photoItems?: PhotoItem[];
-	setPhotoItems?: (items: PhotoItem[]) => void;
+	photoItems?: UserImgQuery[];
+	setPhotoItems?: (items: UserImgQuery[]) => void;
 	activeRealIndex: number;
 	setActiveRealIndex: (index: number) => void;
 	setIsAddCardActive?: (isActive: boolean) => void;
@@ -50,7 +51,7 @@ const Banner = ({ activeRealIndex, photoItems, setPhotoItems, setActiveRealIndex
 		next[index] = {
 			...next[index],
 			imageUrl: previewUrl, // 일단 UI 반영
-			isDefault: false,
+			representative: false,
 		};
 
 		setPhotoItems(next);
@@ -63,7 +64,7 @@ const Banner = ({ activeRealIndex, photoItems, setPhotoItems, setActiveRealIndex
 
 
 	// slide 안에 들어갈 컨텐츠 결정 함수 (추천 네이밍)
-	const renderPhotoSlideContent = (item: PhotoItem, idx: number) => {
+	const renderPhotoSlideContent = (item: UserImgQuery, idx: number) => {
 		// 이미지 없으면 => 추가 카드
 		if (!item.imageUrl) {
 			return (
@@ -90,7 +91,7 @@ const Banner = ({ activeRealIndex, photoItems, setPhotoItems, setActiveRealIndex
 					src={item.imageUrl}
 					alt="card"
 					className={cn('w-full h-full object-cover rounded-lg overflow-hidden',
-						item.isDefault ? 'border-4 border-primary-600' : '',
+						item.representative ? 'border-4 border-primary-600' : '',
 					)}
 				/>
 
