@@ -17,6 +17,8 @@ const HowItWorksSection = () => {
 			<HowItWorksStep step='STEP2'/>
 			<HowItWorksStep step='STEP3'/>
 			<HowItWorksStep step='STEP4'/>
+			<HowItWorksStep step='STEP4'/>
+
 		</div>
 	)
 }

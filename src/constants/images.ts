@@ -73,24 +73,24 @@ export const LOGO_IMAGES = {
 
 // onboarding
 export const ONBOARDING_IMAGES = {
-  ACCURACY_ICON: '/svgs/onboarding/accuracy-icon.svg',
-  CAMERA_BLUE: '/svgs/onboarding/camera-blue.svg',
-  CART_ICON: '/svgs/onboarding/cart-icon.svg',
-  CHECKBOX_MARKED: '/svgs/onboarding/checkbox-marked.svg',
-  CHECKBOX_MARKED_CLOSE: '/svgs/onboarding/close-box.svg',
-  GALLERY: '/svgs/onboarding/gallerly.svg',
-  LOCK_ICON: '/svgs/onboarding/lock-icon.svg',
+	ACCURACY_ICON: '/svgs/onboarding/accuracy-icon.svg',
+	CAMERA_BLUE: '/svgs/onboarding/camera-blue.svg',
+	CART_ICON: '/svgs/onboarding/cart-icon.svg',
+	CHECKBOX_MARKED: '/svgs/onboarding/checkbox-marked.svg',
+	CHECKBOX_MARKED_CLOSE: '/svgs/onboarding/close-box.svg',
+	GALLERY: '/svgs/onboarding/gallerly.svg',
+	LOCK_ICON: '/svgs/onboarding/lock-icon.svg',
 } as const;
 
 // setting
 export const SETTING_IMAGES = {
-  ARROW_RIGHT: '/svgs/setting/arrow-right.svg',
-  BLUE_CLOSE: '/svgs/setting/blue-close-icon.svg',
-  CAMERA: '/svgs/setting/camera-icon.svg',
-  CHECK_BLUE: '/svgs/setting/check-blue-icon.svg',
-  CHECK: '/svgs/setting/check-icon.svg',
-  CHECK_INCOMPLETE: '/svgs/setting/check-incomplete.svg',
-  COMPLETE_CHECK: '/svgs/setting/complete-check.svg',
-  PLUS: '/svgs/setting/plus-icon.svg',
-  DUMMY_PHOTO: '/svgs/setting/dummyphoto.jpeg',
+	ARROW_RIGHT: '/svgs/setting/arrow-right.svg',
+	BLUE_CLOSE: '/svgs/setting/blue-close-icon.svg',
+	CAMERA: '/svgs/setting/camera-icon.svg',
+	CHECK_BLUE: '/svgs/setting/check-blue-icon.svg',
+	CHECK: '/svgs/setting/check-icon.svg',
+	CHECK_INCOMPLETE: '/svgs/setting/check-incomplete.svg',
+	COMPLETE_CHECK: '/svgs/setting/complete-check.svg',
+	PLUS: '/svgs/setting/plus-icon.svg',
+	DUMMY_PHOTO: '/svgs/setting/dummyphoto.jpeg',
 } as const;
