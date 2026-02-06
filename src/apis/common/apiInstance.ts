@@ -27,7 +27,7 @@ let refreshPromise : Promise<string> | null = null;
 
 // storage 타입만 바꿔주면 local / session 자동 전환
 // 액세스토큰 스토리지 미리 지정
-const accessTokenStorage = createStorage<string>(
+export const accessTokenStorage = createStorage<string>(
 	STORAGE_KEY.accessToken,
 	TOKEN_STORAGE_TYPE,
 );
@@ -58,13 +58,16 @@ export const axiosInstance = axios.create({
 
 axiosInstance.interceptors.request.use(
 	(config) => {
+		 console.log(
+      `🌐 API 요청: ${config.method?.toUpperCase()} ${config.url}`);
 		// 리프레시 요청에는 Autorization 헤더를 넣지 않도록 제어 => 헤더 제어
 		if (config.url?.includes('/api/auth/refresh')) {
 			return config;
 		}
 
-		const accessToken = accessTokenStorage.getItem();
 
+		const accessToken =  accessTokenStorage.getItem()
+		
 		// AccessToken이 있을 때만 헤더 주입
 		if (accessToken) {
 			config.headers.Authorization = `Bearer ${accessToken}`;
@@ -75,18 +78,31 @@ axiosInstance.interceptors.request.use(
 );
 
 axiosInstance.interceptors.response.use(
-	(response) => response,
+	(response) =>  {if (ENV_CONFIG.isDev) {
+		console.log(
+        `📦 API 응답: ${response.config.method?.toUpperCase()} ${response.config.url}`,
+        response.data.result,
+		);
+	}
+	return response;
+	},
 	async (error) => {
 		console.log('401 감지됨', error.config.url);
 		const originalRequest : CustomInternalAxiosRequestConfig = error.config;
-
+		const currentPath = window.location.pathname;
+		console.log(currentPath)
 		if ( !error.response || error.response.status !== 401 || originalRequest._retry) {
-			return Promise.reject(error);
+			if (currentPath !== PATH.LANDING) {
+				window.location.href = PATH.LOGIN.ROOT;
+			}			return Promise.reject(error);
 		}
 
 		if (originalRequest.url?.includes('/api/auth/refresh')) {
 			accessTokenStorage.removeItem();
-			window.location.href = '/login';
+			if (currentPath !== PATH.LANDING) {
+
+				window.location.href = PATH.LOGIN.ROOT;
+			}
 			return Promise.reject(error);
 		}
 
@@ -130,7 +146,11 @@ axiosInstance.interceptors.response.use(
 		} catch (refreshError) {
 			console.error('토큰 갱신 실패:', refreshError);
 			accessTokenStorage.removeItem();
-			window.location.href = PATH.LOGIN.ROOT;
+			if (currentPath !== PATH.LANDING) {
+				
+				window.location.href = PATH.LOGIN.ROOT;
+			}		
+			// window.location.href = PATH.LOGIN.ROOT;
 			return Promise.reject(refreshError);
 		}
 	},

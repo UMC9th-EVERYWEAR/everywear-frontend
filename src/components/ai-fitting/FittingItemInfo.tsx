@@ -1,6 +1,4 @@
-import FittingCardStar from '@/public/ai-fitting/FittingCardStar.svg'
-import FittingCardHeart from '@/public/ai-fitting/FittingCardHeart.svg'
-import FittingCardHeartFill from '@/public/ai-fitting/FittingCardHeartFill.svg'
+import { AI_FITTING_IMAGES } from '@/src/constants/images';
 
 interface FittingItemInfoProps {
     data: ItemData
@@ -43,7 +41,7 @@ const FittingItemInfo = ({ data, isHearted, handleHeart, handleBuy }: FittingIte
 						<div className='flex items-center gap-0.5'>
 							<img
 								className='h-4 w-4'
-								src={FittingCardStar}
+								src={AI_FITTING_IMAGES.FITTING_CARD_STAR}
 								alt='피팅 상품 별점'
 							/>
 							<p className='text-neutral-900 text-regular-12'>{data.rating}</p>
@@ -71,12 +69,12 @@ const FittingItemInfo = ({ data, isHearted, handleHeart, handleBuy }: FittingIte
 						>
 							{isHearted ? (
 								<img
-									src={FittingCardHeartFill}
+									src={AI_FITTING_IMAGES.FITTING_CARD_HEART_FILL}
 									alt='내 옷장 저장'
 								/>
 							) : (
 								<img
-									src={FittingCardHeart}
+									src={AI_FITTING_IMAGES.FITTING_CARD_HEART}
 									alt='내 옷장 저장 X'
 								/>
 							)}

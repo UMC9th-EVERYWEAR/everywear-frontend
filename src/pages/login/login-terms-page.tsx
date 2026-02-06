@@ -1,8 +1,11 @@
-import logo from '@/public/svgs/LogoImages/Everywear.svg'
 import Button from '@/src/components/common/Button';
 import TermsCheckBox, { type TermsCheckedState, type TermType } from '@/src/components/login/TermsCheckBox'
+import { LOGO_IMAGES } from '@/src/constants/images';
 import  { TERMS_LINK } from '@/src/constants/link';
+import { PATH } from '@/src/constants/path';
+import { useToggleAgree } from '@/src/hooks/service/user/useToggle';
 import { useState } from 'react';
+import { useNavigate } from 'react-router';
 
 const TERMS_CONFIG: Record<TermType, { label: string; url: string }> = {
 	SERVICE: { label: '서비스 이용약관 동의', url: TERMS_LINK.SERVICE_TERMS.url },
@@ -12,6 +15,7 @@ const TERMS_CONFIG: Record<TermType, { label: string; url: string }> = {
 };
 
 const LoginTermsPage = () => {
+	const navigate = useNavigate();
 
 	const [checked, setChecked] = useState<TermsCheckedState>({
 		SERVICE: false,
@@ -42,7 +46,17 @@ const LoginTermsPage = () => {
 			[key]: !prev[key],
 		}));
 	};
+	const { mutate: toggleAgree, isPending: togglepending , isError } = useToggleAgree();
 
+	const handleLogin = () => {
+		toggleAgree(undefined, {
+			onSuccess: () => navigate(PATH.ONBOARDING.ROOT),
+			// 		TODO:	약관 동의 후 → 유저 정보 다시 불러와서(me)
+			// 실제로 동의가 반영됐는지 확인 
+		})
+	};
+
+	if(isError) navigate(PATH.LOGIN.ROOT)
 
 	return(
 		<div className='w-full flex flex-col items-center pt-32 gap-13'>
@@ -50,7 +64,7 @@ const LoginTermsPage = () => {
 
 
 				<img
-					src={logo}
+					src={LOGO_IMAGES.EVERYWEAR}
 					alt='logo'
 					className='w-full px-6 mb-5'
 				/>
@@ -87,8 +101,8 @@ const LoginTermsPage = () => {
   `}
 			>
 				<Button
-					disabled={!isAllChecked}
-					// onClick={()=>navigate(PATH.ONBOARDING.ROOT)}
+					disabled={!isAllChecked || togglepending}
+					onClick={handleLogin}
 				>로그인하기</Button>
 			</div>
 

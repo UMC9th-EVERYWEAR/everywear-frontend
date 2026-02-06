@@ -1,5 +1,4 @@
-import checkMarked from '@/public/svgs/onboarding/checkbox-marked.svg';
-import noCheckMarked from '@/public/svgs/onboarding/close-box.svg';
+import { LOGIN_IMAGES, ONBOARDING_IMAGES } from '@/src/constants/images';
 import { cn } from '@/src/utils/cn';
 
 
@@ -35,7 +34,6 @@ const GuidePhoto = ({
 	rule,
 	variant = 'GOOD',
 	hasText = false,
-	imageSrc,
 }: GuidePhotoProps) => {	
 	const message = GUIDE_MESSAGES[rule ?? 'SIMPLE_POSE'][variant];
 	return (
@@ -51,12 +49,12 @@ const GuidePhoto = ({
 				}
 			>
 				<img
-					src={imageSrc}
+					src={LOGIN_IMAGES.CHECK_BOX}
 					alt='guide'
 					className="w-full h-full object-cover"
 				/>
 				<img	
-					src={variant === 'GOOD' ? checkMarked : noCheckMarked}
+					src={variant === 'GOOD' ? ONBOARDING_IMAGES.CHECKBOX_MARKED : ONBOARDING_IMAGES.CHECKBOX_MARKED_CLOSE}
 					alt='check'
 					className={cn('absolute right-2 bottom-2',
 						hasText ? 'w-6' : 'w-4.5')

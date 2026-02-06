@@ -1,27 +1,22 @@
-import logo from '@/public/svgs/LogoImages/Everywear.svg'
-import LoginBtn, { type LoginType } from '@/src/components/login/LoginBtn'
-import { PATH } from '@/src/constants/path';
-import { useNavigate } from 'react-router';
+import LoginBtn from '@/src/components/login/LoginBtn'
+import { ENV_CONFIG } from '@/src/constants/config';
+import { LOGO_IMAGES } from '@/src/constants/images';
+export type LoginType = keyof typeof OAUTH_AUTHORIZATION_PATH;
+
+const OAUTH_AUTHORIZATION_PATH = {
+	KAKAO: '/oauth2/authorization/kakao',
+	GOOGLE: '/oauth2/authorization/google',
+} as const;
+
 
 const LoginPage = () => {
 
-	const navigate = useNavigate();
-
 	const handleLogin = (type:LoginType ) => {
-		if(type === 'KAKAO'){
-			console.log('kakaologin')
-			// TODO: kakaologin 구현
-			
-		}if(type === 'GOOGLE'){
-			console.log('googlelogin')
-			// TODO: googlelogin 구현
-		}
+		const path = OAUTH_AUTHORIZATION_PATH[type];
+		window.location.href = `${ENV_CONFIG.SERVER.BASE_URL}${path}`;
 		
 		// TODO: 로그인 후 약관 or 홈페이지 이동 구현
-		navigate(PATH.LOGIN.TERMS);
-
 	}
-
 	return(
 		<div className="bg-primary-600 min-h-screen px-8 flex justify-center items-center">
 			<div className="bg-white rounded-lg w-82 max-w-82 pt-26 pb-26 flex items-center flex-col gap-16">
@@ -29,7 +24,7 @@ const LoginPage = () => {
 
 				<div className='flex flex-col gap-7 px-3'>
 					<img
-						src={logo}
+						src={LOGO_IMAGES.EVERYWEAR}
 						alt='logo'
 						className='px-11 sm:w-400'
 					/>

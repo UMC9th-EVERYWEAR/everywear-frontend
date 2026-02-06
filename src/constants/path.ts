@@ -10,6 +10,7 @@ export const PATH = {
 	LOGIN: {
 		ROOT: '/login',
 		TERMS: '/login/terms',
+		CALLBACK: '/login/callback',
 	},
 	ONBOARDING:{
 		ROOT: '/onboarding',

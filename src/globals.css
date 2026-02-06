@@ -1,5 +1,4 @@
 @import "tailwindcss";
-@plugin "tailwindcss-animate";
 
 
 
@@ -34,8 +33,7 @@
   --color-neutral-100: #eaecf0;
   --color-neutral-50:  #f0f2f7;
 
-
-  --color-primary-900: #303763;
+  --color-primary-900:  #303763;
   --color-primary-700: #2C3374;
   --color-primary-600: #3b4599;
   --color-primary-300: #8d98ff;

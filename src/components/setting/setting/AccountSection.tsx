@@ -1,25 +1,20 @@
-import arrowRight from '@/public/svgs/setting/arrow-right.svg';
+import { SETTING_IMAGES } from '@/src/constants/images';
 import { ArrowRightIcon } from './ArrowRightIcon.';
 import ToggleBtn from './ToggleBtn';
+import type { UserResponseDtoSocialTypeEnum } from '@/src/apis/generated';
 
 
 interface Props {
   openLoginSetting: boolean;
   toggleLoginSetting: () => void;
-  linkedSocialAccounts: {
-    naver: boolean;
-    kakao: boolean;
-    google: boolean;
-  };
-  toggleSocialLink: (provider: 'naver' | 'kakao' | 'google') => void;
+	socialType: UserResponseDtoSocialTypeEnum;
   onChangePhoto: () => void;
 }
 
 const AccountSection = ({
 	openLoginSetting,
 	toggleLoginSetting,
-	linkedSocialAccounts,
-	toggleSocialLink,
+	socialType,
 	onChangePhoto,
 }: Props) => {
 	return (
@@ -37,7 +32,7 @@ const AccountSection = ({
 					기본 사진 변경
 				</span>
 				<img
-					src={arrowRight}
+					src={SETTING_IMAGES.ARROW_RIGHT}
 					alt="arrow right"
 					className='cursor-pointer'
 				/>
@@ -53,31 +48,36 @@ const AccountSection = ({
 				<ArrowRightIcon rotated={openLoginSetting} />
 			</button>
 
-			{openLoginSetting && (
-				<div className="flex flex-col gap-2 py-2">
-					{(['kakao', 'google'] as const).map((provider) => (
-						<div
-							key={provider}
-							className="flex justify-between"
-						>
-							<button className="text-regular-14 text-left">
+			<div
+				className={` flex flex-col gap-2 py-2
+						overflow-hidden
+						transition-all duration-300 ease-in-out
+						${openLoginSetting
+					? 'max-h-40 opacity-100 translate-y-0'
+					: 'max-h-0 opacity-0 -translate-y-1'}
+					`}
+			>
+				{(['KAKAO', 'GOOGLE'] as const).map((provider) => (
+					<div
+						key={provider}
+						className="flex justify-between"
+					>
+						<button className="text-regular-14 text-left">
 						
-								{provider === 'kakao'
-									? '카카오 로그인 연동'
-									: '구글 로그인 연동'}
-							</button>
-							<ToggleBtn
-								checked={linkedSocialAccounts[provider]}
-								onChange={() => toggleSocialLink(provider)}
-							/>
-						</div>
-					))}
+							{provider === 'KAKAO'
+								? '카카오 로그인 연동'
+								: '구글 로그인 연동'}
+						</button>
+						<ToggleBtn
+							checked={socialType === provider}
+						/>
+					</div>
+				))}
 
-					<p className="text-regular-10 text-neutral-400">
-						* SNS 계정을 연결하시면 간편하게 로그인할 수 있습니다.
-					</p>
-				</div>
-			)}
+				<p className="text-regular-10 text-neutral-400">
+					* SNS 계정을 연결하시면 간편하게 로그인할 수 있습니다.
+				</p>
+			</div>
 		</div>
 
 	);

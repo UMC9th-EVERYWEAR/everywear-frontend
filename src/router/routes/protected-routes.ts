@@ -6,7 +6,6 @@ import ClosetPage from '@/src/pages/closet/closet-page';
 import RecentFitting from '@/src/pages/RecentFittingPage';
 import  { PATH } from '@/src/constants/path';
 import AiFittingPage from '@/src/pages/ai-fitting/ai-fitting-page';
-import LoginTermsPage from '@/src/pages/login/login-terms-page';
 import OnBoardingPage from '@/src/pages/onboarding/onboarding-page';
 import OnBoardingPhotoPage from '@/src/pages/onboarding/onboarding-photo-page';
 import Home from '@/src/pages/Home';
@@ -58,10 +57,6 @@ export const protectedRoutes = [
 		Component: AiFittingPage,
 	},
 	{
-		path: PATH.LOGIN.TERMS,
-		Component: LoginTermsPage,
-	},
-	{
 		path: PATH.CLOSET,
 		Component: ClosetPage,
 	},
@@ -73,7 +68,5 @@ export const protectedRoutes = [
 		path: PATH.PRODUCTS.ADD,
 		Component: ProductsAddPage,
 	},
-	// 필요하면 계속 추가
-	// { path: PATH.CLOSET, Component: ClosetPage },
-	// { path: PATH.PRODUCTS.ROOT, Component: ProductsPage },
+
 ];

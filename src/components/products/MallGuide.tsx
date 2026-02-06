@@ -1,8 +1,5 @@
 import { useState } from 'react'
-import step1 from '@/public/svgs/guide/guide1.svg'
-import step2 from '@/public/svgs/guide/guide2.svg'
-import step3 from '@/public/svgs/guide/guide3.svg'
-import step4 from '@/public/svgs/guide/guide4.svg'
+import { GUIDE_IMAGES } from '@/src/constants/images'
 
 
 interface MallGuideProps {
@@ -18,7 +15,7 @@ const MallGuide = ({ onClose }: MallGuideProps) => {
 					onClick={()=> setStep((prev)=> prev+1)}
 				>
 					<img
-						src={step1}
+						src={GUIDE_IMAGES.GUIDE_1}
 						alt='step1'
 						className='w-full'
 					/>
@@ -30,7 +27,7 @@ const MallGuide = ({ onClose }: MallGuideProps) => {
 					onClick={()=> setStep((prev)=> prev+1)}
 				>
 					<img
-						src={step2}
+						src={GUIDE_IMAGES.GUIDE_2}
 						alt='step2'
 					/>
 				</button>
@@ -41,7 +38,7 @@ const MallGuide = ({ onClose }: MallGuideProps) => {
 					onClick={()=> setStep((prev)=> prev+1)}
 				>
 					<img
-						src={step3}
+						src={GUIDE_IMAGES.GUIDE_3}
 						alt='step3'
 					/>
 				</button>
@@ -52,7 +49,7 @@ const MallGuide = ({ onClose }: MallGuideProps) => {
 					onClick={onClose}
 				>
 					<img
-						src={step4}
+						src={GUIDE_IMAGES.GUIDE_4}
 						alt='step4'
 					/>
 				</button>
