@@ -1,7 +1,10 @@
 import { apiClient } from '@/src/apis/common/apiClient'
-import type { ImportDTO } from '../generated';
+import type { ImportDTO, ListDTO } from '../generated';
+import type { CategoryKey } from '@/src/types/products/product';
 
 // products-page
+
+
 export const getProducts = async () => {
 	const { data } = await apiClient.getProducts();
 	return data.result?.products ?? [];
@@ -34,10 +37,23 @@ export const getBottomProducts = async () => {
 
 export const importProduct = async (payload: ImportDTO) => {
 	const { data } = await apiClient.importProduct(payload, { 
-		timeout: 30000, //30초로 설정 진행
+		timeout: 50000, //50초로 설정 진행
 
 	});
 	return data.result;
+};
+
+export const productFetchers: Partial<Record<CategoryKey, () => Promise<ListDTO[]>>> = {
+	'상의': getTopProducts,
+	'아우터': getOuterProducts,
+	'기타': getEtcProducts,
+	'원피스': getDressProducts,
+	'하의': getBottomProducts,
+};
+
+export const getProductsByCategory = async (category: CategoryKey) => {
+	const fetcher = productFetchers[category] ?? getProducts;
+	return fetcher();
 };
 
 // home-page
@@ -46,7 +62,10 @@ export const getHomeProducts = async () => {
 	return data.result?.products ?? [];
 };
 
+
 // closet-page
+
+
 export const getClosetProducts = async () => {
 	const { data } = await apiClient.getClosetProducts();
 	return data.result?.products ?? [];
@@ -75,6 +94,19 @@ export const getClosetDressProducts = async () => {
 export const getClosetBottomProducts = async () => {
 	const { data } = await apiClient.getClosetBottomProducts();
 	return data.result?.products ?? [];
+};
+
+export const ClosetFetchers: Partial<Record<CategoryKey, () => Promise<ListDTO[]>>> = {
+	'상의': getClosetTopProducts,
+	'아우터': getClosetOuterProducts,
+	'기타': getClosetEtcProducts,
+	'원피스': getClosetDressProducts,
+	'하의': getClosetBottomProducts,
+};
+
+export const getClosetByCategory = async (category: CategoryKey) => {
+	const fetcher = productFetchers[category] ?? getClosetProducts;
+	return fetcher();
 };
 
 // ai-fitting-page

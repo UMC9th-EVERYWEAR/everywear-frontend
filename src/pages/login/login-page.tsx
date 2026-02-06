@@ -1,8 +1,6 @@
 import LoginBtn from '@/src/components/login/LoginBtn'
 import { ENV_CONFIG } from '@/src/constants/config';
 import { LOGO_IMAGES } from '@/src/constants/images';
-import { PATH } from '@/src/constants/path';
-import { useNavigate } from 'react-router';
 export type LoginType = keyof typeof OAUTH_AUTHORIZATION_PATH;
 
 const OAUTH_AUTHORIZATION_PATH = {
@@ -12,17 +10,13 @@ const OAUTH_AUTHORIZATION_PATH = {
 
 
 const LoginPage = () => {
-	const navigate = useNavigate();
 
 	const handleLogin = (type:LoginType ) => {
 		const path = OAUTH_AUTHORIZATION_PATH[type];
 		window.location.href = `${ENV_CONFIG.SERVER.BASE_URL}${path}`;
 		
 		// TODO: 로그인 후 약관 or 홈페이지 이동 구현
-		navigate(PATH.LOGIN.TERMS);
-
 	}
-
 	return(
 		<div className="bg-primary-600 min-h-screen px-8 flex justify-center items-center">
 			<div className="bg-white rounded-lg w-82 max-w-82 pt-26 pb-26 flex items-center flex-col gap-16">

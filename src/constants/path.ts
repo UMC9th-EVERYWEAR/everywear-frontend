@@ -59,11 +59,13 @@ export const hideNavPatterns = [
 	PATH.SETTING.WITHDRAW,
 	PATH.SETTING.INQUIRY,
 	PATH.AI_FITTING.DETAIL,
+	PATH.PRODUCTS.ADD,
 ];
 /* fullscreenPatterns: 화면을 전체로 사용하는 라우트 */
 export const fullscreenPatterns = [
 	PATH.LOGIN.ROOT,
 	PATH.LANDING,
+	PATH.ONBOARDING.ROOT,
 ]
 
 /*전역에서 사용하는 SVG 아이콘 경로 상수 모음*/

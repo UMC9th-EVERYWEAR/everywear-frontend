@@ -6,7 +6,7 @@ import { LANDING_IMAGES } from '@/src/constants/images'
 const IntroAIFittingSection = () => {
 	return(
 		<div
-			className='flex flex-col items-center justify-center w-full min-h-screen pt-10 gap-10 bg-phone-two-gradient'
+			className='flex flex-col items-center justify-center w-full pt-10 gap-10'
 		>
 			<SectionTitle
 				sectionTitle='AI 가상 피팅'

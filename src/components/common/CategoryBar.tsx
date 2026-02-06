@@ -1,8 +1,9 @@
 import { IconSvg } from '@/src/assets/icons';
 import type { SvgIconKey } from '@/src/assets/icons/svg/SvgIcon';
+import type { CategoryKey } from '@/src/types/products/product';
 
 const categories: readonly {
-  name: string;
+  name: CategoryKey;
   icon: SvgIconKey;
 }[] = [
 	{ name: '전체', icon: 'All' },
@@ -14,13 +15,13 @@ const categories: readonly {
 ];
 
 interface CategoryBarProps {
-  selected: string;
-  onSelect: (category: string) => void;
+  selected: CategoryKey;
+  onSelect: (category: CategoryKey) => void;
 }
 
 const CategoryBar = ({ selected, onSelect }: CategoryBarProps) => {
 	return (
-		<div className='w-[375px] overflow-x-auto bg-white sticky top-0 z-20'>
+		<div className=' w-[375px] overflow-x-auto bg-white sticky top-0 z-20 sm:w-full sm:-mx-2'>
 			<div className='flex gap-[10px] p-4 items-center whitespace-nowrap'>
 				{categories.map((cat) => {
 					const isActive = selected === cat.name;

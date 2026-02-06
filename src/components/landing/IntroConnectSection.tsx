@@ -6,7 +6,7 @@ import { LANDING_IMAGES } from '@/src/constants/images'
 const IntroConnectSection = () => {
 	return(
 		<div
-			className='flex flex-col items-center justify-center w-full min-h-screen gap-10'
+			className='flex flex-col items-center justify-center w-full gap-10'
 		>
 			<SectionTitle
 				sectionTitle='스마트 쇼핑 연결'

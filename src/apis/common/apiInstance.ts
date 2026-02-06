@@ -78,19 +78,31 @@ axiosInstance.interceptors.request.use(
 );
 
 axiosInstance.interceptors.response.use(
-	(response) => response,
+	(response) =>  {if (ENV_CONFIG.isDev) {
+		console.log(
+        `📦 API 응답: ${response.config.method?.toUpperCase()} ${response.config.url}`,
+        response.data.result,
+		);
+	}
+	return response;
+	},
 	async (error) => {
 		console.log('401 감지됨', error.config.url);
 		const originalRequest : CustomInternalAxiosRequestConfig = error.config;
-
+		const currentPath = window.location.pathname;
+		console.log(currentPath)
 		if ( !error.response || error.response.status !== 401 || originalRequest._retry) {
-			window.location.href = PATH.LOGIN.ROOT;
-			return Promise.reject(error);
+			if (currentPath !== PATH.LANDING) {
+				window.location.href = PATH.LOGIN.ROOT;
+			}			return Promise.reject(error);
 		}
 
 		if (originalRequest.url?.includes('/api/auth/refresh')) {
 			accessTokenStorage.removeItem();
-			window.location.href = PATH.LOGIN.ROOT;
+			if (currentPath !== PATH.LANDING) {
+
+				window.location.href = PATH.LOGIN.ROOT;
+			}
 			return Promise.reject(error);
 		}
 
@@ -134,7 +146,10 @@ axiosInstance.interceptors.response.use(
 		} catch (refreshError) {
 			console.error('토큰 갱신 실패:', refreshError);
 			accessTokenStorage.removeItem();
-			window.location.href = PATH.LOGIN.ROOT;
+			if (currentPath !== PATH.LANDING) {
+				
+				window.location.href = PATH.LOGIN.ROOT;
+			}		
 			return Promise.reject(refreshError);
 		}
 	},

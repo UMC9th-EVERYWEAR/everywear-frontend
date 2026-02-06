@@ -3,11 +3,11 @@ import TermsCheckBox, { type TermsCheckedState, type TermType } from '@/src/comp
 import { LOGO_IMAGES } from '@/src/constants/images';
 import  { TERMS_LINK } from '@/src/constants/link';
 import { PATH } from '@/src/constants/path';
-import { useLogin } from '@/src/hooks/service/auth/useLogin';
+import { useToggleAgree } from '@/src/hooks/service/user/useToggle';
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
 
-const TERMS_CONFIG: Record<TermType, { label: string; url: string }> = {
+export const TERMS_CONFIG: Record<TermType, { label: string; url: string }> = {
 	SERVICE: { label: '서비스 이용약관 동의', url: TERMS_LINK.SERVICE_TERMS.url },
 	PRIVACY: { label: '개인정보 수집 및 이용 동의', url: TERMS_LINK.PRIVACY.url },
 	PHOTO: { label: '사진 정보 피팅 이용 동의', url: TERMS_LINK.PHOTO.url },
@@ -46,15 +46,14 @@ const LoginTermsPage = () => {
 			[key]: !prev[key],
 		}));
 	};
-
-	const { mutate: login, isPending: loginPending, isError } = useLogin();
+	const { mutate: toggleAgree, isPending: togglepending , isError } = useToggleAgree();
 
 	const handleLogin = () => {
-		login(undefined, {
-			onSuccess: () => {
-				navigate(PATH.ONBOARDING.ROOT);
-			},
-		});
+		toggleAgree(undefined, {
+			onSuccess: () => navigate(PATH.ONBOARDING.ROOT),
+			// 		TODO:	약관 동의 후 → 유저 정보 다시 불러와서(me)
+			// 실제로 동의가 반영됐는지 확인 
+		})
 	};
 
 	if(isError) navigate(PATH.LOGIN.ROOT)
@@ -102,7 +101,7 @@ const LoginTermsPage = () => {
   `}
 			>
 				<Button
-					disabled={!isAllChecked || loginPending}
+					disabled={!isAllChecked || togglepending}
 					onClick={handleLogin}
 				>로그인하기</Button>
 			</div>

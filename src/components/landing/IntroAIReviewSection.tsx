@@ -4,7 +4,7 @@ import ScrollAnimationContainer from '../onboarding/onboarding/ScrollAnimationCo
 import { LANDING_IMAGES } from '@/src/constants/images'
 
 interface IntroAIReviewSectionProps {
-  onNext: () => void
+  onNext?: () => void
 }
 
 
@@ -12,7 +12,7 @@ const IntroAIReviewSection = ({ onNext }: IntroAIReviewSectionProps) => {
 	return(
 		<button
 			onClick={onNext}
-			className='flex flex-col items-center justify-center w-full min-h-screen pt-10 gap-10 bg-landing-back'
+			className='flex flex-col items-center justify-center w-full pt-10 gap-10'
 		>
 			<SectionTitle
 				sectionTitle='AI 리뷰 요약'

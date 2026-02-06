@@ -22,7 +22,16 @@ import type {
   UserImgQuery,
   VerifyAndSavePayload,
 } from "./data-contracts";
-import { ContentType, HttpClient, RequestParams } from "./http-client";
+import { HttpClient } from "./http-client";
+import type { RequestParams, ContentType } from "./http-client";
+
+enum ContentType {
+  Json = "application/json",
+  FormData = "multipart/form-data",
+  UrlEncoded = "application/x-www-form-urlencoded",
+  Text = "text/plain",
+}
+
 
 export class Api<
   SecurityDataType = unknown,

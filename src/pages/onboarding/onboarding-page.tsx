@@ -4,7 +4,7 @@ import { cn } from '@/src/utils/cn'
 import { useState } from 'react'
 
 const OnBoardingPage = () => {
-	const [isGuide, setIsGuide] = useState(false)
+	const [isGuide, setIsGuide] = useState(true)
 	const clickGuide = () => {
 		setIsGuide((prev)=> !prev)
 	}
