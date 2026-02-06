@@ -2,7 +2,7 @@ import { Modal } from '@/src/components/common/Modal';
 import Banner from '@/src/components/setting/setting-photo/Banners';
 import CheckItem from '@/src/components/setting/setting-photo/CheckItem';
 import InfoBox from '@/src/components/setting/setting-photo/InfoBox';
-import type { PhotoItem } from '@/src/types/schemas/setting/setting-photo';
+import type { PhotoItem } from '@/src/types/setting/setting-photo';
 import { useState } from 'react';
 import { cn } from '@/src/utils/cn';
 // 더미 데이터

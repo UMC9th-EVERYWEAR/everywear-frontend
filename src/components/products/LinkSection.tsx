@@ -43,7 +43,7 @@ const LinkSection = ({
 
 			{/* 에러 메시지 */}
 			{link && !isValidLink && (
-				<span className="absolute top-13 text-regular-12 text-primary-600 self-start">
+				<span className="absolute top-13.5 text-regular-12 text-primary-600 self-start">
 					올바른 상품 링크를 입력해주세요.
 				</span>
 			)}
@@ -53,6 +53,7 @@ const LinkSection = ({
 				<Button
 					disabled={!isValidLink}
 					onClick={onSubmit}
+					size='md'
 				>
 					추가 완료
 				</Button>

@@ -2,14 +2,16 @@ import { matchPath, Outlet, useLocation } from 'react-router';
 import Header from './Header';
 import { Navbar } from './Navbar';
 import { Modal } from '../common/Modal';
-import { useMemo, useState } from 'react';
+import { useMemo, useRef, useState } from 'react';
 import { fullscreenPatterns, hideHeaderPatterns, hideNavPatterns, PATH } from '@/src/constants/path';
 import { cn } from '@/src/utils/cn';
+import ScrollToTop from '@/src/hooks/domain/products/useScrollToTop';
 
 const RootLayout = () => {
 	const { pathname } = useLocation();
 	const [isWithdrawOpen, setIsWithdrawOpen] = useState(false);
-	
+	const mainRef = useRef<HTMLElement | null>(null);
+
   
 	// 추후 추가 가능
 
@@ -65,7 +67,6 @@ const RootLayout = () => {
 					isFullscreen ? '' : 'max-w-2xl ',  // 추후에는 모든 페이지로 확장 (반응형)
 				)}
 			>
-
 				{/* 2. 헤더 (고정) */}
 				{!shouldHideHeader && (
 					<Header
@@ -76,7 +77,11 @@ const RootLayout = () => {
 
 				{/* 3. 콘텐츠 영역 (여기만 스크롤!) 
 				       grow를 주어 남은 공간을 다 차지하게 하고, no-scrollbar로 깔끔하게 처리 */}
-				<main className='flex-1 overflow-y-auto no-scrollbar'>
+				<ScrollToTop targetRef={mainRef} />
+				<main
+					ref={mainRef}
+					className='flex-1 overflow-y-auto no-scrollbar'
+				>
 					<Outlet />
 				</main>
 
