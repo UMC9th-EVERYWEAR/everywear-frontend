@@ -31,9 +31,9 @@ const ItemBrowseSection = ({ data } : ItemBrowseSectionProps) => {
 				<div className="flex flex-col items-center justify-center text-neutral-500 text-medium-15 h-[75vh]">
 
 					<IconImage
-					name="Product"
-					size={200}
-						/>
+						name="Product"
+						size={200}
+					/>
 					<span className='text-medium-20 mb-3'>아직 피팅할 상품이 없어요</span>
 					<p className='text-medium-14'>
 						관심 있는 상품을 추가하고

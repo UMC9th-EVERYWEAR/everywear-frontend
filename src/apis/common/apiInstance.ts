@@ -150,7 +150,6 @@ axiosInstance.interceptors.response.use(
 				
 				window.location.href = PATH.LOGIN.ROOT;
 			}		
-			// window.location.href = PATH.LOGIN.ROOT;
 			return Promise.reject(refreshError);
 		}
 	},

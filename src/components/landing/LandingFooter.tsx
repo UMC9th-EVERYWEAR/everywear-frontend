@@ -35,7 +35,7 @@ const LandingFooter = () => {
 
 					<div className='flex gap-2.5 items-center mb-2'>
 						<img 
-							src={LOGO_IMAGES.EVERYWEAR}
+							src={LOGO_IMAGES.HANEGER_LOGO}
 							alt="Everywear" 
 							className="w-17.5 object-contain"
 						/>

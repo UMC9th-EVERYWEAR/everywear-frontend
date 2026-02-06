@@ -27,6 +27,7 @@ interface GuidePhotoProps {
   rule?: PhotoGuideRule;
   variant?: GuideVariant;
 	hasText?: boolean;
+	imageSrc?: string;
 }
 
 const GuidePhoto = ({
@@ -37,7 +38,7 @@ const GuidePhoto = ({
 	const message = GUIDE_MESSAGES[rule ?? 'SIMPLE_POSE'][variant];
 	return (
 		<div
-			className={cn(' overflow-hidden rounded-md flex flex-col',
+			className={cn('overflow-hidden rounded-md flex flex-col',
 				hasText ? 'h-50' : 'h-20 w-17',
 			)}
 		>

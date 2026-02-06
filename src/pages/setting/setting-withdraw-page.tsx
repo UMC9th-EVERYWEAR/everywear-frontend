@@ -20,7 +20,8 @@ const SettingWithdraw = () => {
 
 		try {
 			await withdraw();
-			setOpenWithdraw(false);
+			console.log('회원탈퇴!')
+			// setOpenWithdraw(false);
 		} catch (e) {
 			console.error('회원 탈퇴 실패', e);
 		}
@@ -32,11 +33,11 @@ const SettingWithdraw = () => {
 	}
 
 	return <div className='mx-4 mt-3.5 text-neutral-900 h-screen overflow-hidden flex flex-col items-center'>
-		<div className='w-full flex-1 flex flex-col items-center'>
+		<div className='w-full flex-1 flex flex-col items-center max-w-sm'>
 
 
-			<div className='text-medium-16 mb-5 w-75'>{data?.name}님, 탈퇴하기 전에 꼭 확인해주세요</div>
-			<div className=" border border-primary-300 py-4 px-2.5  rounded-lg flex items-start gap-3 w-75">
+			<div className='w-full text-regular-16 mb-5 text-start'>{data?.name}님, 탈퇴하기 전에 꼭 확인해주세요</div>
+			<div className=" border border-primary-300 py-4 px-2.5  rounded-lg flex items-start gap-3 w-full">
 				<img
 					src={SETTING_IMAGES.CHECK_BLUE}
 					alt='check-icon'
@@ -60,12 +61,13 @@ const SettingWithdraw = () => {
 						src={isConfirmed ? SETTING_IMAGES.COMPLETE_CHECK:  SETTING_IMAGES.CHECK_INCOMPLETE }
 						alt='check'
 					/>
-					<p className='text-medium-16'>탈퇴 유의사항을 모두 확인했어요.</p>
+					<p className='text-regular-16'>탈퇴 유의사항을 모두 확인했어요.</p>
 				</button>
 			</div>
 			<Button
 				variant='filled'
 				disabled={!isConfirmed}
+				size='md'
 				onClick={()=>setOpenWithdraw(true)}
 			>탈퇴하기</Button>
 		</div>
