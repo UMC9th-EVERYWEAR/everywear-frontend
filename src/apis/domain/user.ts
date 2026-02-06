@@ -23,6 +23,5 @@ export const toggleAlarm = async () => {
 };
 
 export const toggleAgree = async () => {
-	await apiClient.toggleAlarm();
+	await apiClient.toggleAgree();
 };
-

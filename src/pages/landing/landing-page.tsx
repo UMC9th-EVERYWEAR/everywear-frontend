@@ -4,16 +4,24 @@ import IntroAIFittingSection from '@/src/components/landing/IntroAIFittingSectio
 import IntroAIReviewSection from '@/src/components/landing/IntroAIReviewSection'
 import IntroConnectSection from '@/src/components/landing/IntroConnectSection'
 import LandingFooter from '@/src/components/landing/LandingFooter'
-// import ScrollAnimationContainer from '@/src/components/onboarding/onboarding/ScrollAnimationContainer'
+import { PATH } from '@/src/constants/path'
+import { useMe } from '@/src/hooks/service/auth/useMe'
 import { cn } from '@/src/utils/cn'
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import { useNavigate } from 'react-router'
 
 const LadingPage = () => {
-	// const heroRef = useRef<HTMLDivElement>(null)
 	const introRef = useRef<HTMLDivElement>(null)
 	const howRef = useRef<HTMLDivElement>(null)
 	const [scrollEnabled, setScrollEnabled] = useState(false)
-	// const [hasEntered, setHasEntered] = useState(false) //  Hero 노출 여부
+	const navigate = useNavigate();
+	const { data: me } = useMe();
+
+	useEffect(() => {
+		if (me) {
+			navigate(PATH.HOME); // 또는 onboarding
+		}
+	}, [me, navigate]);
 
 
 
