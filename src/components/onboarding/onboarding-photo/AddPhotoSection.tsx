@@ -29,6 +29,7 @@ const AddPhotoSection = ({ setShowGuide } : AddPhotoSectionProps) => {
 		capturePhoto,
 	} = usePhotoInput();
 	const [isVerify, setIsVerify] = useState(false)
+	// const [resizedPreviewUrl, setResizedPreviewUrl] = useState<string | null>(null);
 
 	const handleClick = (type: PhotoBtnType) => {
 		if (type === 'CAMERA') openCamera();
@@ -40,7 +41,12 @@ const AddPhotoSection = ({ setShowGuide } : AddPhotoSectionProps) => {
 	const handleConfirm = async () => {
 		if (!file) return;
 		console.log('원본 파일 용량(MB):', (file.size / 1024 / 1024).toFixed(2));
-		const resizingBlob = await imageCompression(file, { maxSizeMB: 0.5 });
+		const resizingBlob = await imageCompression(file, {
+			maxSizeMB: 1,              // 🔹 1MB 정도로 완화
+			maxWidthOrHeight: 2048,    // 🔹 해상도 상한선만 제한
+			useWebWorker: true,
+			initialQuality: 0.9,      // 🔹 처음 품질 높게 시작
+		});				
 		const resizingFile = new File([resizingBlob], file.name, { type: resizingBlob.type });
 		setFile(resizingFile);
 		setIsVerify(true);
@@ -48,6 +54,11 @@ const AddPhotoSection = ({ setShowGuide } : AddPhotoSectionProps) => {
 			'리사이징 파일 용량(MB):',
 			(resizingFile.size / 1024 / 1024).toFixed(2),
 		);
+
+
+		// 🔽 테스트용 preview URL 생성
+		// const resizedUrl = URL.createObjectURL(resizingFile);
+		// setResizedPreviewUrl(resizedUrl);
 	};
 
 
@@ -148,6 +159,20 @@ const AddPhotoSection = ({ setShowGuide } : AddPhotoSectionProps) => {
 					setIsVerify={setIsVerify}
 				            />
 			}
+
+
+			{/* {resizedPreviewUrl && (
+				<div className="mt-6 px-5">
+					<p className="text-regular-12 text-neutral-500 mb-2">
+						리사이징 결과 미리보기 (테스트용)
+					</p>
+					<img
+						src={resizedPreviewUrl}
+						alt="resized-preview"
+						className="w-full max-h-80 object-contain border border-neutral-300 rounded-md"
+					/>
+				</div>
+			)} */}
 		</>
 	)
 }

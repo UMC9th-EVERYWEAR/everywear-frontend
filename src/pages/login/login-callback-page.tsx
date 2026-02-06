@@ -25,11 +25,11 @@ const OAuthCallbackPage = () => {
 
 		  login(undefined, {
 			onSuccess: () => {
-				navigate(PATH.LOGIN.TERMS);
+				// navigate(PATH.LOGIN.TERMS);
 				
 			},
 			onError: () => {
-				navigate(PATH.LOGIN.ROOT);
+				// navigate(PATH.LOGIN.ROOT);
 			},
 		});
 	}, [searchParams, login, navigate]);
