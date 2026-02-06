@@ -7,7 +7,7 @@ env:
 on:
   push:
     branches:
-      - main  # develop 브랜치에만 실행
+      - main  # main 브랜치에만 실행
 
 permissions:
   contents: write
