@@ -1,40 +1,36 @@
-import { LOGIN_IMAGES, ONBOARDING_IMAGES } from '@/src/constants/images';
+import { ONBOARDING_GUIDE_IMAGES, ONBOARDING_IMAGES } from '@/src/constants/images';
 import { cn } from '@/src/utils/cn';
 
 
 export type PhotoGuideRule =
   | 'SINGLE_SUBJECT'
-  | 'SIMPLE_POSE';
+  | 'SIMPLE_POSE'
+  | 'CLOTHES_VISIBLE'
+  | 'NO_GROUP'
+  | 'THUMBNAIL_1'
+  | 'THUMBNAIL_2'
+  | 'THUMBNAIL_3'
+  | 'THUMBNAIL_4';
 
-type GuideVariant = 'GOOD' | 'BAD';
-
-const GUIDE_MESSAGES: Record<
-  PhotoGuideRule,
-  Record<GuideVariant, string>
-
-> = {
-	SINGLE_SUBJECT: {
-		GOOD: '단독 사진, 전신 또는 반신 정면 사진',
-		BAD: '단체 사진 또는 복잡한 의상 금지',
-	},
-	SIMPLE_POSE: {
-		GOOD: '단순한 포즈, 가려지지 않은 의상',
-		BAD: '가려진 의상이 있는 복잡한 포즈 금지',
-	},
-};
+type GuideVariant = keyof typeof ONBOARDING_GUIDE_IMAGES;
 
 interface GuidePhotoProps {
   rule?: PhotoGuideRule;
+	index: number;
   variant?: GuideVariant;
 	hasText?: boolean;
+	message?: string;
 }
 
 const GuidePhoto = ({
-	rule,
+	index,
+	message,
 	variant = 'GOOD',
 	hasText = false,
 }: GuidePhotoProps) => {	
-	const message = GUIDE_MESSAGES[rule ?? 'SIMPLE_POSE'][variant];
+	const imageSrc = ONBOARDING_GUIDE_IMAGES[variant][index];
+	if (!imageSrc) return null;
+
 	return (
 		<div
 			className={cn(' overflow-hidden rounded-md flex flex-col',
@@ -48,7 +44,7 @@ const GuidePhoto = ({
 				}
 			>
 				<img
-					src={LOGIN_IMAGES.CHECK_BOX}
+					src={imageSrc}
 					alt='guide'
 					className="w-full h-full object-cover"
 				/>
@@ -61,7 +57,7 @@ const GuidePhoto = ({
 				/>
 			</div>
 			{
-				hasText && 
+				hasText && message && 
 				<div className="bg-primary-900 min-h-10 flex items-center justify-center flex-1">
 					<span className="text-regular-10 text-white text-center">{message}</span>
 				</div>

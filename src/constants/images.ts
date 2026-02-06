@@ -82,6 +82,25 @@ export const ONBOARDING_IMAGES = {
 	LOCK_ICON: '/svgs/onboarding/lock-icon.svg',
 } as const;
 
+export const ONBOARDING_GUIDE_IMAGES = {
+	GOOD: [
+		'/svgs/onboarding/guide/good-photo1.svg',
+		'/svgs/onboarding/guide/good-photo2.svg',
+		'/svgs/onboarding/guide/good-photo3.svg',
+		'/svgs/onboarding/guide/good-photo4.svg',
+		'/svgs/onboarding/guide/good-photo5.svg',
+		'/svgs/onboarding/guide/good-photo6.svg',
+	],
+	BAD: [
+		'/svgs/onboarding/guide/bad-photo1.svg',
+		'/svgs/onboarding/guide/bad-photo2.svg',
+		'/svgs/onboarding/guide/bad-photo3.svg',
+		'/svgs/onboarding/guide/bad-photo4.svg',
+		'/svgs/onboarding/guide/bad-photo5.svg',
+		'/svgs/onboarding/guide/bad-photo6.svg',
+	],
+} as const;
+
 // setting
 export const SETTING_IMAGES = {
 	ARROW_RIGHT: '/svgs/setting/arrow-right.svg',

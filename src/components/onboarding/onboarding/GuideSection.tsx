@@ -3,6 +3,32 @@ import { useNavigate } from 'react-router';
 import Button from '../../common/Button';
 import GuidePhoto from './GuidePhoto';
 import { cn } from '@/src/utils/cn';
+import { ONBOARDING_GUIDE_IMAGES } from '@/src/constants/images';
+
+const MAIN_GUIDES = [
+	{
+		variant: 'GOOD' as const,
+		index: 0,
+		message: '단독 사진, 전신 또는 반신 정면 사진',
+	},
+	{
+		variant: 'BAD' as const,
+		index: 0,
+		message: '단체 사진 또는 복잡한 의상 금지',
+	},
+	{
+		variant: 'GOOD' as const,
+		index: 1,
+		message: '단순한 포즈, 가려지지 않은 의상',
+	},
+	{
+		variant: 'BAD' as const,
+		index: 1,
+		message: '가려진 의상이 있는 복잡한 포즈 금지',
+	},
+];
+const THUMBNAIL_START_INDEX = 2;
+
 
 const GuideSection = () => {
 
@@ -23,61 +49,29 @@ const GuideSection = () => {
 				<p className="px-1 text-regular-14 text-center text-neutral-500 mb-3">최상의 결과를 얻으려면 당신의 인물 사진을 업로드할 때 아래 가이드라인을 따라주세요</p>
 			
 				<div className='grid grid-cols-2 grid-rows-2 gap-3'>
-					<GuidePhoto
-						rule={'SINGLE_SUBJECT'}
-						variant='GOOD'
-						hasText={true}
-					/>
-					<GuidePhoto
-						rule={'SINGLE_SUBJECT'}
-						variant='BAD'
-						hasText={true}
-					/>
-					<GuidePhoto
-						rule={'SIMPLE_POSE'}
-						variant='GOOD'
-						hasText={true}
-					/>
-					<GuidePhoto
-						rule={'SIMPLE_POSE'}
-						variant='BAD'
-						hasText={true}
-					/>
+					{MAIN_GUIDES.map(({ variant, index, message }) => (
+						<GuidePhoto
+							key={`${variant}-${index}`}
+							variant={variant}
+							index={index}
+							hasText
+							message={message}
+						/>
+					))}
 				</div>
 
 				<div className='grid grid-cols-4 grid-rows-2 gap-3 mt-5'>
-					<GuidePhoto
-						variant='GOOD'
-						hasText={false}
-					/>	
-					<GuidePhoto
-						variant='GOOD'
-						hasText={false}
-					/>
-					<GuidePhoto
-						variant='GOOD'
-						hasText={false}
-					/>
-					<GuidePhoto
-						variant='GOOD'
-						hasText={false}
-					/>	
-					<GuidePhoto
-						variant='BAD'
-						hasText={false}
-					/>	
-					<GuidePhoto
-						variant='BAD'
-						hasText={false}
-					/>	
-					<GuidePhoto
-						variant='BAD'
-						hasText={false}
-					/>	
-					<GuidePhoto
-						variant='BAD'
-						hasText={false}
-					/>
+					{(['GOOD', 'BAD'] as const).map((variant) =>
+						ONBOARDING_GUIDE_IMAGES[variant]
+							.slice(THUMBNAIL_START_INDEX)
+							.map((_, idx) => (
+								<GuidePhoto
+									key={`${variant}-thumb-${idx}`}
+									variant={variant}
+									index={idx + THUMBNAIL_START_INDEX}
+								/>
+							)),
+					)}
 				</div>
 			</div>
 

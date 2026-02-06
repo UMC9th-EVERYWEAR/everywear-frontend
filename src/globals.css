@@ -22,7 +22,6 @@
 
 
   --line-height-default: 1.5;
-
   --color-neutral-1000: #D2D2D2;
   --color-neutral-900: #2a323f;
   --color-neutral-700: #596373;
@@ -33,6 +32,7 @@
   --color-neutral-100: #eaecf0;
   --color-neutral-50:  #f0f2f7;
 
+  --color-primary-900: #303763;
   --color-primary-700: #2C3374;
   --color-primary-600: #3b4599;
   --color-primary-300: #8d98ff;
@@ -376,6 +376,17 @@
     }
   }
 
+  @keyframes guide-down {
+    0% {
+      opacity: 0;
+      transform: translateY(30px); /* -10 */
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
   @keyframes text-fade-slide {
   from {
     opacity: 0;
@@ -493,6 +504,9 @@
   }
   .animate-guide-in {
     animation: guide-in 0.8s ease-out forwards;
+  }
+    .animate-guide-down {
+    animation: guide-down 0.5s ease-out forwards;
   }
 
  .animate-clothes-motion  {
