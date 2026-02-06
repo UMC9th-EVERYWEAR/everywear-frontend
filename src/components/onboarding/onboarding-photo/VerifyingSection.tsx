@@ -9,6 +9,8 @@ import TipSection from './TipSection';
 import { useVerifyAndSaveProfileImage } from '@/src/hooks/service/user/useVerifyAndSaveProfileImage';
 import LoadingGuide from './LoadingGuide';
 import type { AxiosError } from 'axios';
+import { useNavigate } from 'react-router';
+import { PATH } from '@/src/constants/path';
 
 type VerifyPhase = 'IDLE' | 'VERIFYING' | 'SUCCESS' | 'FAIL';
 type VerifyErrorType = 'INVALID_IMAGE' | 'SERVER_ERROR' | null;
@@ -27,6 +29,7 @@ const VerifyingSection = ({ previewUrl, resizingPhoto, setIsVerify } : Verifying
 	const [stepIndex, setStepIndex] = useState<number | null>(null);
 
 	const requestedRef = useRef(false);
+	const navigate = useNavigate();
 
 
 	const { mutateAsync, isPending } = useVerifyAndSaveProfileImage();
@@ -124,6 +127,7 @@ const VerifyingSection = ({ previewUrl, resizingPhoto, setIsVerify } : Verifying
 					<div className='flex flex-col gap-2 -mt-4 animate-frame-in'>
 						<Button						
 							size='lg'
+							onClick={()=> navigate(PATH.HOME)}
 						>이 사진으로 피팅하기</Button>
 						<Button
 							disabled={isPending}
