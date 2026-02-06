@@ -26,7 +26,7 @@ const AccountSection = ({
 
 			<button
 				onClick={onChangePhoto}
-				className="py-2 w-full flex justify-between border-b-[0.5px] border-neutral-300"
+				className="py-2 w-full flex justify-between border-b-[0.5px] border-neutral-300 cursor-pointer"
 			>
 				<span className="text-regular-14 flex items-center">
 					기본 사진 변경
@@ -34,13 +34,12 @@ const AccountSection = ({
 				<img
 					src={SETTING_IMAGES.ARROW_RIGHT}
 					alt="arrow right"
-					className='cursor-pointer'
 				/>
 			</button>
 
 			<button
 				onClick={toggleLoginSetting}
-				className="py-2 w-full flex justify-between border-b-[0.5px] border-neutral-300"
+				className="py-2 w-full flex justify-between border-b-[0.5px] border-neutral-300 cursor-pointer"
 			>
 				<span className="text-regular-14 flex items-center">
 					간편 로그인 설정

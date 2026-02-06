@@ -20,7 +20,8 @@ const SettingWithdraw = () => {
 
 		try {
 			await withdraw();
-			setOpenWithdraw(false);
+			console.log('회원탈퇴!')
+			// setOpenWithdraw(false);
 		} catch (e) {
 			console.error('회원 탈퇴 실패', e);
 		}
