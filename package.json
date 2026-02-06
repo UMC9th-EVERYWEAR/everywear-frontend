@@ -4,16 +4,29 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc -b && vite build",
+    "dev": "vite --mode development --host",
+    "build": "tsc -b && vite build --mode production",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview --mode production",
+    "prepare": "lefthook install",
+    "api:gen": "node scripts/generate-api.cjs",
+    "prettier": "prettier --write .",
+    "type-check": "tsc --noEmit -p ./tsconfig.json"
   },
   "dependencies": {
+    "@emailjs/browser": "^4.4.1",
     "@tailwindcss/vite": "^4.1.18",
     "@tanstack/react-query": "^5.90.16",
-    "react": "^19.2.0",
-    "react-dom": "^19.2.0",
+    "@tanstack/react-query-devtools": "^5.91.2",
+    "axios": "^1.13.4",
+    "clsx": "^2.1.1",
+    "env-cmd": "^11.0.0",
+    "lucide-react": "^0.563.0",
+    "react": "19.2.4",
+    "react-dom": "19.2.4",
+    "react-router": "^7.12.0",
+    "swiper": "^12.0.3",
+    "tailwind-merge": "^3.4.0",
     "tailwindcss": "^4.1.18",
     "zod": "^4.3.4",
     "zustand": "^5.0.9"
@@ -26,6 +39,7 @@
     "@typescript-eslint/eslint-plugin": "^8.52.0",
     "@typescript-eslint/parser": "^8.52.0",
     "@vitejs/plugin-react": "^5.1.1",
+    "dotenv": "^17.2.3",
     "eslint": "^9.39.1",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-import": "^2.32.0",
@@ -34,8 +48,12 @@
     "eslint-plugin-react-hooks": "^7.0.1",
     "eslint-plugin-react-refresh": "^0.4.24",
     "globals": "^16.5.0",
+    "lefthook": "^2.0.15",
+    "swagger-typescript-api": "^13.2.16",
+    "tailwindcss-animate": "^1.0.7",
     "typescript": "~5.9.3",
     "typescript-eslint": "^8.46.4",
-    "vite": "^7.2.4"
+    "vite": "^7.2.4",
+    "vite-tsconfig-paths": "^6.0.4"
   }
 }

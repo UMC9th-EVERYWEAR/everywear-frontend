@@ -1,27 +1,56 @@
-import React from "react";
+import React from 'react';
 
-type ButtonVariant = "primary" | "outline" | "gray" | "dark";
-
-interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: ButtonVariant;
+interface ButtonProps {
   children: React.ReactNode;
+  variant?: 'filled' | 'outlined' | 'hover';
+  size?: 'sm' | 'md' | 'lg' | 'xl';
+  disabled?: boolean;
+  onClick?: () => void;
 }
 
-const Button = ({ variant = "primary", children, className, ...props }: ButtonProps) => {
-  const baseStyle = "flex w-[300px] p-[10px] justify-center items-center gap-[10px] rounded-[10px] text-regular-16 text-neutral-50 transition-all active:scale-[0.98] cursor-pointer";
+export const Button = ({
+	children,
+	variant = 'filled',
+	size = 'xl',
+	disabled = false,
+	onClick,
+}: ButtonProps) => {
+	const baseStyle = `
+    flex justify-center items-center gap-[10px] rounded-[10px]
+    transition-all font-['Pretendard']
+  `;
 
-  const variants = {
-    primary: "bg-primary-600",
-    outline: "bg-white border-[1.5px] border-primary-600 !text-primary-600",
-    gray: "bg-neutral-500",
-    dark: "bg-[#2C3374]",
-  };
+	const sizeStyles = {
+		sm: 'w-[200px] p-[8px] text-[14px]',
+		md: 'w-[300px] p-[10px] text-[16px]',
+		lg: 'w-[340px] p-[12px] text-[18px]',
+		xl: 'w-full p-[16px] text-[18px]', 
+	};
 
-  return (
-    <button className={`${baseStyle} ${variants[variant]} ${className}`} {...props}>
-      {children}
-    </button>
-  );
+	const variantStyles = {
+		filled: 'bg-[var(--color-primary-600)] text-[var(--color-neutral-50)] hover:bg-[var(--color-primary-700)] cursor-pointer transition-colors duration-200',
+		outlined: 'bg-white text-[var(--color-primary-600)] border-[1.5px] border-[var(--color-primary-600)] hover:bg-[var(--color-primary-600)] hover:text-[var(--color-neutral-50)] cursor-pointer transition-colors duration-200',
+		hover: 'bg-[var(--color-primary-700)] text-[var(--color-neutral-50)] cursor-pointer transition-colors duration-200',
+	};
+
+	// 비활성화 스타일
+	const disabledStyle = 'bg-[var(--color-neutral-400)] text-white cursor-not-allowed';
+
+	const fullClassName = `
+    ${baseStyle}
+    ${sizeStyles[size]}
+    ${disabled ? disabledStyle : variantStyles[variant]}
+  `;
+
+	return (
+		<button
+			onClick={onClick}
+			disabled={disabled}
+			className={fullClassName}
+		>
+			{children}
+		</button>
+	);
 };
 
 export default Button;
