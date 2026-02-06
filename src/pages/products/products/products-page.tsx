@@ -6,8 +6,7 @@ import { useNavigate } from 'react-router';
 import ItemBrowseSection from '@/src/components/closet/ItemBrowseSection';
 import MallGuide from '@/src/components/products/MallGuide';
 import type { CategoryKey } from '@/src/types/products/product';
-import { useProducts, useTopProducts, useOuterProducts, useEtcProducts, useDressProducts, useBottomProducts } from '@/src/hooks/service/product/useProducts';
-import type { ListDTO } from '@/src/apis/generated';
+import { useProductsByCategory } from '@/src/hooks/service/product/useProducts';
 
 
 const ProductsPage = () => {
@@ -20,23 +19,10 @@ const ProductsPage = () => {
 
 	const handleSelected = (category : CategoryKey) => setSelected(category)
 
-	const all = useProducts();
-	const top = useTopProducts();
-	const outer = useOuterProducts();
-	const etc = useEtcProducts();
-	const dress = useDressProducts();
-	const bottom = useBottomProducts();
+	const { data = [] } = useProductsByCategory(selected);
 
-	const dataMap: Record<CategoryKey, ListDTO[]> = {
-		전체: all.data ?? [],
-		상의: top.data ?? [],
-		아우터: outer.data ?? [],
-		기타: etc.data ?? [],
-		원피스: dress.data ?? [],
-		하의: bottom.data ?? [],
-	};
 
-	const filteredProducts = dataMap[selected];
+	const filteredProducts = data;
 
 	return(
 		<div 

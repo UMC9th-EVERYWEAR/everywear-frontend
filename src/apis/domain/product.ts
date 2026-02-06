@@ -1,7 +1,19 @@
 import { apiClient } from '@/src/apis/common/apiClient'
 import type { ImportDTO } from '../generated';
+import type { CategoryKey } from '@/src/types/products/product';
 
 // products-page
+export const getProductsByCategory = async (category: CategoryKey) => {
+	switch (category) {
+			case '상의': return getTopProducts();
+			case '아우터': return getOuterProducts();
+			case '기타': return getEtcProducts();
+			case '원피스': return getDressProducts();
+			case '하의': return getBottomProducts();
+			default: return getProducts(); // 전체
+	}
+};
+
 export const getProducts = async () => {
 	const { data } = await apiClient.getProducts();
 	return data.result?.products ?? [];

@@ -6,8 +6,10 @@ import {
 	getEtcProducts,
 	getDressProducts,
 	getBottomProducts,
+	getProductsByCategory,
 } from '@/src/apis/domain/product';
 import { QUERY_KEYS } from '@/src/constants/query-key';
+import type { CategoryKey } from '@/src/types/products/product';
 
 /** 전체 상품 */
 export const useProducts = () =>
@@ -50,3 +52,12 @@ export const useBottomProducts = () =>
 		queryKey: QUERY_KEYS.PRODUCT.CATEGORY('bottom'),
 		queryFn: getBottomProducts,
 	});
+
+
+//
+export const useProductsByCategory = (category: CategoryKey) => {
+	return useQuery({
+		queryKey: QUERY_KEYS.PRODUCT.CATEGORY(category),
+		queryFn: () => getProductsByCategory(category),
+	});
+};
