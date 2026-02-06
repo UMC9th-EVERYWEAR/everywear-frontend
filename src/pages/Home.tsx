@@ -14,6 +14,7 @@ import { useRecentFittingsQuery, useHomeProductsQuery } from '@/src/hooks/querie
 import { QUERY_KEYS } from '../constants/query-key';
 import { PATH } from '../constants/path';
 import type { FittingSummary, ListDTO } from '../apis/generated';
+import ProductCardSkeleton from '../components/common/ProductCardSkeleton';
 
 const Home = () => {
 	const navigate = useNavigate();
@@ -118,7 +119,7 @@ const Home = () => {
 						</h3>
 						<button 
 							className="text-medium-12 text-[var(--color-neutral-900)] cursor-pointer mb-1 hover:text-[var(--color-primary-600)] transition-colors"
-							onClick={() => navigate(PATH.CLOSET)}
+							onClick={() => navigate(PATH.PRODUCTS.ROOT)}
 						>
 							전체보기 →
 						</button>
@@ -135,9 +136,9 @@ const Home = () => {
 				>
 					{isProductLoading ? (
 						[1, 2, 3].map((i) => (
-							<div
+							<ProductCardSkeleton
 								key={i}
-								className="min-w-[140px] h-[200px] bg-neutral-100 rounded-[10px] animate-pulse"
+								isHome
 							/>
 						))
 					) : productsList.length > 0 ? (

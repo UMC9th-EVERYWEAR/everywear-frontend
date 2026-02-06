@@ -7,7 +7,7 @@ interface ItemAddCountSectionProps {
 
 const ItemAddCountSection = ({ category, count, onClick } : ItemAddCountSectionProps) => {
 	return (
-		<div className='flex justify-between items-center mb-5 px-4'>
+		<div className='flex justify-between items-center mb-5'>
 			<p className='text-regular-14'>{category} 상품({count})</p>
 			<button
 				className='w-18 h-6 px-1.75 py-1.25 flex justify-center 

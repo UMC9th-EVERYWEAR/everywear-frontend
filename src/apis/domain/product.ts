@@ -59,6 +59,17 @@ export const getHomeProducts = async () => {
 };
 
 // closet-page
+export const getClosetProductsByCategory = async (category: CategoryKey) => {
+	switch (category) {
+			case '상의': return getClosetTopProducts();
+			case '아우터': return getClosetOuterProducts();
+			case '기타': return getClosetEtcProducts();
+			case '원피스': return getClosetDressProducts();
+			case '하의': return getClosetBottomProducts();
+			default: return getClosetProducts(); // 전체
+	}
+};
+
 export const getClosetProducts = async () => {
 	const { data } = await apiClient.getClosetProducts();
 	return data.result?.products ?? [];

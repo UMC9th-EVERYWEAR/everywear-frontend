@@ -2,11 +2,12 @@ import ItemAddCountSection from '@/src/components/closet/ItemAddSection';
 import CategoryBar from '@/src/components/common/CategoryBar'
 import { PATH } from '@/src/constants/path';
 import { useRef, useState } from 'react';
-import { useNavigate } from 'react-router';
+import {  useNavigate } from 'react-router';
 import ItemBrowseSection from '@/src/components/closet/ItemBrowseSection';
 import MallGuide from '@/src/components/products/MallGuide';
 import type { CategoryKey } from '@/src/types/products/product';
 import { useProductsByCategory } from '@/src/hooks/service/product/useProducts';
+import ItemSkeleton from '@/src/components/closet/ItemSkeleton';
 
 
 const ProductsPage = () => {
@@ -19,10 +20,9 @@ const ProductsPage = () => {
 
 	const handleSelected = (category : CategoryKey) => setSelected(category)
 
-	const { data = [] } = useProductsByCategory(selected);
+	const { data: filteredProducts = [] , isLoading: productLodaing } = useProductsByCategory(selected);
 
 
-	const filteredProducts = data;
 
 	return(
 		<div 
@@ -53,7 +53,15 @@ const ProductsPage = () => {
 					count={filteredProducts.length}
 					onClick={() => navigate(PATH.PRODUCTS.ADD)}
 				/>
-				<ItemBrowseSection data={filteredProducts} />
+				{
+					productLodaing ? (
+						<ItemSkeleton />
+					) :(
+						<ItemBrowseSection
+							data={filteredProducts}
+						/>
+					)
+				}
 			</div>
 
 

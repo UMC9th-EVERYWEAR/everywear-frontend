@@ -1,29 +1,14 @@
 import ProductCard from '../common/ProductCard';
-import { useState } from 'react';
-import ProductCardSkeleton from '../common/ProductCardSkeleton';
 import { IconImage } from '@/src/assets/icons/image/IconImage';
 import type { ListDTO } from '@/src/apis/generated';
 
 interface ItemBrowseSectionProps {
-    data : ListDTO[]
+    data : ListDTO[],
+		isCloset?: boolean
 }
 
-const ItemBrowseSection = ({ data } : ItemBrowseSectionProps) => {
-	// eslint-disable-next-line @typescript-eslint/no-unused-vars
-	const [isLoading, _setIsLoading] = useState(false)
-	  const MIN_PRODUCTS = 8; // 로딩시 보여줄 임시 상품 개수
+const ItemBrowseSection = ({ data, isCloset = false } : ItemBrowseSectionProps) => {
 
-	if (isLoading) {
-		return (
-			<div className="grid grid-cols-2 gap-2 place-items-center tablet:grid-cols-3">
-				{Array.from({ length: MIN_PRODUCTS }).map((_, index) => (
-					<ProductCardSkeleton
-						key={index}
-					/>
-				))}
-			</div>
-		);
-	}
 	
 	return (
 		<>
@@ -53,7 +38,7 @@ const ItemBrowseSection = ({ data } : ItemBrowseSectionProps) => {
 							price={product.price ?? ''}
 							rating={product.star_point ?? 0}
 							imageUrl={product.product_img_url ?? ''}
-							// isCloset={product.isCloset}
+							isCloset={isCloset}
 						/>
 					))}
 				</div>}
