@@ -3,7 +3,7 @@ import TermsCheckBox, { type TermsCheckedState, type TermType } from '@/src/comp
 import { LOGO_IMAGES } from '@/src/constants/images';
 import  { TERMS_LINK } from '@/src/constants/link';
 import { PATH } from '@/src/constants/path';
-import { useLogin } from '@/src/hooks/service/auth/useLogin';
+import { useToggleAgree } from '@/src/hooks/service/user/useToggle';
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
 
@@ -46,15 +46,14 @@ const LoginTermsPage = () => {
 			[key]: !prev[key],
 		}));
 	};
-
-	const { mutate: login, isPending: loginPending, isError } = useLogin();
+	const { mutate: toggleAgree, isPending: togglepending , isError } = useToggleAgree();
 
 	const handleLogin = () => {
-		login(undefined, {
-			onSuccess: () => {
-				navigate(PATH.ONBOARDING.ROOT);
-			},
-		});
+		toggleAgree(undefined, {
+			onSuccess: () => navigate(PATH.ONBOARDING.ROOT),
+			// 		TODO:	약관 동의 후 → 유저 정보 다시 불러와서(me)
+			// 실제로 동의가 반영됐는지 확인 
+		})
 	};
 
 	if(isError) navigate(PATH.LOGIN.ROOT)
@@ -102,7 +101,7 @@ const LoginTermsPage = () => {
   `}
 			>
 				<Button
-					disabled={!isAllChecked || loginPending}
+					disabled={!isAllChecked || togglepending}
 					onClick={handleLogin}
 				>로그인하기</Button>
 			</div>
