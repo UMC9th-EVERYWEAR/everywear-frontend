@@ -61,7 +61,7 @@ const getStepIcon = (
 };
 
 const getIconClass = (
-	step: typeof steps[number],
+	// step: typeof steps[number],
 	status: StepStatus,
 ) => {
 	if (status === 'LOADING') return 'animate-infinite-fade opacity-70';
@@ -84,7 +84,7 @@ const VerifySteps = ({ stepStatus }: VerifyStepsProps) => {
 					>
 						<img
 							src={getStepIcon(step, status)}
-							className={`w-5 h-5 ${getIconClass(step, status)}`}
+							className={`w-5 h-5 ${getIconClass(status)}`}
 							alt='icon'
 						/>
 						<span
