@@ -1,5 +1,6 @@
 // @ts-nocheck
 import type {
+  ApiResponseAgreeToggleResponse,
   ApiResponseAiReviewDTO,
   ApiResponseFittingApplyResult,
   ApiResponseFittingDetail,
