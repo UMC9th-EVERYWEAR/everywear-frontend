@@ -14,6 +14,14 @@ export const QUERY_KEYS = {
 		SESSION: ['auth', 'session'] as const,
 	},
 
+	// 사용자 이미지 (프로필 사진)
+	USER_IMAGES: {
+		ALL: ['user-images'] as const,
+		LIST: ['user-images', 'list'] as const,
+		DETAIL: (imageId: number) =>
+      ['user-images', 'detail', imageId] as const,
+	},
+
 	// 상품 관련 (무신사, 지그재그 등)
 	PRODUCT: {
 		ALL: ['product'] as const,

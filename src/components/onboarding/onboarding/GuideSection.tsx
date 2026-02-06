@@ -1,40 +1,35 @@
 import { PATH } from '@/src/constants/path';
 import { useNavigate } from 'react-router';
 import Button from '../../common/Button';
-import GuidePhoto, { type PhotoGuideRule } from './GuidePhoto';
-import singleGood from '@/public/svgs/onboarding/good-photo1.svg';
-import singleBad from '@/public/svgs/onboarding/bad-photo1.svg';
-import poseGood from '@/public/svgs/onboarding/good-photo2.svg';
-import poseBad from '@/public/svgs/onboarding/bad-photo2.svg';
-import good1 from  '@/public/svgs/onboarding/good-photo3.svg'
-import good2 from  '@/public/svgs/onboarding/good-photo4.svg'
-import good3 from  '@/public/svgs/onboarding/good-photo5.svg'
-import good4 from  '@/public/svgs/onboarding/good-photo6.svg'
+import GuidePhoto from './GuidePhoto';
 
-import bad1 from  '@/public/svgs/onboarding/bad-photo3.svg'
-import bad2 from '@/public/svgs/onboarding/bad-photo4.svg'
-import bad3 from '@/public/svgs/onboarding/bad-photo5.svg'
-import bad4 from '@/public/svgs/onboarding/bad-photo6.svg'
 import { cn } from '@/src/utils/cn';
+import { ONBOARDING_GUIDE_IMAGES } from '@/src/constants/images';
 
-const GUIDE_RULE_IMAGES: Record<
-  PhotoGuideRule,
-  Record<'GOOD' | 'BAD', string>
-> = {
-	SINGLE_SUBJECT: {
-		GOOD: singleGood,
-		BAD: singleBad,
+const MAIN_GUIDES = [
+	{
+		variant: 'GOOD' as const,
+		index: 0,
+		message: '단독 사진, 전신 또는 반신 정면 사진',
 	},
-	SIMPLE_POSE: {
-		GOOD: poseGood,
-		BAD: poseBad,
+	{
+		variant: 'BAD' as const,
+		index: 0,
+		message: '단체 사진 또는 복잡한 의상 금지',
 	},
-};
+	{
+		variant: 'GOOD' as const,
+		index: 1,
+		message: '단순한 포즈, 가려지지 않은 의상',
+	},
+	{
+		variant: 'BAD' as const,
+		index: 1,
+		message: '가려진 의상이 있는 복잡한 포즈 금지',
+	},
+];
+const THUMBNAIL_START_INDEX = 2;
 
-const GUIDE_EXAMPLE_IMAGES = {
-	GOOD: [good1, good2, good3, good4],
-	BAD: [bad1, bad2, bad3, bad4],
-} as const;
 
 const GuideSection = () => {
 
@@ -55,48 +50,29 @@ const GuideSection = () => {
 				<p className="px-1 text-regular-14 text-center text-neutral-500 mb-3">최상의 결과를 얻으려면 당신의 인물 사진을 업로드할 때 아래 가이드라인을 따라주세요</p>
 			
 				<div className='grid grid-cols-2 grid-rows-2 gap-3'>
-					<GuidePhoto
-						imageSrc={GUIDE_RULE_IMAGES.SINGLE_SUBJECT.GOOD}
-						rule={'SINGLE_SUBJECT'}
-						variant='GOOD'
-						hasText={true}
-					/>
-					<GuidePhoto
-						imageSrc={GUIDE_RULE_IMAGES.SINGLE_SUBJECT.BAD}
-						rule={'SINGLE_SUBJECT'}
-						variant='BAD'
-						hasText={true}
-					/>
-					<GuidePhoto
-						imageSrc={GUIDE_RULE_IMAGES.SIMPLE_POSE.GOOD}
-						rule={'SIMPLE_POSE'}
-						variant='GOOD'
-						hasText={true}
-					/>
-					<GuidePhoto
-						imageSrc={GUIDE_RULE_IMAGES.SIMPLE_POSE.GOOD}
-						rule={'SIMPLE_POSE'}
-						variant='BAD'
-						hasText={true}
-					/>
+					{MAIN_GUIDES.map(({ variant, index, message }) => (
+						<GuidePhoto
+							key={`${variant}-${index}`}
+							variant={variant}
+							index={index}
+							hasText
+							message={message}
+						/>
+					))}
 				</div>
 
 				<div className='grid grid-cols-4 grid-rows-2 gap-3 mt-5'>
-					  {GUIDE_EXAMPLE_IMAGES.GOOD.map((img, idx) => (
-						<GuidePhoto
-							key={`good-${idx}`}
-							imageSrc={img}
-							variant="GOOD"
-						/>
-					))}
-
-					{GUIDE_EXAMPLE_IMAGES.BAD.map((img, idx) => (
-						<GuidePhoto
-							key={`bad-${idx}`}
-							imageSrc={img}
-							variant="BAD"
-						/>
-					))}
+					{(['GOOD', 'BAD'] as const).map((variant) =>
+						ONBOARDING_GUIDE_IMAGES[variant]
+							.slice(THUMBNAIL_START_INDEX)
+							.map((_, idx) => (
+								<GuidePhoto
+									key={`${variant}-thumb-${idx}`}
+									variant={variant}
+									index={idx + THUMBNAIL_START_INDEX}
+								/>
+							)),
+					)}
 				</div>
 			</div>
 
