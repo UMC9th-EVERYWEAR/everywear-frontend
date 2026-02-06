@@ -1,32 +1,21 @@
 import ItemAddCountSection from '@/src/components/closet/ItemAddSection';
 import ItemBrowseSection from '@/src/components/closet/ItemBrowseSection';
+import ItemSkeleton from '@/src/components/closet/ItemSkeleton';
 import CategoryBar from '@/src/components/common/CategoryBar';
-import type { ProductCardProps } from '@/src/components/common/ProductCard';
 import { PATH } from '@/src/constants/path';
+import { useClosetsProductsByCategory } from '@/src/hooks/service/product/useClosetProducts';
 import type { CategoryKey } from '@/src/types/products/product';
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
-
-// 타입은 나중에 백엔드 연동하고 파일 하나로 정리할 예정입니다.
-export interface ProductDataType extends ProductCardProps {
-  category: CategoryKey;
-}
-
-const MOCK_PRODUCTS: ProductDataType[] = [];
-
-
 
 const ClosetPage = () => {
 	const navigate = useNavigate();
 	const [selected, setSelected] = useState<CategoryKey>('전체');
 
 	const handleSelected = (category : CategoryKey) => setSelected(category)
-    
-	// '전체'이면 모든 데이터, 아니면 카테고리가 일치하는 데이터만 반환
-	const filteredProducts = selected === '전체' 
-		? MOCK_PRODUCTS 
-		: MOCK_PRODUCTS.filter((product) => product.category === selected);
 
+	const { data: filteredClosetProducts = [],  isLoading: closetLoading } = useClosetsProductsByCategory(selected);
+	
 	return (
 		<div className="flex flex-col items-center px-5" >
 			<div className='sm:w-full'>
@@ -40,14 +29,19 @@ const ClosetPage = () => {
 
 				<ItemAddCountSection
 					category={selected}
-					count={filteredProducts.length}
+					count={filteredClosetProducts.length}
 					onClick={() => navigate(PATH.PRODUCTS.ADD)}
 				/>
 
-				<ItemBrowseSection
-					data={filteredProducts}
-					isCloset={true}
-				/>
+				{
+					closetLoading ? (
+						<ItemSkeleton />
+					) :(
+						<ItemBrowseSection
+							data={filteredClosetProducts}
+						/>
+					)
+				}
 
 			</div>
       
