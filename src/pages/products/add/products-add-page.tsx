@@ -1,24 +1,21 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router'; 
 import LinkSection from '@/src/components/products/LinkSection';
 import MallLogosSection from '@/src/components/products/MallLogos';
 import checkUrlFormat from '@/src/utils/checkUrlFormat';
 import { useImportProductMutation } from '@/src/hooks/queries/useProductMutation'; 
-import { PATH } from '@/src/constants/path'; 
+import ProductsModals from '@/src/components/products/ProductsModals';
 import usePreventRefresh from '@/src/hooks/domain/products/usePreventRefresh';
 
 const ProductsAddPage = () => {
 	const [link, setLink] = useState('');
-	// const [successModal, setSuccessModal] = useState(false)
-	// const [failModal, setFailModal] = useState(false)
+	const [openModal, setOpenModal] = useState<'SUCCESS' | 'FAIL' | null>(null);
 
-	const navigate = useNavigate(); 
 
 	// API 호출 로직을 전용 mutation 훅으로 분리
 	const { mutate: importProduct, isPending } = useImportProductMutation();
 
 	// usePreventRefresh: 상품 가져오는 도중의 새로고침 방지
-	const shouldBlockRefresh = link.length > 0 || isPending;
+	const shouldBlockRefresh = isPending;
 
 	usePreventRefresh(shouldBlockRefresh);
 
@@ -33,12 +30,11 @@ const ProductsAddPage = () => {
 			{ product_url: link },
 			{
 				onSuccess: () => {
-					alert('상품이 옷장에 성공적으로 담겼습니다!');
-					navigate(PATH.HOME); 
+					setOpenModal('SUCCESS')
 				},
 				onError: (error) => {
 					console.error('상품 등록 실패', error);
-					alert('상품 등록에 실패했습니다. 링크를 다시 확인해주세요.');
+					setOpenModal('FAIL')
 				},
 			},
 		);
@@ -66,6 +62,19 @@ const ProductsAddPage = () => {
 			/>
 
 
+			{/** modals */}
+			{
+				openModal === 'FAIL' && 			<ProductsModals
+					type='FAIL'
+					onClose={()=> setOpenModal(null)}
+				                           />
+			}
+			{
+				openModal === 'SUCCESS' && 			<ProductsModals
+					type='SUCCESS'
+					onClose={()=> setOpenModal(null)}
+				                              />
+			}		
 		</div>
 	);
 };

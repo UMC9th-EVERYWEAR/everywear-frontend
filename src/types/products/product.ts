@@ -8,3 +8,6 @@ export const CATEGORY_QUERY_MAP = {
 	원피스: 'dress',
 	하의: 'bottom',
 } as const;
+
+
+export type ResultType = 'FAIL' | 'SUCCESS';

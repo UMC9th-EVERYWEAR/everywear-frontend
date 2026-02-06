@@ -1,7 +1,7 @@
 import ItemAddCountSection from '@/src/components/closet/ItemAddSection';
 import CategoryBar from '@/src/components/common/CategoryBar'
 import { PATH } from '@/src/constants/path';
-import {  useState } from 'react';
+import { useRef, useState } from 'react';
 import { useNavigate } from 'react-router';
 import ItemBrowseSection from '@/src/components/closet/ItemBrowseSection';
 import MallGuide from '@/src/components/products/MallGuide';
@@ -12,9 +12,10 @@ import type { ListDTO } from '@/src/apis/generated';
 
 const ProductsPage = () => {
 	const navigate = useNavigate();
+	const scrollRef = useRef<HTMLDivElement>(null);
+
 	const [selected, setSelected] = useState<CategoryKey>('전체');
 	const [showGuide, setShowGuide]  = useState(false)
-
 
 
 	const handleSelected = (category : CategoryKey) => setSelected(category)
@@ -38,17 +39,21 @@ const ProductsPage = () => {
 	const filteredProducts = dataMap[selected];
 
 	return(
-		<div className="px-5 py-2.5 flex flex-col items-center">
-			<div className="w-full border-neutral-200 flex justify-end max-w-md">
+		<div 
+			ref={scrollRef}
+
+			className="px-5 py-2.5 flex flex-col items-center"
+		>
+			<div className="w-full border-neutral-200 flex justify-end">
 
 				<button 
 					onClick={()=> setShowGuide(true)}
-					className="text-center text-primary-300 text-regular-10 cursor-pointer hover:opacity-75"
+					className="text-end text-primary-300 text-regular-10 cursor-pointer hover:opacity-75 sm:w-full"
 				>
 					가상 피팅 가이드
 				</button>    
 			</div>
-			<div>
+			<div className='sm:w-full'>
 				<CategoryBar
 					selected={selected}
 					onSelect={handleSelected}
