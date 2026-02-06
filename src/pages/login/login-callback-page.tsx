@@ -1,6 +1,11 @@
 
 // import { accessTokenStorage } from '@/src/apis/common/apiInstance';
+import { accessTokenStorage } from '@/src/apis/common/apiInstance';
 import Loading from '@/src/components/common/Loading';
+import { PATH } from '@/src/constants/path';
+import { useLogin } from '@/src/hooks/service/auth/useLogin';
+import { useEffect } from 'react';
+import { useSearchParams, useNavigate } from 'react-router';
 // import { PATH } from '@/src/constants/path';
 // import { useLogin } from '@/src/hooks/service/auth/useLogin';
 // import { useEffect } from 'react';
@@ -8,23 +13,23 @@ import Loading from '@/src/components/common/Loading';
 
 
 const OAuthCallbackPage = () => {
-	// const [searchParams] = useSearchParams();
-	// const { mutate: login } = useLogin();
-	// const navigate = useNavigate();
+	const [searchParams] = useSearchParams();
+	const { mutate: login } = useLogin();
+	const navigate = useNavigate();
 
 	
-	// useEffect(() => {
-	// 	const accessToken = searchParams.get('accessToken');
+	useEffect(() => {
+		const accessToken = searchParams.get('accessToken');
 
-	// 	if (!accessToken) {
-	// 		navigate(PATH.LOGIN.ROOT);
-	// 		return;
-	// 	}
+		if (!accessToken) {
+			navigate(PATH.LOGIN.ROOT);
+			return;
+		}
 
-	// 	accessTokenStorage.setItem(accessToken)
+		accessTokenStorage.setItem(accessToken)
 
-	// 	  login();
-	// }, [searchParams, login, navigate]);
+		  login();
+	}, [searchParams, login, navigate]);
 
 	return <Loading />
 };
