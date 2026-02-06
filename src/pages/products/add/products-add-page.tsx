@@ -5,13 +5,23 @@ import MallLogosSection from '@/src/components/products/MallLogos';
 import checkUrlFormat from '@/src/utils/checkUrlFormat';
 import { useImportProductMutation } from '@/src/hooks/queries/useProductMutation'; 
 import { PATH } from '@/src/constants/path'; 
+import usePreventRefresh from '@/src/hooks/domain/products/usePreventRefresh';
 
 const ProductsAddPage = () => {
 	const [link, setLink] = useState('');
+	// const [successModal, setSuccessModal] = useState(false)
+	// const [failModal, setFailModal] = useState(false)
+
 	const navigate = useNavigate(); 
-  
+
 	// API 호출 로직을 전용 mutation 훅으로 분리
 	const { mutate: importProduct, isPending } = useImportProductMutation();
+
+	// usePreventRefresh: 상품 가져오는 도중의 새로고침 방지
+	const shouldBlockRefresh = link.length > 0 || isPending;
+
+	usePreventRefresh(shouldBlockRefresh);
+
 
 	const isValidLink = checkUrlFormat(link);
 
@@ -55,12 +65,7 @@ const ProductsAddPage = () => {
 				onSubmit={handleSubmit}
 			/>
 
-			{/* 로딩 모달 */}
-			{isPending && (
-				<div className="fixed inset-0 z-[100] flex flex-col gap-5 items-center justify-center bg-black/50">
-					<div className="w-10 h-10 border-4 border-t-transparent border-white rounded-full animate-spin" />
-				</div>
-			)}
+
 		</div>
 	);
 };

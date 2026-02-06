@@ -15,7 +15,7 @@ const ItemBrowseSection = ({ data } : ItemBrowseSectionProps) => {
 
 	if (isLoading) {
 		return (
-			<div className="mx-5 grid grid-cols-2 gap-2 place-items-center">
+			<div className="grid grid-cols-2 gap-2 place-items-center tablet:grid-cols-3">
 				{Array.from({ length: MIN_PRODUCTS }).map((_, index) => (
 					<ProductCardSkeleton
 						key={index}
@@ -43,7 +43,7 @@ const ItemBrowseSection = ({ data } : ItemBrowseSectionProps) => {
 					</p>
 				</div>
 			) : 
-				<div className='mx-5 grid grid-cols-2 gap-2.5 place-items-center'>
+				<div className='grid grid-cols-2 gap-2.5 place-items-center sm:grid-cols-3'>
 					{data.map((product) => (
 						<ProductCard
 							key={product.product_id} // 리스트 렌더링엔 key가 필수

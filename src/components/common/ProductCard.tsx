@@ -55,7 +55,7 @@ const ProductCard = ({
 	return (
 		<button 
 			onClick={handleCardClick}
-			className="flex flex-col items-center w-[160px] shrink-0 cursor-pointer active:scale-[0.98] transition-transform"
+			className="flex flex-col items-center max-w-[200px] w-full shrink-0 cursor-pointer active:scale-[0.98] transition-transform"
 		>
       
 			{/* 1. 이미지 영역 */}
@@ -87,12 +87,12 @@ const ProductCard = ({
 				</div>
 
 				{/* 상품명 */}
-				<h3 className="w-full overflow-hidden text-[var(--color-neutral-900)] text-regular-14 leading-[21px] whitespace-nowrap text-ellipsis mt-0.5">
+				<h3 className="w-full text-start overflow-hidden text-[var(--color-neutral-900)] text-regular-14 leading-[21px] whitespace-nowrap text-ellipsis mt-0.5">
 					{name || '상품명 없음'}
 				</h3>
 
 				{/* 가격 - NaN 방지 로직 적용 */}
-				<p className="overflow-hidden text-[var(--color-neutral-900)] text-medium-12 leading-[18px] whitespace-nowrap">
+				<p className="overflow-hidden text-start  text-[var(--color-neutral-900)] text-medium-12 leading-[18px] whitespace-nowrap">
 					{price || '0원'}
 				</p>
 

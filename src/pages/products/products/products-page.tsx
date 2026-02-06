@@ -14,7 +14,9 @@ const ProductsPage = () => {
 	const navigate = useNavigate();
 	const [selected, setSelected] = useState<CategoryKey>('전체');
 	const [showGuide, setShowGuide]  = useState(false)
-  
+
+
+
 	const handleSelected = (category : CategoryKey) => setSelected(category)
 
 	const all = useProducts();
@@ -46,12 +48,14 @@ const ProductsPage = () => {
 					가상 피팅 가이드
 				</button>    
 			</div>
-			<CategoryBar
-				selected={selected}
-				onSelect={handleSelected}
-			/>		
+			<div>
+				<CategoryBar
+					selected={selected}
+					onSelect={handleSelected}
+				/>		
+			</div>
 
-			<div className='w-[375px] flex flex-col mb-5'> {/* 나중에 width 설정 바꿔야 함 */}
+			<div className='w-full flex-col mb-5'> {/* 나중에 width 설정 바꿔야 함 */}
 
 				<ItemAddCountSection
 					category={selected}

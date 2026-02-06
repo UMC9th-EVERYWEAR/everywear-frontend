@@ -8,7 +8,7 @@ interface MallGuideProps {
 const MallGuide = ({ onClose }: MallGuideProps) => {
 	const [step, setStep] = useState<number>(1)
 	return(
-		<div		className="fixed inset-0 z-100 flex items-center justify-center bg-black/50">
+		<div		className="fixed inset-0 z-1000 flex items-center justify-center bg-neutral-200">
 			{
 				step === 1 && 
 				<button
