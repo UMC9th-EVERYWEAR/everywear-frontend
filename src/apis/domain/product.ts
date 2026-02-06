@@ -1,18 +1,9 @@
 import { apiClient } from '@/src/apis/common/apiClient'
-import type { ImportDTO } from '../generated';
+import type { ImportDTO, ListDTO } from '../generated';
 import type { CategoryKey } from '@/src/types/products/product';
 
 // products-page
-export const getProductsByCategory = async (category: CategoryKey) => {
-	switch (category) {
-			case '상의': return getTopProducts();
-			case '아우터': return getOuterProducts();
-			case '기타': return getEtcProducts();
-			case '원피스': return getDressProducts();
-			case '하의': return getBottomProducts();
-			default: return getProducts(); // 전체
-	}
-};
+
 
 export const getProducts = async () => {
 	const { data } = await apiClient.getProducts();
@@ -52,23 +43,28 @@ export const importProduct = async (payload: ImportDTO) => {
 	return data.result;
 };
 
+export const productFetchers: Partial<Record<CategoryKey, () => Promise<ListDTO[]>>> = {
+	'상의': getTopProducts,
+	'아우터': getOuterProducts,
+	'기타': getEtcProducts,
+	'원피스': getDressProducts,
+	'하의': getBottomProducts,
+};
+
+export const getProductsByCategory = async (category: CategoryKey) => {
+	const fetcher = productFetchers[category] ?? getProducts;
+	return fetcher();
+};
+
 // home-page
 export const getHomeProducts = async () => {
 	const { data } = await apiClient.getHomeProducts();
 	return data.result?.products ?? [];
 };
 
+
 // closet-page
-export const getClosetProductsByCategory = async (category: CategoryKey) => {
-	switch (category) {
-			case '상의': return getClosetTopProducts();
-			case '아우터': return getClosetOuterProducts();
-			case '기타': return getClosetEtcProducts();
-			case '원피스': return getClosetDressProducts();
-			case '하의': return getClosetBottomProducts();
-			default: return getClosetProducts(); // 전체
-	}
-};
+
 
 export const getClosetProducts = async () => {
 	const { data } = await apiClient.getClosetProducts();
@@ -98,6 +94,19 @@ export const getClosetDressProducts = async () => {
 export const getClosetBottomProducts = async () => {
 	const { data } = await apiClient.getClosetBottomProducts();
 	return data.result?.products ?? [];
+};
+
+export const ClosetFetchers: Partial<Record<CategoryKey, () => Promise<ListDTO[]>>> = {
+	'상의': getClosetTopProducts,
+	'아우터': getClosetOuterProducts,
+	'기타': getClosetEtcProducts,
+	'원피스': getClosetDressProducts,
+	'하의': getClosetBottomProducts,
+};
+
+export const getClosetByCategory = async (category: CategoryKey) => {
+	const fetcher = productFetchers[category] ?? getClosetProducts;
+	return fetcher();
 };
 
 // ai-fitting-page

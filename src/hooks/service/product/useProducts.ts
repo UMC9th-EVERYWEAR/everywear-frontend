@@ -9,7 +9,7 @@ import {
 	getProductsByCategory,
 } from '@/src/apis/domain/product';
 import { QUERY_KEYS } from '@/src/constants/query-key';
-import type { CategoryKey } from '@/src/types/products/product';
+import { PRODUCT_CATEGORIES, type CategoryKey } from '@/src/types/products/product';
 
 /** 전체 상품 */
 export const useProducts = () =>
@@ -56,8 +56,9 @@ export const useBottomProducts = () =>
 
 //
 export const useProductsByCategory = (category: CategoryKey) => {
+	const queryKeyCategory = PRODUCT_CATEGORIES[category].queryKey;
 	return useQuery({
-		queryKey: QUERY_KEYS.PRODUCT.CATEGORY(category),
+		queryKey: QUERY_KEYS.PRODUCT.CATEGORY(queryKeyCategory),
 		queryFn: () => getProductsByCategory(category),
 	});
 };
