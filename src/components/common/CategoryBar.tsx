@@ -1,8 +1,9 @@
 import { IconSvg } from '@/src/assets/icons';
 import type { SvgIconKey } from '@/src/assets/icons/svg/SvgIcon';
+import type { CategoryKey } from '@/src/types/products/product';
 
 const categories: readonly {
-  name: string;
+  name: CategoryKey;
   icon: SvgIconKey;
 }[] = [
 	{ name: '전체', icon: 'All' },
@@ -14,8 +15,8 @@ const categories: readonly {
 ];
 
 interface CategoryBarProps {
-  selected: string;
-  onSelect: (category: string) => void;
+  selected: CategoryKey;
+  onSelect: (category: CategoryKey) => void;
 }
 
 const CategoryBar = ({ selected, onSelect }: CategoryBarProps) => {

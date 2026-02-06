@@ -5,7 +5,7 @@ import emailjs from '@emailjs/browser';
 import { uploadImageToImgBB } from '@/src/utils/imgbb';
 import AttachmentPicker from '@/src/components/setting/setting-inquiry/AttachmentPicker';
 import { Modal } from '@/src/components/common/Modal';
-import type { TagCategory, InquiryDraft } from '@/src/types/schemas/setting/setting-inquiry';
+import type { TagCategory, InquiryDraft } from '@/src/types/setting/setting-inquiry';
 
 
 

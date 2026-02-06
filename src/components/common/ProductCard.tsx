@@ -63,7 +63,7 @@ const ProductCard = ({
 				<img
 					src={imageUrl || '/images/default-product.png'} // 이미지 없을 때 기본 이미지 처리
 					alt={name}
-					className="w-full h-full object-cover"
+					className="w-full h-full object-cover transition-transform duration-200 ease-in-out hover:scale-110"
 				/>
 			</div>
 

@@ -58,9 +58,7 @@ const LadingPage = () => {
 			  >
 				<HowItWorksSection />
 
-				{/* <ScrollAnimationContainer> */}
 				<LandingFooter />
-				{/* </ScrollAnimationContainer> */}
 			</section>
 
 		</div>

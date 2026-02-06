@@ -1,28 +1,39 @@
 import ItemAddCountSection from '@/src/components/closet/ItemAddSection';
 import CategoryBar from '@/src/components/common/CategoryBar'
 import { PATH } from '@/src/constants/path';
-import { useState } from 'react';
+import {  useState } from 'react';
 import { useNavigate } from 'react-router';
 import ItemBrowseSection from '@/src/components/closet/ItemBrowseSection';
-import type { ProductDataType } from '../../closet/closet-page';
 import MallGuide from '@/src/components/products/MallGuide';
-
-
-export const MOCK_PRODUCTS: ProductDataType[] = [
-
-];
+import type { CategoryKey } from '@/src/types/products/product';
+import { useProducts, useTopProducts, useOuterProducts, useEtcProducts, useDressProducts, useBottomProducts } from '@/src/hooks/service/product/useProducts';
+import type { ListDTO } from '@/src/apis/generated';
 
 
 const ProductsPage = () => {
 	const navigate = useNavigate();
-	const [selected, setSelected] = useState('전체');
+	const [selected, setSelected] = useState<CategoryKey>('전체');
 	const [showGuide, setShowGuide]  = useState(false)
   
-	const handleSelected = (category : string) => setSelected(category)
+	const handleSelected = (category : CategoryKey) => setSelected(category)
 
-	const filteredProducts = selected === '전체' 
-		? MOCK_PRODUCTS 
-		: MOCK_PRODUCTS.filter((product) => product.category === selected);
+	const all = useProducts();
+	const top = useTopProducts();
+	const outer = useOuterProducts();
+	const etc = useEtcProducts();
+	const dress = useDressProducts();
+	const bottom = useBottomProducts();
+
+	const dataMap: Record<CategoryKey, ListDTO[]> = {
+		전체: all.data ?? [],
+		상의: top.data ?? [],
+		아우터: outer.data ?? [],
+		기타: etc.data ?? [],
+		원피스: dress.data ?? [],
+		하의: bottom.data ?? [],
+	};
+
+	const filteredProducts = dataMap[selected];
 
 	return(
 		<div className="px-5 py-2.5 flex flex-col items-center">

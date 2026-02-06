@@ -1,4 +1,4 @@
-import type { PhotoItem } from '@/src/types/schemas/setting/setting-photo';
+import type { PhotoItem } from '@/src/types/setting/setting-photo';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination } from 'swiper/modules';
 import React from 'react';
