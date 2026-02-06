@@ -1,3 +1,5 @@
+import type { CategoryQueryKey } from '@/src/types/products/product';
+
 /**
  * [QUERY_KEYS]
  * React Query에서 사용할 쿼리 키들을 상수화합니다.
@@ -24,7 +26,7 @@ export const QUERY_KEYS = {
 	PRODUCT: {
 		ALL: ['product'] as const,
 		LIST: ['product', 'list'] as const,
-		CATEGORY: (category: string) => ['product', 'category', category] as const,
+		CATEGORY: (category: CategoryQueryKey) => ['product', 'category', category] as const,
 		LIKE: ['product', 'like'] as const,
 	},
 
