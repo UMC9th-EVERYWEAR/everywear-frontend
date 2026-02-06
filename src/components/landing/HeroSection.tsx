@@ -1,6 +1,4 @@
-import logo from '@/public/logo.svg'
-import everywear from '@/public/svgs/LogoImages/Everywear.svg'
-import iphone from '@/public/svgs/landing/iPhone.svg'
+import { LANDING_IMAGES, LOGO_IMAGES } from '@/src/constants/images'
 import { cn } from '@/src/utils/cn'
 import { useEffect, useState } from 'react'
 
@@ -25,12 +23,12 @@ const HeroSection = ({ onNext }: HeroSectionProps) => {
 
 			<div className='flex gap-2.5 items-center mb-2'>
 				<img 
-					src={logo}
+					src={LOGO_IMAGES.HANEGER_LOGO}
 					alt="Everywear" 
 					className="w-17.5 object-contain"
 				/>
 				<img
-					src={everywear}
+					src={LOGO_IMAGES.EVERYWEAR}
 					alt='everywear'
 					className='w-48.5 h-8.5'
 				/>
@@ -39,7 +37,7 @@ const HeroSection = ({ onNext }: HeroSectionProps) => {
 			<p className='text-semibold-16 text-primary-600'>AI로 입어보고 AI로 분석하는 스마트 피팅 앱</p>
 
 			<img 
-				src={iphone}
+				src={LANDING_IMAGES.IPHONE}
 				alt='iphone' 
 			/>
 

@@ -1,4 +1,4 @@
-import arrowRight from '@/public/svgs/setting/arrow-right.svg';
+import  { SETTING_IMAGES } from '@/src/constants/images';
 
 interface Props {
   onInquiry: () => void;
@@ -14,7 +14,7 @@ const SupportSection = ({ onInquiry }: Props) => {
 			<div className="py-2 flex justify-between border-b-[0.5px] border-neutral-300">
 				<span className="text-regular-14">서비스 이용약관</span>
 				<img
-					src={arrowRight}
+					src={SETTING_IMAGES.ARROW_RIGHT}
 					alt="arrow right"
 					className='cursor-pointer'
 
@@ -24,7 +24,7 @@ const SupportSection = ({ onInquiry }: Props) => {
 			<div className="py-2 flex justify-between border-b-[0.5px] border-neutral-300">
 				<span className="text-regular-14">개인정보 처리방침</span>
 				<img
-					src={arrowRight}
+					src={SETTING_IMAGES.ARROW_RIGHT}
 					alt="arrow right"
 					className='cursor-pointer'
 
@@ -37,7 +37,7 @@ const SupportSection = ({ onInquiry }: Props) => {
 			>
 				<span className="text-regular-14">1:1 문의하기</span>
 				<img
-					src={arrowRight}
+					src={SETTING_IMAGES.ARROW_RIGHT}
 					alt="arrow right"
 					className='cursor-pointer'
 

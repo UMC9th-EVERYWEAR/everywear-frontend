@@ -1,6 +1,4 @@
-import accuracy from '@/public/svgs/onboarding/accuracy-icon.svg'
-import security from '@/public/svgs/onboarding/lock-icon.svg'
-import speed from '@/public/svgs/onboarding/cart-icon.svg'
+import { ONBOARDING_IMAGES } from '@/src/constants/images';
 
 
 export type FeatureKey = 'ACCURACY' | 'SECURITY' | 'SPEED';
@@ -21,17 +19,17 @@ const FEATURE_CONFIG: Record<
 	ACCURACY: {
 		title: '정확한 AI 피팅',
 		description: '정면 전신 사진으로 더 정확한 피팅 결과를 제공합니다.',
-		icon: accuracy,
+		icon: ONBOARDING_IMAGES.ACCURACY_ICON,
 	},
 	SECURITY: {
 		title: '안전한 보관',
 		description: '사진은 안전하게 암호화되어 보관되며, 본인만 확인 가능합니다.',
-		icon: security,
+		icon: ONBOARDING_IMAGES.LOCK_ICON,
 	},
 	SPEED: {
 		title: '빠른 피팅',
 		description: '한 번 등록으로 모든 상품을 빠르게 가상으로 착용해보세요.',
-		icon: speed,
+		icon: ONBOARDING_IMAGES.CART_ICON,
 	},
 };
 

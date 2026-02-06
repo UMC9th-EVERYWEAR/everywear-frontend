@@ -1,12 +1,10 @@
-import logo from '@/public/logo.svg'
-import every from '@/public/svgs/LogoImages/every-logo.svg'
-import wear from '@/public/svgs/LogoImages/wear-logo.svg'
 import FooterNameSection from './FooterNameSection'
 import Button from '../common/Button'
 import { useNavigate } from 'react-router'
 import { PATH } from '@/src/constants/path'
 import AnimatedItem from './AnimatedItem'
 import { useScrollAnimation } from '@/src/hooks/domain/onboarding/useScrollAnimation'
+import { LOGO_IMAGES } from '@/src/constants/images'
 
 
 
@@ -37,17 +35,17 @@ const LandingFooter = () => {
 
 					<div className='flex gap-2.5 items-center mb-2'>
 						<img 
-							src={logo}
+							src={LOGO_IMAGES.EVERYWEAR}
 							alt="Everywear" 
 							className="w-17.5 object-contain"
 						/>
 						<div className='flex flex-col gap-2.5'>
 							<img
-								src={every}
+								src={LOGO_IMAGES.EVERY_LOGO}
 								alt='everywear'
 							/>
 							<img
-								src={wear}
+								src={LOGO_IMAGES.WEAR_LOGO}
 								alt='everywear'
 							/>
 						</div>

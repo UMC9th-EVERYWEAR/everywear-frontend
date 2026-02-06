@@ -9,7 +9,9 @@
     "lint": "eslint .",
     "preview": "vite preview --mode production",
     "prepare": "lefthook install",
-    "api:gen": "node scripts/generate-api.cjs"
+    "api:gen": "node scripts/generate-api.cjs",
+    "prettier": "prettier --write .",
+    "type-check": "tsc --noEmit -p ./tsconfig.json"
   },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
@@ -20,7 +22,7 @@
     "clsx": "^2.1.1",
     "env-cmd": "^11.0.0",
     "lucide-react": "^0.563.0",
-    "react": "^19.2.4",
+    "react": "19.2.4",
     "react-dom": "19.2.4",
     "react-router": "^7.12.0",
     "swiper": "^12.0.3",

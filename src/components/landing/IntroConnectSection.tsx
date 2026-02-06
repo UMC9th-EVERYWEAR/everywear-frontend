@@ -1,7 +1,7 @@
-import intro1 from '@/public/svgs/landing/intro1.svg'
 import SectionTitle from './SectionTitle'
 import Callout from './Callout'
 import ScrollAnimationContainer from '../onboarding/onboarding/ScrollAnimationContainer'
+import { LANDING_IMAGES } from '@/src/constants/images'
 
 const IntroConnectSection = () => {
 	return(
@@ -21,7 +21,7 @@ const IntroConnectSection = () => {
 
 					{/* image */}
 					<img
-						src={intro1}
+						src={LANDING_IMAGES.INTRO_1}
 						alt="intro1"
 						className="relative w-45 h-80 object-contain z-20"
 					/>			

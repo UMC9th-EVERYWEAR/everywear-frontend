@@ -1,11 +1,7 @@
 
-import blueCheck from '@/public/svgs/setting/check-blue-icon.svg'
-import unCheck from '@/public/svgs/setting/check-incomplete.svg'
-import completeCheck from '@/public/svgs/setting/complete-check.svg'
-
-
 import Button from '@/src/components/common/Button';
 import { Modal } from '@/src/components/common/Modal';
+import { SETTING_IMAGES } from '@/src/constants/images';
 import { useMe } from '@/src/hooks/service/auth/useMe';
 import { useWithdraw } from '@/src/hooks/service/auth/useWithdraw';
 import { useState } from 'react';
@@ -42,7 +38,7 @@ const SettingWithdraw = () => {
 			<div className='text-medium-16 mb-5 w-75'>{data?.name}님, 탈퇴하기 전에 꼭 확인해주세요</div>
 			<div className=" border border-primary-300 py-4 px-2.5  rounded-lg flex items-start gap-3 w-75">
 				<img
-					src={blueCheck}
+					src={SETTING_IMAGES.CHECK_BLUE}
 					alt='check-icon'
 				/>
 				<div className='text-regular-14'>
@@ -61,7 +57,7 @@ const SettingWithdraw = () => {
 					onClick={toggleWithdraw}
 				>
 					<img
-						src={isConfirmed ? completeCheck:  unCheck }
+						src={isConfirmed ? SETTING_IMAGES.COMPLETE_CHECK:  SETTING_IMAGES.CHECK_INCOMPLETE }
 						alt='check'
 					/>
 					<p className='text-medium-16'>탈퇴 유의사항을 모두 확인했어요.</p>

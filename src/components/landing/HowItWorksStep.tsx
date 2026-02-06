@@ -1,16 +1,6 @@
 
-import phoneMockup1 from '@/public/svgs/landing/how-work1.svg'
-import phoneDetailHighlight1 from '@/public/svgs/landing/how-work1-1.svg'
-
-import phoneMockup2 from '@/public/svgs/landing/intro1.svg'
-import phoneDetailHighlight2 from '@/public/svgs/landing/how-work2-1.svg'
-
-import phoneMockup3 from '@/public/svgs/landing/how-work3.svg'
-import phoneDetailHighlight3 from '@/public/svgs/landing/how-work3-1.svg'
-
-import phoneMockup4 from '@/public/svgs/landing/intro2.svg'
-import phoneDetailHighlight4 from '@/public/svgs/landing/how-work4-1.svg'
 import ScrollAnimationContainer from '../onboarding/onboarding/ScrollAnimationContainer'
+import  { LANDING_IMAGES } from '@/src/constants/images'
 
 export type STEPKEY = 'STEP1' | 'STEP2' | 'STEP3' | 'STEP4';
 
@@ -36,8 +26,8 @@ const STEP_CONFIG: Record<
 		title: 1,
 		description: '유명 쇼핑몰로 이동하여',
 		description2: '원하는 상품을 찾습니다.',
-		phoneMockup: phoneMockup1,
-		phoneDetailHighlight: phoneDetailHighlight1,
+   phoneMockup: LANDING_IMAGES.HOW_WORK_1,
+    phoneDetailHighlight: LANDING_IMAGES.HOW_WORK_1_1,
 		positionTop: 4,
 		positionLeft: 0.5,
 		detailWidth: 1.3,
@@ -46,8 +36,8 @@ const STEP_CONFIG: Record<
 		title: 2,
 		description: '쇼핑몰에서 복사한',
 		description2: '링크를 붙여넣습니다.',
-		phoneMockup: phoneMockup2,
-		phoneDetailHighlight: phoneDetailHighlight2,
+    phoneMockup: LANDING_IMAGES.INTRO_1,
+    phoneDetailHighlight: LANDING_IMAGES.HOW_WORK_2_1,
 		positionTop: 7.8,
 		positionLeft: 0.55,
 		detailWidth: 1.35,
@@ -56,8 +46,8 @@ const STEP_CONFIG: Record<
 		title: 3,
 		description: '원하는 상품을 클릭해',
 		description2: 'AI 분석을 요청합니다.',
-		phoneMockup: phoneMockup3,
-		phoneDetailHighlight: phoneDetailHighlight3,
+    phoneMockup: LANDING_IMAGES.HOW_WORK_3,
+    phoneDetailHighlight: LANDING_IMAGES.HOW_WORK_3_1,
 		positionTop: 6.3,
 		positionLeft: 0.2,
 		detailWidth: 1.4,
@@ -66,8 +56,8 @@ const STEP_CONFIG: Record<
 	STEP4 : {
 		title: 4,
 		description: 'AI분석 결과를 확인합니다.',
-		phoneMockup: phoneMockup4,
-		phoneDetailHighlight: phoneDetailHighlight4,
+    phoneMockup: LANDING_IMAGES.INTRO_2,
+    phoneDetailHighlight: LANDING_IMAGES.HOW_WORK_4_1,
 		positionTop: 18.6,
 		positionLeft: 0.65,
 		detailWidth: 1.35,
