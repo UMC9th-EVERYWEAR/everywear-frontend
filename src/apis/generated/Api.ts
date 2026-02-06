@@ -32,7 +32,6 @@ enum ContentType {
   Text = "text/plain",
 }
 
-
 export class Api<
   SecurityDataType = unknown,
 > extends HttpClient<SecurityDataType> {

@@ -1,3 +1,5 @@
+export type ResultType = 'FAIL' | 'SUCCESS';
+
 export const PRODUCT_CATEGORIES = {
 	전체: {
 		queryKey: 'all',
