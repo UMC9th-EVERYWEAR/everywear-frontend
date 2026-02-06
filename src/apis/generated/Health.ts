@@ -14,11 +14,10 @@ export class Health<
    * @summary 상세 헬스체크
    * @request GET:/health
    * @secure
-   * @response `200` `any` OK
+   * @response `200` `ApiResponseMapStringObject` OK
    */
   detailedHealthCheck = (params: RequestParams = {}) =>
-    // ✅ 응답 타입을 ApiResponseMapStringObject 대신 any로 변경하여 에러를 해결합니다.
-    this.request<any, any>({
+    this.request<ApiResponseMapStringObject, any>({
       path: `/health`,
       method: "GET",
       secure: true,

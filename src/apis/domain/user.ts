@@ -17,3 +17,12 @@ export const selectRepresentativeImage = async (imageId: number) => {
 export const deleteProfileImage = async (imageId: number) => {
 	await apiClient.deleteProfileImage(imageId);
 };
+
+export const toggleAlarm = async () => {
+	await apiClient.toggleAlarm();
+};
+
+export const toggleAgree = async () => {
+	await apiClient.toggleAlarm();
+};
+
