@@ -1,7 +1,7 @@
 import ItemAddCountSection from '@/src/components/closet/ItemAddSection';
 import CategoryBar from '@/src/components/common/CategoryBar'
 import { PATH } from '@/src/constants/path';
-import { useRef, useState } from 'react';
+import {  useState } from 'react';
 import {  useNavigate } from 'react-router';
 import ItemBrowseSection from '@/src/components/closet/ItemBrowseSection';
 import MallGuide from '@/src/components/products/MallGuide';
@@ -12,7 +12,6 @@ import ItemSkeleton from '@/src/components/closet/ItemSkeleton';
 
 const ProductsPage = () => {
 	const navigate = useNavigate();
-	const scrollRef = useRef<HTMLDivElement>(null);
 
 	const [selected, setSelected] = useState<CategoryKey>('전체');
 	const [showGuide, setShowGuide]  = useState(false)
@@ -26,7 +25,6 @@ const ProductsPage = () => {
 
 	return(
 		<div 
-			ref={scrollRef}
 
 			className="px-5 py-2.5 flex flex-col items-center"
 		>
