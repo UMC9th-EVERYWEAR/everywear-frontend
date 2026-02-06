@@ -6,10 +6,7 @@ import { PATH } from '@/src/constants/path';
 import { useLogin } from '@/src/hooks/service/auth/useLogin';
 import { useEffect } from 'react';
 import { useSearchParams, useNavigate } from 'react-router';
-// import { PATH } from '@/src/constants/path';
-// import { useLogin } from '@/src/hooks/service/auth/useLogin';
-// import { useEffect } from 'react';
-// import { useNavigate, useSearchParams } from 'react-router';
+
 
 
 const OAuthCallbackPage = () => {
