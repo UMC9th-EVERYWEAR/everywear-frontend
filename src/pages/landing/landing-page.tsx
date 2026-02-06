@@ -7,13 +7,13 @@ import LandingFooter from '@/src/components/landing/LandingFooter'
 import { PATH } from '@/src/constants/path'
 import { useMe } from '@/src/hooks/service/auth/useMe'
 import { cn } from '@/src/utils/cn'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router'
 
 const LadingPage = () => {
 	const introRef = useRef<HTMLDivElement>(null)
-	const howRef = useRef<HTMLDivElement>(null)
-	const [scrollEnabled, setScrollEnabled] = useState(false)
+	// const howRef = useRef<HTMLDivElement>(null)
+	// const [scrollEnabled, setScrollEnabled] = useState(false)
 	const navigate = useNavigate();
 	const { data: me } = useMe();
 
@@ -26,7 +26,7 @@ const LadingPage = () => {
 
 
 	const scrollToIntro = () => {
-		setScrollEnabled(true)
+		// setScrollEnabled(true)
 		requestAnimationFrame(() => {
 			introRef.current?.scrollIntoView({ behavior: 'smooth' })
 		})	}
@@ -37,39 +37,48 @@ const LadingPage = () => {
 
 	return (
 		<div
-			className={cn('w-full h-screen snap-y snap-mandatory scrollbar-hide',
-				scrollEnabled ? 'overflow-y-scroll' : 'overflow-hidden',
-			)}
+			className={cn('w-full ')}
 		>
 			{/* Hero  */}
 			<section
 				// ref={heroRef}
-				className="h-screen snap-start overflow-y-hidden"
+				className="h-screen"
 			>
 				<HeroSection onNext={scrollToIntro} />
 			</section>
 
 			<section
-				ref={introRef}
-				className="min-h-screen snap-start "
+				className="relative h-[200vh]"
 			>				
-				{/* intro */}
-				<IntroConnectSection />
-				<IntroAIFittingSection />
-				<IntroAIReviewSection onNext={scrollToHow} />
+				<div className="sticky top-0 h-screen flex items-center justify-center">
+					{/* intro */}
+					<IntroConnectSection />
+				</div>
 			</section>
 
-			{/* how work */}
-			  <section
-				ref={howRef}
-				className="min-h-screen snap-start overflow-y-auto"
-			  >
-				<HowItWorksSection />
+			<section
+				className="relative h-[300vh] bg-phone-two-gradient"
+			>				
+				<div className="sticky top-0 h-screen flex items-center justify-center">
 
-				{/* <ScrollAnimationContainer> */}
-				<LandingFooter />
-				{/* </ScrollAnimationContainer> */}
+					{/* intro */}
+					<IntroAIFittingSection />
+				</div>
+			</section>		
+			<section
+				className="relative h-[200vh] bg-landing-back"
+			>
+				<div className="sticky top-0 h-screen flex items-center justify-center">
+					<IntroAIReviewSection onNext={scrollToHow} />
+				</div>
 			</section>
+
+
+			<HowItWorksSection />
+
+			{/* <ScrollAnimationContainer> */}
+			<LandingFooter />
+			{/* </ScrollAnimationContainer> */}
 
 		</div>
 	)
