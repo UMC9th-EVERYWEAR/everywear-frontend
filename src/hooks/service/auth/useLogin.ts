@@ -4,12 +4,15 @@ import { useAuthStore } from '@/src/store/use-auth-store';
 import { ENV_CONFIG } from '@/src/constants/config';
 import { accessTokenStorage } from '@/src/apis/common/apiInstance';
 import { QUERY_KEYS } from '@/src/constants/query-key';
+import { PATH } from '@/src/constants/path';
+import { useNavigate } from 'react-router';
 
 
 export const useLogin = () => {
 	const login = useAuthStore((state) => state.login);
 	const latestAccessToken = accessTokenStorage.getItem();
 	const queryClient = useQueryClient();
+	const navigate = useNavigate();
 
 
 	return useMutation({
@@ -30,11 +33,12 @@ export const useLogin = () => {
 			queryClient.invalidateQueries({ queryKey: QUERY_KEYS.AUTH.USER });
 
 
-			// if (!me?.isAgreed) {
-			// 	navigate(PATH.LOGIN.TERMS)
-			// }
-
-			// navigate(PATH.ONBOARDING.ROOT);
+			if (!me?.isAgreed) { 
+				navigate(PATH.LOGIN.TERMS)
+			}
+			if (me?.isAgreed) {
+				navigate(PATH.HOME);
+			}
 
 			if (ENV_CONFIG.isDev) {
 				console.log('[DEV] login success 💻', me);

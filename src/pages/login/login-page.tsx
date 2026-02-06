@@ -16,9 +16,7 @@ const LoginPage = () => {
 		window.location.href = `${ENV_CONFIG.SERVER.BASE_URL}${path}`;
 		
 		// TODO: 로그인 후 약관 or 홈페이지 이동 구현
-
 	}
-
 	return(
 		<div className="bg-primary-600 min-h-screen px-8 flex justify-center items-center">
 			<div className="bg-white rounded-lg w-82 max-w-82 pt-26 pb-26 flex items-center flex-col gap-16">

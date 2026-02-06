@@ -9,6 +9,7 @@ import { cn } from '@/src/utils/cn';
 const RootLayout = () => {
 	const { pathname } = useLocation();
 	const [isWithdrawOpen, setIsWithdrawOpen] = useState(false);
+	
   
 	// 추후 추가 가능
 

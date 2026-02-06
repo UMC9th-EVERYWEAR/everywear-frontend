@@ -3,9 +3,8 @@ import TermsCheckBox, { type TermsCheckedState, type TermType } from '@/src/comp
 import { LOGO_IMAGES } from '@/src/constants/images';
 import  { TERMS_LINK } from '@/src/constants/link';
 import { PATH } from '@/src/constants/path';
-import { useLogin } from '@/src/hooks/service/auth/useLogin';
 import { useToggleAgree } from '@/src/hooks/service/user/useToggle';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router';
 
 const TERMS_CONFIG: Record<TermType, { label: string; url: string }> = {
@@ -47,16 +46,13 @@ const LoginTermsPage = () => {
 			[key]: !prev[key],
 		}));
 	};
-	const { mutate: toggleAgree, isPending: togglepending } = useToggleAgree();
-	const { mutate: login, isError } = useLogin();
-
-	useEffect(()=> {
-		login();
-	},[login])
+	const { mutate: toggleAgree, isPending: togglepending , isError } = useToggleAgree();
 
 	const handleLogin = () => {
 		toggleAgree(undefined, {
-			// onSuccess: () => navigate(PATH.ONBOARDING.ROOT),
+			onSuccess: () => navigate(PATH.ONBOARDING.ROOT),
+			// 		TODO:	약관 동의 후 → 유저 정보 다시 불러와서(me)
+			// 실제로 동의가 반영됐는지 확인 
 		})
 	};
 
