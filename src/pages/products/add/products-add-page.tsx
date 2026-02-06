@@ -64,16 +64,10 @@ const ProductsAddPage = () => {
 
 			{/** modals */}
 			{
-				openModal === 'FAIL' && 			<ProductsModals
-					type='FAIL'
+				openModal && <ProductsModals
+					type={openModal}
 					onClose={()=> setOpenModal(null)}
-				                           />
-			}
-			{
-				openModal === 'SUCCESS' && 			<ProductsModals
-					type='SUCCESS'
-					onClose={()=> setOpenModal(null)}
-				                              />
+				             />
 			}		
 		</div>
 	);
