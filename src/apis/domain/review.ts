@@ -15,3 +15,8 @@ export const getAiReview = async (productId: number) => {
 	const { data } = await apiClient.getAiReview(productId);
 	return data.result;
 };
+
+export const generateAiReview = async (productId: number) => {
+	const { data } = await apiClient.generateAiReview(productId);
+	return data.result ?? [];
+};

@@ -1,6 +1,6 @@
-import logo from '@/public/svgs/LogoImages/Everywear.svg'
 import LoginBtn from '@/src/components/login/LoginBtn'
 import { ENV_CONFIG } from '@/src/constants/config';
+import { LOGO_IMAGES } from '@/src/constants/images';
 import { PATH } from '@/src/constants/path';
 import { useNavigate } from 'react-router';
 export type LoginType = keyof typeof OAUTH_AUTHORIZATION_PATH;
@@ -30,7 +30,7 @@ const LoginPage = () => {
 
 				<div className='flex flex-col gap-7 px-3'>
 					<img
-						src={logo}
+						src={LOGO_IMAGES.EVERYWEAR}
 						alt='logo'
 						className='px-11 sm:w-400'
 					/>

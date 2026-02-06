@@ -13,3 +13,4 @@ export const userLogout = async () => {
 export const withdraw = async () => {
 	await apiClient.withdraw();
 };
+

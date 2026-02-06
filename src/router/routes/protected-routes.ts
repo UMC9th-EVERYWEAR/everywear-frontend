@@ -6,7 +6,6 @@ import ClosetPage from '@/src/pages/closet/closet-page';
 import RecentFitting from '@/src/pages/RecentFittingPage';
 import  { PATH } from '@/src/constants/path';
 import AiFittingPage from '@/src/pages/ai-fitting/ai-fitting-page';
-import LoginTermsPage from '@/src/pages/login/login-terms-page';
 import OnBoardingPage from '@/src/pages/onboarding/onboarding-page';
 import OnBoardingPhotoPage from '@/src/pages/onboarding/onboarding-photo-page';
 import Home from '@/src/pages/Home';

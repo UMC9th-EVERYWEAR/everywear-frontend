@@ -1,13 +1,13 @@
-import arrowRight from '@/public/svgs/setting/arrow-right.svg';
+import { SETTING_IMAGES } from '@/src/constants/images';
 import { ArrowRightIcon } from './ArrowRightIcon.';
 import ToggleBtn from './ToggleBtn';
-import type { UserResponseSocialTypeEnum } from '@/src/apis/generated';
+import type { UserResponseDtoSocialTypeEnum } from '@/src/apis/generated';
 
 
 interface Props {
   openLoginSetting: boolean;
   toggleLoginSetting: () => void;
-	socialType: UserResponseSocialTypeEnum;
+	socialType: UserResponseDtoSocialTypeEnum;
   onChangePhoto: () => void;
 }
 
@@ -32,7 +32,7 @@ const AccountSection = ({
 					기본 사진 변경
 				</span>
 				<img
-					src={arrowRight}
+					src={SETTING_IMAGES.ARROW_RIGHT}
 					alt="arrow right"
 					className='cursor-pointer'
 				/>

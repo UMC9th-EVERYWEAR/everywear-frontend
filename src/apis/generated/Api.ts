@@ -1,6 +1,8 @@
 // @ts-nocheck
 import type {
+  ApiResponseAgreeToggleResponse,
   ApiResponseAiReviewDTO,
+  ApiResponseAlarmToggleResponse,
   ApiResponseFittingApplyResult,
   ApiResponseFittingDetail,
   ApiResponseImportDTO,
@@ -11,7 +13,7 @@ import type {
   ApiResponseProductListResponse,
   ApiResponseString,
   ApiResponseTokenRefreshResponse,
-  ApiResponseUserResponse,
+  ApiResponseUserResponseDto,
   ApiResponseVoid,
   CrawlResponseDTO,
   CrawlReviewDTO,
@@ -191,6 +193,40 @@ export class Api<
       ...params,
     });
   /**
+   * @description 사용자의 알림 설정 상태를 토글합니다. 호출할 때마다 true/false가 반전됩니다. default값은 ture입니다.
+   *
+   * @tags User
+   * @name ToggleAlarm
+   * @summary 알림 설정 토글
+   * @request PATCH:/api/user/alarm
+   * @secure
+   * @response `200` `ApiResponseAlarmToggleResponse` OK
+   */
+  toggleAlarm = (params: RequestParams = {}) =>
+    this.request<ApiResponseAlarmToggleResponse, any>({
+      path: `/api/user/alarm`,
+      method: "PATCH",
+      secure: true,
+      ...params,
+    });
+  /**
+   * @description 사용자의 약관 동의 상태를 토글합니다. 호출할 때마다 true/false가 반전됩니다. default값은 false입니다.
+   *
+   * @tags User
+   * @name ToggleAgree
+   * @summary 약관 동의 토글
+   * @request PATCH:/api/user/agree
+   * @secure
+   * @response `200` `ApiResponseAgreeToggleResponse` OK
+   */
+  toggleAgree = (params: RequestParams = {}) =>
+    this.request<ApiResponseAgreeToggleResponse, any>({
+      path: `/api/user/agree`,
+      method: "PATCH",
+      secure: true,
+      ...params,
+    });
+  /**
    * @description 특정 상품에 대한 사용자의 좋아요 상태를 토글합니다. 호출할 때마다 true/false가 반전됩니다.
    *
    * @tags Product
@@ -215,10 +251,10 @@ export class Api<
    * @summary 내 정보 조회
    * @request GET:/api/user/me
    * @secure
-   * @response `200` `ApiResponseUserResponse` OK
+   * @response `200` `ApiResponseUserResponseDto` OK
    */
   getMyInfo = (params: RequestParams = {}) =>
-    this.request<ApiResponseUserResponse, any>({
+    this.request<ApiResponseUserResponseDto, any>({
       path: `/api/user/me`,
       method: "GET",
       secure: true,

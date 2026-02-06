@@ -9,6 +9,7 @@ export default defineConfig(({ mode }) => {
 		plugins: [
 			tailwindcss(),
 			tsconfigPaths(),
+			
 		],
 
 		define: {

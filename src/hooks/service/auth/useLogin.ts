@@ -10,7 +10,9 @@ export const useLogin = () => {
 	const latestAccessToken = accessTokenStorage.getItem();
 
 	return useMutation({
-		mutationFn: getMyInfo, // 로그인 직후 /me 확인
+		mutationFn: async () => {
+			return getMyInfo();
+		},		
 		onSuccess: (me) => {
 			login(
 				{
