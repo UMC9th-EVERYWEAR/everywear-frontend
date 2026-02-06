@@ -6,10 +6,10 @@ import { useRotatingIcon } from '@/src/hooks/domain/products/useRotatingIcon';
 
 
 const LOADING_ICONS: SvgIconFn[] = [
-  SVG_ICON_DATA.Top,
-  SVG_ICON_DATA.Bottom,
-  SVG_ICON_DATA.Outer,
-  SVG_ICON_DATA.Dress,
+	SVG_ICON_DATA.Top,
+	SVG_ICON_DATA.Bottom,
+	SVG_ICON_DATA.Outer,
+	SVG_ICON_DATA.Dress,
 ];
 
 
