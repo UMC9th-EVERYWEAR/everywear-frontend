@@ -1,5 +1,11 @@
+const ALLOWED_DOMAINS = [
+	'musinsa.com',
+	'zigzag.kr',
+	'29cm.co.kr',
+	'wconcept.co.kr',
+];
 
-function checkUrlFormat(url: string) {
+export function checkUrlFormat(url: string) {
 	try {
 		const parsed = new URL(url.startsWith('http') ? url : `https://${url}`);
 		return /^[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)+$/.test(parsed.hostname);
@@ -7,6 +13,23 @@ function checkUrlFormat(url: string) {
 		return false;
 	}
 }
-export default checkUrlFormat
 
-// TODO: 확장해서 무신사 지그재그 등의 링크만 되도록 검사
+
+export function checkDomainDomainFormat(url: string) {
+	try {
+		const parsed = new URL(
+			url.startsWith('http') ? url : `https://${url}`,
+		);
+		const hostname = parsed.hostname.replace(/^www\./, '');
+
+		    const isAllowedDomain = ALLOWED_DOMAINS.some(
+			(domain) =>
+				hostname === domain || hostname.endsWith(`.${domain}`),
+		);
+		return isAllowedDomain;
+	} catch {
+		return false;
+	}
+}
+
+

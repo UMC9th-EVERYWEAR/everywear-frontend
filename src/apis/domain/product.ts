@@ -36,11 +36,18 @@ export const getBottomProducts = async () => {
 };
 
 export const importProduct = async (payload: ImportDTO) => {
-	const { data } = await apiClient.importProduct(payload, { 
-		timeout: 50000, //50초로 설정 진행
+	try{
+		const { data } = await apiClient.importProduct(payload, { 
+			timeout: 300, //50초로 설정 진행
+	
+		});
+		return data.result;
+	}
+	catch (error) {
+		console.error('🔥 ', error);
+		throw error; 
+	}
 
-	});
-	return data.result;
 };
 
 export const productFetchers: Partial<Record<CategoryKey, () => Promise<ListDTO[]>>> = {

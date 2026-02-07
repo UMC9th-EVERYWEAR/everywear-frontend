@@ -1,29 +1,37 @@
 import { useState } from 'react';
 import LinkSection from '@/src/components/products/LinkSection';
 import MallLogosSection from '@/src/components/products/MallLogos';
-import checkUrlFormat from '@/src/utils/checkUrlFormat';
+import  {  checkDomainDomainFormat, checkUrlFormat } from '@/src/utils/checkUrlFormat';
 import { useImportProductMutation } from '@/src/hooks/queries/useProductMutation'; 
 import ProductsModals from '@/src/components/products/ProductsModals';
 import usePreventRefresh from '@/src/hooks/domain/products/usePreventRefresh';
+import useToast from '@/src/hooks/domain/ai-fitting/UseToast';
+import Toast from '@/src/components/common/Toast';
+import ToastContainer from '@/src/components/common/ToastContainer';
 
 const ProductsAddPage = () => {
 	const [link, setLink] = useState('');
 	const [openModal, setOpenModal] = useState<'SUCCESS' | 'FAIL' | null>(null);
-
+	const { toasts , deleteToast, createToast }  = useToast()
 
 	// API 호출 로직을 전용 mutation 훅으로 분리
 	const { mutate: importProduct, isPending } = useImportProductMutation();
 
 	// usePreventRefresh: 상품 가져오는 도중의 새로고침 방지
-	const shouldBlockRefresh = isPending;
+	const shouldBlockRefresh = isPending
 
 	usePreventRefresh(shouldBlockRefresh);
 
 
 	const isValidLink = checkUrlFormat(link);
+	const isValidDomain = checkDomainDomainFormat(link)
 
 	const handleSubmit = () => {
 		if (!isValidLink || isPending) return;
+		if(!isValidDomain){
+			createToast({ message: '지원되지 않는 쇼핑몰입니다.' });
+			return;
+		}
 
 		// 컴포넌트 내부에서 직접 await 하지 않고 mutation 훅 실행
 		importProduct(
@@ -50,6 +58,17 @@ const ProductsAddPage = () => {
 					앱을 터치하면 해당 앱으로 이동합니다.
 				</p>
 			</div>
+			<ToastContainer>
+				{toasts.map((t) => (
+					<Toast
+						key={t.id}
+						id={t.id}
+						message={t.message}
+						deleteToast={deleteToast}
+					/>
+				))}
+			</ToastContainer>
+
 
 			<MallLogosSection />
 
