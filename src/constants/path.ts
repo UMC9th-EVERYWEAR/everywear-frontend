@@ -26,6 +26,8 @@ export const PATH = {
 
 	RECENT_FITTING: '/recent-fitting',
 
+	FITTING_DETAIL: '/fitting-detail',
+
 	AI_FITTING: {
 		DETAIL: '/ai-fitting/:id', 
 	},
@@ -59,6 +61,7 @@ export const hideNavPatterns = [
 	PATH.SETTING.WITHDRAW,
 	PATH.SETTING.INQUIRY,
 	PATH.AI_FITTING.DETAIL,
+	PATH.FITTING_DETAIL,
 	PATH.PRODUCTS.ADD,
 ];
 /* fullscreenPatterns: 화면을 전체로 사용하는 라우트 */

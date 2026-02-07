@@ -1,14 +1,13 @@
-
 export interface FittingRecord {
-  id: number;
-  resultImageUrl: string;
-  createdAt: string;
-  status: 'COMPLETED' | 'PROCESSING' | 'FAILED';
-  usedItems: {
     id: number;
-    name: string;
-    category: string;
-  }[];
+    resultImageUrl: string;
+    createdAt: string;
+    status: 'COMPLETED' | 'PROCESSING' | 'FAILED';
+    usedItems: {
+        id: number;
+        name: string;
+        category: string;
+    }[];
 }
 
 const MOCK_FITTINGS: FittingRecord[] = [
@@ -26,27 +25,19 @@ const MOCK_FITTINGS: FittingRecord[] = [
 		status: 'COMPLETED',
 		usedItems: [{ id: 102, name: '와이드 데님 팬츠', category: '하의' }],
 	},
-	{
-		id: 3,
-		resultImageUrl: 'https://picsum.photos/seed/fitting3/300/400',
-		createdAt: '2025-05-10T10:00:00Z',
-		status: 'COMPLETED',
-		usedItems: [{ id: 103, name: '린넨 재킷', category: '아우터' }],
-	},
 ];
 
-export const useFittings = () => {
-	const forceMock = true;
+export const useFittings = () => ({
+	data: MOCK_FITTINGS,
+	isLoading: false,
+});
 
-	if (forceMock) {
-		return {
-			data: MOCK_FITTINGS,
-			isLoading: false,
-		};
-	}
-
+// ✅ 상세 조회를 위한 훅 (반드시 export)
+export const useFittingDetail = (id: number) => {
+	const { data } = useFittings();
+	const detail = data.find((item) => item.id === id);
 	return {
-		data: [],
+		data: detail,
 		isLoading: false,
 	};
 };
