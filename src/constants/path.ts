@@ -26,7 +26,7 @@ export const PATH = {
 
 	RECENT_FITTING: '/recent-fitting',
 
-	FITTING_DETAIL: '/fitting-detail',
+	FITTING_DETAIL: '/fitting-detail/:id',
 
 	AI_FITTING: {
 		DETAIL: '/ai-fitting/:id', 

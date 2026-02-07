@@ -21,8 +21,8 @@ interface CategoryBarProps {
 
 const CategoryBar = ({ selected, onSelect }: CategoryBarProps) => {
 	return (
-		<div className=' w-[375px] overflow-x-auto bg-white sticky top-0 z-20 sm:w-full sm:-mx-2'>
-			<div className='flex gap-[10px] p-4 items-center whitespace-nowrap'>
+		<div className="w-[375px] overflow-x-auto bg-white sticky top-0 z-20 sm:w-full sm:-mx-2">
+			<div className="flex gap-[10px] p-4 items-center whitespace-nowrap justify-center">
 				{categories.map((cat) => {
 					const isActive = selected === cat.name;
 
@@ -35,10 +35,10 @@ const CategoryBar = ({ selected, onSelect }: CategoryBarProps) => {
                 rounded-full gap-1 border box-border cursor-pointer
                 transition-all duration-200
                 ${
-                  isActive
-                  	? 'bg-[var(--color-primary-600)] text-[var(--color-neutral-50)] border-[var(--color-primary-600)]'
-                  	: 'bg-[var(--color-neutral-100)] text-[var(--color-neutral-700)] border-[var(--color-neutral-300)]'
-                }
+									isActive
+										? 'bg-[var(--color-primary-600)] text-[var(--color-neutral-50)] border-[var(--color-primary-600)]'
+										: 'bg-[var(--color-neutral-100)] text-[var(--color-neutral-700)] border-[var(--color-neutral-300)]'
+								}
               `}
 						>
 							<IconSvg
