@@ -4,6 +4,11 @@ import InfoBox from '@/src/components/setting/setting-photo/InfoBox';
 import { Modal } from '@/src/components/common/Modal';
 import { cn } from '@/src/utils/cn';
 import type { UserImgQuery } from '@/src/apis/generated';
+import useToast from '@/src/hooks/domain/ai-fitting/UseToast';
+import Toast from '../../common/Toast';
+import ToastContainer from '../../common/ToastContainer';
+import React from 'react';
+import type { PendingUpload } from '@/src/pages/setting/setting-photo-page';
 
 interface Props {
   loading: boolean;
@@ -13,6 +18,7 @@ interface Props {
   openChangePhotoModal: boolean;
   openDeletePhotoModal: boolean;
 
+	setPendingUploads: React.Dispatch<React.SetStateAction<PendingUpload[]>>;
   onChangeIndex: (i: number) => void;
   onAddCardActiveChange: (v: boolean) => void;
 
@@ -32,6 +38,7 @@ const SettingPhotoView = ({
 	isAddCardActive,
 	openChangePhotoModal,
 	openDeletePhotoModal,
+	setPendingUploads,
 	onChangeIndex,
 	onAddCardActiveChange,
 	onOpenChangeModal,
@@ -41,8 +48,25 @@ const SettingPhotoView = ({
 	onSelectRepresentative,
 	onDeleteImage,
 }: Props) => {
+	const { toasts, createToast, deleteToast } = useToast();
+
+	const handleStartFitting = () => {
+		createToast({ message: '대표 사진은 삭제가 불가합니다.' });
+	};
+
 	return (
-		<div className="pt-6 flex flex-col items-center text-neutral-900">
+		
+		<div className="py-6 flex flex-col items-center text-neutral-900">
+			<ToastContainer>
+				{toasts.map((t) => (
+					<Toast
+						key={t.id}
+						id={t.id}
+						message={t.message}
+						deleteToast={deleteToast}
+					/>
+				))}
+			</ToastContainer>
 			<InfoBox>
 				<CheckItem text="최대 5개까지 사진을 등록할 수 있어요." />
 				<CheckItem text="가상 피팅에 사용할 사진을 등록해주세요." />
@@ -54,12 +78,13 @@ const SettingPhotoView = ({
 					activeRealIndex={activeRealIndex}
 					setActiveRealIndex={onChangeIndex}
 					setIsAddCardActive={onAddCardActiveChange}
+					setPendingUploads={setPendingUploads}
 				/>
 			</div>
 
 			<div className="mx-4 flex justify-between w-full max-w-[343px]">
 				<button
-					onClick={onOpenDeleteModal}
+					onClick={isAddCardActive ? onOpenDeleteModal : handleStartFitting}
 					className={cn(
 						'text-primary-600 border w-20 rounded-full h-11',
 						isAddCardActive && 'text-neutral-400 pointer-events-none',

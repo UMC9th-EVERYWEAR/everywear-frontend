@@ -8,17 +8,21 @@ import {  useEffect, useRef } from 'react';
 import { SETTING_IMAGES } from '@/src/constants/images';
 import type { Swiper as SwiperClass } from 'swiper/types';
 import type { UserImgQuery } from '@/src/apis/generated';
+// import { useVerifyAndSaveProfileImage } from '@/src/hooks/service/user/useVerifyAndSaveProfileImage';
+import type { PendingUpload } from '@/src/pages/setting/setting-photo-page';
 
 interface BannerProps {
 	photoItems?: UserImgQuery[];
-	setPhotoItems?: (items: UserImgQuery[]) => void;
 	activeRealIndex: number;
 	setActiveRealIndex: (index: number) => void;
 	setIsAddCardActive?: (isActive: boolean) => void;
+	setPendingUploads: React.Dispatch<React.SetStateAction<PendingUpload[]>>;
+	
 }
-const Banner = ({ activeRealIndex, photoItems, setPhotoItems, setActiveRealIndex, setIsAddCardActive }: BannerProps) => {
+const Banner = ({ activeRealIndex, photoItems, setActiveRealIndex, setIsAddCardActive, setPendingUploads }: BannerProps) => {
 	const fileInputRef = useRef<HTMLInputElement | null>(null);
 	const pendingIndexRef = useRef<number | null>(null);
+	// const { mutateAsync: uploadPhoto, isPending } = useVerifyAndSaveProfileImage();
 
 
 	// hasImage: null/undefined/공백 처리까지 고려한 이미지 존재 여부 확인 함수 
@@ -42,19 +46,19 @@ const Banner = ({ activeRealIndex, photoItems, setPhotoItems, setActiveRealIndex
 		const file = e.target.files?.[0];
 		    const index = pendingIndexRef.current;
 
-		if (!file || index === null || !photoItems || !setPhotoItems) return;
+		if (!file || index === null || !photoItems || !setPendingUploads) return;
 
 		//  미리보기(낙관적 UI)
 		const previewUrl = URL.createObjectURL(file);
+		const tempId = -(Date.now());
 
-		const next = [...photoItems];
-		next[index] = {
-			...next[index],
-			imageUrl: previewUrl, // 일단 UI 반영
-			representative: false,
-		};
-
-		setPhotoItems(next);
+		setPendingUploads((prev) => [
+			...prev,
+			{
+				tempId,
+				previewUrl,
+			},
+		]);
 
 		// 같은 파일 다시 선택 가능하도록 초기화
 		e.target.value = '';
@@ -94,8 +98,6 @@ const Banner = ({ activeRealIndex, photoItems, setPhotoItems, setActiveRealIndex
 						item.representative ? 'border-4 border-primary-600' : '',
 					)}
 				/>
-
-
 			</div>
 		);
 	};
