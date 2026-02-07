@@ -13,9 +13,10 @@ const LoginPage = () => {
 
 	const handleLogin = (type:LoginType ) => {
 		const path = OAUTH_AUTHORIZATION_PATH[type];
-		window.location.href = `${ENV_CONFIG.SERVER.BASE_URL}${path}`;
-		
-		// TODO: 로그인 후 약관 or 홈페이지 이동 구현
+		const redirectUri = encodeURIComponent(
+  `${window.location.origin}/login/callback`,
+		);
+		window.location.href = `${ENV_CONFIG.SERVER.BASE_URL}${path}?redirect_uri=${redirectUri}`;
 	}
 	return(
 		<div className="bg-primary-600 min-h-screen px-8 flex justify-center items-center">
