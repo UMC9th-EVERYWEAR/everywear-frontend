@@ -3,8 +3,6 @@ import { SVG_ICON_DATA, type SvgIconFn } from '@/src/assets/icons';
 import { useRotatingIcon } from '@/src/hooks/domain/products/useRotatingIcon';
 
 
-
-
 const LOADING_ICONS: SvgIconFn[] = [
 	SVG_ICON_DATA.Top,
 	SVG_ICON_DATA.Bottom,
@@ -20,12 +18,13 @@ const Loading = () => {
 		2000,     // 2초
 		true,
 	);
+
   
 	return(
 		<div 
-			className="min-h-screen flex items-center justify-center"
+			className="min-h-screen flex flex-col items-center justify-center"
 		>
-			<div className="scale-800 animate-clothes-motion transition-opacity duration-300 mb-20">
+			<div className="absolute scale-800 top-1/3 left-1/2 -translate-x-1/2   animate-clothes-motion mb-20">
 				{RotatingIcon(false)}
 			</div>
 		</div>

@@ -510,7 +510,7 @@
   }
 
  .animate-clothes-motion  {
-    animation: clothes-motion  1.3s linear 0s infinite;
+    animation: clothes-motion  1.8s linear 0s infinite;
   }
   .animate-fade-in-right{
     position: relative;
@@ -553,7 +553,11 @@
 
 
 @keyframes fade-out-up {
-  from {
+  0% {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  50% {
     opacity: 1;
     transform: translateY(0);
   }
@@ -564,5 +568,5 @@
 }
 
 .animate-view-out {
-  animation: fade-out-up 0.5s ;
+  animation: fade-out-up 3s ease;
 }
