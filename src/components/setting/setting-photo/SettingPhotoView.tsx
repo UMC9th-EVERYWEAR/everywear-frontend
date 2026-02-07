@@ -14,6 +14,7 @@ interface Props {
   loading: boolean;
   photoItems: UserImgQuery[];
   activeRealIndex: number;
+	activeImageId: number;
   isAddCardActive: boolean;
   openChangePhotoModal: boolean;
   openDeletePhotoModal: boolean;
@@ -35,6 +36,7 @@ const SettingPhotoView = ({
 	loading,
 	photoItems,
 	activeRealIndex,
+	activeImageId,
 	isAddCardActive,
 	openChangePhotoModal,
 	openDeletePhotoModal,
@@ -48,11 +50,15 @@ const SettingPhotoView = ({
 	onSelectRepresentative,
 	onDeleteImage,
 }: Props) => {
+	const representativeId = photoItems.find((i)=> i.representative)?.profileImageId
+
 	const { toasts, createToast, deleteToast } = useToast();
 
 	const handleStartFitting = () => {
 		createToast({ message: '대표 사진은 삭제가 불가합니다.' });
 	};
+
+
 
 	return (
 		
@@ -84,7 +90,7 @@ const SettingPhotoView = ({
 
 			<div className="mx-4 flex justify-between w-full max-w-[343px]">
 				<button
-					onClick={isAddCardActive ? onOpenDeleteModal : handleStartFitting}
+					onClick={representativeId === activeImageId ? handleStartFitting: onOpenDeleteModal}
 					className={cn(
 						'text-primary-600 border w-20 rounded-full h-11',
 						isAddCardActive && 'text-neutral-400 pointer-events-none',

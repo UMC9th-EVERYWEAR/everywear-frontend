@@ -51,6 +51,7 @@ const SettingPhotoPage = () => {
 			photoItems={filledPhotoItems}
 			setPendingUploads={setPendingUploads}
 			activeRealIndex={activeRealIndex}
+			activeImageId={activeImageId ?? 0}
 			isAddCardActive={isAddCardActive}
 			openChangePhotoModal={openChangePhotoModal}
 			openDeletePhotoModal={openDeletePhotoModal}

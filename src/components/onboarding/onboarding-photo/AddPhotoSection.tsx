@@ -3,9 +3,9 @@ import Button from '@/src/components/common/Button';
 import PhotoBtn, { type PhotoBtnType } from './PhotoBtn';
 import { cn } from '@/src/utils/cn';
 import { usePhotoInput } from '@/src/hooks/domain/onboarding/usePhotoInput';
-import imageCompression from 'browser-image-compression';
 import { useState } from 'react';
 import VerifyingSection from './VerifyingSection';
+import { resizeImage } from '@/src/utils/resizeImage';
 
 
 interface AddPhotoSectionProps {
@@ -41,18 +41,13 @@ const AddPhotoSection = ({ setShowGuide } : AddPhotoSectionProps) => {
 	const handleConfirm = async () => {
 		if (!file) return;
 		console.log('원본 파일 용량(MB):', (file.size / 1024 / 1024).toFixed(2));
-		const resizingBlob = await imageCompression(file, {
-			maxSizeMB: 1,              // 🔹 1MB 정도로 완화
-			maxWidthOrHeight: 2048,    // 🔹 해상도 상한선만 제한
-			useWebWorker: true,
-			initialQuality: 0.9,      // 🔹 처음 품질 높게 시작
-		});				
-		const resizingFile = new File([resizingBlob], file.name, { type: resizingBlob.type });
-		setFile(resizingFile);
+		const resizedFile = await resizeImage(file);
+
+		setFile(resizedFile);
 		setIsVerify(true);
 		console.log(
 			'리사이징 파일 용량(MB):',
-			(resizingFile.size / 1024 / 1024).toFixed(2),
+			(resizedFile.size / 1024 / 1024).toFixed(2),
 		);
 
 

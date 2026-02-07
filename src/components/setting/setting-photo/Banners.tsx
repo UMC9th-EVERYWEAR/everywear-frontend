@@ -8,8 +8,9 @@ import {  useEffect, useRef } from 'react';
 import { SETTING_IMAGES } from '@/src/constants/images';
 import type { Swiper as SwiperClass } from 'swiper/types';
 import type { UserImgQuery } from '@/src/apis/generated';
-// import { useVerifyAndSaveProfileImage } from '@/src/hooks/service/user/useVerifyAndSaveProfileImage';
 import type { PendingUpload } from '@/src/pages/setting/setting-photo-page';
+import { resizeImage } from '@/src/utils/resizeImage';
+import { useVerifyAndSaveProfileImage } from '@/src/hooks/service/user/useVerifyAndSaveProfileImage';
 
 interface BannerProps {
 	photoItems?: UserImgQuery[];
@@ -22,7 +23,7 @@ interface BannerProps {
 const Banner = ({ activeRealIndex, photoItems, setActiveRealIndex, setIsAddCardActive, setPendingUploads }: BannerProps) => {
 	const fileInputRef = useRef<HTMLInputElement | null>(null);
 	const pendingIndexRef = useRef<number | null>(null);
-	// const { mutateAsync: uploadPhoto, isPending } = useVerifyAndSaveProfileImage();
+	const { mutateAsync: uploadPhoto } = useVerifyAndSaveProfileImage();
 
 
 	// hasImage: null/undefined/공백 처리까지 고려한 이미지 존재 여부 확인 함수 
@@ -42,7 +43,7 @@ const Banner = ({ activeRealIndex, photoItems, setActiveRealIndex, setIsAddCardA
 		fileInputRef.current?.click();
 	};
 
-	  const handleChangeFile = (e: React.ChangeEvent<HTMLInputElement>) => {
+	  const handleChangeFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
 		const file = e.target.files?.[0];
 		    const index = pendingIndexRef.current;
 
@@ -59,7 +60,9 @@ const Banner = ({ activeRealIndex, photoItems, setActiveRealIndex, setIsAddCardA
 				previewUrl,
 			},
 		]);
-
+		const resizedFile = await resizeImage(file);
+		uploadPhoto(resizedFile)
+		
 		// 같은 파일 다시 선택 가능하도록 초기화
 		e.target.value = '';
 		    pendingIndexRef.current = null;
