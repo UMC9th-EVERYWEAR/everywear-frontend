@@ -3,7 +3,7 @@ import ItemBrowseSection from '@/src/components/closet/ItemBrowseSection';
 import ItemSkeleton from '@/src/components/closet/ItemSkeleton';
 import CategoryBar from '@/src/components/common/CategoryBar';
 import { PATH } from '@/src/constants/path';
-import { useClosetsProductsByCategory } from '@/src/hooks/service/product/useClosetProducts';
+import { useClosetProductsByCategory } from '@/src/hooks/service/product/useClosetProducts';
 import type { CategoryKey } from '@/src/types/products/product';
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
@@ -14,7 +14,7 @@ const ClosetPage = () => {
 
 	const handleSelected = (category : CategoryKey) => setSelected(category)
 
-	const { data: filteredClosetProducts = [],  isLoading: closetLoading } = useClosetsProductsByCategory(selected);
+	const { data: filteredClosetProducts = [],  isLoading: closetLoading } = useClosetProductsByCategory(selected);
 	
 	return (
 		<div className="flex flex-col items-center px-5" >
@@ -35,10 +35,11 @@ const ClosetPage = () => {
 
 				{
 					closetLoading ? (
-						<ItemSkeleton />
+						<ItemSkeleton isCloset={true}/>
 					) :(
 						<ItemBrowseSection
 							data={filteredClosetProducts}
+							isCloset={true}
 						/>
 					)
 				}

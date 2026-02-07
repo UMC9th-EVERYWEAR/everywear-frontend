@@ -5,7 +5,7 @@ import { useQuery } from '@tanstack/react-query'
 
 // 내 옷장 전체
 export const useClosetProducts = () => {
-	useQuery({
+	return useQuery({
 		queryKey: QUERY_KEYS.CLOSET.ALL,
 		queryFn: getClosetProducts,
 	})
@@ -13,7 +13,7 @@ export const useClosetProducts = () => {
 
 // 내 옷장 상의
 export const useClosetTopProducts = () => {
-	useQuery({
+	return useQuery({
 		queryKey: QUERY_KEYS.CLOSET.CATEGORY('top'),
 		queryFn: getClosetTopProducts,
 	})
@@ -21,7 +21,7 @@ export const useClosetTopProducts = () => {
 
 // 내 옷장 아우터
 export const useClosetOuterProducts = () => {
-	useQuery({
+	return useQuery({
 		queryKey: QUERY_KEYS.CLOSET.CATEGORY('outer'),
 		queryFn: getClosetOuterProducts,
 	})
@@ -29,7 +29,7 @@ export const useClosetOuterProducts = () => {
 
 // 내 옷장 기타
 export const useClosetEtcProducts = () => {
-	useQuery({
+	return useQuery({
 		queryKey: QUERY_KEYS.CLOSET.CATEGORY('etc'),
 		queryFn: getClosetEtcProducts,
 	})
@@ -37,7 +37,7 @@ export const useClosetEtcProducts = () => {
 
 // 내 옷장 원피스
 export const useClosetDressProducts = () => {
-	useQuery({
+	return useQuery({
 		queryKey: QUERY_KEYS.CLOSET.CATEGORY('dress'),
 		queryFn: getClosetDressProducts,
 	})
@@ -45,14 +45,14 @@ export const useClosetDressProducts = () => {
 
 // 내 옷장 하의
 export const useClosetBottomProducts = () => {
-	useQuery({
+	return useQuery({
 		queryKey: QUERY_KEYS.CLOSET.CATEGORY('bottom'),
 		queryFn: getClosetBottomProducts,
 	})
 }
 
 // 내 옷장 카테고리별
-export const useClosetsProductsByCategory = (category: CategoryKey) => {
+export const useClosetProductsByCategory = (category: CategoryKey) => {
 	const queryKeyCategory = PRODUCT_CATEGORIES[category].queryKey;
 	return useQuery({
 		queryKey: QUERY_KEYS.CLOSET.CATEGORY(queryKeyCategory),
