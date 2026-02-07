@@ -16,7 +16,7 @@ const LoginPage = () => {
 		const redirectUri = encodeURIComponent(
   `${window.location.origin}/login/callback`,
 		);
-		window.location.href = `${ENV_CONFIG.SERVER.BASE_URL}${path}?redirect_url=${redirectUri}`;
+		window.location.href = `${ENV_CONFIG.SERVER.BASE_URL}${path}?redirect_uri=${redirectUri}`;
 	}
 	return(
 		<div className="bg-primary-600 min-h-screen px-8 flex justify-center items-center">
