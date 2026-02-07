@@ -10,7 +10,7 @@ interface StickySectionProps {
   stickyClassName?: string;
   /** section wrapper 클래스 */
   className?: string;
-
+isHow?: boolean
   sectionRef?: React.RefObject<HTMLDivElement | null>;
 
 }
