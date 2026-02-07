@@ -117,7 +117,17 @@ axiosInstance.interceptors.response.use(
     
 		const originalRequest : CustomInternalAxiosRequestConfig = error.config;
 		const currentPath = window.location.pathname;
-		if ( !error.response || error.response.status !== 401 || originalRequest._retry) {
+
+		if (!error.response) {
+			return Promise.reject(error);
+		}
+
+		if (error.response.status !== 401) {
+			return Promise.reject(error);
+		}
+
+
+		if ( originalRequest._retry) {
 			if (currentPath !== PATH.LANDING) {
 				window.location.href = PATH.LOGIN.ROOT;
 			}			return Promise.reject(error);
