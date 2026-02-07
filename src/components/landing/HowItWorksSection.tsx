@@ -1,6 +1,5 @@
 
 
-import { useRef } from 'react';
 import HowItWorksStep, { type STEPKEY } from './HowItWorksStep'
 import SectionTitle from './SectionTitle'
 import { forwardRef } from 'react';
@@ -29,14 +28,12 @@ StepSection.displayName = 'StepSection';
 
 
 const HowItWorksSection = () => {
-	const sectionRef = useRef<HTMLDivElement | null>(null);
 
 	const { ref: endRef, isInViewport, isSticky } = useScrollStickyAnimation();
 
 
 	return(
 		<section 
-			ref={sectionRef}
 			className="relative h-full bg-landing-how-it-works"
 		>
 			<div
@@ -63,8 +60,7 @@ const HowItWorksSection = () => {
 			</div>
 
 		</section>
-
 	)
-			
+		
 }
 export default HowItWorksSection

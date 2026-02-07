@@ -13,22 +13,17 @@ export const useScrollStickyAnimation = () => {
 		const callback = (entries: IntersectionObserverEntry[]) => { // 관찰 중인 요소의 상태가 변할 때마다 호출됨
 			entries.forEach((entry) => {
 				if (entry.isIntersecting) {
-					// 요소가 화면에 처음 들어왔을 때만 상태를 true로 바꾸고,
+					// 요소가 화면에 처음 들어왔을 때만 상태를 true로 바꿈
 					console.log(entries[0].boundingClientRect); 
 					setIsInViewport(true);
-					// 애니메이션은 한 번만 실행되도록 ,이후에는 더 이상 IntersectionObserver가 해당 요소를 감시하지 않도록 함
-					// observer.unobserve(entry.target);
-				} else {
-					// 요소가 뷰포트를 벗어난 경우
-					// setIsInViewport(false);
-				}
+				} 
 			});
 		};
 
 		const options = { 
-			root: null, // 브라우저 뷰포트를 기준으로 관찰
-			rootMargin: '0px', // 화면 하단 기준 40% 지점에서 감지
-			threshold: 0.9 }; // 1px이라도 보이면 콜백 실행
+			root: null, 
+			rootMargin: '0px', 
+			threshold: 0.9 }; 
 
 		const observer = new IntersectionObserver(callback, options);
 		observer.observe(ref.current); // 요소 관찰 시작
@@ -41,10 +36,12 @@ export const useScrollStickyAnimation = () => {
 	useEffect(() => {
 		if(!isInViewport) return;
 		if (isInViewport) {
-			setTimeout(() => {
+			const timer = setTimeout(() => {
 				setIsSticky(false);
 			}, 500);
+			return () => clearTimeout(timer);
 		} 
+		
 	}, [isInViewport]);
 
 
