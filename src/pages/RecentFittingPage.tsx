@@ -1,29 +1,33 @@
 import { formatToMonthGroup } from '@/src/utils/date';
 import { useMemo } from 'react';
-
-// 임시 데이터: api연동 필요
-const fittingHistory = [
-	{ id: 1, date: '2025.6.7', month: '2025년 6월', imageUrl: 'https://via.placeholder.com/300' },
-	{ id: 2, date: '2025.6.7', month: '2025년 6월', imageUrl: 'https://via.placeholder.com/300' },
-	{ id: 3, date: '2025.6.7', month: '2025년 6월', imageUrl: 'https://via.placeholder.com/300' },
-	{ id: 4, date: '2025.5.7', month: '2025년 5월', imageUrl: 'https://via.placeholder.com/300' },
-	{ id: 5, date: '2025.5.7', month: '2025년 5월', imageUrl: 'https://via.placeholder.com/300' },
-	{ id: 6, date: '2025.5.7', month: '2025년 5월', imageUrl: 'https://via.placeholder.com/300' },
-	{ id: 7, date: '2025.4.7', month: '2025년 4월', imageUrl: 'https://via.placeholder.com/300' },
-	{ id: 8, date: '2025.4.7', month: '2025년 4월', imageUrl: 'https://via.placeholder.com/300' },
-	{ id: 9, date: '2025.4.7', month: '2025년 4월', imageUrl: 'https://via.placeholder.com/300' },
-];
+import { useFittings } from '@/src/hooks/service/fitting/useFittings';
+import ItemSkeleton from '@/src/components/closet/ItemSkeleton';
 
 const RecentFitting = () => {
-	//데이터로부터 고유한 '월' 리스트를 동적으로 추출하고 최적화. -> api 연동시
+	// 1. 우리가 만든 훅에서 데이터를 가져옵니다.
+	const { data: fittingHistory = [], isLoading } = useFittings();
+
+	// 2. 고유한 '월' 리스트 추출 (데이터가 바뀔 때마다 최적화)
 	const months = useMemo(() => {
+		if (!fittingHistory.length) return [];
+        
 		const uniqueMonths = Array.from(
-			new Set(fittingHistory.map((item) => formatToMonthGroup(item.date))),
+			new Set(fittingHistory.map((item) => formatToMonthGroup(item.createdAt || '2025.1.1'))),
 		);
-		// 내림차순 정렬 -> 최신달이 우선으로 나오게
+		// 내림차순 정렬
 		return uniqueMonths.sort((a, b) => b.localeCompare(a));
 	}, [fittingHistory]);
 
+	// 3. 로딩 처리 (팀원들이 만든 스켈레톤 활용)
+	if (isLoading) {
+		return (
+			<div className='p-4'>
+				<ItemSkeleton />
+			</div>
+		);
+	}
+
+	// 4. 빈 화면 처리
 	if (fittingHistory.length === 0) {
 		return (
 			<div className='flex flex-1 flex-col items-center justify-center h-full bg-white'>
@@ -39,27 +43,40 @@ const RecentFitting = () => {
 					key={month}
 					className='mt-8'
 				>
-					{/* 타이포그래피: 시스템에 20px이 없다면 가장 가까운 medium-16 + bold 조합 추천 */}
 					<h2 className='px-4 mb-4 text-[var(--color-neutral-900)] text-medium-16 font-bold leading-normal'>
 						{month}
 					</h2>
                     
+					{/* 가로 스크롤 영역 */}
 					<div className='flex gap-[10px] overflow-x-auto no-scrollbar pl-4 pr-4'>
 						{fittingHistory
-							.filter(item => formatToMonthGroup(item.date) === month)
+							.filter(item => formatToMonthGroup(item.createdAt) === month)
 							.map((item) => (
 								<div 
 									key={item.id} 
-									className='min-w-[calc((100%-32px-20px)/2.5)] aspect-[3/4] rounded-[10px] overflow-hidden bg-[var(--color-neutral-100)] shrink-0 relative'
+									// ✅ Lint 해결: 웹 접근성 속성 추가
+									role="button"
+									tabIndex={0}
+									className='min-w-[calc((100%-32px-20px)/2.5)] aspect-[3/4] rounded-[10px] overflow-hidden bg-[var(--color-neutral-100)] shrink-0 relative cursor-pointer active:scale-95 transition-transform outline-none focus:ring-2 focus:ring-primary-300'
+									onClick={() => {
+										console.log(`${item.id}번 피팅 상세로 이동`);
+									}}
+									// ✅ Lint 해결: 키보드 이벤트 추가
+									onKeyDown={(e) => {
+										if (e.key === 'Enter' || e.key === ' ') {
+											console.log(`${item.id}번 피팅 상세로 이동`);
+										}
+									}}
 								>
 									<img 
-										src={item.imageUrl} 
+										src={item.resultImageUrl} 
 										alt='피팅 이미지' 
 										className='w-full h-full object-cover' 
 									/>
+									{/* 날짜 표시 */}
 									<div className='absolute bottom-2 w-full text-center'>
 										<span className='text-[var(--color-neutral-50)] text-regular-14 font-medium drop-shadow-md'>
-											{item.date}
+											{new Date(item.createdAt).toLocaleDateString().replace(/\s/g, '').slice(0, -1)}
 										</span>
 									</div>
 								</div>
