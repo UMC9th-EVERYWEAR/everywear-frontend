@@ -99,7 +99,7 @@ const Home = () => {
 				<span className="self-center text-center text-[var(--color-primary-300)] text-regular-10 tracking-[-0.3px] cursor-pointer">
 					유명 브랜드 가상 피팅 가이드
 				</span>
-				<div className="w-full">
+				<div className="w-full flex justify-center">
 					<Button 
 						variant="filled" 
 						size="xl" 

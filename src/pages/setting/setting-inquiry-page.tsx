@@ -6,6 +6,9 @@ import { uploadImageToImgBB } from '@/src/utils/imgbb';
 import AttachmentPicker from '@/src/components/setting/setting-inquiry/AttachmentPicker';
 import { Modal } from '@/src/components/common/Modal';
 import type { TagCategory, InquiryDraft } from '@/src/types/setting/setting-inquiry';
+import useToast from '@/src/hooks/domain/ai-fitting/UseToast';
+import Toast from '@/src/components/common/Toast';
+import ToastContainer from '@/src/components/common/ToastContainer';
 
 
 
@@ -32,6 +35,10 @@ const SettingInquiry = () => {
 	const [completed, setCompleted] = useState(false);
 	const [draftLoaded, setDraftLoaded] = useState(false);
 
+	const { toasts, createToast, deleteToast } = useToast();
+
+
+ 
 
 	// 복원 useEffect ( 추후에 창 나가기 시에 초기화하는 것으로 수정)
 	useEffect(() => {
@@ -87,7 +94,8 @@ const SettingInquiry = () => {
 	  const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
 		if (!title.trim() || !email.trim() || !message.trim()) {
-			alert('필수 항목을 모두 입력해주세요.');
+			createToast({ message: '필수 항목을 모두 입력해주세요' });
+
 			return;
 		}
 		if (!formRef.current) return;
@@ -157,6 +165,7 @@ const SettingInquiry = () => {
 			onSubmit={handleSubmit}
 			className="pt-6 px-4 text-medium-14 flex flex-col items-center"
 		>			
+
 			<div className='flex flex-col gap-7 w-full mb-9'>
 				<div className='flex w-full gap-2.5'>
 					{/*  hidden input으로 category, name 같이 보내기 */}
@@ -265,7 +274,16 @@ const SettingInquiry = () => {
 			>
 				{isSending ? '전송 중...' : '접수하기'}
 			</button>
-
+			<ToastContainer>
+				{toasts.map((t) => (
+					<Toast
+						key={t.id}
+						id={t.id}
+						message={t.message}
+						deleteToast={deleteToast}
+					/>
+				))}
+			</ToastContainer>
 			{
 				completed && (
 					<Modal
