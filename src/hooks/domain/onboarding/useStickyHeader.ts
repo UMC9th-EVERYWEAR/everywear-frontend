@@ -14,7 +14,6 @@ export const useScrollStickyAnimation = () => {
 			entries.forEach((entry) => {
 				if (entry.isIntersecting) {
 					// 요소가 화면에 처음 들어왔을 때만 상태를 true로 바꿈
-					console.log(entries[0].boundingClientRect); 
 					setIsInViewport(true);
 				} 
 			});

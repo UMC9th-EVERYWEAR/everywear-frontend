@@ -37,7 +37,7 @@ const HowItWorksSection = () => {
 			className="relative h-full bg-landing-how-it-works"
 		>
 			<div
-				className={cn('flex items-center justify-center z-1000',
+				className={cn('flex items-center justify-center',
 					isSticky && 'sticky top-10',
 					isInViewport && 'animate-view-out',		
 				)}
