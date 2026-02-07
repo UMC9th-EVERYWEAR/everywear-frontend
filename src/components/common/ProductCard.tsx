@@ -39,6 +39,7 @@ const ProductCard = ({
 	rating = 0, 
 	imageUrl, 
 	isCloset = false ,
+	productUrl,
 }: ProductCardProps) => {
  
 	const navigate = useNavigate();
@@ -51,6 +52,17 @@ const ProductCard = ({
 			console.warn('상품 ID가 없어 상세 페이지로 이동할 수 없습니다.');
 		}
 	};
+
+	// 구매하기 버튼 클릭 시 핸들러
+	const handlePurchase = () => {
+		if (productUrl) window.open(productUrl);
+	}
+
+	const handleRecentFitting = () => {
+		if (id) {
+			navigate(`/recent-fiitng/${id}`)
+		}
+	}
 
 	return (
 		<button 
@@ -102,8 +114,14 @@ const ProductCard = ({
 						className="mt-2.5 flex justify-between w-full"
 						onClick={(e) => e.stopPropagation()}
 					>
-						<button className={ButtonClassName}>구매하기</button>
-						<button className={ButtonClassName}>AI 분석하기</button>
+						<button
+							className={ButtonClassName}
+							onClick={handlePurchase}
+						>구매하기</button>
+						<button
+							className={ButtonClassName}
+							onClick={handleRecentFitting}
+						>AI 분석하기</button>
 					</button>
 				)}
 			</div>
