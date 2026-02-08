@@ -9,6 +9,9 @@ import Toast from '../../common/Toast';
 import ToastContainer from '../../common/ToastContainer';
 import React from 'react';
 import type { PendingUpload } from '@/src/pages/setting/setting-photo-page';
+import type { Swiper as SwiperClass } from 'swiper/types';
+import type { RefObject } from 'react';
+
 
 interface Props {
   loading: boolean;
@@ -18,7 +21,7 @@ interface Props {
   isAddCardActive: boolean;
   openChangePhotoModal: boolean;
   openDeletePhotoModal: boolean;
-
+  swiperRef: RefObject<SwiperClass | null>;
 	setPendingUploads: React.Dispatch<React.SetStateAction<PendingUpload[]>>;
   onChangeIndex: (i: number) => void;
   onAddCardActiveChange: (v: boolean) => void;
@@ -40,6 +43,7 @@ const SettingPhotoView = ({
 	isAddCardActive,
 	openChangePhotoModal,
 	openDeletePhotoModal,
+	swiperRef,
 	setPendingUploads,
 	onChangeIndex,
 	onAddCardActiveChange,
@@ -82,6 +86,7 @@ const SettingPhotoView = ({
 				<Banner
 					photoItems={photoItems}
 					activeRealIndex={activeRealIndex}
+					swiperRef={swiperRef}
 					setActiveRealIndex={onChangeIndex}
 					setIsAddCardActive={onAddCardActiveChange}
 					setPendingUploads={setPendingUploads}

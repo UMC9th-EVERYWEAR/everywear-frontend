@@ -29,7 +29,7 @@ const AddPhotoSection = ({ setShowGuide } : AddPhotoSectionProps) => {
 		handleChangeFile,
 		captureFromCamera,
 	} = usePhotoInput();
-	const [isVerify, setIsVerify] = useState(true)
+	const [isVerify, setIsVerify] = useState(false)
 
 	usePreventRefresh(isVerify);
 

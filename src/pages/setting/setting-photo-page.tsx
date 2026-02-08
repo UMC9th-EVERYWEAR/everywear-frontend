@@ -1,9 +1,10 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { useProfileImages } from '@/src/hooks/service/user/useProfileImages';
 import type { UserImgQuery } from '@/src/apis/generated';
 import { useSelectRepresentativeImage } from '@/src/hooks/service/user/useSelectRepresentativeImage';
 import { useDeleteProfileImage } from '@/src/hooks/service/user/useDeleteProfileImage';
 import SettingPhotoView from '@/src/components/setting/setting-photo/SettingPhotoView';
+import type { Swiper as SwiperClass } from 'swiper/types';
 
 const MAX_PHOTOS = 5;
 
@@ -23,11 +24,16 @@ const SettingPhotoPage = () => {
 	const [openDeletePhotoModal, setOpenDeletePhotoModal] = useState(false); // 사진 삭제 후 서버 값으로 초기화
 	const [activeRealIndex, setActiveRealIndex] = useState(0);
 	const [isAddCardActive, setIsAddCardActive] = useState(false); 
+	const swiperRef = useRef<SwiperClass | null>(null)
 
 	
 	{/* 5칸짜리 UI 배열 */}
 	const filledPhotoItems: UserImgQuery[] = (() => {
 		const items = profileData ?? [];
+	  const representativeItem = items.find((i)=> i.representative)
+		const restItems = items.filter((i) => !i.representative);
+
+		const sortedItems = representativeItem ?  [representativeItem, ...restItems] : items;
 
 		const uploadingPhotos : UserImgQuery[] = pendingUploads.map((p) => ({
 			id: p.tempId,
@@ -38,7 +44,7 @@ const SettingPhotoPage = () => {
 			{ length: Math.max(0, MAX_PHOTOS - (items.length + uploadingPhotos.length)) },
 			(_, index) => ({ profileImageId: -(index + 1000) }),
 		);
-		return [...items, ...uploadingPhotos, ...emptySlots];
+		return [...sortedItems, ...uploadingPhotos, ...emptySlots];
 	})();
 
 	const activeImageId =
@@ -55,6 +61,7 @@ const SettingPhotoPage = () => {
 			isAddCardActive={isAddCardActive}
 			openChangePhotoModal={openChangePhotoModal}
 			openDeletePhotoModal={openDeletePhotoModal}
+			swiperRef={swiperRef}
 			onChangeIndex={setActiveRealIndex}
 			onAddCardActiveChange={setIsAddCardActive}
 			onOpenChangeModal={() => setOpenChangePhotoModal(true)}
@@ -64,7 +71,10 @@ const SettingPhotoPage = () => {
 			onSelectRepresentative={() => {
 				if (!activeImageId) return;
 				selectRepresentative(activeImageId, {
-					onSuccess: () => setOpenChangePhotoModal(false),
+					onSuccess: () => {setOpenChangePhotoModal(false)
+						    swiperRef.current?.slideToLoop(0);
+
+					},
 				});
 			}}
 			onDeleteImage={() => {

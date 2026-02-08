@@ -1,6 +1,6 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination } from 'swiper/modules';
-import React from 'react';
+import React, { type RefObject } from 'react';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import { cn } from '@/src/utils/cn';
@@ -15,12 +15,13 @@ import { useVerifyAndSaveProfileImage } from '@/src/hooks/service/user/useVerify
 interface BannerProps {
 	photoItems?: UserImgQuery[];
 	activeRealIndex: number;
+  swiperRef: RefObject<SwiperClass | null>;
 	setActiveRealIndex: (index: number) => void;
 	setIsAddCardActive?: (isActive: boolean) => void;
 	setPendingUploads: React.Dispatch<React.SetStateAction<PendingUpload[]>>;
 	
 }
-const Banner = ({ activeRealIndex, photoItems, setActiveRealIndex, setIsAddCardActive, setPendingUploads }: BannerProps) => {
+const Banner = ({ activeRealIndex, photoItems, swiperRef, setActiveRealIndex, setIsAddCardActive, setPendingUploads }: BannerProps) => {
 	const fileInputRef = useRef<HTMLInputElement | null>(null);
 	const pendingIndexRef = useRef<number | null>(null);
 	const { mutateAsync: uploadPhoto } = useVerifyAndSaveProfileImage();
@@ -129,7 +130,12 @@ const Banner = ({ activeRealIndex, photoItems, setActiveRealIndex, setIsAddCardA
 				}}
 				className="photo-swiper pb-6 h-106.75"
 				onSwiper={(swiper: SwiperClass) => {
+		
 					setActiveRealIndex(swiper.realIndex);
+					if(swiperRef){
+						swiperRef.current = swiper
+
+					}
 				}}
 				  onSlideChange={(swiper: SwiperClass) => {
 					setActiveRealIndex(swiper.realIndex)}}
