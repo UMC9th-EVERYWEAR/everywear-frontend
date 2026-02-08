@@ -36,9 +36,9 @@ const SettingPhotoPage = () => {
 		const sortedItems = representativeItem ?  [representativeItem, ...restItems] : items;
 
 		const uploadingPhotos : UserImgQuery[] = pendingUploads.map((p) => ({
-			id: p.tempId,
-			imageUrl: p.previewUrl,
-			representative: false,	
+profileImageId: p.tempId,
+imageUrl: p.previewUrl,
+representative: false,
 		}));
 		const emptySlots: UserImgQuery[] = Array.from(
 			{ length: Math.max(0, MAX_PHOTOS - (items.length + uploadingPhotos.length)) },
