@@ -54,7 +54,7 @@ export const useBottomProducts = () =>
 	});
 
 
-//
+/** 카테고리 별*/
 export const useProductsByCategory = (category: CategoryKey) => {
 	const queryKeyCategory = PRODUCT_CATEGORIES[category].queryKey;
 	return useQuery({

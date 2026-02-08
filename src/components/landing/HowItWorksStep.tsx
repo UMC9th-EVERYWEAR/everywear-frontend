@@ -1,12 +1,15 @@
 
 import ScrollAnimationContainer from '../onboarding/onboarding/ScrollAnimationContainer'
 import  { LANDING_IMAGES } from '@/src/constants/images'
+import React from 'react';
 
 export type STEPKEY = 'STEP1' | 'STEP2' | 'STEP3' | 'STEP4';
 
 
 interface  HowItWorksStepProps  { 
 	step: STEPKEY
+	  style?: React.CSSProperties;
+
 }
 
 const STEP_CONFIG: Record<
@@ -66,15 +69,17 @@ const STEP_CONFIG: Record<
 
 
 
-const HowItWorksStep = ({ step }: HowItWorksStepProps) => {
+const HowItWorksStep = ({ step , style }: HowItWorksStepProps) => {
 	const { title, description, description2, phoneMockup, phoneDetailHighlight, positionTop, detailWidth, positionLeft } = STEP_CONFIG[step];
 
 	return(
 
-		<div className='flex w-77 items-center justify-center h-full gap-5.5 mb-10'> {/* 반응형할거면 바꿔야함*/}
+		<div
+			className='flex w-77 items-center justify-center h-screen gap-5.5 mb-10'
+			style={style}
+		> 
 				
 			<div className="relative">
-				{/* image */}
 				<img
 					src={phoneMockup}
 					alt="phoneMockup1"

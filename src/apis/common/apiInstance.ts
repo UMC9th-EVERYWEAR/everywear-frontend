@@ -107,16 +107,31 @@ axiosInstance.interceptors.response.use(
       },
 		);
 
+		// 타임아웃 시 에러 처리
+		// TODO : 백엔드에서 보내주는 에러메시지 확인 후 수정 필요
+		// TODO : 필요하다면 타임아웃 시 토스트 띄우기 등 추가 필요
+		if (error.code === 'ECONNABORTED' || error.message.includes('timeout')) {
+			console.error('요청 시간이 초과되었습니다.');
+			return Promise.reject(error);
+		}
     
 		const originalRequest : CustomInternalAxiosRequestConfig = error.config;
 		const currentPath = window.location.pathname;
-		console.log(currentPath)
-		if ( !error.response || error.response.status !== 401 || originalRequest._retry) {
+
+		if (!error.response) {
+			return Promise.reject(error);
+		}
+
+		if (error.response.status !== 401) {
+			return Promise.reject(error);
+		}
+
+
+		if ( originalRequest._retry) {
 			if (currentPath !== PATH.LANDING) {
 				window.location.href = PATH.LOGIN.ROOT;
 			}			return Promise.reject(error);
 		}
-
 
 		if (originalRequest.url?.includes('/api/auth/refresh')) {
 			accessTokenStorage.removeItem();
@@ -127,13 +142,6 @@ axiosInstance.interceptors.response.use(
 			return Promise.reject(error);
 		}
 
-		// 타임아웃 시 에러 처리
-		// TODO : 백엔드에서 보내주는 에러메시지 확인 후 수정 필요
-		// TODO : 필요하다면 타임아웃 시 토스트 띄우기 등 추가 필요
-		if (error.code === 'ECONNABORTED' || error.message.includes('timeout')) {
-			console.error('요청 시간이 초과되었습니다.');
-			return Promise.reject(error);
-		}
 		console.log('401 에러 감지: 토큰 갱신 시도');
 		originalRequest._retry = true; // 재시도 플래그 설정
 

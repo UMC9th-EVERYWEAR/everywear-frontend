@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
-import { useNavigate } from 'react-router';
+import { useNavigate, useParams } from 'react-router';
 import TabBar from '@/src/components/ai-fitting/TabBar';
-import FittingItemInfo, { type ItemData } from '@/src/components/ai-fitting/FittingItemInfo';
+import FittingItemInfo from '@/src/components/ai-fitting/FittingItemInfo';
 import FittingTab from '@/src/components/ai-fitting/FittingTab';
 import ReviewTab from '@/src/components/ai-fitting/ReviewTab'; 
 import type {  FittingState, ReviewState } from '@/src/types/ai-fitting/status';
@@ -11,22 +11,14 @@ import ToastContainer from '@/src/components/common/ToastContainer';
 import useToast from '@/src/hooks/domain/ai-fitting/UseToast';
 import type { ModalState } from '@/src/types/ai-fitting/modal';
 import { Modal } from '@/src/components/common/Modal';
+import { useProducts } from '@/src/hooks/service/product/useProducts';
+import useLike from '@/src/hooks/service/fitting/useLike';
 
 export type TabType = 'fitting' | 'review';
-
-const itemDataExample: ItemData = {
-	company: '무신사',
-	rating: 4.7,
-	title: '베이직 화이트 티셔츠',
-	price: 29000,
-	imgUrl: 'https://lh3.googleusercontent.com/d/1Xijhz5zKYVwsYP8ZANbMvCtTdlgIT-YU',
-	buyUrl: 'https://www.musinsa.com/products/5863714',
-};
 
 const AiFittingPage = () => {
 	const navigate = useNavigate();
 	const [activeTab, setActiveTab] = useState<TabType>('fitting');
-	const [isHearted, setIsHearted] = useState(false);
 	const [fittingState, setFittingState] = useState<FittingState>({ status: 'idle' });
 	const [reviewState, setReviewState] = useState<ReviewState>({ status : 'idle' });
 	const [modal, setModal] = useState<ModalState>({ type : 'none' });
@@ -35,6 +27,14 @@ const AiFittingPage = () => {
 	const allowExitRef = useRef(false);
 	const isAnalyzing = fittingState.status === 'loading' || reviewState.status === 'loading';
 	const isAnalyzingRef = useRef(false);
+
+	// 전체 상품 조회 후 url에서 id 가져와 특정 상품 데이터 필터링
+	// 단일 상품 조회 api 생성 시 대체 예정
+	const { id } = useParams();
+	const { data, isSuccess } = useProducts();
+	const detailProduct = isSuccess && data ? data.find((p) => p.product_id === Number(id)) : null;
+
+	const { mutate : mutateLike } = useLike({ createToast });
 
 	useEffect(() => {
 		isAnalyzingRef.current = isAnalyzing;
@@ -62,14 +62,19 @@ const AiFittingPage = () => {
 		return () => window.removeEventListener('popstate', handlePopState);
 	}, [navigate]);
 
-	const handleHeart = () => {
-		const nextState = !isHearted;
-		setIsHearted(nextState);
-		if (nextState) createToast({ message: '내 옷장에 추가되었습니다.' });
+
+	// 이벤트 핸들러
+	const handleHeart = (currentLikedStatus: boolean) => {
+		if (!detailProduct) return;
+        
+		mutateLike({ 
+			productId: Number(id), 
+			isLiked: currentLikedStatus, 
+		});
 	};
 
 	const handleGoToShop = () => {
-		window.open(itemDataExample.buyUrl, '_blank', 'noopener,noreferrer');
+		window.open(detailProduct?.product_url, '_blank', 'noopener,noreferrer');
 		setModal({ type: 'none' });
 	};
 
@@ -161,8 +166,8 @@ const AiFittingPage = () => {
 				/>
 
 				<FittingItemInfo
-					data={itemDataExample}
-					isHearted={isHearted}
+					key={detailProduct?.product_id}
+					data={detailProduct}
 					handleHeart={handleHeart}
 					handleBuy={() => setModal({ type: 'buy' })}
 				/>
