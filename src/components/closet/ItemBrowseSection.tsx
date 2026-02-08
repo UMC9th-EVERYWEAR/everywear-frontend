@@ -86,7 +86,7 @@ const ItemBrowseSection = ({ data, isCloset = false } : ItemBrowseSectionProps) 
 						}}
 						itemContent={(_, product) => (
 							<ProductCard
-								id={product.product_id!}
+								id={product.product_id ?? 0}
 								company={product.brand_name ?? ''}
 								name={product.product_name ?? ''}
 								price={product.price ?? ''}
