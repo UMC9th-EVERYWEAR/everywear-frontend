@@ -62,9 +62,15 @@ const AiFittingPage = () => {
 		return () => window.removeEventListener('popstate', handlePopState);
 	}, [navigate]);
 
-	const handleHeart = () => {
+
+	// 이벤트 핸들러
+	const handleHeart = (currentLikedStatus: boolean) => {
 		if (!detailProduct) return;
-		mutateLike({ productId : Number(id), isLiked: detailProduct.is_liked });
+        
+		mutateLike({ 
+			productId: Number(id), 
+			isLiked: currentLikedStatus, 
+		});
 	};
 
 	const handleGoToShop = () => {
@@ -160,6 +166,7 @@ const AiFittingPage = () => {
 				/>
 
 				<FittingItemInfo
+					key={detailProduct?.product_id}
 					data={detailProduct}
 					handleHeart={handleHeart}
 					handleBuy={() => setModal({ type: 'buy' })}

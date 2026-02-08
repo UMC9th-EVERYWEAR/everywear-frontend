@@ -1,6 +1,5 @@
 import { toggleProductLike } from '@/src/apis/domain';
-import { QUERY_KEYS } from '@/src/constants/query-key';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation } from '@tanstack/react-query';
 import type { ToastInput } from '../../domain/ai-fitting/UseToast';
 
 interface useLikeProps {
@@ -14,18 +13,9 @@ interface LikeVariables {
 
 function useLike({ createToast } : useLikeProps) {
 
-	const queryClient = useQueryClient();
-
 	return useMutation({
 		mutationFn: ({ productId }: LikeVariables) => toggleProductLike(productId),
 		onSuccess: (_data, variables) => {
-			// detail 키가 없으므로 전체 상품 리스트 갱신, 내 옷장 리스트 갱신
-			queryClient.invalidateQueries({ 
-				queryKey: QUERY_KEYS.PRODUCT.ALL, 
-			});
-			queryClient.invalidateQueries({ 
-				queryKey: QUERY_KEYS.CLOSET.ALL, 
-			});
 
 			// 내가 보낸 이전 상태값으로 판별
 			// 이전에 좋아요였다면(true) -> 클릭했으니 삭제
@@ -35,9 +25,6 @@ function useLike({ createToast } : useLikeProps) {
 			} else {
 				createToast({ message: '내 옷장에 추가되었습니다.' });
 			}
-		},
-		onError: (error) => {
-			console.error('좋아요 변경 실패:', error);
 		},
 	})
 }
