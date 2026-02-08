@@ -23,7 +23,7 @@ function useLike({ createToast } : useLikeProps) {
 				queryKey: QUERY_KEYS.CLOSET.ALL, 
 			});
 
-			// 내가 보낸 이전 상태값으로 판별
+			// 내가 보낸 이전 상태값으로 판별	
 			// 이전에 좋아요였다면(true) -> 클릭했으니 삭제
 			// 이전에 좋아요가 아니었다면(false) -> 클릭했으니 추가
 			if (variables.isLiked) {
