@@ -1,6 +1,8 @@
 import { toggleProductLike } from '@/src/apis/domain';
 import { useMutation } from '@tanstack/react-query';
 import type { ToastInput } from '../../domain/ai-fitting/UseToast';
+import { queryClient } from '@/src/lib/react-query';
+import { QUERY_KEYS } from '@/src/constants/query-key';
 
 interface useLikeProps {
     createToast: (toast: ToastInput) => void;
@@ -16,6 +18,10 @@ function useLike({ createToast } : useLikeProps) {
 	return useMutation({
 		mutationFn: ({ productId }: LikeVariables) => toggleProductLike(productId),
 		onSuccess: (_data, variables) => {
+
+			queryClient.invalidateQueries({ 
+				queryKey: QUERY_KEYS.CLOSET.ALL, 
+			});
 
 			// 내가 보낸 이전 상태값으로 판별
 			// 이전에 좋아요였다면(true) -> 클릭했으니 삭제
