@@ -62,7 +62,13 @@ const SettingPhotoView = ({
 		createToast({ message: '대표 사진은 삭제가 불가합니다.' });
 	};
 
+	const handleUploadStartNotice = () => {
+		createToast({ message: '사진 분석을 시작하겠습니다.' })
+	}
 
+	const handleUploadError= () => {
+		createToast({ message: '가상피팅에 적합하지 않은 이미지에요.' })
+	}
 
 	return (
 		
@@ -90,6 +96,8 @@ const SettingPhotoView = ({
 					setActiveRealIndex={onChangeIndex}
 					setIsAddCardActive={onAddCardActiveChange}
 					setPendingUploads={setPendingUploads}
+					handleUploadStartNotice={handleUploadStartNotice}
+					handleError={handleUploadError}
 				/>
 			</div>
 

@@ -19,9 +19,11 @@ interface BannerProps {
 	setActiveRealIndex: (index: number) => void;
 	setIsAddCardActive?: (isActive: boolean) => void;
 	setPendingUploads: React.Dispatch<React.SetStateAction<PendingUpload[]>>;
+	handleUploadStartNotice: () => void;
+	handleError: () => void;
 	
 }
-const Banner = ({ activeRealIndex, photoItems, swiperRef, setActiveRealIndex, setIsAddCardActive, setPendingUploads }: BannerProps) => {
+const Banner = ({ activeRealIndex, photoItems, swiperRef, setActiveRealIndex, setIsAddCardActive, setPendingUploads, handleUploadStartNotice, handleError }: BannerProps) => {
 	const fileInputRef = useRef<HTMLInputElement | null>(null);
 	const pendingIndexRef = useRef<number | null>(null);
 	const { mutateAsync: uploadPhoto } = useVerifyAndSaveProfileImage();
@@ -49,6 +51,7 @@ const Banner = ({ activeRealIndex, photoItems, swiperRef, setActiveRealIndex, se
 		    const index = pendingIndexRef.current;
 
 		if (!file || index === null || !photoItems || !setPendingUploads) return;
+		handleUploadStartNotice();
 
 		//  미리보기(낙관적 UI)
 		const previewUrl = URL.createObjectURL(file);
@@ -62,7 +65,12 @@ const Banner = ({ activeRealIndex, photoItems, swiperRef, setActiveRealIndex, se
 			},
 		]);
 		const resizedFile = await resizeImage(file);
-		uploadPhoto(resizedFile)
+		uploadPhoto(resizedFile,
+			{
+				onSettled: () => setPendingUploads([]),
+				onError: handleError,
+			},
+		)
 		
 		// 같은 파일 다시 선택 가능하도록 초기화
 		e.target.value = '';

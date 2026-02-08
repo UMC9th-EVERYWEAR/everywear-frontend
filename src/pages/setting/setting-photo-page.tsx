@@ -1,12 +1,11 @@
-import { useRef, useState } from 'react';
+import {  useRef, useState } from 'react';
 import { useProfileImages } from '@/src/hooks/service/user/useProfileImages';
-import type { UserImgQuery } from '@/src/apis/generated';
 import { useSelectRepresentativeImage } from '@/src/hooks/service/user/useSelectRepresentativeImage';
 import { useDeleteProfileImage } from '@/src/hooks/service/user/useDeleteProfileImage';
 import SettingPhotoView from '@/src/components/setting/setting-photo/SettingPhotoView';
 import type { Swiper as SwiperClass } from 'swiper/types';
+import { usePhotoItems } from '@/src/hooks/domain/setting/usePhotoItems';
 
-const MAX_PHOTOS = 5;
 
 export type PendingUpload = {
   tempId: number;        // 음수 id
@@ -16,9 +15,11 @@ export type PendingUpload = {
 
 const SettingPhotoPage = () => {
 	const { data: profileData, isLoading: profileLoading } = useProfileImages();
+
 	const { mutate: selectRepresentative } = useSelectRepresentativeImage();
 	const { mutate: deleteImage } = useDeleteProfileImage();
 	const [pendingUploads, setPendingUploads] = useState<PendingUpload[]>([]);
+
 
 	const [openChangePhotoModal, setOpenChangePhotoModal] = useState(false);
 	const [openDeletePhotoModal, setOpenDeletePhotoModal] = useState(false); // 사진 삭제 후 서버 값으로 초기화
@@ -26,35 +27,15 @@ const SettingPhotoPage = () => {
 	const [isAddCardActive, setIsAddCardActive] = useState(false); 
 	const swiperRef = useRef<SwiperClass | null>(null)
 
-	
+
 	{/* 5칸짜리 UI 배열 */}
-	const filledPhotoItems: UserImgQuery[] = (() => {
-		const items = profileData ?? [];
-	  const representativeItem = items.find((i)=> i.representative)
-		const restItems = items.filter((i) => !i.representative);
-
-		const sortedItems = representativeItem ?  [representativeItem, ...restItems] : items;
-
-		const uploadingPhotos : UserImgQuery[] = pendingUploads.map((p) => ({
-profileImageId: p.tempId,
-imageUrl: p.previewUrl,
-representative: false,
-		}));
-		const emptySlots: UserImgQuery[] = Array.from(
-			{ length: Math.max(0, MAX_PHOTOS - (items.length + uploadingPhotos.length)) },
-			(_, index) => ({ profileImageId: -(index + 1000) }),
-		);
-		return [...sortedItems, ...uploadingPhotos, ...emptySlots];
-	})();
-
-	const activeImageId =
-	filledPhotoItems[activeRealIndex]?.profileImageId;
+	const { photoItems, activeImageId } = usePhotoItems({ profileData: profileData ?? [], pendingUploads, activeRealIndex })
 
 
 	return (
 		<SettingPhotoView
 			loading={profileLoading}
-			photoItems={filledPhotoItems}
+			photoItems={photoItems}
 			setPendingUploads={setPendingUploads}
 			activeRealIndex={activeRealIndex}
 			activeImageId={activeImageId ?? 0}
@@ -73,7 +54,6 @@ representative: false,
 				selectRepresentative(activeImageId, {
 					onSuccess: () => {setOpenChangePhotoModal(false)
 						    swiperRef.current?.slideToLoop(0);
-
 					},
 				});
 			}}
