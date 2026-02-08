@@ -14,10 +14,7 @@ const FittingTab = ({ state, handleStartFitting, handleRestartFitting }: Fitting
 	// 목데이터
 	const imageUrlExample : FittingData = 'https://lh3.googleusercontent.com/d/1XuItc3eisxkLo6ZXqClQs-ZcsbYU0brI';
 
-	// 다운로드 핸들러
-	// 부모에서 만들고 넘겨줘야 하지만 임시로 이렇게 설정
-	// 나중에 api 연결 후에 변경할 예정
-	// TODO : 다운로드 핸들러 구현
+	// 피팅결과 이미지 다운로드
 	const handleDownload = () => {
 		if (state.status === 'success' && state.resultUrl) {
 			fileDownload(state.resultUrl);
