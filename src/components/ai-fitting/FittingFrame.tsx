@@ -1,6 +1,8 @@
 import type { FittingState } from '@/src/types/ai-fitting/status';
 import { LoadingSpinner } from './LoadingSpinner';
 import { cn } from '@/src/utils/cn';
+import { useNavigate } from 'react-router';
+import { PATH } from '@/src/constants/path';
 
 export type ImgType = 'BEFORE' | 'AFTER';
 
@@ -11,6 +13,12 @@ interface FittingFrameProps {
 }
 
 const FittingFrame = ({ type = 'BEFORE', imgUrl, state }: FittingFrameProps) => {
+	const navigate = useNavigate();
+
+	const handleChangeProfileImg = () => {
+		navigate(PATH.SETTING.CHANGE_PHOTO);
+	}
+
 	return (
 		<div
 			className="w-full px-2.5 py-4 border rounded-xl border-neutral-200 
@@ -58,6 +66,7 @@ const FittingFrame = ({ type = 'BEFORE', imgUrl, state }: FittingFrameProps) => 
 						className={cn('w-[50%] p-2.5 flex justify-center items-center border\
 						 rounded-[10px] border-primary-600 text-regular-16\
 						 cursor-pointer text-primary-600')}
+						 onClick={handleChangeProfileImg}
 					>
 						사진 변경하기
 					</button>
