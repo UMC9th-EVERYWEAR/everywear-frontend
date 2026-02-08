@@ -64,8 +64,6 @@ export const getHomeProducts = async () => {
 
 
 // closet-page
-
-
 export const getClosetProducts = async () => {
 	const { data } = await apiClient.getClosetProducts();
 	return data.result?.products ?? [];
@@ -96,7 +94,7 @@ export const getClosetBottomProducts = async () => {
 	return data.result?.products ?? [];
 };
 
-export const ClosetFetchers: Partial<Record<CategoryKey, () => Promise<ListDTO[]>>> = {
+export const closetFetchers: Partial<Record<CategoryKey, () => Promise<ListDTO[]>>> = {
 	'상의': getClosetTopProducts,
 	'아우터': getClosetOuterProducts,
 	'기타': getClosetEtcProducts,
@@ -105,7 +103,7 @@ export const ClosetFetchers: Partial<Record<CategoryKey, () => Promise<ListDTO[]
 };
 
 export const getClosetByCategory = async (category: CategoryKey) => {
-	const fetcher = productFetchers[category] ?? getClosetProducts;
+	const fetcher = closetFetchers[category] ?? getClosetProducts;
 	return fetcher();
 };
 
