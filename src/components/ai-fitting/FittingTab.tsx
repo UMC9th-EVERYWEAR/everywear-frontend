@@ -2,6 +2,7 @@ import type { FittingState } from '@/src/types/ai-fitting/status';
 import FittingFrame from './FittingFrame';
 import type { FittingData } from '@/src/types/ai-fitting/data';
 import ButtonLayout from './ButtonLayout';
+import { fileDownload } from '@/src/utils/fileDownload';
 
 interface FittingTabProps {
     state: FittingState;
@@ -19,7 +20,7 @@ const FittingTab = ({ state, handleStartFitting, handleRestartFitting }: Fitting
 	// TODO : 다운로드 핸들러 구현
 	const handleDownload = () => {
 		if (state.status === 'success' && state.resultUrl) {
-			window.open(state.resultUrl, '_blank');
+			fileDownload(state.resultUrl);
 		}
 	};
 
