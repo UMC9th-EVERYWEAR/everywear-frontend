@@ -12,42 +12,44 @@ interface ItemBrowseSectionProps {
 }
 const VIRTUALIZE_THRESHOLD = 50;
 
-const ItemBrowseSection = ({ data, isCloset = false } : ItemBrowseSectionProps) => {
-	const shouldVirtualize = data.length >= VIRTUALIZE_THRESHOLD;
-
-	const GridList = forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
+const GridList = forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
 		 
-		// eslint-disable-next-line react/prop-types
-		({ style, children, ...props }, ref) => (
-			<div
-				ref={ref}
-				{...props}
-				style={{
-					display: 'flex',
-					flexWrap: 'wrap',
-					...style,
-				}}
-			>
-				{children}
-			</div>
-		),
-	);
-	GridList.displayName = 'GridList';
-
-
-	const GridItem = ({ style, children, ...props }: HTMLAttributes<HTMLDivElement>) => (
+	// eslint-disable-next-line react/prop-types
+	({ style, children, ...props }, ref) => (
 		<div
+			ref={ref}
 			{...props}
 			style={{
-				width: '33.3333%',
-				padding: '8px',
-				boxSizing: 'border-box',
+				display: 'flex',
+				flexWrap: 'wrap',
 				...style,
 			}}
 		>
 			{children}
 		</div>
-	);
+	),
+);
+GridList.displayName = 'GridList';
+
+
+const GridItem = ({ style, children, ...props }: HTMLAttributes<HTMLDivElement>) => (
+	<div
+		{...props}
+		style={{
+			width: '33.3333%',
+			padding: '8px',
+			boxSizing: 'border-box',
+			...style,
+		}}
+	>
+		{children}
+	</div>
+);
+
+const ItemBrowseSection = ({ data, isCloset = false } : ItemBrowseSectionProps) => {
+	const shouldVirtualize = data.length >= VIRTUALIZE_THRESHOLD;
+
+
 
 	if(data.length === 0 ) {
 		return(
