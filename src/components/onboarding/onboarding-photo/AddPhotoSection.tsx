@@ -6,6 +6,7 @@ import { usePhotoInput } from '@/src/hooks/domain/onboarding/usePhotoInput';
 import { useState } from 'react';
 import VerifyingSection from './VerifyingSection';
 import { resizeImage } from '@/src/utils/resizeImage';
+import usePreventRefresh from '@/src/hooks/domain/products/usePreventRefresh';
 
 
 interface AddPhotoSectionProps {
@@ -22,14 +23,15 @@ const AddPhotoSection = ({ setShowGuide } : AddPhotoSectionProps) => {
 		videoRef,
 		canvasRef,
 		fileInputRef,
-		setFile,
+		setPhoto,
 		openCamera,
 		openFilePicker,
 		handleChangeFile,
-		capturePhoto,
+		captureFromCamera,
 	} = usePhotoInput();
-	const [isVerify, setIsVerify] = useState(false)
-	// const [resizedPreviewUrl, setResizedPreviewUrl] = useState<string | null>(null);
+	const [isVerify, setIsVerify] = useState(true)
+
+	usePreventRefresh(isVerify);
 
 	const handleClick = (type: PhotoBtnType) => {
 		if (type === 'CAMERA') openCamera();
@@ -43,17 +45,12 @@ const AddPhotoSection = ({ setShowGuide } : AddPhotoSectionProps) => {
 		console.log('원본 파일 용량(MB):', (file.size / 1024 / 1024).toFixed(2));
 		const resizedFile = await resizeImage(file);
 
-		setFile(resizedFile);
+		setPhoto(resizedFile, previewUrl ?? '');
 		setIsVerify(true);
 		console.log(
 			'리사이징 파일 용량(MB):',
 			(resizedFile.size / 1024 / 1024).toFixed(2),
 		);
-
-
-		// 🔽 테스트용 preview URL 생성
-		// const resizedUrl = URL.createObjectURL(resizingFile);
-		// setResizedPreviewUrl(resizedUrl);
 	};
 
 
@@ -133,7 +130,7 @@ const AddPhotoSection = ({ setShowGuide } : AddPhotoSectionProps) => {
 				/>
 				{/*btn2 */}
 				<button
-					onClick={capturePhoto}
+					onClick={captureFromCamera}
 					className='absolute bottom-20 left-1/2 -translate-x-1/2 bg-white rounded-full w-15 h-15 flex justify-center items-center cursor-pointer'
 				>
 					<div

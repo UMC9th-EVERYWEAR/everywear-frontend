@@ -6,11 +6,14 @@ export const useCameraCapture = () => {
 
 	const videoRef = useRef<HTMLVideoElement | null>(null);
 	const canvasRef = useRef<HTMLCanvasElement | null>(null);
+	  const streamRef = useRef<MediaStream | null>(null);
+
 
 	const openCamera = async () => {
 		if (!videoRef.current) return;
 
 		const stream = await getWebcamStream();
+		streamRef.current = stream;
 		videoRef.current.srcObject = stream;
 		setIsCamera(true);
 	};
@@ -27,8 +30,12 @@ export const useCameraCapture = () => {
 		canvas.height = video.videoHeight;
 		ctx.drawImage(video, 0, 0);
 
+		// 카메라 종룐
+		streamRef.current?.getTracks().forEach((t) => t.stop());
+		streamRef.current = null;
+
 		setIsCamera(false);
-		return canvas.toDataURL('image/png');
+		return canvas.toDataURL('image/jpeg');
 	};
 
 	return {
