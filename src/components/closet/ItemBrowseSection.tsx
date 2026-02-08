@@ -80,7 +80,7 @@ const ItemBrowseSection = ({ data, isCloset = false } : ItemBrowseSectionProps) 
 						data={data}
 						style={{ height: '80vh' }}
 						initialItemCount={8}
-						overscan={2000}
+						overscan={500}
 						// useWindowScroll
 						components={{
 							List: GridList,
