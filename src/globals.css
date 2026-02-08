@@ -1,7 +1,6 @@
 @import "tailwindcss";
 
 
-
 @layer base {
   :root {
     --font-pretendard: "Pretendard";
