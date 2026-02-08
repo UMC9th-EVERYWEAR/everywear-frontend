@@ -129,7 +129,7 @@ axiosInstance.interceptors.response.use(
 
 		if ( originalRequest._retry) {
 			if (currentPath !== PATH.LANDING) {
-				// window.location.href = PATH.LOGIN.ROOT;
+				window.location.href = PATH.LOGIN.ROOT;
 			}			return Promise.reject(error);
 		}
 
@@ -137,7 +137,7 @@ axiosInstance.interceptors.response.use(
 			accessTokenStorage.removeItem();
 			if (currentPath !== PATH.LANDING) {
 
-				// window.location.href = PATH.LOGIN.ROOT;
+				window.location.href = PATH.LOGIN.ROOT;
 			}
 			return Promise.reject(error);
 		}
@@ -177,7 +177,7 @@ axiosInstance.interceptors.response.use(
 			accessTokenStorage.removeItem();
 			if (currentPath !== PATH.LANDING) {
 				
-				// window.location.href = PATH.LOGIN.ROOT;
+				window.location.href = PATH.LOGIN.ROOT;
 			}		
 			return Promise.reject(refreshError);
 		}
