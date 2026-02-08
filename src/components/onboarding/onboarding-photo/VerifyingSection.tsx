@@ -1,4 +1,3 @@
-// import { LoadingSpinner } from '../../ai-fitting/LoadingSpinner';
 import React, { useMemo } from 'react';
 import FittingResultPreview, { type FittingStatus } from './FittingResultPreview';
 import FittingProgressBox from './FittingProgressBox';
@@ -32,9 +31,7 @@ const VerifyingSection = ({ previewUrl, resizingPhoto, setIsVerify } : Verifying
 	const navigate = useNavigate();
 
 
-	const { mutateAsync, isPending } = useVerifyAndSaveProfileImage();
-
-
+	const { mutateAsync } = useVerifyAndSaveProfileImage();
 
 	const [phase, setPhase] = useState<VerifyPhase>('VERIFYING');
 	const [errorType, setErrorType] = useState<VerifyErrorType>(null);
@@ -67,8 +64,9 @@ const VerifyingSection = ({ previewUrl, resizingPhoto, setIsVerify } : Verifying
 	useEffect(() => {
 		if (phase !== 'VERIFYING') return;
 
-		const t1 = window.setTimeout(() => setStepIndex(1), 8000);
-		const t2 = window.setTimeout(() => setStepIndex(2), 11000);
+		const t1 = window.setTimeout(() => setStepIndex(1), 10000);
+		const t2 = window.setTimeout(() => setStepIndex(2), 12000);
+
 
 		return () => {
 			clearTimeout(t1);
@@ -94,17 +92,19 @@ const VerifyingSection = ({ previewUrl, resizingPhoto, setIsVerify } : Verifying
 
 		return [
 			stepIndex === null ? 'LOADING' : 'SUCCESS',
-			stepIndex !== null && stepIndex >= 1 ? 'SUCCESS' : 'WAIT',
+			stepIndex === 1
+				? 'LOADING'
+				: stepIndex !== null && stepIndex >= 2
+					? 'SUCCESS'
+					: 'WAIT',
 			stepIndex !== null && stepIndex >= 2 ? 'LOADING' : 'WAIT',
 		];
 	}, [phase, stepIndex]);
 
 
-	if(!previewUrl || !resizingPhoto)
-		return(
-			<>사진이없어요</>
-		)
-
+	// if(!previewUrl || !resizingPhoto){
+	// 	setIsVerify(false)
+	// }
 
 	return (
 		<div className="min-h-screen flex flex-col items-center py-4 px-2.5 text-center">
@@ -130,7 +130,6 @@ const VerifyingSection = ({ previewUrl, resizingPhoto, setIsVerify } : Verifying
 							onClick={()=> navigate(PATH.HOME)}
 						>이 사진으로 피팅하기</Button>
 						<Button
-							disabled={isPending}
 							size='lg'
 							variant='outlined'
 							onClick={()=> setIsVerify(false)}
