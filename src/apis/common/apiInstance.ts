@@ -133,7 +133,6 @@ axiosInstance.interceptors.response.use(
 			}			return Promise.reject(error);
 		}
 
-
 		if (originalRequest.url?.includes('/api/auth/refresh')) {
 			accessTokenStorage.removeItem();
 			if (currentPath !== PATH.LANDING) {
