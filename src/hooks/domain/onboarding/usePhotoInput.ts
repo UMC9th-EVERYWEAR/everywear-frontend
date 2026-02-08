@@ -1,68 +1,62 @@
-import React from 'react';
-import { useRef, useState  } from 'react';
-import { getWebcamStream } from '@/src/utils/getWebcam';
+import { useCameraCapture } from './useCameraCapture';
+import { useImageFileInput } from './useImageFileInput';
 
 export const usePhotoInput = () => {
-	const [file, setFile] = useState<File | null>(null);
-	const [previewUrl, setPreviewUrl] = useState<string | null>(null);
-	const [isCamera, setIsCamera] = useState(false);
+	const image = useImageFileInput();
+	const camera = useCameraCapture();
 
-	const videoRef = useRef<HTMLVideoElement | null>(null);
-	const canvasRef = useRef<HTMLCanvasElement | null>(null);
-	const fileInputRef = useRef<HTMLInputElement | null>(null);
-
-	/* ---------- gallery ---------- */
-	const openFilePicker = () => {
-		fileInputRef.current?.click();
+	const setPhoto = (file: File | null, previewUrl?: string) => {
+		image.setFile(file);
+		image.setPreviewUrl(previewUrl ?? null);
 	};
 
-	const handleChangeFile = (e: React.ChangeEvent<HTMLInputElement>) => {
-		const file = e.target.files?.[0];
-		if (!file) return;
-		
-		setFile(file);
 
-		const previewUrl = URL.createObjectURL(file);
-		setPreviewUrl(previewUrl);
-		e.target.value = '';
+	const dataUrlToFile = (
+		dataUrl: string,
+		fileName = 'camera.jpg',
+	): File => {
+		const arr = dataUrl.split(',');
+		const mime = arr[0].match(/:(.*?);/)?.[1] ?? 'image/jpeg';
+		const bstr = atob(arr[1]);
+		let n = bstr.length;
+		const u8arr = new Uint8Array(n);
+
+		while (n--) {
+			u8arr[n] = bstr.charCodeAt(n);
+		}
+
+		return new File([u8arr], fileName, { type: mime });
 	};
 
-	/* ---------- camera ---------- */
-	const openCamera = async () => {
-		if (!videoRef.current) return;
+	const captureFromCamera = () => {
+		const dataUrl = camera.capturePhoto();
+		if (!dataUrl) return;
 
-		const stream = await getWebcamStream();
-		videoRef.current.srcObject = stream;
-		setIsCamera(true);
-	};
+		 const file = dataUrlToFile(
+			dataUrl,
+      `camera_${Date.now()}.jpg`,
+		);
 
-	const capturePhoto = () => {
-		if (!videoRef.current || !canvasRef.current) return;
-
-		const canvas = canvasRef.current;
-		const video = videoRef.current;
-		const ctx = canvas.getContext('2d');
-		if (!ctx) return;
-
-		canvas.width = video.videoWidth;
-		canvas.height = video.videoHeight;
-		ctx.drawImage(video, 0, 0);
-
-		setPreviewUrl(canvas.toDataURL('image/png'));
-		setIsCamera(false);
+		setPhoto(file, dataUrl)
 	};
 
 	return {
-		file,
-		previewUrl,
-		isCamera,
-		videoRef,
-		canvasRef,
-		fileInputRef,
-		setFile,
-		openCamera,
-		openFilePicker,
-		handleChangeFile,
-		capturePhoto,
+		file: image.file,
+		previewUrl: image.previewUrl,
+
+		setPhoto,
+
+		// file input
+		fileInputRef: image.fileInputRef,
+		openFilePicker: image.openFilePicker,
+		handleChangeFile: image.handleChangeFile,
+		reset: image.reset,
+
+		// camera
+		isCamera: camera.isCamera,
+		videoRef: camera.videoRef,
+		canvasRef: camera.canvasRef,
+		openCamera: camera.openCamera,
+		captureFromCamera,
 	};
 };

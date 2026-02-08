@@ -28,7 +28,7 @@ export const QUERY_KEYS = {
 		LIST: ['product', 'list'] as const,
 		CATEGORY: (category: CategoryQueryKey) => ['product', 'category', category] as const,
 		LIKE: ['product', 'like'] as const,
-	},
+	}, 	
 
 	// 리뷰 및 크롤링 관련
 	REVIEW: {

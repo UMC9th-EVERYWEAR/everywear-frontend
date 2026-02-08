@@ -1,23 +1,32 @@
-import type { PhotoItem } from '@/src/types/setting/setting-photo';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination } from 'swiper/modules';
-import React from 'react';
+import React, { type RefObject } from 'react';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import { cn } from '@/src/utils/cn';
 import {  useEffect, useRef } from 'react';
 import { SETTING_IMAGES } from '@/src/constants/images';
 import type { Swiper as SwiperClass } from 'swiper/types';
+import type { UserImgQuery } from '@/src/apis/generated';
+import type { PendingUpload } from '@/src/pages/setting/setting-photo-page';
+import { resizeImage } from '@/src/utils/resizeImage';
+import { useVerifyAndSaveProfileImage } from '@/src/hooks/service/user/useVerifyAndSaveProfileImage';
+
 interface BannerProps {
-	photoItems?: PhotoItem[];
-	setPhotoItems?: (items: PhotoItem[]) => void;
+	photoItems?: UserImgQuery[];
 	activeRealIndex: number;
+  swiperRef: RefObject<SwiperClass | null>;
 	setActiveRealIndex: (index: number) => void;
 	setIsAddCardActive?: (isActive: boolean) => void;
+	setPendingUploads: React.Dispatch<React.SetStateAction<PendingUpload[]>>;
+	handleUploadStartNotice: () => void;
+	handleError: () => void;
+	
 }
-const Banner = ({ activeRealIndex, photoItems, setPhotoItems, setActiveRealIndex, setIsAddCardActive }: BannerProps) => {
+const Banner = ({ activeRealIndex, photoItems, swiperRef, setActiveRealIndex, setIsAddCardActive, setPendingUploads, handleUploadStartNotice, handleError }: BannerProps) => {
 	const fileInputRef = useRef<HTMLInputElement | null>(null);
 	const pendingIndexRef = useRef<number | null>(null);
+	const { mutateAsync: uploadPhoto } = useVerifyAndSaveProfileImage();
 
 
 	// hasImage: null/undefined/공백 처리까지 고려한 이미지 존재 여부 확인 함수 
@@ -37,24 +46,32 @@ const Banner = ({ activeRealIndex, photoItems, setPhotoItems, setActiveRealIndex
 		fileInputRef.current?.click();
 	};
 
-	  const handleChangeFile = (e: React.ChangeEvent<HTMLInputElement>) => {
+	  const handleChangeFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
 		const file = e.target.files?.[0];
 		    const index = pendingIndexRef.current;
 
-		if (!file || index === null || !photoItems || !setPhotoItems) return;
+		if (!file || index === null || !photoItems || !setPendingUploads) return;
+		handleUploadStartNotice();
 
 		//  미리보기(낙관적 UI)
 		const previewUrl = URL.createObjectURL(file);
+		const tempId = -(Date.now());
 
-		const next = [...photoItems];
-		next[index] = {
-			...next[index],
-			imageUrl: previewUrl, // 일단 UI 반영
-			isDefault: false,
-		};
-
-		setPhotoItems(next);
-
+		setPendingUploads((prev) => [
+			...prev,
+			{
+				tempId,
+				previewUrl,
+			},
+		]);
+		const resizedFile = await resizeImage(file);
+		uploadPhoto(resizedFile,
+			{
+				onSettled: () => setPendingUploads([]),
+				onError: handleError,
+			},
+		)
+		
 		// 같은 파일 다시 선택 가능하도록 초기화
 		e.target.value = '';
 		    pendingIndexRef.current = null;
@@ -63,7 +80,7 @@ const Banner = ({ activeRealIndex, photoItems, setPhotoItems, setActiveRealIndex
 
 
 	// slide 안에 들어갈 컨텐츠 결정 함수 (추천 네이밍)
-	const renderPhotoSlideContent = (item: PhotoItem, idx: number) => {
+	const renderPhotoSlideContent = (item: UserImgQuery, idx: number) => {
 		// 이미지 없으면 => 추가 카드
 		if (!item.imageUrl) {
 			return (
@@ -90,11 +107,9 @@ const Banner = ({ activeRealIndex, photoItems, setPhotoItems, setActiveRealIndex
 					src={item.imageUrl}
 					alt="card"
 					className={cn('w-full h-full object-cover rounded-lg overflow-hidden',
-						item.isDefault ? 'border-4 border-primary-600' : '',
+						item.representative ? 'border-4 border-primary-600' : '',
 					)}
 				/>
-
-
 			</div>
 		);
 	};
@@ -123,7 +138,12 @@ const Banner = ({ activeRealIndex, photoItems, setPhotoItems, setActiveRealIndex
 				}}
 				className="photo-swiper pb-6 h-106.75"
 				onSwiper={(swiper: SwiperClass) => {
+		
 					setActiveRealIndex(swiper.realIndex);
+					if(swiperRef){
+						swiperRef.current = swiper
+
+					}
 				}}
 				  onSlideChange={(swiper: SwiperClass) => {
 					setActiveRealIndex(swiper.realIndex)}}

@@ -9,9 +9,10 @@ interface CalloutProps {
 
 const Callout = ({ children, height, isLine, marginBottom }: CalloutProps) => (
 	<div
-		className={cn('flex items-center gap-5.5',
-		)
-		}
+		className={cn(
+			'flex items-center gap-5.5',
+			// 'animate-view-in', 
+		)}
 		style={{ height , marginBottom }}
 
 	>

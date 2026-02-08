@@ -61,7 +61,6 @@ const getStepIcon = (
 };
 
 const getIconClass = (
-	// step: typeof steps[number],
 	status: StepStatus,
 ) => {
 	if (status === 'LOADING') return 'animate-infinite-fade opacity-70';

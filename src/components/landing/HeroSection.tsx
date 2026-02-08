@@ -47,7 +47,7 @@ const HeroSection = ({ onNext }: HeroSectionProps) => {
 					!showArrow && 'animation-paused',
 				)}
 			>
-				화면을 클릭하세요!
+				{/* 화면을 클릭하세요! */}
 			</div>
 
 		</button>
