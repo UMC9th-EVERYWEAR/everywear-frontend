@@ -1,22 +1,13 @@
+import type { ListDTO } from '@/src/apis/generated';
 import { AI_FITTING_IMAGES } from '@/src/constants/images';
 
 interface FittingItemInfoProps {
-    data: ItemData
-    isHearted: boolean;
+    data: ListDTO | null | undefined
     handleHeart: () => void;
     handleBuy: () => void;
 }
 
-export interface ItemData {
-    company: string,
-    rating: number,
-    title: string,
-    price: number,
-    imgUrl: string,
-    buyUrl: string,
-}
-
-const FittingItemInfo = ({ data, isHearted, handleHeart, handleBuy }: FittingItemInfoProps) => {
+const FittingItemInfo = ({ data, handleHeart, handleBuy }: FittingItemInfoProps) => {
 	return (
 		<div className='border rounded-xl border-neutral-200 border-solid px-2.5 py-1.5 flex mb-2.5 gap-4'>
 
@@ -26,7 +17,7 @@ const FittingItemInfo = ({ data, isHearted, handleHeart, handleBuy }: FittingIte
 				<img
 					// object-cover: 이미지 비율을 유지하면서 영역을 꽉 채움 (넘치는 부분은 잘림)
 					className='border-none rounded-[10px] w-full h-22 object-cover'
-					src={data.imgUrl}
+					src={data?.product_img_url}
 					alt='피팅상품이미지'
 				/>
 			</div>
@@ -37,20 +28,20 @@ const FittingItemInfo = ({ data, isHearted, handleHeart, handleBuy }: FittingIte
 				<div className='flex flex-col'> 
 					{/* 쇼핑몰 정보 & 별점 */}
 					<div className='flex justify-between items-center'>
-						<p className='text-fitting-company text-regular-12'>{data.company}</p>
+						<p className='text-fitting-company text-regular-12'>{data?.shoppingmale_name}</p>
 						<div className='flex items-center gap-0.5'>
 							<img
 								className='h-4 w-4'
 								src={AI_FITTING_IMAGES.FITTING_CARD_STAR}
 								alt='피팅 상품 별점'
 							/>
-							<p className='text-neutral-900 text-regular-12'>{data.rating}</p>
+							<p className='text-neutral-900 text-regular-12'>{data?.star_point}</p>
 						</div>
 					</div>
 					{/* 피팅 상품 이름 */}
-					<p className='text-neutral-900 text-regular-14 text-left line-clamp-1'>{data.title}</p>
+					<p className='text-neutral-900 text-regular-14 text-left line-clamp-1'>{data?.product_name}</p>
 					{/* 피팅 상품 가격 */}
-					<p className='text-neutral-900 text-regular-14 text-left'>{data.price.toLocaleString()}원</p>
+					<p className='text-neutral-900 text-regular-14 text-left'>{data?.price}</p>
 				</div>
 
 				{/* 하단 버튼 그룹 */}
@@ -67,7 +58,7 @@ const FittingItemInfo = ({ data, isHearted, handleHeart, handleBuy }: FittingIte
 							onClick={handleHeart}
 							className='cursor-pointer p-1'
 						>
-							{isHearted ? (
+							{data?.is_liked ? (
 								<img
 									src={AI_FITTING_IMAGES.FITTING_CARD_HEART_FILL}
 									alt='내 옷장 저장'
