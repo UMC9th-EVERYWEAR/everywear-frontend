@@ -2,12 +2,17 @@ import { requestFitting } from '@/src/apis/domain';
 import type { FittingRequest } from '@/src/apis/generated';
 import { QUERY_KEYS } from '@/src/constants/query-key';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import type { ToastInput } from '../../domain/ai-fitting/UseToast';
+
+interface usePostFittingProps {
+    createToast : (toast : ToastInput) => void;
+}
 
 interface FittingVariable {
     payload : FittingRequest;
 }
 
-function usePostFitting() {
+function usePostFitting({ createToast } : usePostFittingProps) {
 	const queryClient = useQueryClient();
 	return useMutation({
 		mutationFn: ({ payload } : FittingVariable) => requestFitting(payload),
@@ -15,6 +20,7 @@ function usePostFitting() {
 			queryClient.invalidateQueries({
 				queryKey: QUERY_KEYS.FITTING.SESSION,
 			});
+			createToast({ message: '가상 피팅이 완료되었습니다.' });
 			console.log('피팅 결과 : ', data);
 		},
 
