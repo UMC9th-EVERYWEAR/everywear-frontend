@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { useNavigate } from 'react-router';
+import { useNavigate, useParams } from 'react-router';
 import TabBar from '@/src/components/ai-fitting/TabBar';
 import FittingItemInfo, { type ItemData } from '@/src/components/ai-fitting/FittingItemInfo';
 import FittingTab from '@/src/components/ai-fitting/FittingTab';
@@ -11,6 +11,7 @@ import ToastContainer from '@/src/components/common/ToastContainer';
 import useToast from '@/src/hooks/domain/ai-fitting/UseToast';
 import type { ModalState } from '@/src/types/ai-fitting/modal';
 import { Modal } from '@/src/components/common/Modal';
+import { useProducts } from '@/src/hooks/service/product/useProducts';
 
 export type TabType = 'fitting' | 'review';
 
@@ -36,6 +37,12 @@ const AiFittingPage = () => {
 	const isAnalyzing = fittingState.status === 'loading' || reviewState.status === 'loading';
 	const isAnalyzingRef = useRef(false);
 
+	// 전체 상품 조회 후 url에서 id 가져와 특정 상품 데이터 필터링
+	// 단일 상품 조회 api 생성 시 대체 예정
+	const { id } = useParams();
+	const { data, isSuccess } = useProducts();
+	const detailProduct = isSuccess && data ? data.find((p) => p.product_id === Number(id)) : null;
+	console.log('detailProduct : ', detailProduct);
 	useEffect(() => {
 		isAnalyzingRef.current = isAnalyzing;
 		// 분석이 시작되는 순간 히스토리를 하나 쌓아서 뒤로가기를 가로챕니다. -> 즉 1이 쌓이고 이때부턴 뒤로가기 되려면 -2가 되야함.

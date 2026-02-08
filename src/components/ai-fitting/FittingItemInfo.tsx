@@ -25,7 +25,7 @@ const FittingItemInfo = ({ data, isHearted, handleHeart, handleBuy }: FittingIte
 			<div className='flex shrink-0 w- py-0.75'>
 				<img
 					// object-cover: 이미지 비율을 유지하면서 영역을 꽉 채움 (넘치는 부분은 잘림)
-					className='border-none rounded-[10px] w-full h-full object-cover'
+					className='border-none rounded-[10px] w-full h-22 object-cover'
 					src={data.imgUrl}
 					alt='피팅상품이미지'
 				/>
