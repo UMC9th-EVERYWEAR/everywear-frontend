@@ -1,4 +1,5 @@
 import { useRef, useState } from 'react';
+import 'webrtc-adapter';
 import { getWebcamStream } from '@/src/utils/getWebcam';
 
 export const useCameraCapture = () => {
@@ -9,11 +10,25 @@ export const useCameraCapture = () => {
 
 	const openCamera = async () => {
 		if (!videoRef.current) return;
+		try { 
+			const stream = await getWebcamStream();
+			videoRef.current.srcObject = stream;
+			setIsCamera(true);
+		} catch (e){
+			console.error('Camera access failed', e);
 
-		const stream = await getWebcamStream();
-		videoRef.current.srcObject = stream;
-		setIsCamera(true);
+		}
 	};
+
+	const stopCamera = () => {
+		const stream = videoRef.current?.srcObject as MediaStream | null;
+		stream?.getTracks().forEach(track => track.stop());
+
+		if (videoRef.current) {
+			videoRef.current.srcObject = null;
+		}
+	};
+
 
 	const capturePhoto = (): string | null => {
 		if (!videoRef.current || !canvasRef.current) return null;
@@ -27,6 +42,7 @@ export const useCameraCapture = () => {
 		canvas.height = video.videoHeight;
 		ctx.drawImage(video, 0, 0);
 
+		stopCamera();
 		setIsCamera(false);
 		return canvas.toDataURL('image/png');
 	};

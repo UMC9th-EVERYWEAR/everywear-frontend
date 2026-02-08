@@ -210,14 +210,25 @@
 }
 
 .bg-phone-gradient {
+  background: radial-gradient(
+    circle farthest-corner,
+    var(--color-landing-shadow)  10%,
+    #FFFFFF 55%
+  );
+
   background:
   radial-gradient(
       farthest-corner circle in oklab,
-      #BDC3FB 10%, #FFFFFF 55%
+    var(--color-landing-shadow) 10%, #FFFFFF 55%
     )
 }
 
 .bg-phone-two-gradient {
+    background: linear-gradient(
+    #FFFFFF 0%,
+    var(--color-landing-back) 67%
+  );
+
   background: linear-gradient(
     in oklab,
     #FFFFFF 0%, var(--color-landing-back) 67%
@@ -565,10 +576,14 @@
 
 .animate-view-in {
   animation-name: view-in ;
-  animation-duration: 2s; /* 중요: 0s면 안 보임 */
+  animation-duration: 2s; 
   animation-timing-function: linear;
   animation-fill-mode: both;
+}
 
-  animation-timeline: view();
-  animation-range: entry 0% entry 80%;
+@supports (animation-timeline: view()) {
+  .animate-view-in {
+    animation-timeline: view();
+    animation-range: entry 0% entry 80%;
+  }
 }
