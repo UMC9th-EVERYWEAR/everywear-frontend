@@ -58,7 +58,7 @@ const SettingPhotoView = ({
 
 	const { toasts, createToast, deleteToast } = useToast();
 
-	const handleStartFitting = () => {
+	const handleDeleteRepresentativeAttempt = () => {
 		createToast({ message: '대표 사진은 삭제가 불가합니다.' });
 	};
 
@@ -103,7 +103,7 @@ const SettingPhotoView = ({
 
 			<div className="mx-4 flex justify-between w-full max-w-[343px]">
 				<button
-					onClick={representativeId === activeImageId ? handleStartFitting: onOpenDeleteModal}
+					onClick={representativeId === activeImageId ? handleDeleteRepresentativeAttempt: onOpenDeleteModal}
 					className={cn(
 						'text-primary-600 border w-20 rounded-full h-11',
 						isAddCardActive && 'text-neutral-400 pointer-events-none',
