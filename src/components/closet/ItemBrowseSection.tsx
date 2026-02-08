@@ -4,11 +4,10 @@ import type { ListDTO } from '@/src/apis/generated';
 
 interface ItemBrowseSectionProps {
     data : ListDTO[],
-		isCloset?: boolean
+	isCloset?: boolean
 }
 
 const ItemBrowseSection = ({ data, isCloset = false } : ItemBrowseSectionProps) => {
-
 	
 	return (
 		<>
@@ -39,6 +38,7 @@ const ItemBrowseSection = ({ data, isCloset = false } : ItemBrowseSectionProps) 
 							rating={product.star_point ?? 0}
 							imageUrl={product.product_img_url ?? ''}
 							isCloset={isCloset}
+							productUrl={product.product_url ?? ''}
 						/>
 					))}
 				</div>}
