@@ -7,6 +7,7 @@ import { useState } from 'react';
 import VerifyingSection from './VerifyingSection';
 import { resizeImage } from '@/src/utils/resizeImage';
 import usePreventRefresh from '@/src/hooks/domain/products/usePreventRefresh';
+import { ENV_CONFIG } from '@/src/constants/config';
 
 
 interface AddPhotoSectionProps {
@@ -42,24 +43,31 @@ const AddPhotoSection = ({ setShowGuide } : AddPhotoSectionProps) => {
 
 	const handleConfirm = async () => {
 		if (!file) return;
-		console.log('원본 파일 용량(MB):', (file.size / 1024 / 1024).toFixed(2));
 		const resizedFile = await resizeImage(file);
 		setResizedFile(resizedFile);
 		setPhoto(resizedFile, previewUrl ?? '');
 		setIsVerify(true);
-		console.log(
-			'리사이징 파일 용량(MB):',
-			(resizedFile.size / 1024 / 1024).toFixed(2),
-		);
+		if(ENV_CONFIG.isDev){
+			console.log('원본 파일 용량(MB):', (file.size / 1024 / 1024).toFixed(2));
+			console.log(
+				'리사이징 파일 용량(MB):',
+				(resizedFile.size / 1024 / 1024).toFixed(2),
+			);
+		}
 	};
 
 
+	if(isVerify && resizedFile) 
+		return(
+			 <VerifyingSection
+				previewUrl={previewUrl ?? ''}
+				resizingPhoto={resizedFile} 
+				setIsVerify={setIsVerify}
+			 />
+		)
+
 	return(
-		<>
-			{
-				!isVerify &&
-		(<>
-					
+		<>		
 			{
 				!isCamera && 
 				<div className="px-5 p-4 flex justify-center flex-col items-center">
@@ -116,7 +124,6 @@ const AddPhotoSection = ({ setShowGuide } : AddPhotoSectionProps) => {
 					isCamera ? 'min-h-screen h-full' : 'invisible h-0',
 				)}
 			>
-				{ }
 				<video
 					ref={videoRef}
 					autoPlay
@@ -141,16 +148,5 @@ const AddPhotoSection = ({ setShowGuide } : AddPhotoSectionProps) => {
 				/>
 			</div>
 		</> ) 
-			}
-			{
-				isVerify && <VerifyingSection
-					previewUrl={previewUrl ?? ''}
-					resizingPhoto={resizedFile} 
-					setIsVerify={setIsVerify}
-				            />
-			}
-
-		</>
-	)
 }
 export default AddPhotoSection
