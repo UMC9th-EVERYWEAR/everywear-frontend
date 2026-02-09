@@ -6,7 +6,7 @@ import { LANDING_IMAGES } from '@/src/constants/images'
 const IntroAIFittingSection = () => {
 	return(
 		<div
-			className='flex flex-col items-center justify-center w-full pt-10 gap-10'
+			className='flex flex-col items-center justify-center w-full gap-10'
 		>
 			<SectionTitle
 				sectionTitle='AI 가상 피팅'
@@ -19,7 +19,7 @@ const IntroAIFittingSection = () => {
 					<img
 						src={LANDING_IMAGES.INTRO_2}
 						alt="intro2"
-						className="relative object-cover z-20"
+						className="w-35 relative object-cover z-20"
 					/>			
 				</div>
 

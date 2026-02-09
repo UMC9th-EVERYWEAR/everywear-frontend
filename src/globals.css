@@ -494,6 +494,21 @@
   }
 
 
+@keyframes header-out {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-12px);
+  }
+}
+
+.animate-header-out {
+  animation: header-out 0.5s ease-out forwards;
+}
+
 
   .animate-frame-in {
     animation: frame-in 1.5s forwards;
@@ -569,4 +584,25 @@
 
 .animate-view-out {
   animation: fade-out-up 3s ease;
+}
+
+
+
+@keyframes view-in {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+.animate-view-in {
+  animation-name: view-in ;
+  animation-duration: 1s; /* 중요: 0s면 안 보임 */
+  animation-timing-function: linear;
+  animation-fill-mode: both;
+
+  animation-timeline: view();
+  animation-range: entry 90% exit 70%;
 }

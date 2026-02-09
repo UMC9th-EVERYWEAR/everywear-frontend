@@ -12,8 +12,6 @@ import { useNavigate } from 'react-router'
 
 const LadingPage = () => {
 	const introRef = useRef<HTMLDivElement>(null)
-	// const howRef = useRef<HTMLDivElement>(null)
-	// const [scrollEnabled, setScrollEnabled] = useState(false)
 	const navigate = useNavigate();
 	const { data: me } = useMe();
 
@@ -76,9 +74,7 @@ const LadingPage = () => {
 
 			<HowItWorksSection />
 
-			{/* <ScrollAnimationContainer> */}
 			<LandingFooter />
-			{/* </ScrollAnimationContainer> */}
 
 		</div>
 	)
