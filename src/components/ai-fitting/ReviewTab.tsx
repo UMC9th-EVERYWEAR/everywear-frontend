@@ -3,48 +3,38 @@ import ReviewCard from './ReviewCard';
 import type { ReviewState } from '@/src/types/ai-fitting/status';
 import { LoadingSpinner } from './LoadingSpinner';
 import { cn } from '@/src/utils/cn';
-import { useEffect, useState } from 'react';
+// import { useEffect, useState } from 'react';
 import { AI_FITTING_IMAGES } from '@/src/constants/images';
 
 interface ReviewTabProps {
     state: ReviewState;
-    handleStartReview: () => void;
+	handleStartReviewAi : () => void;
 }
 
-const ReviewTab = ({ state, handleStartReview }: ReviewTabProps) => {
+const ReviewTab = ({ state, handleStartReviewAi }: ReviewTabProps) => {
 	// 15초 타이머 상태
-	const [showResult, setShowResult] = useState(false);
+	// const [showResult, setShowResult] = useState(false);
 
 	// 의존성 배열 문제를 해결하기 위해 상태값 미리 추출
-	const summaryStatus = state.status === 'success' ? state.summary.status : undefined;
+	// const summaryStatus = state.status === 'success' ? state.summary.status : undefined;
 
-	useEffect(() => {
-		let timer: ReturnType<typeof setTimeout>;
+	// useEffect(() => {
+	// 	let timer: ReturnType<typeof setTimeout>;
 
-		if (state.status === 'success' && summaryStatus === 'success') {
-			timer = setTimeout(() => {
-				setShowResult(true);
-			}, 15000);
-		}
+	// 	if (state.status === 'success' && summaryStatus === 'success') {
+	// 		timer = setTimeout(() => {
+	// 			setShowResult(true);
+	// 		}, 15000);
+	// 	}
 
-		return () => {
-			clearTimeout(timer);
-			setShowResult(false);
-		};
-	}, [state.status, summaryStatus]); 
-
+	// 	return () => {
+	// 		clearTimeout(timer);
+	// 		setShowResult(false);
+	// 	};
+	// }, [state.status, summaryStatus]); 
 
 	// 리뷰 요약 로딩 상태 계산
-	const isSummaryLoading = state.status === 'loading' || 
-                             (state.status === 'success' && state.summary.status === 'loading') || 
-                             (state.status === 'success' && state.summary.status === 'success' && !showResult);
-
-	// 리뷰 요약 성공 상태 여부 (boolean)
-	const isSummaryVisible = state.status === 'success' && state.summary.status === 'success' && showResult;
-
-	// 리뷰 데이터 로드 성공 여부
-	const isGlobalSuccess = state.status === 'success'; 
-
+	const isSummaryLoading = state.status === 'loading' || (state.status === 'success' && state.summary.status === 'loading');
 
 	return (
 		<div className='flex flex-col items-center mb-32'>
@@ -66,9 +56,9 @@ const ReviewTab = ({ state, handleStartReview }: ReviewTabProps) => {
 						</div>
 					)}
 
-					{isSummaryVisible && state.status === 'success' && state.summary.status === 'success' && (
+					{state.status === 'success' && state.summary.status === 'success' && (
 						<div className='w-full flex min-h-10 text-regular-14 text-neutral-900'>
-							{state.summary.text}
+							{state.summary.result.summary}
 						</div>
 					)}
 
@@ -86,7 +76,7 @@ const ReviewTab = ({ state, handleStartReview }: ReviewTabProps) => {
 							<div className={cn('flex w-full items-center justify-center')}>
 								<button
 									className='p-2.5 bg-review-rotate rounded-full cursor-pointer shadow-2'
-									onClick={handleStartReview}
+									onClick={handleStartReviewAi}
 								>
 									<img
 										src={AI_FITTING_IMAGES.ROTATE_ICON}
@@ -100,12 +90,12 @@ const ReviewTab = ({ state, handleStartReview }: ReviewTabProps) => {
 
 
 				{/* 주요 리뷰 키워드 */}
-				{isGlobalSuccess && (
+				{state.status === 'success' && state.summary.status === 'success' && (
 					<div className='flex flex-col my-1.5'>
 						<span className='text-primary-600 text-bold-16 flex justify-start mb-1'>
 							주요 리뷰 키워드
 						</span>
-						<ReviewKeywordTag keywordList={state.keywords} />
+						<ReviewKeywordTag keywordList={state.summary.result.keywords} />
 					</div>
 				)}
 
@@ -126,7 +116,7 @@ const ReviewTab = ({ state, handleStartReview }: ReviewTabProps) => {
 						</div>
 					)}
 
-					{isGlobalSuccess && (state.reviews.length > 0 ? (
+					{state.status === 'success' && state.summary.status === 'success' && (state.reviews.length > 0 ? (
 						state.reviews.map((review) => (
 							<ReviewCard
 								key={review.id}

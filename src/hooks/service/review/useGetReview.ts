@@ -6,6 +6,14 @@ function useGetReview(product_id : number) {
 	return useQuery({
 		queryKey: QUERY_KEYS.REVIEW.RECENT(product_id),
 		queryFn :() => getReviews(product_id), 
+		
+		refetchInterval : (query) => {
+			const data = query.state.data;
+
+			if (!data || query.state.status === 'pending') return 5000;
+			else return false;
+		},
+		refetchIntervalInBackground : true,
 	})
 
 }

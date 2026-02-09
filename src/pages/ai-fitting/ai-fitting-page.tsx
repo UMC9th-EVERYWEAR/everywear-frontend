@@ -4,7 +4,7 @@ import TabBar from '@/src/components/ai-fitting/TabBar';
 import FittingItemInfo from '@/src/components/ai-fitting/FittingItemInfo';
 import FittingTab from '@/src/components/ai-fitting/FittingTab';
 import ReviewTab from '@/src/components/ai-fitting/ReviewTab'; 
-import type { FittingState, ReviewState } from '@/src/types/ai-fitting/status';
+import type { FittingState, ReviewState, ReviewSummaryState } from '@/src/types/ai-fitting/status';
 import Toast from '@/src/components/common/Toast';
 import ToastContainer from '@/src/components/common/ToastContainer';
 import useToast from '@/src/hooks/domain/ai-fitting/UseToast';
@@ -13,25 +13,36 @@ import { Modal } from '@/src/components/common/Modal';
 import { useProducts } from '@/src/hooks/service/product/useProducts';
 import useLike from '@/src/hooks/service/fitting/useLike';
 import usePostFitting from '@/src/hooks/service/fitting/usePostFitting';
+import usePostReview from '@/src/hooks/service/review/usePostReveiw';
+import usePostReviewAi from '@/src/hooks/service/review/usePostReviewAi';
+import useGetReview from '@/src/hooks/service/review/useGetReview';
+import useGetReviewAi from '@/src/hooks/service/review/useGetReviewAi';
+import type { ReviewItem } from '@/src/types/ai-fitting/data';
 
 export type TabType = 'fitting' | 'review';
 
 const AiFittingPage = () => {
+	
+	// product_id useParams()로 가져오기
+	const { id } = useParams();
+	const detailProductId = Number(id);
+
+	// ** useState, useQuery, useMutation, 커스텀 훅 선언 **
+	// useState, 커스텀 훅 선언
 	const navigate = useNavigate();
 	const [activeTab, setActiveTab] = useState<TabType>('fitting');
-	const [reviewState, setReviewState] = useState<ReviewState>({ status : 'idle' });
 	const [modal, setModal] = useState<ModalState>({ type : 'none' });
 	const { toasts, createToast, deleteToast } = useToast();
-
-	// 전체 상품 조회 후 url에서 id 가져와 특정 상품 데이터 필터링
-	// 단일 상품 조회 api 생성 시 대체 예정
-	const { id } = useParams();
-	const { data, isSuccess } = useProducts();
-	const detailProduct = isSuccess && data ? data.find((p) => p.product_id === Number(id)) : null;
-
+	
+	// useQuery, useMutation 선언 
 	const { mutate : mutateLike } = useLike({ createToast });
 	const { mutate : mutateFitting,  data : resultFitting, isPending : isFittingLoading, isSuccess : isFittingSuccess, isError : isFittingError } = usePostFitting({ createToast })
-	
+	const { mutate : mutateReview } = usePostReview();
+	const { mutate : mutateReviewAi } = usePostReviewAi();
+	const { data : recentReview, isPending : isReviewLoading, isSuccess : isReviewSuccess, isError : isReviewError } = useGetReview(detailProductId);
+	const { data : aiReview, isPending : isAiReviewLoading, isSuccess : isAiReviewSuccess } = useGetReviewAi(detailProductId);
+	const { data, isLoading } = useProducts();
+
 	// FittingTab 상태
 	const  currentFittingState = useMemo((): FittingState => {
 		if (isFittingLoading) {
@@ -49,9 +60,51 @@ const AiFittingPage = () => {
 		return { status: 'idle' };
 	}, [isFittingLoading, isFittingError, isFittingSuccess, resultFitting])
 
+	const currentReviewState = useMemo((): ReviewState => {
+		if (isReviewLoading) {
+			return { status: 'loading' };
+		}
+
+		if (isReviewError) {
+			return { status: 'error', error: 'SERVER_ERROR' };
+		}
+
+		if (isReviewSuccess && recentReview) {
+			const reviewList: ReviewItem[] = recentReview.reviews || []; 
+
+			let summaryState: ReviewSummaryState;
+
+			if (isAiReviewLoading) {
+				summaryState = { status: 'loading' };
+			} else if (isAiReviewSuccess && aiReview) {
+				summaryState = { 
+					status: 'success', 
+					result : {
+						keywords : aiReview.keywords || [],
+						summary : aiReview.summary || '', 
+					},
+				};
+			} else {
+				summaryState = { status: 'error', error: 'INSUFFICIENT_REVIEWS' };
+			}
+
+			return {
+				status: 'success',
+				reviews: reviewList,
+				summary: summaryState,
+			};
+		}
+
+		// 4. 기본 상태
+		return { status: 'idle' };
+	}, [
+		isReviewLoading, isReviewError, isReviewSuccess, recentReview,
+		isAiReviewLoading, isAiReviewSuccess, aiReview,
+	]);
+
 	// 피팅 중 뒤로가기 방지용 
 	const allowExitRef = useRef(false);
-	const isAnalyzing = isFittingLoading || reviewState.status === 'loading';
+	const isAnalyzing = isFittingLoading || isReviewLoading || isAiReviewLoading;
 	const isAnalyzingRef = useRef(false);
 
 	// useEffect(피팅 중 뒤로가기 방지)
@@ -76,20 +129,43 @@ const AiFittingPage = () => {
 				navigate(-1);
 			}
 		};
-
 		window.addEventListener('popstate', handlePopState);
 		return () => window.removeEventListener('popstate', handlePopState);
 	}, [navigate]);
 
+	useEffect(() => {
+		if (isReviewSuccess && recentReview?.reviews) {
+			const countReviews = recentReview.reviews.length > 0;
+			const needAiGeneration = !aiReview && !isAiReviewLoading;
 
-	// 이벤트 핸들러
+			if (countReviews && needAiGeneration) {
+                
+				mutateReviewAi({
+					productId: detailProductId, 
+				});
+			}
+		}
+	}, [isReviewSuccess, recentReview, aiReview, isAiReviewLoading, detailProductId, mutateReviewAi]);
+
+	// 전체 상품 조회 후 url에서 id 가져와 특정 상품 데이터 필터링
+	// 단일 상품 조회 api 생성 시 대체 예정
+	if (isLoading) {
+		return <div className="flex justify-center p-10">로딩 중...</div>;
+	}
+	const detailProduct = data?.find((p) => p.product_id === detailProductId);
+
+	if (!detailProduct) {
+		return <div className='flex justify-center p-10'>상품 정보를 찾을 수 없습니다.</div>
+	}
+
+	// ** 이벤트 핸들러 **
 	
 	// 좋아요 토글 핸들러
 	const handleHeart = (currentLikedStatus: boolean) => {
 		if (!detailProduct) return;
         
 		mutateLike({ 
-			productId: Number(id), 
+			productId: detailProductId, 
 			isLiked: currentLikedStatus, 
 		});
 	};
@@ -103,13 +179,40 @@ const AiFittingPage = () => {
 
 	// 피팅 시작 핸들러
 	const handleStartFitting = () => {
-		if (!detailProduct) return;
 		createToast({ message: 'AI 피팅을 시작하겠습니다.' });
 
 		mutateFitting({
 			payload : { productId : detailProduct.product_id },
 		})
 	};
+
+	const handleStartReview = () => {
+		if (!detailProduct.product_id) {
+			createToast({ message: '상품 정보를 불러오지 못했습니다.' });
+			return;
+		}
+		mutateReview({
+			payload: { 
+				product_id : detailProduct.product_id, 
+				product_url : detailProduct.product_url ?? '', 
+				shoppingmall_name : detailProduct.shoppingmale_name ?? '', 
+			},
+		})
+	}
+
+	const handleStartReviewAi = () => {
+		if (!detailProduct.product_id) {
+			return;
+		}
+		mutateReviewAi({
+			productId : detailProduct.product_id,
+		})
+	}
+
+	const handleFirstFitting = () => {
+		handleStartFitting();
+		handleStartReview();
+	}
 
 	// 피팅중 뒤로가기 및 경로 초기화 핸들러
 	const handleExitConfirm = () => {
@@ -149,7 +252,7 @@ const AiFittingPage = () => {
 				{activeTab === 'fitting' && (
 					<FittingTab
 						state={currentFittingState} 
-						handleStartFitting={handleStartFitting} 
+						handleStartFitting={handleFirstFitting} 
 						handleRestartFitting={handleStartFitting}
                        
 					/>
@@ -157,8 +260,9 @@ const AiFittingPage = () => {
 
 				{activeTab === 'review' && (
 					<ReviewTab 
-						state={reviewState} 
-						handleStartReview={() => setReviewState({ status: 'loading' })}
+						state={currentReviewState}
+						handleStartReviewAi={handleStartReviewAi}
+
                         
 					/>
 				)}

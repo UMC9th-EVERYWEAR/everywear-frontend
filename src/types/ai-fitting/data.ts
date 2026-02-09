@@ -9,7 +9,6 @@ export interface ReviewImage {
 }
 
 export interface ReviewKeyword {
-  id: number;
   label: string; 
 }
 

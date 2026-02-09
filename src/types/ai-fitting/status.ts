@@ -1,4 +1,5 @@
-import type { FittingData, ReviewItem, ReviewKeyword } from './data';
+import type { AiReviewDTO } from '@/src/apis/generated';
+import type { FittingData, ReviewItem } from './data';
 
 // [1-1] 피팅 에러 원인 (Discriminated Union용)
 export type FittingErrorReason = 
@@ -18,7 +19,7 @@ export type FittingStateStatus = 'idle' | 'loading' | 'success' | 'error';
 // 리뷰 요약 상태
 export type ReviewSummaryState = 
   | { status: 'loading' }                     // 요약 로딩 중 (옵션)
-  | { status: 'success'; text: string }       // 성공 시 요약문
+  | { status: 'success'; result : AiReviewDTO}       // 성공 시 요약문
   | { status: 'error'; error: 'INSUFFICIENT_REVIEWS' }; // 요약만 실패 / INSUFFICIENT_REVIEWS : 리뷰 수가 부족함
 
 
@@ -30,6 +31,5 @@ export type ReviewState =
   | { 
       status: 'success'; 
       reviews: ReviewItem[];        // 리뷰 목록 (무조건 존재)
-      keywords: ReviewKeyword[];    // 키워드 (무조건 존재)
       summary: ReviewSummaryState;  // ★ 요약 상태는 독립적으로 관리
     };
