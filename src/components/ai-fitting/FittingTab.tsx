@@ -1,19 +1,16 @@
 import type { FittingState } from '@/src/types/ai-fitting/status';
 import FittingFrame from './FittingFrame';
-import type { FittingData } from '@/src/types/ai-fitting/data';
 import ButtonLayout from './ButtonLayout';
 import { fileDownload } from '@/src/utils/fileDownload';
 
 interface FittingTabProps {
+	profileImg : string;
     state: FittingState;
     handleStartFitting: () => void; 
 	handleRestartFitting: () => void;
 }
 
-const FittingTab = ({ state, handleStartFitting, handleRestartFitting }: FittingTabProps) => {
-	// 목데이터
-	const imageUrlExample : FittingData = 'https://lh3.googleusercontent.com/d/1XuItc3eisxkLo6ZXqClQs-ZcsbYU0brI';
-
+const FittingTab = ({ profileImg, state, handleStartFitting, handleRestartFitting }: FittingTabProps) => {
 	// 피팅결과 이미지 다운로드
 	const handleDownload = () => {
 		if (state.status === 'success' && state.resultUrl) {
@@ -35,7 +32,7 @@ const FittingTab = ({ state, handleStartFitting, handleRestartFitting }: Fitting
 				{isIdle && (
 					<FittingFrame
 						state={state}
-						imgUrl={imageUrlExample}
+						imgUrl={profileImg}
 						type='BEFORE' 
 					/>
 				)}
@@ -45,7 +42,7 @@ const FittingTab = ({ state, handleStartFitting, handleRestartFitting }: Fitting
 					<>  
 						<FittingFrame
 							state={state}
-							imgUrl={imageUrlExample}
+							imgUrl={profileImg}
 							type='BEFORE'
 						/>
 						<FittingFrame

@@ -10,14 +10,14 @@ import ToastContainer from '@/src/components/common/ToastContainer';
 import useToast from '@/src/hooks/domain/ai-fitting/UseToast';
 import type { ModalState } from '@/src/types/ai-fitting/modal';
 import { Modal } from '@/src/components/common/Modal';
-import { useProducts } from '@/src/hooks/service/product/useProducts';
 import useLike from '@/src/hooks/service/fitting/useLike';
 import usePostFitting from '@/src/hooks/service/fitting/usePostFitting';
 import usePostReview from '@/src/hooks/service/review/usePostReveiw';
 import usePostReviewAi from '@/src/hooks/service/review/usePostReviewAi';
 import useGetReview from '@/src/hooks/service/review/useGetReview';
 import useGetReviewAi from '@/src/hooks/service/review/useGetReviewAi';
-import type { ReviewItem } from '@/src/types/ai-fitting/data';
+import useProductsDetail from '@/src/hooks/service/product/useProductsDetail';
+import useGetProfileImg from '@/src/hooks/service/user/useGetProfileImg';
 
 export type TabType = 'fitting' | 'review';
 
@@ -25,7 +25,7 @@ const AiFittingPage = () => {
 	
 	// product_id useParams()로 가져오기
 	const { id } = useParams();
-	const detailProductId = Number(id);
+	const productId = Number(id);
 
 	// ** useState, useQuery, useMutation, 커스텀 훅 선언 **
 	// useState, 커스텀 훅 선언
@@ -33,50 +33,51 @@ const AiFittingPage = () => {
 	const [activeTab, setActiveTab] = useState<TabType>('fitting');
 	const [modal, setModal] = useState<ModalState>({ type : 'none' });
 	const { toasts, createToast, deleteToast } = useToast();
-	
+	const [isReviewEnabled, setIsReviewEnabled] = useState(false);
+	const [isReviewAiEnabled, setIsReviewAiEnabled] = useState(false);
+
 	// useQuery, useMutation 선언 
 	const { mutate : mutateLike } = useLike({ createToast });
-	const { mutate : mutateFitting,  data : resultFitting, isPending : isFittingLoading, isSuccess : isFittingSuccess, isError : isFittingError } = usePostFitting({ createToast })
+	const { mutate : mutateFitting,  data : resultFitting, isPending : isFittingLoading, isError : isFittingError } = usePostFitting({ createToast });
 	const { mutate : mutateReview } = usePostReview();
 	const { mutate : mutateReviewAi } = usePostReviewAi();
-	const { data : recentReview, isPending : isReviewLoading, isSuccess : isReviewSuccess, isError : isReviewError } = useGetReview(detailProductId);
-	const { data : aiReview, isPending : isAiReviewLoading, isSuccess : isAiReviewSuccess } = useGetReviewAi(detailProductId);
-	const { data, isLoading } = useProducts();
+	const { data : recentReview, isLoading : isReviewLoading } = useGetReview(productId, { enabled : isReviewEnabled });
+	const { data : aiReview, isLoading : isAiReviewLoading } = useGetReviewAi(productId, { enabled : isReviewAiEnabled });
+	const { data : productData, isLoading, isError } = useProductsDetail(productId);
+	const { data : profile } = useGetProfileImg();
 
 	// FittingTab 상태
 	const  currentFittingState = useMemo((): FittingState => {
 		if (isFittingLoading) {
 			return { status: 'loading' };
 		}
-		if (isFittingSuccess) {
+		if (resultFitting) {
 			return { 
 				status: 'success', 
 				resultUrl: resultFitting?.fittingResultImageUrl,
 			};
 		}
 		if (isFittingError) {
-			return { status: 'error', error: 'UNKNOWN_ERROR' }; 
+			return { status: 'error' }; 
 		}
 		return { status: 'idle' };
-	}, [isFittingLoading, isFittingError, isFittingSuccess, resultFitting])
+	}, [isFittingLoading, isFittingError, resultFitting])
 
 	const currentReviewState = useMemo((): ReviewState => {
-		if (isReviewLoading) {
+		if (recentReview?.status === 'processing') {
 			return { status: 'loading' };
 		}
 
-		if (isReviewError) {
-			return { status: 'error', error: 'SERVER_ERROR' };
+		if (recentReview?.status === 'failed') {
+			return { status: 'error' };
 		}
 
-		if (isReviewSuccess && recentReview) {
-			const reviewList: ReviewItem[] = recentReview.reviews || []; 
-
+		if (recentReview?.status === 'complete') {
 			let summaryState: ReviewSummaryState;
 
 			if (isAiReviewLoading) {
 				summaryState = { status: 'loading' };
-			} else if (isAiReviewSuccess && aiReview) {
+			} else if (aiReview) {
 				summaryState = { 
 					status: 'success', 
 					result : {
@@ -85,22 +86,19 @@ const AiFittingPage = () => {
 					},
 				};
 			} else {
-				summaryState = { status: 'error', error: 'INSUFFICIENT_REVIEWS' };
+				summaryState = { status: 'error' };
 			}
 
 			return {
 				status: 'success',
-				reviews: reviewList,
+				reviews: recentReview.reviews ?? [],
 				summary: summaryState,
 			};
 		}
 
 		// 4. 기본 상태
 		return { status: 'idle' };
-	}, [
-		isReviewLoading, isReviewError, isReviewSuccess, recentReview,
-		isAiReviewLoading, isAiReviewSuccess, aiReview,
-	]);
+	}, [recentReview, isAiReviewLoading, aiReview]);
 
 	// 피팅 중 뒤로가기 방지용 
 	const allowExitRef = useRef(false);
@@ -133,28 +131,11 @@ const AiFittingPage = () => {
 		return () => window.removeEventListener('popstate', handlePopState);
 	}, [navigate]);
 
-	useEffect(() => {
-		if (isReviewSuccess && recentReview?.reviews) {
-			const countReviews = recentReview.reviews.length > 0;
-			const needAiGeneration = !aiReview && !isAiReviewLoading;
-
-			if (countReviews && needAiGeneration) {
-                
-				mutateReviewAi({
-					productId: detailProductId, 
-				});
-			}
-		}
-	}, [isReviewSuccess, recentReview, aiReview, isAiReviewLoading, detailProductId, mutateReviewAi]);
-
-	// 전체 상품 조회 후 url에서 id 가져와 특정 상품 데이터 필터링
-	// 단일 상품 조회 api 생성 시 대체 예정
 	if (isLoading) {
 		return <div className="flex justify-center p-10">로딩 중...</div>;
 	}
-	const detailProduct = data?.find((p) => p.product_id === detailProductId);
 
-	if (!detailProduct) {
+	if (isError || !productData) {
 		return <div className='flex justify-center p-10'>상품 정보를 찾을 수 없습니다.</div>
 	}
 
@@ -162,18 +143,15 @@ const AiFittingPage = () => {
 	
 	// 좋아요 토글 핸들러
 	const handleHeart = (currentLikedStatus: boolean) => {
-		if (!detailProduct) return;
-        
 		mutateLike({ 
-			productId: detailProductId, 
+			productId: productId, 
 			isLiked: currentLikedStatus, 
 		});
 	};
 
 	// 쇼핑몰 링크 이동 핸들러
 	const handleGoToShop = () => {
-		// '_blank' : 새 창에서 열기
-		window.open(detailProduct?.product_url, '_blank', 'noopener,noreferrer');
+		window.open(productData?.product_url, '_blank', 'noopener,noreferrer');
 		setModal({ type: 'none' });
 	};
 
@@ -182,43 +160,45 @@ const AiFittingPage = () => {
 		createToast({ message: 'AI 피팅을 시작하겠습니다.' });
 
 		mutateFitting({
-			payload : { productId : detailProduct.product_id },
+			payload : { productId : productData.product_id },
 		})
 	};
 
+	const handleGetReview = () => {
+		setIsReviewEnabled(true);
+	}
+
+	const handleGetReviewAi = () => {
+		setIsReviewAiEnabled(true);
+	}
+
 	const handleStartReview = () => {
-		if (!detailProduct.product_id) {
-			createToast({ message: '상품 정보를 불러오지 못했습니다.' });
-			return;
-		}
 		mutateReview({
 			payload: { 
-				product_id : detailProduct.product_id, 
-				product_url : detailProduct.product_url ?? '', 
-				shoppingmall_name : detailProduct.shoppingmale_name ?? '', 
+				product_id : productId, 
+				product_url : productData.product_url ?? '', 
+				shoppingmall_name : productData.shoppingmale_name ?? '', 
 			},
 		})
 	}
 
 	const handleStartReviewAi = () => {
-		if (!detailProduct.product_id) {
-			return;
-		}
 		mutateReviewAi({
-			productId : detailProduct.product_id,
+			productId : productId,
 		})
+		handleGetReviewAi();
 	}
 
 	const handleFirstFitting = () => {
 		handleStartFitting();
 		handleStartReview();
+		handleGetReview();
 	}
 
-	// 피팅중 뒤로가기 및 경로 초기화 핸들러
 	const handleExitConfirm = () => {
 		allowExitRef.current = true;
 		setModal({ type: 'none' });
-		navigate(-2); // pushState로 쌓인 히스토리까지 고려하여 -2 이동
+		navigate(-2); 
 	};
 
 	return (
@@ -243,14 +223,15 @@ const AiFittingPage = () => {
 				/>
 
 				<FittingItemInfo
-					key={detailProduct?.product_id}
-					data={detailProduct}
+					key={productData?.product_id}
+					data={productData}
 					handleHeart={handleHeart}
 					handleBuy={() => setModal({ type: 'buy' })}
 				/>
 
 				{activeTab === 'fitting' && (
 					<FittingTab
+						profileImg={profile?.representative_img?.imageUrl || ''}
 						state={currentFittingState} 
 						handleStartFitting={handleFirstFitting} 
 						handleRestartFitting={handleStartFitting}

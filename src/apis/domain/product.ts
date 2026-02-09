@@ -56,7 +56,7 @@ export const getProductsByCategory = async (category: CategoryKey) => {
 
 export const getProductDetail = async (productId : number) => {
 	const { data } = await apiClient.getProductDetail(productId);
-	return data.result?.product ?? [];
+	return data.result?.product;
 }
 
 // home-page

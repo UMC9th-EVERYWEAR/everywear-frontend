@@ -1,23 +1,14 @@
 import type { ListDTO } from '@/src/apis/generated';
 import { AI_FITTING_IMAGES } from '@/src/constants/images';
-import { useState } from 'react';
 
 interface FittingItemInfoProps {
-    data: ListDTO | null | undefined
+    data: ListDTO
     handleHeart: (current: boolean) => void;
     handleBuy: () => void;
 }
 
 const FittingItemInfo = ({ data, handleHeart, handleBuy }: FittingItemInfoProps) => {
-
-	const [isLiked, setIsLiked] = useState(data?.is_liked ?? false);
-
-	const onHeartClick = () => {
-		const nextStatus = !isLiked;
-		setIsLiked(nextStatus);
-		handleHeart(isLiked); 
-	};
-
+	
 	return (
 		<div className='border rounded-xl border-neutral-200 border-solid px-2.5 py-1.5 flex mb-2.5 gap-4'>
 
@@ -65,10 +56,10 @@ const FittingItemInfo = ({ data, handleHeart, handleBuy }: FittingItemInfoProps)
 					</button>
 					<div className='flex items-center'>
 						<button
-							onClick={onHeartClick}
+							onClick={() => handleHeart(data?.is_liked ?? false)}
 							className='cursor-pointer p-1'
 						>
-							{isLiked ? (
+							{data?.is_liked ? (
 								<img
 									src={AI_FITTING_IMAGES.FITTING_CARD_HEART_FILL}
 									alt='내 옷장 저장'

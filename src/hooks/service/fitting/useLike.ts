@@ -10,7 +10,7 @@ interface useLikeProps {
 
 interface LikeVariables {
     productId: number;
-    isLiked: boolean | undefined; // 현재 좋아요 상태
+    isLiked: boolean | undefined;
 }
 
 function useLike({ createToast } : useLikeProps) {
@@ -19,13 +19,14 @@ function useLike({ createToast } : useLikeProps) {
 		mutationFn: ({ productId }: LikeVariables) => toggleProductLike(productId),
 		onSuccess: (_data, variables) => {
 
+			queryClient.invalidateQueries({
+				queryKey : QUERY_KEYS.PRODUCT.DETAIL(variables.productId),
+			})
+
 			queryClient.invalidateQueries({ 
 				queryKey: QUERY_KEYS.CLOSET.ALL, 
 			});
 
-			// 내가 보낸 이전 상태값으로 판별	
-			// 이전에 좋아요였다면(true) -> 클릭했으니 삭제
-			// 이전에 좋아요가 아니었다면(false) -> 클릭했으니 추가
 			if (variables.isLiked) {
 				createToast({ message: '내 옷장에서 삭제되었습니다.' });
 			} else {

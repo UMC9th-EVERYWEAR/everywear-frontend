@@ -11,6 +11,7 @@ import type {
   ApiResponseMapStringObject,
   ApiResponseProductDetailResponse,
   ApiResponseProductListResponse,
+  ApiResponseRepresentativeImgResponse,
   ApiResponseString,
   ApiResponseTokenRefreshResponse,
   ApiResponseUserResponse,
@@ -19,6 +20,7 @@ import type {
   CrawlReviewDTO,
   FittingRequest,
   ImportDTO,
+  ReviewListDTO,
   UserImgQuery,
   VerifyAndSavePayload,
 } from "./data-contracts";

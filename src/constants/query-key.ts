@@ -18,6 +18,7 @@ export const QUERY_KEYS = {
 	USER_IMAGES: {
 		ALL: ['user-images'] as const,
 		LIST: ['user-images', 'list'] as const,
+		REPRESENTATIVE: ['user-images', 'representative'] as const,
 		DETAIL: (imageId: number) =>
       ['user-images', 'detail', imageId] as const,
 	},
