@@ -4,18 +4,18 @@ import React, { type RefObject } from 'react';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import { cn } from '@/src/utils/cn';
-import {  useEffect, useRef } from 'react';
+import {  useEffect } from 'react';
 import { SETTING_IMAGES } from '@/src/constants/images';
 import type { Swiper as SwiperClass } from 'swiper/types';
 import type { UserImgQuery } from '@/src/apis/generated';
 import type { PendingUpload } from '@/src/pages/setting/setting-photo-page';
-import { resizeImage } from '@/src/utils/resizeImage';
-import { useVerifyAndSaveProfileImage } from '@/src/hooks/service/user/useVerifyAndSaveProfileImage';
+import { useBannerUpload } from '@/src/hooks/domain/setting/useBannerUpload';
 
 interface BannerProps {
 	photoItems?: UserImgQuery[];
 	activeRealIndex: number;
   swiperRef: RefObject<SwiperClass | null>;
+	itemIds: number[]
 	setActiveRealIndex: (index: number) => void;
 	setIsAddCardActive?: (isActive: boolean) => void;
 	setPendingUploads: React.Dispatch<React.SetStateAction<PendingUpload[]>>;
@@ -23,60 +23,22 @@ interface BannerProps {
 	handleError: () => void;
 	
 }
-const Banner = ({ activeRealIndex, photoItems, swiperRef, setActiveRealIndex, setIsAddCardActive, setPendingUploads, handleUploadStartNotice, handleError }: BannerProps) => {
-	const fileInputRef = useRef<HTMLInputElement | null>(null);
-	const pendingIndexRef = useRef<number | null>(null);
-	const { mutateAsync: uploadPhoto } = useVerifyAndSaveProfileImage();
-
-
-	// hasImage: null/undefined/공백 처리까지 고려한 이미지 존재 여부 확인 함수 
-	const hasImage = (url?: string | null) => Boolean(url?.trim());
-
-	const activeItem = photoItems?.[activeRealIndex];
+const Banner = ({ activeRealIndex, photoItems, swiperRef, itemIds, setActiveRealIndex, setIsAddCardActive, setPendingUploads, handleUploadStartNotice, handleError }: BannerProps) => {
 	
-	/// isAddCardActive 상태 업데이트
+	const { fileInputRef, openFilePicker, handleChangeFile } = useBannerUpload({
+		setPendingUploads,
+		handleUploadStartNotice,
+		handleError,
+	})
+
 	useEffect(() => {
-		if (setIsAddCardActive) {
-			setIsAddCardActive(!hasImage(activeItem?.imageUrl));
-		}
-	}, [activeRealIndex, activeItem, setIsAddCardActive]);
+		if(!setIsAddCardActive || !photoItems) return;
+		const activeItem = photoItems?.[activeRealIndex];
+		const hasId = itemIds.some((i)=> activeItem?.profileImageId === i)
+		setIsAddCardActive(!hasId);
+	
+	}, [activeRealIndex, setIsAddCardActive, itemIds, photoItems]);
 
-	const openFilePicker = (index: number) => {
-		pendingIndexRef.current = index;
-		fileInputRef.current?.click();
-	};
-
-	  const handleChangeFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
-		const file = e.target.files?.[0];
-		    const index = pendingIndexRef.current;
-
-		if (!file || index === null || !photoItems || !setPendingUploads) return;
-		handleUploadStartNotice();
-
-		//  미리보기(낙관적 UI)
-		const previewUrl = URL.createObjectURL(file);
-		const tempId = -(Date.now());
-
-		setPendingUploads((prev) => [
-			...prev,
-			{
-				tempId,
-				previewUrl,
-			},
-		]);
-		const resizedFile = await resizeImage(file);
-		uploadPhoto(resizedFile,
-			{
-				onSettled: () => setPendingUploads([]),
-				onError: handleError,
-			},
-		)
-		
-		// 같은 파일 다시 선택 가능하도록 초기화
-		e.target.value = '';
-		    pendingIndexRef.current = null;
-
-	};
 
 
 	// slide 안에 들어갈 컨텐츠 결정 함수 (추천 네이밍)

@@ -22,15 +22,14 @@ interface Props {
   openChangePhotoModal: boolean;
   openDeletePhotoModal: boolean;
   swiperRef: RefObject<SwiperClass | null>;
+	itemIds: number[];
 	setPendingUploads: React.Dispatch<React.SetStateAction<PendingUpload[]>>;
   onChangeIndex: (i: number) => void;
   onAddCardActiveChange: (v: boolean) => void;
-
   onOpenChangeModal: () => void;
   onCloseChangeModal: () => void;
   onOpenDeleteModal: () => void;
   onCloseDeleteModal: () => void;
-
   onSelectRepresentative: () => void;
   onDeleteImage: () => void;
 }
@@ -44,6 +43,7 @@ const SettingPhotoView = ({
 	openChangePhotoModal,
 	openDeletePhotoModal,
 	swiperRef,
+	itemIds,
 	setPendingUploads,
 	onChangeIndex,
 	onAddCardActiveChange,
@@ -58,17 +58,22 @@ const SettingPhotoView = ({
 
 	const { toasts, createToast, deleteToast } = useToast();
 
-	const handleDeleteRepresentativeAttempt = () => {
+	const notifyCannotDeleteRepresentative = () => {
 		createToast({ message: '대표 사진은 삭제가 불가합니다.' });
 	};
 
-	const handleUploadStartNotice = () => {
+	const notifyUploadStarted = () => {
 		createToast({ message: '사진 분석을 시작하겠습니다.' })
 	}
 
-	const handleUploadError= () => {
+	const notifyInvalidImage= () => {
 		createToast({ message: '가상피팅에 적합하지 않은 이미지에요.' })
 	}
+
+	const notifyAlreadyRepresentative = () => {
+		createToast({ message: '이미 대표 사진으로 설정되어 있어요' })
+	}
+
 
 	return (
 		
@@ -93,17 +98,18 @@ const SettingPhotoView = ({
 					photoItems={photoItems}
 					activeRealIndex={activeRealIndex}
 					swiperRef={swiperRef}
+					itemIds={itemIds}
 					setActiveRealIndex={onChangeIndex}
 					setIsAddCardActive={onAddCardActiveChange}
 					setPendingUploads={setPendingUploads}
-					handleUploadStartNotice={handleUploadStartNotice}
-					handleError={handleUploadError}
+					handleUploadStartNotice={notifyUploadStarted}
+					handleError={notifyInvalidImage}
 				/>
 			</div>
 
 			<div className="mx-4 flex justify-between w-full max-w-[343px]">
 				<button
-					onClick={representativeId === activeImageId ? handleDeleteRepresentativeAttempt: onOpenDeleteModal}
+					onClick={representativeId === activeImageId ? notifyCannotDeleteRepresentative: onOpenDeleteModal}
 					className={cn(
 						'text-primary-600 border w-20 rounded-full h-11',
 						isAddCardActive && 'text-neutral-400 pointer-events-none',
@@ -113,7 +119,7 @@ const SettingPhotoView = ({
 				</button>
 
 				<button
-					onClick={onOpenChangeModal}
+					onClick={ representativeId === activeImageId  ? notifyAlreadyRepresentative : onOpenChangeModal}
 					className={cn(
 						'bg-primary-600 text-white w-63.25 rounded-full h-11',
 						isAddCardActive && 'bg-neutral-400 pointer-events-none',
