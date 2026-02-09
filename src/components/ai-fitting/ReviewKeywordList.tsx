@@ -7,9 +7,9 @@ const ReviewKeywordList = ({ keywordList }: ReviewKeywordProps) => {
 
 	return (
 		<div className="flex flex-wrap gap-2.5">
-			{keywordList.map((keyword) => (
+			{keywordList.map((keyword, index) => (
 				<div
-					key={keyword}
+					key={index}
 					className="flex justify-center items-center border border-solid border-primary-600 rounded-full px-2 py-1 whitespace-nowrap bg-white"
 				>
 					<span className="text-primary-600 text-regular-14">

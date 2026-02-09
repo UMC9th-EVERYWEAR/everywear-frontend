@@ -3,7 +3,6 @@ import ReviewCard from './ReviewCard';
 import type { ReviewState } from '@/src/types/ai-fitting/status';
 import { LoadingSpinner } from './LoadingSpinner';
 import { cn } from '@/src/utils/cn';
-// import { useEffect, useState } from 'react';
 import { AI_FITTING_IMAGES } from '@/src/constants/images';
 
 interface ReviewTabProps {
@@ -12,27 +11,6 @@ interface ReviewTabProps {
 }
 
 const ReviewTab = ({ state, handleStartReviewAi }: ReviewTabProps) => {
-	// 15초 타이머 상태
-	// const [showResult, setShowResult] = useState(false);
-
-	// 의존성 배열 문제를 해결하기 위해 상태값 미리 추출
-	// const summaryStatus = state.status === 'success' ? state.summary.status : undefined;
-
-	// useEffect(() => {
-	// 	let timer: ReturnType<typeof setTimeout>;
-
-	// 	if (state.status === 'success' && summaryStatus === 'success') {
-	// 		timer = setTimeout(() => {
-	// 			setShowResult(true);
-	// 		}, 15000);
-	// 	}
-
-	// 	return () => {
-	// 		clearTimeout(timer);
-	// 		setShowResult(false);
-	// 	};
-	// }, [state.status, summaryStatus]); 
-
 	// 리뷰 요약 로딩 상태 계산
 	const isSummaryLoading = state.status === 'loading' || (state.status === 'success' && state.summary.status === 'loading');
 
@@ -119,7 +97,7 @@ const ReviewTab = ({ state, handleStartReviewAi }: ReviewTabProps) => {
 					{state.status === 'success' && state.summary.status === 'success' && (state.reviews.length > 0 ? (
 						state.reviews.map((review) => (
 							<ReviewCard
-								key={review.id}
+								key={review.review_id}
 								data={review}
 							/>
 						))

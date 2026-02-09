@@ -1,24 +1,24 @@
-import type { ReviewItem } from '@/src/types/ai-fitting/data'; // 경로 수정 필요
 import { useState } from 'react';
 import { truncate } from '@/src/utils/truncate';
 import useDraggableScroll from '@/src/hooks/domain/ai-fitting/useDraggableScroll';
 import { cn } from '@/src/utils/cn';
 import  { AI_FITTING_IMAGES } from '@/src/constants/images';
+import type { ReviewDTO } from '@/src/apis/generated';
 
 interface ReviewCardProps {
-    data: ReviewItem; 
+    data: ReviewDTO; 
 }
 const MAX_LENGTH = 115;
 
 const ReviewCard = ({ data }: ReviewCardProps) => {
-	// 텍스트 3줄 제한 및 더보기 버튼 여부
 	const [isExpanded, setIsExpanded] = useState(false);
-	const content = data.content; // reviewBody -> content
+	const { scrollRef, isDragging, dragEvents } = useDraggableScroll(1);
+
+	const content = data.content ?? '';
 	const shouldTruncate = content.length > MAX_LENGTH;
 	const displayContent = isExpanded ? content : truncate(content, MAX_LENGTH);
 
 	// 리뷰 이미지 옆으로 슬라이드 기능
-	const { scrollRef, isDragging, dragEvents } = useDraggableScroll(1);
 
 	return (
 		<div className="flex flex-col gap-1 py-1.5 border-b border-solid border-neutral-100 w-full overflow-hidden">
@@ -29,22 +29,24 @@ const ReviewCard = ({ data }: ReviewCardProps) => {
 					{Array.from({ length: 5 }).map((_, index) => (
 						<img
 							key={index}
-							src={index < data.rating ?  AI_FITTING_IMAGES.REVIEW_STAR_ON : AI_FITTING_IMAGES.REVIEW_STAR_OFF} // starCount -> rating
+							src={index < (data.rating ?? 0) ?  AI_FITTING_IMAGES.REVIEW_STAR_ON : AI_FITTING_IMAGES.REVIEW_STAR_OFF}
 							alt="별점"
 						/>
 					))}
 				</div>
-				<span className="text-neutral-400 text-medium-10 ml-1">{data.date}</span>
+				<span className="text-neutral-400 text-medium-10 ml-1">{data.review_date ?? ''}</span>
 			</div>
 
 			{/* 상품 정보 */}
 			<div className="py-3.25 pl-3.25 bg-neutral-50 border rounded-xs border-black/10 gap-0.75 flex flex-col text-regular-14">
 				<span>
-					구매 정보 : {data.productName} • {data.productSize}
+					구매 정보 : {data.option_text ?? ''}
 				</span>
-				<span>
-					체형 정보 : {data.gender}, {data.buyerHeight}cm, {data.buyerWeight}kg
-				</span>
+				{data.user_height && data.user_weight && 
+					<span>
+						체형 정보 : {data.user_height}cm, {data.user_weight}kg
+					</span>
+				}
 			</div>
 
 			{/* 리뷰 본문 */}
@@ -75,13 +77,13 @@ const ReviewCard = ({ data }: ReviewCardProps) => {
 					aria-label="리뷰 이미지 슬라이더"
 					// tabIndex={0}
 				>
-					{data.images.map((img) => (
+					{data.images.map((img, index) => (
 						<div
-							key={img.id}
+							key={index}
 							className="relative w-[161.75px] h-[107.833px] shrink-0"
 						>
 							<img
-								src={img.imgUrl}
+								src={img}
 								alt="리뷰 이미지"
 								className="w-full h-full object-cover pointer-events-none"
 							/>
