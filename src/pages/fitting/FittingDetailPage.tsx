@@ -1,67 +1,159 @@
-import { useState } from 'react';
-import { useParams, useNavigate } from 'react-router';
+import { useEffect, useRef, useState, useMemo } from 'react';
+import { useNavigate, useParams } from 'react-router';
 import TabBar from '@/src/components/ai-fitting/TabBar';
 import FittingItemInfo from '@/src/components/ai-fitting/FittingItemInfo';
 import FittingTab from '@/src/components/ai-fitting/FittingTab';
 import ReviewTab from '@/src/components/ai-fitting/ReviewTab'; 
-import ToastContainer from '@/src/components/common/ToastContainer';
+import type { FittingState, ReviewState } from '@/src/types/ai-fitting/status';
 import Toast from '@/src/components/common/Toast';
+import ToastContainer from '@/src/components/common/ToastContainer';
 import useToast from '@/src/hooks/domain/ai-fitting/UseToast';
+import type { ModalState } from '@/src/types/ai-fitting/modal';
 import { Modal } from '@/src/components/common/Modal';
-import { useFittingDetail } from '@/src/hooks/service/fitting/useFittings';
+import { useProducts } from '@/src/hooks/service/product/useProducts';
+import useLike from '@/src/hooks/service/fitting/useLike';
+import usePostFitting from '@/src/hooks/service/fitting/usePostFitting';
+import { useFittings } from '@/src/hooks/service/fitting/useFittings';
+import type { ListDTO } from '@/src/apis/generated';
+
+export type TabType = 'fitting' | 'review';
+
+interface FittingData {
+	id: number;
+	fittingId?: number;
+	productId?: number;
+	product_id?: number;
+	fittingResultImage: string;
+	product?: {
+		productId: number;
+	};
+}
 
 const FittingDetailPage = () => {
-	const { id } = useParams<{ id: string }>();
 	const navigate = useNavigate();
+	const [activeTab, setActiveTab] = useState<TabType>('fitting');
+	const [reviewState, setReviewState] = useState<ReviewState>({ status: 'idle' });
+	const [modal, setModal] = useState<ModalState>({ type: 'none' });
 	const { toasts, createToast, deleteToast } = useToast();
-    
-	const { data: fittingDetail, isLoading } = useFittingDetail(Number(id));
-    
-	const [activeTab, setActiveTab] = useState<'fitting' | 'review'>('fitting');
-	const [isBuyModalOpen, setIsBuyModalOpen] = useState(false);
 
-	if (isLoading) return <div className="flex-1 bg-white" />;
-	if (!fittingDetail) return <div className="flex-1 bg-white p-10 text-center">정보를 찾을 수 없습니다.</div>;
+	const { id } = useParams();
+	const { data: fittingsData, isLoading: isFittingsLoading } = useFittings() as unknown as { data: FittingData[] };
 
-	const { product } = fittingDetail;
+	const fittingResultFromHistory = useMemo(() => {
+		if (!fittingsData || !id) return null;
+		const list = Array.isArray(fittingsData) ? fittingsData : (fittingsData as unknown as { data: FittingData[] }).data || [];
+		return list.find((f: FittingData) => String(f.id ?? f.fittingId) === String(id));
+	}, [fittingsData, id]);
 
-	// 쇼핑몰 이동 핸들러
-	const handleGoToShop = () => {
-		if (product?.purchaseUrl) {
-			window.open(product.purchaseUrl, '_blank');
-		} else {
-			createToast({ message: '구매 링크가 없습니다.' });
+	const { data: products, isSuccess, isLoading: isProductsLoading } = useProducts();
+
+	const realProductId = useMemo(() => {
+		if (!fittingResultFromHistory) return null;
+		return (
+			fittingResultFromHistory.productId ?? 
+			fittingResultFromHistory.product_id ?? 
+			fittingResultFromHistory.product?.productId ??
+			null
+		);
+	}, [fittingResultFromHistory]);
+
+	const detailProduct = useMemo(() => {
+		if (!isSuccess || !products || !realProductId) return null;
+		return products.find((p) => Number(p.product_id) === Number(realProductId)) ?? null;
+	}, [isSuccess, products, realProductId]);
+
+	const normalizedProduct = useMemo<ListDTO | null>(() => {
+		if (!detailProduct) return null;
+		const raw = detailProduct as unknown as Record<string, string | number | boolean>;
+		return {
+			...detailProduct,
+			product_img_url: String(raw.product_img_url || raw.product_image_url || raw.productImageUrl || raw.imageUrl || ''),
+			shoppingmale_name: String(raw.shoppingmall_name || raw.siteName || '브랜드'),
+		} as ListDTO;
+	}, [detailProduct]);
+
+	const { mutate: mutateLike } = useLike({ createToast });
+	
+	const {
+		mutate: mutateFitting,
+		data: resultFitting,
+		isPending: isFittingLoading,
+		isSuccess: isFittingSuccess,
+	} = usePostFitting({ createToast });
+
+	const getFittingState = (): FittingState => {
+		if (fittingResultFromHistory?.fittingResultImage) {
+			return { status: 'success', resultUrl: fittingResultFromHistory.fittingResultImage };
 		}
-		setIsBuyModalOpen(false);
+		if (isFittingLoading) return { status: 'loading' };
+		if (isFittingSuccess) {
+			const res = resultFitting as unknown as Record<string, string>;
+			return {
+				status: 'success',
+				resultUrl: res?.fittingResultImageUrl || res?.fittingResultImage || '',
+			};
+		}
+		return { status: 'idle' };
 	};
 
-	return (
-		<div className="flex justify-center min-h-screen bg-[#F8F9FA]">
-			<div className="flex flex-col w-full max-w-109 bg-white shadow-lg min-h-screen relative overflow-x-hidden">
-                
-				<header className="flex items-center px-4 py-4 border-b border-gray-100 sticky top-0 bg-white z-10">
-					<button
-						onClick={() => navigate(-1)}
-						className="p-1 cursor-pointer"
-					>
-						<svg
-							width="24"
-							height="24"
-							viewBox="0 0 24 24"
-							fill="none"
-						>
-							<path
-								d="M15 18L9 12L15 6"
-								stroke="currentColor"
-								strokeWidth="2"
-								strokeLinecap="round"
-								strokeLinejoin="round"
-							/>
-						</svg>
-					</button>
-					<h1 className="flex-1 text-center font-bold text-lg pr-8">피팅 내역 상세</h1>
-				</header>
+	const currentFittingState = getFittingState();
 
+	const handleHeart = (status: boolean) => {
+		if (!normalizedProduct) return;
+		mutateLike({ productId: normalizedProduct.product_id, isLiked: status });
+	};
+
+	const handleGoToShop = () => {
+		const raw = normalizedProduct as unknown as Record<string, string>;
+		const url = raw?.product_url || raw?.purchaseUrl;
+		if (url) window.open(url, '_blank', 'noopener,noreferrer');
+		setModal({ type: 'none' });
+	};
+
+	const handleStartFitting = () => {
+		if (!normalizedProduct) return;
+		createToast({ message: 'AI 피팅을 시작하겠습니다.' });
+		mutateFitting({
+			payload: { productId: normalizedProduct.product_id },
+		});
+	};
+
+	const handleExitConfirm = () => {
+		allowExitRef.current = true;
+		setModal({ type: 'none' });
+		navigate(-2);
+	};
+
+	const allowExitRef = useRef(false);
+	const isAnalyzing = isFittingLoading || reviewState.status === 'loading';
+	const isAnalyzingRef = useRef(false);
+
+	useEffect(() => {
+		isAnalyzingRef.current = isAnalyzing;
+		if (isAnalyzing) window.history.pushState(null, '', window.location.href);
+	}, [isAnalyzing]);
+
+	useEffect(() => {
+		const handlePopState = () => {
+			if (allowExitRef.current) return;
+			if (isAnalyzingRef.current) {
+				window.history.pushState(null, '', window.location.href);
+				setModal({ type: 'exit_confirm' });
+			} else {
+				navigate(-1);
+			}
+		};
+		window.addEventListener('popstate', handlePopState);
+		return () => window.removeEventListener('popstate', handlePopState);
+	}, [navigate]);
+
+	if (isFittingsLoading || isProductsLoading) {
+		return <div className="flex-1 bg-white flex items-center justify-center">정보를 불러오는 중...</div>;
+	}
+
+	return (
+		<div className="flex items-center justify-center mb-8">
+			<div className="flex flex-col px-4 h-full w-full max-w-109 relative">
 				<ToastContainer>
 					{toasts.map((t) => (
 						<Toast
@@ -73,73 +165,58 @@ const FittingDetailPage = () => {
 					))}
 				</ToastContainer>
 
-				<TabBar 
-					activeTab={activeTab} 
-					onTabChange={(tab) => setActiveTab(tab as 'fitting' | 'review')} 
-					isIdle={true}
+				<TabBar
+					activeTab={activeTab}
+					onTabChange={(tab) => setActiveTab(tab as TabType)}
+					isIdle={!isAnalyzing}
 					onIdleToast={createToast}
 				/>
 
+				{normalizedProduct ? (
+					<FittingItemInfo
+						key={normalizedProduct.product_id}
+						data={normalizedProduct}
+						handleHeart={handleHeart}
+						handleBuy={() => setModal({ type: 'buy' })}
+					/>
+				) : (
+					<div className="h-24 flex items-center justify-center text-gray-400">상품 정보를 찾을 수 없습니다.</div>
+				)}
+
 				<div className="flex-1 overflow-y-auto no-scrollbar pb-10">
-					<div className="px-4 py-6">
-						{/* FittingItemInfo 컴포넌트의 ListDTO 구조에 맞게 매핑 */}
-						<FittingItemInfo
-							data={{
-								shoppingmale_name: product?.siteName || '브랜드 정보 없음',
-								product_name: product?.productName || '상품명 정보 없음',
-								price: product?.price?.toString() || '0', 
-								//product_img_url: product?.productImage || '',
-								star_point: product?.rating || 0,
-								is_liked: product?.isLiked || false,
-							}}
-							handleHeart={(isLiked) => {
-								createToast({ message: isLiked ? '옷장에서 삭제되었습니다.' : '옷장에 저장되었습니다.' });
-							}}
-							handleBuy={() => setIsBuyModalOpen(true)}
+					{activeTab === 'fitting' && (
+						<FittingTab 
+							state={currentFittingState} 
+							handleStartFitting={handleStartFitting} 
+							handleRestartFitting={handleStartFitting} 
 						/>
-					</div>
-
-					<div className="px-4">
-						{activeTab === 'fitting' && (
-							<FittingTab 
-								state={{ 
-									status: 'success', 
-									resultUrl: fittingDetail.fittingResultImage || '', 
-								}} 
-								handleStartFitting={() => {}} 
-								handleRestartFitting={() => {}}
-							/>
-						)}
-
-						{activeTab === 'review' && (
-							<ReviewTab 
-								handleStartReview={() => {}}
-								state={{ 
-									status: 'success', 
-									summary: { 
-										status: 'success', 
-										text: fittingDetail.reviewSummary || '리뷰 분석 결과입니다.', 
-									},
-									keywords: [
-										{ id: 1, label: `별점 ${product?.rating || 0}` },
-										{ id: 2, label: '정사이즈' },
-										{ id: 3, label: '가벼움' },
-									],
-									reviews: fittingDetail.reviews || [], 
-								}} 
-							/>
-						)}
-					</div>
+					)}
+					{activeTab === 'review' && (
+						<ReviewTab 
+							state={reviewState} 
+							handleStartReview={() => setReviewState({ status: 'loading' })} 
+						/>
+					)}
 				</div>
 
 				<Modal
-					isOpen={isBuyModalOpen}
-					onClose={() => setIsBuyModalOpen(false)}
+					isOpen={modal.type === 'buy'}
+					onClose={() => setModal({ type: 'none' })}
 					text="쇼핑몰로 이동할까요?"
 					btn1Text="이동"
 					btn1Action={handleGoToShop}
 					btn2Text="취소"
-					btn2Action={() => setIsBuyModalOpen(false)}
+					btn2Action={() => setModal({ type: 'none' })}
+				/>
+				<Modal
+					isOpen={modal.type === 'exit_confirm'}
+					onClose={() => setModal({ type: 'none' })}
+					title="분석을 중단할까요?"
+					text="지금 나가시면 분석 결과가 저장되지 않습니다."
+					btn1Text="나가기"
+					btn1Action={handleExitConfirm}
+					btn2Text="취소"
+					btn2Action={() => setModal({ type: 'none' })}
 				/>
 			</div>
 		</div>
