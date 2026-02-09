@@ -2,7 +2,6 @@
 import type {
   ApiResponseAgreeToggleResponse,
   ApiResponseAiReviewDTO,
-  ApiResponseAlarmToggleResponse,
   ApiResponseFittingApplyResult,
   ApiResponseFittingDetail,
   ApiResponseImportDTO,
@@ -13,7 +12,7 @@ import type {
   ApiResponseProductListResponse,
   ApiResponseString,
   ApiResponseTokenRefreshResponse,
-  ApiResponseUserResponseDto,
+  ApiResponseUserResponse,
   ApiResponseVoid,
   CrawlResponseDTO,
   CrawlReviewDTO,
@@ -24,6 +23,7 @@ import type {
 } from "./data-contracts";
 import { HttpClient } from "./http-client";
 import type { RequestParams, ContentType } from "./http-client";
+
 
 enum ContentType {
   Json = "application/json",
@@ -80,11 +80,11 @@ export class Api<
    * @request POST:/api/review/crawl
    * @secure
    * @response `200` `CrawlResponseDTO` 리뷰가 이미 존재하여 즉시 반환 (캐시)
-   * @response `202` `any` 리뷰 크롤링 시작됨 (백그라운드 처리 중)
-   * @response `404` `any` 상품을 찾을 수 없음
+   * @response `202` `CrawlResponseDTO` 리뷰 크롤링 시작됨 (백그라운드 처리 중)
+   * @response `404` `ApiResponse` 상품을 찾을 수 없음
    */
   crawlReview = (data: CrawlReviewDTO, params: RequestParams = {}) =>
-    this.request<CrawlResponseDTO, any>({
+    this.request<CrawlResponseDTO, ApiResponse>({
       path: `/api/review/crawl`,
       method: "POST",
       body: data,
@@ -285,6 +285,23 @@ export class Api<
       ...params,
     });
   /**
+   * @description 사용자의 대표사진을 조회합니다.
+   *
+   * @tags user-img-controller
+   * @name GetRepresentativeImage
+   * @summary 대표 이미지 조회
+   * @request GET:/api/user-images/representative
+   * @secure
+   * @response `200` `ApiResponseRepresentativeImgResponse` OK
+   */
+  getRepresentativeImage = (params: RequestParams = {}) =>
+    this.request<ApiResponseRepresentativeImgResponse, any>({
+      path: `/api/user-images/representative`,
+      method: "GET",
+      secure: true,
+      ...params,
+    });
+  /**
    * @description 상품의 리뷰를 조회합니다. **응답 상태:** - `completed`: 리뷰 데이터 있음 (크롤링 완료) - `processing`: 크롤링 진행 중 (리뷰 데이터 없음) - `failed`: 크롤링 실패 - `not_started`: 크롤링 아직 시작 안 함 **사용 시나리오:** 1. `POST /api/review/crawl`로 크롤링 시작 2. 이 API로 크롤링 상태 확인 3. `status: completed`가 되면 리뷰 데이터 사용 **Polling 권장 주기:** - 5초마다 확인 (최대 1분)
    *
    * @tags Review
@@ -292,10 +309,10 @@ export class Api<
    * @summary 리뷰 조회
    * @request GET:/api/review/{productId}
    * @secure
-   * @response `200` `any` 크롤링 진행 중
+   * @response `200` `ReviewListDTO` 크롤링 진행 중
    */
   getReviews = (productId: number, params: RequestParams = {}) =>
-    this.request<any, any>({
+    this.request<ReviewListDTO, any>({
       path: `/api/review/${productId}`,
       method: "GET",
       secure: true,
@@ -315,6 +332,23 @@ export class Api<
   getProducts = (params: RequestParams = {}) =>
     this.request<ApiResponseProductListResponse, any>({
       path: `/api/products`,
+      method: "GET",
+      secure: true,
+      ...params,
+    });
+  /**
+   * @description 사용자가 선택한 상품의 정보를 조회합니다.
+   *
+   * @tags Product
+   * @name GetProductDetail
+   * @summary 상품 단건 조회
+   * @request GET:/api/products/{product_id}
+   * @secure
+   * @response `200` `ApiResponseProductDetailResponse` OK
+   */
+  getProductDetail = (productId: number, params: RequestParams = {}) =>
+    this.request<ApiResponseProductDetailResponse, any>({
+      path: `/api/products/${productId}`,
       method: "GET",
       secure: true,
       ...params,
