@@ -31,11 +31,11 @@ export const Navbar = () => {
 							{/* isActive를 props로 넘겨서 아이콘 색상을 바꿀 수 있다면 전달 */}
 							<IconImage
 								name={Icon}
-								size={20}
+								size={24}
 								active={isActive}
 							/>
 						</div>
-						<span className="text-regular-10 mt-[2px] font-medium leading-none text-center">
+						<span className="text-regular-12 mt-[2px] font-medium leading-none text-center">
 							{label}
 						</span>
 					</button>
