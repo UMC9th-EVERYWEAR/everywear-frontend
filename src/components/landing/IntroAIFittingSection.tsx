@@ -24,7 +24,7 @@ const IntroAIFittingSection = () => {
 				</div>
 
 				<ScrollAnimationContainer
-					className='absolute top-12 right-3.5 flex flex-col'
+					className='absolute top-12 right-5 flex flex-col'
 					baseDelay={0.3}
 					stepDelay={0.6}
 				>			
@@ -51,12 +51,14 @@ const IntroAIFittingSection = () => {
 						height={0}
 						isLine
 						marginBottom={21}
+						marginLeft={-8}
 					>
 						가상 피팅 이미지를 재생성할 수 있어요!
 					</Callout>
 					<Callout
 						height={0}
 						isLine
+						marginLeft={-8}
 					>
 						피팅 결과 이미지를 저장할 수 있어요!					
 					</Callout>
