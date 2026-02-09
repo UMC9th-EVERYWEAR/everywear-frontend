@@ -12,7 +12,6 @@ const Callout = ({ children, height, isLine, marginBottom, marginLeft }: Callout
 	<div
 		className={cn(
 			'flex items-center gap-5.5',
-			// 'animate-view-in', 
 		)}
 		style={{ height , marginBottom }}
 

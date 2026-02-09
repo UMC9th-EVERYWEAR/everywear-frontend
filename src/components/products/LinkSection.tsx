@@ -76,7 +76,7 @@ const LinkSection = ({
 			}
 
 			{
-				!loading && 
+				loading && 
 				<div
 					className="fixed inset-0 z-100 flex flex-col gap-20 items-center justify-center bg-black/50"
 				>				
