@@ -57,7 +57,7 @@ const FittingFrame = ({ type = 'BEFORE', imgUrl, state }: FittingFrameProps) => 
 							<img
 								src={imgUrl}
 								alt={`피팅 ${type} 이미지`}
-								className="w-full h-full object-cover"
+								className="w-full h-full object-cover border-none rounded-xl"
 							/>
 						)
 					)}
