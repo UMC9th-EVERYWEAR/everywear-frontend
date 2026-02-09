@@ -40,6 +40,7 @@ const ProductsAddPage = () => {
 		);
 	};
 
+
 	return (
 		<div className="py-7 px-5 flex flex-col items-center">
 			<div className="flex flex-col gap-1 mb-3">

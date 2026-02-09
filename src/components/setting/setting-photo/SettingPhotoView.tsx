@@ -111,7 +111,7 @@ const SettingPhotoView = ({
 				<button
 					onClick={representativeId === activeImageId ? notifyCannotDeleteRepresentative: onOpenDeleteModal}
 					className={cn(
-						'text-primary-600 border w-20 rounded-full h-11',
+						'text-primary-600 border w-20 rounded-full h-11 cursor-pointer',
 						isAddCardActive && 'text-neutral-400 pointer-events-none',
 					)}
 				>
@@ -121,7 +121,7 @@ const SettingPhotoView = ({
 				<button
 					onClick={ representativeId === activeImageId  ? notifyAlreadyRepresentative : onOpenChangeModal}
 					className={cn(
-						'bg-primary-600 text-white w-63.25 rounded-full h-11',
+						'bg-primary-600 text-white w-63.25 rounded-full h-11 cursor-pointer',
 						isAddCardActive && 'bg-neutral-400 pointer-events-none',
 					)}
 				>
