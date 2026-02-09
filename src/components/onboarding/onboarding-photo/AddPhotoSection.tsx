@@ -13,8 +13,6 @@ interface AddPhotoSectionProps {
   setShowGuide: () => void;
 }
 
-// 헤더에 대한 고민 필요
-
 const AddPhotoSection = ({ setShowGuide } : AddPhotoSectionProps) => {
 	const {
 		file,
@@ -30,6 +28,7 @@ const AddPhotoSection = ({ setShowGuide } : AddPhotoSectionProps) => {
 		captureFromCamera,
 	} = usePhotoInput();
 	const [isVerify, setIsVerify] = useState(false)
+	
 
 	usePreventRefresh(isVerify);
 
@@ -39,12 +38,13 @@ const AddPhotoSection = ({ setShowGuide } : AddPhotoSectionProps) => {
 	};
 
 	
+	const [resizedFile, setResizedFile] = useState<File | null>(null);
 
 	const handleConfirm = async () => {
 		if (!file) return;
 		console.log('원본 파일 용량(MB):', (file.size / 1024 / 1024).toFixed(2));
 		const resizedFile = await resizeImage(file);
-
+		setResizedFile(resizedFile);
 		setPhoto(resizedFile, previewUrl ?? '');
 		setIsVerify(true);
 		console.log(
@@ -75,7 +75,6 @@ const AddPhotoSection = ({ setShowGuide } : AddPhotoSectionProps) => {
 							<p className='text-neutral-900 mb-2.5'>한 명만 나온 사진을 등록해 주세요!</p>
 
 							<div className="border-dashed border w-full border-neutral-500 rounded-lg h-84 bg-onboarding-photo flex justify-center items-center text-neutral-600 overflow-hidden">
-								{/* 사진을 추가해주세요! 등 멘트 수정 필요해보임 */}
 								{previewUrl && 
 								<img
 									src={previewUrl} 
@@ -128,7 +127,6 @@ const AddPhotoSection = ({ setShowGuide } : AddPhotoSectionProps) => {
 					)}
 					muted
 				/>
-				{/*btn2 */}
 				<button
 					onClick={captureFromCamera}
 					className='absolute bottom-20 left-1/2 -translate-x-1/2 bg-white rounded-full w-15 h-15 flex justify-center items-center cursor-pointer'
@@ -147,24 +145,11 @@ const AddPhotoSection = ({ setShowGuide } : AddPhotoSectionProps) => {
 			{
 				isVerify && <VerifyingSection
 					previewUrl={previewUrl ?? ''}
-					resizingPhoto={file} 
+					resizingPhoto={resizedFile} 
 					setIsVerify={setIsVerify}
 				            />
 			}
 
-
-			{/* {resizedPreviewUrl && (
-				<div className="mt-6 px-5">
-					<p className="text-regular-12 text-neutral-500 mb-2">
-						리사이징 결과 미리보기 (테스트용)
-					</p>
-					<img
-						src={resizedPreviewUrl}
-						alt="resized-preview"
-						className="w-full max-h-80 object-contain border border-neutral-300 rounded-md"
-					/>
-				</div>
-			)} */}
 		</>
 	)
 }
