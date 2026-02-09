@@ -1,41 +1,60 @@
-import { useEffect, useRef, useState } from 'react';
-import { useNavigate } from 'react-router';
+import { useEffect, useMemo, useRef, useState } from 'react';
+import { useNavigate, useParams } from 'react-router';
 import TabBar from '@/src/components/ai-fitting/TabBar';
-import FittingItemInfo, { type ItemData } from '@/src/components/ai-fitting/FittingItemInfo';
+import FittingItemInfo from '@/src/components/ai-fitting/FittingItemInfo';
 import FittingTab from '@/src/components/ai-fitting/FittingTab';
 import ReviewTab from '@/src/components/ai-fitting/ReviewTab'; 
-import type {  FittingState, ReviewState } from '@/src/types/ai-fitting/status';
-import { MOCK_REVIEW_DATA } from '@/src/data/ai-fitting/reviewMockData'; 
+import type { FittingState, ReviewState } from '@/src/types/ai-fitting/status';
 import Toast from '@/src/components/common/Toast';
 import ToastContainer from '@/src/components/common/ToastContainer';
 import useToast from '@/src/hooks/domain/ai-fitting/UseToast';
 import type { ModalState } from '@/src/types/ai-fitting/modal';
 import { Modal } from '@/src/components/common/Modal';
+import { useProducts } from '@/src/hooks/service/product/useProducts';
+import useLike from '@/src/hooks/service/fitting/useLike';
+import usePostFitting from '@/src/hooks/service/fitting/usePostFitting';
 
 export type TabType = 'fitting' | 'review';
-
-const itemDataExample: ItemData = {
-	company: '무신사',
-	rating: 4.7,
-	title: '베이직 화이트 티셔츠',
-	price: 29000,
-	imgUrl: 'https://lh3.googleusercontent.com/d/1Xijhz5zKYVwsYP8ZANbMvCtTdlgIT-YU',
-	buyUrl: 'https://www.musinsa.com/products/5863714',
-};
 
 const AiFittingPage = () => {
 	const navigate = useNavigate();
 	const [activeTab, setActiveTab] = useState<TabType>('fitting');
-	const [isHearted, setIsHearted] = useState(false);
-	const [fittingState, setFittingState] = useState<FittingState>({ status: 'idle' });
 	const [reviewState, setReviewState] = useState<ReviewState>({ status : 'idle' });
 	const [modal, setModal] = useState<ModalState>({ type : 'none' });
 	const { toasts, createToast, deleteToast } = useToast();
 
+	// 전체 상품 조회 후 url에서 id 가져와 특정 상품 데이터 필터링
+	// 단일 상품 조회 api 생성 시 대체 예정
+	const { id } = useParams();
+	const { data, isSuccess } = useProducts();
+	const detailProduct = isSuccess && data ? data.find((p) => p.product_id === Number(id)) : null;
+
+	const { mutate : mutateLike } = useLike({ createToast });
+	const { mutate : mutateFitting,  data : resultFitting, isPending : isFittingLoading, isSuccess : isFittingSuccess, isError : isFittingError } = usePostFitting({ createToast })
+	
+	// FittingTab 상태
+	const  currentFittingState = useMemo((): FittingState => {
+		if (isFittingLoading) {
+			return { status: 'loading' };
+		}
+		if (isFittingSuccess) {
+			return { 
+				status: 'success', 
+				resultUrl: resultFitting?.fittingResultImageUrl,
+			};
+		}
+		if (isFittingError) {
+			return { status: 'error', error: 'UNKNOWN_ERROR' }; 
+		}
+		return { status: 'idle' };
+	}, [isFittingLoading, isFittingError, isFittingSuccess, resultFitting])
+
+	// 피팅 중 뒤로가기 방지용 
 	const allowExitRef = useRef(false);
-	const isAnalyzing = fittingState.status === 'loading' || reviewState.status === 'loading';
+	const isAnalyzing = isFittingLoading || reviewState.status === 'loading';
 	const isAnalyzingRef = useRef(false);
 
+	// useEffect(피팅 중 뒤로가기 방지)
 	useEffect(() => {
 		isAnalyzingRef.current = isAnalyzing;
 		// 분석이 시작되는 순간 히스토리를 하나 쌓아서 뒤로가기를 가로챕니다. -> 즉 1이 쌓이고 이때부턴 뒤로가기 되려면 -2가 되야함.
@@ -62,81 +81,41 @@ const AiFittingPage = () => {
 		return () => window.removeEventListener('popstate', handlePopState);
 	}, [navigate]);
 
-	const handleHeart = () => {
-		const nextState = !isHearted;
-		setIsHearted(nextState);
-		if (nextState) createToast({ message: '내 옷장에 추가되었습니다.' });
+
+	// 이벤트 핸들러
+	
+	// 좋아요 토글 핸들러
+	const handleHeart = (currentLikedStatus: boolean) => {
+		if (!detailProduct) return;
+        
+		mutateLike({ 
+			productId: Number(id), 
+			isLiked: currentLikedStatus, 
+		});
 	};
 
+	// 쇼핑몰 링크 이동 핸들러
 	const handleGoToShop = () => {
-		window.open(itemDataExample.buyUrl, '_blank', 'noopener,noreferrer');
+		// '_blank' : 새 창에서 열기
+		window.open(detailProduct?.product_url, '_blank', 'noopener,noreferrer');
 		setModal({ type: 'none' });
 	};
 
+	// 피팅 시작 핸들러
 	const handleStartFitting = () => {
+		if (!detailProduct) return;
 		createToast({ message: 'AI 피팅을 시작하겠습니다.' });
-		setFittingState({ status: 'loading' });
+
+		mutateFitting({
+			payload : { productId : detailProduct.product_id },
+		})
 	};
 
-	const handleSuccessFitting = () => {
-		createToast({ message: '가상 피팅이 완료되었습니다.' });
-		setFittingState({
-			status: 'success',
-			resultUrl: 'https://lh3.googleusercontent.com/d/1XuItc3eisxkLo6ZXqClQs-ZcsbYU0brI',
-		});
-	};
-
-	const handleSuccessReview = () => {
-		setReviewState({
-			status: 'success',
-			summary: { status: 'loading' },
-			keywords: MOCK_REVIEW_DATA.keywords,
-			reviews: MOCK_REVIEW_DATA.reviews,
-		});
-	};
-
-	const handleSuccessSummary = () => {
-		setReviewState((prev) => {
-			if (prev.status !== 'success') return prev;
-			return {
-				...prev,
-				summary: { status: 'success', text: MOCK_REVIEW_DATA.summary },
-			};
-		});
-	};
-
-	// const handleErrorFitting = (errorReason: FittingErrorReason) => {
-	// 	setFittingState({ status: 'error', error: errorReason });
-	// 	createToast({ message: 'AI 피팅을 실패했습니다.' });
-	// };
-
-	// const handleErrorReview = () => {
-	// 	setReviewState({ status: 'error', error: 'SERVER_ERROR' });
-	// };
-
-	// const handleErrorSummary = () => {
-	// 	setReviewState((prev) => {
-	// 		if (prev.status !== 'success') return prev;
-	// 		return {
-	// 			...prev,
-	// 			summary: { status: 'error', error: 'INSUFFICIENT_REVIEWS' },
-	// 		};
-	// 	});
-	// 	createToast({ message: '리뷰 요약에 실패했습니다.' });
-	// };
-
+	// 피팅중 뒤로가기 및 경로 초기화 핸들러
 	const handleExitConfirm = () => {
 		allowExitRef.current = true;
 		setModal({ type: 'none' });
 		navigate(-2); // pushState로 쌓인 히스토리까지 고려하여 -2 이동
-	};
-
-	const handleSimulateFitting = () => {
-		handleStartFitting();
-		setReviewState({ status: 'loading' });
-		setTimeout(handleSuccessFitting, 5000);
-		setTimeout(handleSuccessReview, 1000);
-		setTimeout(handleSuccessSummary, 2000);
 	};
 
 	return (
@@ -161,17 +140,17 @@ const AiFittingPage = () => {
 				/>
 
 				<FittingItemInfo
-					data={itemDataExample}
-					isHearted={isHearted}
+					key={detailProduct?.product_id}
+					data={detailProduct}
 					handleHeart={handleHeart}
 					handleBuy={() => setModal({ type: 'buy' })}
 				/>
 
 				{activeTab === 'fitting' && (
-					<FittingTab 
-						state={fittingState} 
-						handleStartFitting={handleSimulateFitting} 
-						handleRestartFitting={handleSimulateFitting}
+					<FittingTab
+						state={currentFittingState} 
+						handleStartFitting={handleStartFitting} 
+						handleRestartFitting={handleStartFitting}
                        
 					/>
 				)}

@@ -6,7 +6,7 @@ import { LANDING_IMAGES } from '@/src/constants/images'
 const IntroAIFittingSection = () => {
 	return(
 		<div
-			className='flex flex-col items-center justify-center w-full pt-10 gap-10'
+			className='flex flex-col items-center justify-center w-full gap-10'
 		>
 			<SectionTitle
 				sectionTitle='AI 가상 피팅'
@@ -19,12 +19,12 @@ const IntroAIFittingSection = () => {
 					<img
 						src={LANDING_IMAGES.INTRO_2}
 						alt="intro2"
-						className="relative object-cover z-20"
+						className="w-35 relative object-cover z-20"
 					/>			
 				</div>
 
 				<ScrollAnimationContainer
-					className='absolute top-12 right-3.5 flex flex-col'
+					className='absolute top-12 right-5 flex flex-col'
 					baseDelay={0.3}
 					stepDelay={0.6}
 				>			
@@ -51,12 +51,14 @@ const IntroAIFittingSection = () => {
 						height={0}
 						isLine
 						marginBottom={21}
+						marginLeft={-8}
 					>
 						가상 피팅 이미지를 재생성할 수 있어요!
 					</Callout>
 					<Callout
 						height={0}
 						isLine
+						marginLeft={-8}
 					>
 						피팅 결과 이미지를 저장할 수 있어요!					
 					</Callout>

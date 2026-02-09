@@ -39,6 +39,7 @@ const ProductCard = ({
 	rating = 0, 
 	imageUrl, 
 	isCloset = false ,
+	productUrl,
 }: ProductCardProps) => {
  
 	const navigate = useNavigate();
@@ -52,10 +53,21 @@ const ProductCard = ({
 		}
 	};
 
+	// 구매하기 버튼 클릭 시 핸들러
+	const handlePurchase = () => {
+		if (productUrl) window.open(productUrl);
+	}
+
+	const handleRecentFitting = () => {
+		if (id) {
+			navigate(`/recent-fiitng/${id}`)
+		}
+	}
+
 	return (
 		<button 
 			onClick={handleCardClick}
-			className="flex flex-col items-center max-w-[200px] w-full shrink-0 cursor-pointer active:scale-[0.98] transition-transform"
+			className="flex flex-col items-center min-w-10 max-w-[200px] w-full shrink-0 cursor-pointer active:scale-[0.98] transition-transform"
 		>
       
 			{/* 1. 이미지 영역 */}
@@ -102,8 +114,14 @@ const ProductCard = ({
 						className="mt-2.5 flex justify-between w-full"
 						onClick={(e) => e.stopPropagation()}
 					>
-						<button className={ButtonClassName}>구매하기</button>
-						<button className={ButtonClassName}>AI 분석하기</button>
+						<button
+							className={ButtonClassName}
+							onClick={handlePurchase}
+						>구매하기</button>
+						<button
+							className={ButtonClassName}
+							onClick={handleRecentFitting}
+						>AI 분석하기</button>
 					</button>
 				)}
 			</div>
