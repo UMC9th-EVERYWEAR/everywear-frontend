@@ -3,15 +3,10 @@ import Callout from './Callout'
 import ScrollAnimationContainer from '../onboarding/onboarding/ScrollAnimationContainer'
 import { LANDING_IMAGES } from '@/src/constants/images'
 
-interface IntroAIReviewSectionProps {
-  onNext?: () => void
-}
 
-
-const IntroAIReviewSection = ({ onNext }: IntroAIReviewSectionProps) => {
+const IntroAIReviewSection = () => {
 	return(
 		<button
-			onClick={onNext}
 			className='flex flex-col items-center justify-center w-full gap-10'
 		>
 			<SectionTitle

@@ -7,11 +7,10 @@ import LandingFooter from '@/src/components/landing/LandingFooter'
 import { PATH } from '@/src/constants/path'
 import { useMe } from '@/src/hooks/service/auth/useMe'
 import { cn } from '@/src/utils/cn'
-import { useEffect, useRef } from 'react'
+import { useEffect } from 'react'
 import { useNavigate } from 'react-router'
 
 const LadingPage = () => {
-	const introRef = useRef<HTMLDivElement>(null)
 	const navigate = useNavigate();
 	const { data: me } = useMe();
 
@@ -23,26 +22,15 @@ const LadingPage = () => {
 
 
 
-	const scrollToIntro = () => {
-		// setScrollEnabled(true)
-		requestAnimationFrame(() => {
-			introRef.current?.scrollIntoView({ behavior: 'smooth' })
-		})	}
-
-	const scrollToHow = () => {
-		// howRef.current?.scrollIntoView({ behavior: 'smooth' })
-	}
-
 	return (
 		<div
 			className={cn('w-full ')}
 		>
 			{/* Hero  */}
 			<section
-				// ref={heroRef}
 				className="h-screen"
 			>
-				<HeroSection onNext={scrollToIntro} />
+				<HeroSection />
 			</section>
 
 			<section
@@ -67,7 +55,7 @@ const LadingPage = () => {
 				className="relative h-[200vh] bg-landing-back"
 			>
 				<div className="sticky top-0 h-screen flex items-center justify-center">
-					<IntroAIReviewSection onNext={scrollToHow} />
+					<IntroAIReviewSection />
 				</div>
 			</section>
 
