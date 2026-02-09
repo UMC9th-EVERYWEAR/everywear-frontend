@@ -8,6 +8,7 @@ import MallGuide from '@/src/components/products/MallGuide';
 import type { CategoryKey } from '@/src/types/products/product';
 import { useProductsByCategory } from '@/src/hooks/service/product/useProducts';
 import ItemSkeleton from '@/src/components/closet/ItemSkeleton';
+import ErrorPage from '../../error/error-page';
 
 
 const ProductsPage = () => {
@@ -19,9 +20,10 @@ const ProductsPage = () => {
 
 	const handleSelected = (category : CategoryKey) => setSelected(category)
 
-	const { data: filteredProducts = [] , isLoading: productLodaing } = useProductsByCategory(selected);
+	const { data: products = [] , isLoading: productLoading, isError, error } = useProductsByCategory(selected);
 
 
+	if (isError) return <ErrorPage error={error} />;
 
 	return(
 		<div 
@@ -44,19 +46,19 @@ const ProductsPage = () => {
 				/>		
 			</div>
 
-			<div className='w-full flex-col mb-5'> {/* 나중에 width 설정 바꿔야 함 */}
+			<div className='w-full flex-col mb-5'>
 
 				<ItemAddCountSection
 					category={selected}
-					count={filteredProducts.length}
+					count={products.length}
 					onClick={() => navigate(PATH.PRODUCTS.ADD)}
 				/>
 				{
-					productLodaing ? (
+					productLoading ? (
 						<ItemSkeleton />
 					) :(
 						<ItemBrowseSection
-							data={filteredProducts}
+							data={products}
 						/>
 					)
 				}
