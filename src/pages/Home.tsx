@@ -2,19 +2,15 @@ import { useRef, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router';
 import { useQueryClient } from '@tanstack/react-query';
 import { Button } from '@/src/components/common/Button';
-import MusinsaLogo from '@/public/svgs/LogoImages/MusinsaLogo.svg';
-import ZigzagLogo from '@/public/svgs/LogoImages/ZigzagLogo.png';
-import Logo29cm from '@/public/svgs/LogoImages/29cmLogo.svg';
-import WLogo from '@/public/svgs/LogoImages/WLogo.svg';
 import ProductCard from '@/src/components/common/ProductCard';
 import RectangleIcon from '@/public/svgs/LogoImages/Rectangle.svg'; 
 import EllipseIcon from '@/public/svgs/LogoImages/Ellipse.svg';     
-import { MALL_LINKS } from '../constants/link';
 import { useRecentFittingsQuery, useHomeProductsQuery } from '@/src/hooks/queries/useHomeQueries';
 import { QUERY_KEYS } from '../constants/query-key';
 import { PATH } from '../constants/path';
 import type { FittingSummary, ListDTO } from '../apis/generated';
 import ProductCardSkeleton from '../components/common/ProductCardSkeleton';
+import PartnerMallSection from '../components/products/PartnerMallSection';
 
 const Home = () => {
 	const navigate = useNavigate();
@@ -71,28 +67,7 @@ const Home = () => {
 			</section>
 
 			{/* 2. 파트너 쇼핑몰 리스트 */}
-			<section className="flex gap-2 px-4 py-4 bg-white overflow-x-auto no-scrollbar">
-				{[
-					{ url: MALL_LINKS.MUSINSA.url, src: MusinsaLogo, alt: '무신사', bg: 'bg-black' },
-					{ url: MALL_LINKS.ZIGZAG.url, src: ZigzagLogo, alt: '지그재그', bg: 'bg-[#E592FF]' },
-					{ url: MALL_LINKS.CM.url, src: Logo29cm, alt: '29CM', bg: 'bg-black' },
-					{ url: MALL_LINKS.WCONCEPT.url, src: WLogo, alt: 'W컨셉', bg: 'bg-white border border-[var(--color-neutral-100)]' },
-				].map((mall, idx) => (
-					<a
-						key={idx}
-						href={mall.url}
-						target="_blank"
-						rel="noreferrer"
-						className={`w-[75px] h-[75px] ${mall.bg} rounded-[6px] flex items-center justify-center overflow-hidden shrink-0`}
-					>
-						<img
-							src={mall.src}
-							alt={mall.alt}
-							className="w-full h-full object-contain p-1"
-						/>
-					</a>
-				))}
-			</section>
+			<PartnerMallSection isHome/>
 
 			{/* 3. 상품 추가 버튼 */}
 			<section className="flex flex-col px-4 mt-4 gap-4">

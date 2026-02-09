@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router';
 import { ICON_PATHS } from '../../constants/path'; 
-import { LOGO_IMAGES } from '@/src/constants/images';
+import { EverWearIcon } from '@/src/assets/icons/components/Icons';
 
 interface HeaderProps {
   type: 'main' | 'sub'; 
@@ -24,12 +24,8 @@ const Header = ({ type, title = 'EVERY WEAR', onBack }: HeaderProps) => {
 		<header className="w-full h-[45px] px-4 bg-white flex items-center sticky top-0 z-30 shadow-12">
 			{type === 'main' ? (
 			/* 1. 메인 헤더 레이아웃*/
-				<div className="flex justify-between items-end w-full pb-1">
-					<img 
-						src={LOGO_IMAGES.EVERYWEAR}
-						alt="Everywear" 
-						className="h-[18px] w-auto object-contain"
-					/>
+				<div className="flex justify-between items-end w-full">
+					<EverWearIcon width={133}/>
 					<button 
 						className="text-primary-600 transition-opacity active:opacity-50 cursor-pointer"
 						aria-label="설정"

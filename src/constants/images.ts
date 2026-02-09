@@ -66,7 +66,7 @@ export const LOGO_IMAGES = {
 	HANGER_OFF: '/svgs/LogoImages/hanger-off.svg',
 	CLOTHES_ON: '/svgs/LogoImages/clothes-on.svg',
 	CLOTHES_OFF: '/svgs/LogoImages/clothes-off.svg',
-	CLOSET_ON: '/svgs/LogoImages/closet-on.svg',
+	CLOSET_ON: '/svgs/LogoImages/closet-on.svg?react',
 	CLOSET_OFF: '/svgs/LogoImages/closet-off.svg',
 
 } as const;

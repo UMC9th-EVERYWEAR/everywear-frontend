@@ -1,4 +1,5 @@
-import { ONBOARDING_GUIDE_IMAGES, ONBOARDING_IMAGES } from '@/src/constants/images';
+import { GoodBoxIcon, XBoxIcon } from '@/src/assets/icons/components/Icons';
+import { ONBOARDING_GUIDE_IMAGES } from '@/src/constants/images';
 import { cn } from '@/src/utils/cn';
 
 
@@ -49,13 +50,16 @@ const GuidePhoto = ({
 					alt='guide'
 					className="w-full h-full object-cover"
 				/>
-				<img	
-					src={variant === 'GOOD' ? ONBOARDING_IMAGES.CHECKBOX_MARKED : ONBOARDING_IMAGES.CHECKBOX_MARKED_CLOSE}
-					alt='check'
+				{variant === 'GOOD' ? 		<GoodBoxIcon
+					className={cn('absolute right-2 bottom-2  rounded-xs',
+						hasText ? 'w-6' : 'w-4.5')
+					}
+				                        /> : 		<XBoxIcon
 					className={cn('absolute right-2 bottom-2',
 						hasText ? 'w-6' : 'w-4.5')
 					}
-				/>
+				                               />}
+		
 			</div>
 			{
 				hasText && message && 

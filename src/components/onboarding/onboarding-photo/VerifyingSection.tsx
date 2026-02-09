@@ -64,8 +64,8 @@ const VerifyingSection = ({ previewUrl, resizingPhoto, setIsVerify } : Verifying
 	useEffect(() => {
 		if (phase !== 'VERIFYING') return;
 
-		const t1 = window.setTimeout(() => setStepIndex(1), 10000);
-		const t2 = window.setTimeout(() => setStepIndex(2), 12000);
+		const t1 = window.setTimeout(() => setStepIndex(1), 12000);
+		const t2 = window.setTimeout(() => setStepIndex(2), 14000);
 
 
 		return () => {
@@ -122,6 +122,7 @@ const VerifyingSection = ({ previewUrl, resizingPhoto, setIsVerify } : Verifying
 				<FittingProgressBox status={status}/>
 
 				<VerifySteps stepStatus={stepStatus}/>
+
 				{
 					status === 'SUCCESS' && 
 					<div className='flex flex-col gap-2 -mt-4 animate-frame-in'>

@@ -1,6 +1,4 @@
-import loadingIcon from '@/public/svgs/onboarding/loadingOne.svg';
-import checkMarked from '@/public/svgs/login/check-box.svg';
-import noCheckMarked from '@/public/svgs/onboarding/close-box.svg';
+import { CheckLoginIcon, LoadingIcon, XBoxIcon } from '@/src/assets/icons/components/Icons';
 
 export type FittingStatus = 'LOADING' | 'SUCCESS' | 'FAIL';
 
@@ -28,9 +26,10 @@ const FittingResultPreview = ({
 			<div className="w-41 h-50 rounded-lg bg-gray-100 flex items-center justify-center">
 				{status === 'LOADING' && (
 					<div className="flex flex-col items-center gap-2.5 text-regular-16">
-						<img
-							src={loadingIcon}
-							alt="loading"
+
+						<LoadingIcon
+							width={28}
+							height={28}
 						/>
 						<p className="text-regular-16 text-neutral-500 text-center">
 							AI 분석 중
@@ -40,10 +39,10 @@ const FittingResultPreview = ({
 
 				{status === 'SUCCESS'  && (
 					<div className="flex flex-col items-center gap-2.5 text-regular-16">
-						<img
-							src={checkMarked}
-							alt="fitting-result"
-							className="w-7 h-7 object-cover "
+						<CheckLoginIcon
+							width={28}
+							height={28}
+							className={  'text-primary-300 rounded-xs'}
 						/>
 						<p className="text-regular-16 text-neutral-500 text-center">
 							인식 성공
@@ -53,11 +52,15 @@ const FittingResultPreview = ({
 
 				{status === 'FAIL' && (
 					<div className="flex flex-col items-center gap-2.5 text-regular-16">
-						<img
+						<XBoxIcon
+							width={28}
+							height={28}
+						/>
+						{/* <img
 							src={noCheckMarked}
 							alt="fitting-result"
 							className="w-7 h-7 object-cover "
-						/>
+						/> */}
 						<p className="text-regular-16 text-neutral-500 text-center">
 							인식 실패
 						</p>
