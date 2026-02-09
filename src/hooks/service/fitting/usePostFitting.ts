@@ -16,12 +16,11 @@ function usePostFitting({ createToast } : usePostFittingProps) {
 	const queryClient = useQueryClient();
 	return useMutation({
 		mutationFn: ({ payload } : FittingVariable) => requestFitting(payload),
-		onSuccess: (data) => {
+		onSuccess: () => {
 			queryClient.invalidateQueries({
 				queryKey: QUERY_KEYS.FITTING.SESSION,
 			});
 			createToast({ message: '가상 피팅이 완료되었습니다.' });
-			console.log('피팅 결과 : ', data);
 		},
 
 		onError:(error) => {
