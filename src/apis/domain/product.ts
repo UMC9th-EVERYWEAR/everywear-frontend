@@ -3,8 +3,6 @@ import type { ImportDTO, ListDTO } from '../generated';
 import type { CategoryKey } from '@/src/types/products/product';
 
 // products-page
-
-
 export const getProducts = async () => {
 	const { data } = await apiClient.getProducts();
 	return data.result?.products ?? [];
@@ -55,6 +53,11 @@ export const getProductsByCategory = async (category: CategoryKey) => {
 	const fetcher = productFetchers[category] ?? getProducts;
 	return fetcher();
 };
+
+export const getProductDetail = async (productId : number) => {
+	const { data } = await apiClient.getProductDetail(productId);
+	return data.result?.product ?? [];
+}
 
 // home-page
 export const getHomeProducts = async () => {

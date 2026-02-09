@@ -9,6 +9,7 @@ import type {
   ApiResponseListFittingSummary,
   ApiResponseLong,
   ApiResponseMapStringObject,
+  ApiResponseProductDetailResponse,
   ApiResponseProductListResponse,
   ApiResponseString,
   ApiResponseTokenRefreshResponse,
