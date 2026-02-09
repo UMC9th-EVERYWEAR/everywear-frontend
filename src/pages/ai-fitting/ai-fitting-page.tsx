@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { useNavigate, useParams } from 'react-router';
 import TabBar from '@/src/components/ai-fitting/TabBar';
 import FittingItemInfo from '@/src/components/ai-fitting/FittingItemInfo';
@@ -31,8 +31,9 @@ const AiFittingPage = () => {
 
 	const { mutate : mutateLike } = useLike({ createToast });
 	const { mutate : mutateFitting,  data : resultFitting, isPending : isFittingLoading, isSuccess : isFittingSuccess, isError : isFittingError } = usePostFitting({ createToast })
-
-	const getFittingState = (): FittingState => {
+	
+	// FittingTab 상태
+	const  currentFittingState = useMemo((): FittingState => {
 		if (isFittingLoading) {
 			return { status: 'loading' };
 		}
@@ -46,10 +47,7 @@ const AiFittingPage = () => {
 			return { status: 'error', error: 'UNKNOWN_ERROR' }; 
 		}
 		return { status: 'idle' };
-	};
-
-	// FittingTab 상태
-	const currentFittingState = getFittingState();
+	}, [isFittingLoading, isFittingError, isFittingSuccess, resultFitting])
 
 	// 피팅 중 뒤로가기 방지용 
 	const allowExitRef = useRef(false);

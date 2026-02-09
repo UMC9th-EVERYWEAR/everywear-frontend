@@ -3,6 +3,7 @@ import { LoadingSpinner } from './LoadingSpinner';
 import { cn } from '@/src/utils/cn';
 import { useNavigate } from 'react-router';
 import { PATH } from '@/src/constants/path';
+import { useCallback } from 'react';
 
 export type ImgType = 'BEFORE' | 'AFTER';
 
@@ -15,9 +16,9 @@ interface FittingFrameProps {
 const FittingFrame = ({ type = 'BEFORE', imgUrl, state }: FittingFrameProps) => {
 	const navigate = useNavigate();
 
-	const handleChangeProfileImg = () => {
+	const handleChangeProfileImg = useCallback(() => {
 		navigate(PATH.SETTING.CHANGE_PHOTO);
-	}
+	}, [navigate]);
 
 	return (
 		<div
