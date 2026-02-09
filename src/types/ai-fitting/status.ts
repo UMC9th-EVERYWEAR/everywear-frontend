@@ -10,7 +10,7 @@ export type FittingErrorReason =
 export type FittingState = 
   | { status: 'idle' }    // 초기 상태 (아무것도 안 함)
   | { status: 'loading'} // AI 생성 중
-  | { status: 'success'; resultUrl: FittingData}     // 성공 (결과 이미지 포함)
+  | { status: 'success'; resultUrl?: FittingData}     // 성공 (결과 이미지 포함)
   | { status: 'error'; error: FittingErrorReason };   // 실패 (에러 원인 포함)
 
 export type FittingStateStatus = 'idle' | 'loading' | 'success' | 'error';
