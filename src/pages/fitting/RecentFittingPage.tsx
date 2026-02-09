@@ -4,17 +4,42 @@ import { formatToMonthGroup } from '@/src/utils/date';
 import { useFittings } from '@/src/hooks/service/fitting/useFittings';
 import { PATH } from '@/src/constants/path';
 
+interface FittingItem {
+    id: number;
+    createdAt: string;
+    resultImageUrl: string;
+    status: 'COMPLETED' | 'PROCESSING' | 'FAILED';
+}
+
 const RecentFitting = () => {
 	const navigate = useNavigate();
-	const { data = [], isLoading } = useFittings();
+    
+	const { data = [], isLoading } = useFittings() as unknown as { 
+        data: FittingItem[]; 
+        isLoading: boolean 
+    };
 
+	// 월별 그룹화
 	const months = useMemo(() => {
 		if (!data.length) return [];
-		const uniqueMonths = Array.from(new Set(data.map((item) => formatToMonthGroup(item.createdAt))));
+		const uniqueMonths = Array.from(
+			new Set(data.map((item) => formatToMonthGroup(item.createdAt))),
+		);
 		return uniqueMonths.sort((a, b) => b.localeCompare(a));
 	}, [data]);
 
 	if (isLoading) return <div className="flex-1 bg-white" />;
+
+	// 내역 없음 처리 -> DATA길이를 보고 판단
+	if (data.length === 0) {
+		return (
+			<div className="flex flex-1 flex-col items-center justify-center h-full bg-white">
+				<p className="text-[var(--color-neutral-500)] text-medium-16">
+					피팅 내역이 없습니다
+				</p>
+			</div>
+		);
+	}
 
 	return (
 		<main className="flex-1 overflow-y-auto bg-white pb-20 no-scrollbar">
@@ -23,7 +48,6 @@ const RecentFitting = () => {
 					key={month}
 					className="mt-8 px-4"
 				>
-					{/* 월별 타이틀 */}
 					<h2 className="mb-4 text-[var(--color-neutral-900)] text-medium-16 font-bold leading-normal">
 						{month}
 					</h2>
@@ -51,14 +75,9 @@ const RecentFitting = () => {
 										loading="lazy"
 									/>
                                     
-									{/* 날짜 표시 레이어 */}
 									<div className="absolute bottom-2 w-full text-center">
 										<span className="text-white text-[10px] font-medium drop-shadow-md">
-											{new Date(item.createdAt).toLocaleDateString('ko-KR', {
-												year: 'numeric',
-												month: 'numeric',
-												day: 'numeric',
-											}).replace(/\. /g, '.').replace(/\.$/, '')}
+											{new Date(item.createdAt).toLocaleDateString('ko-KR').replace(/\.$/, '')}
 										</span>
 									</div>
 								</div>
