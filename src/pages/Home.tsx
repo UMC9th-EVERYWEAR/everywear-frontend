@@ -41,7 +41,6 @@ const Home = () => {
 	const [fittingScrollRatio, setFittingScrollRatio] = useState(0);
 	const fittingScrollRef = useRef<HTMLDivElement>(null);
 
-	// ✅ 서버 응답 데이터 매핑
 	const productsList = homeProducts ?? [];
 
 	const handleProductScroll = () => {
@@ -69,8 +68,6 @@ const Home = () => {
 
 	return (
 		<div className='flex flex-col w-full bg-white pb-10 min-h-[calc(100vh-101px)]'>
-      
-
 			{/* 1. 파트너 쇼핑몰 타이틀 */}
 			<section className='px-4 pt-6 pb-2'> 
 				<h2 className='text-[var(--color-neutral-900)] text-medium-16 mt-1 font-bold'>
@@ -177,7 +174,6 @@ const Home = () => {
 					)}
 				</div>
 
-				{/* 상품 인디케이터 */}
 				<div className="flex justify-center items-center mt-2 h-[12px]">
 					<div className="relative flex items-center justify-center w-[55px] h-[6px]">
 						<img
@@ -233,7 +229,8 @@ const Home = () => {
 							<button 
 								key={fitting.fittingId} 
 								className="min-w-[137px] h-[182px] bg-neutral-100 rounded-[10px] overflow-hidden shrink-0 cursor-pointer active:opacity-80 transition-opacity"
-								onClick={() => navigate(`/ai-fitting/${fitting.fittingId}`)}
+								// 💡 수정: 생성 페이지가 아닌 '상세 조회'(/fittings/ID) 경로로 이동
+								onClick={() => navigate(PATH.FITTING_DETAIL.replace(':id', String(fitting.fittingId)))}
 							>
 								<img 
 									src={fitting.fittingResultImage} 
@@ -251,7 +248,6 @@ const Home = () => {
 					)}
 				</div>
 
-				{/* 피팅 인디케이터 */}
 				<div className="flex justify-center items-center mt-2 h-[12px]">
 					<div className="relative flex items-center justify-center w-[55px] h-[6px]">
 						<img
