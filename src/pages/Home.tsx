@@ -104,9 +104,12 @@ const Home = () => {
 
 			{/* 3. 상품 추가 버튼 */}
 			<section className="flex flex-col px-4 mt-4 gap-4">
-				<span className="self-center text-center text-[var(--color-primary-300)] text-regular-10 tracking-[-0.3px] cursor-pointer">
+				<button 
+					onClick={()=>setShowGuide(true)}
+					className="self-center text-center text-[var(--color-primary-300)] text-regular-10 tracking-[-0.3px] cursor-pointer"
+				>
 					유명 브랜드 가상 피팅 가이드
-				</span>
+				</button>
 				<div className="w-full">
 					<Button 
 						variant="filled" 

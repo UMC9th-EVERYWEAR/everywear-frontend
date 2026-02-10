@@ -11,8 +11,8 @@ export const resizeImage = async (
 	options?: ResizeImageOptions,
 ): Promise<File> => {
 	const blob = await imageCompression(file, {
-		maxSizeMB: options?.maxSizeMB ?? 1.5,
-		maxWidthOrHeight: options?.maxWidthOrHeight ?? 2048,
+		maxSizeMB: options?.maxSizeMB ?? 1,
+		maxWidthOrHeight: options?.maxWidthOrHeight ?? 1024,
 		initialQuality: options?.initialQuality ?? 0.95,
 		alwaysKeepResolution: true,
 		useWebWorker: true,
