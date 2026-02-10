@@ -1,19 +1,24 @@
 import { PATH } from '@/src/constants/path';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
-import type { FallbackProps } from 'react-error-boundary';
+// import type { FallbackProps } from 'react-error-boundary';
 
 
 
-const ErrorPage = ({ error }: FallbackProps) => {
+type ErrorPageProps = {
+  error?: unknown;
+};
+
+const ErrorPage = ({ error }: ErrorPageProps) => {
 	const [remainingSeconds, setRemainingSeconds] = useState(3);
+	const navigate = useNavigate();
+
 	const message =
     error instanceof Error
     	? error.message
     	: 'Unexpected error occurred';
 
 
-	const navigate = useNavigate();
 
 	useEffect(() => {
 	  const timer = setTimeout(() => {

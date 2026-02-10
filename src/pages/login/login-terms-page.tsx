@@ -39,7 +39,6 @@ const LoginTermsPage = () => {
 		});
 	};
 
-	// 개별 토글
 	const toggleOne = (key: TermType) => {
 		setChecked((prev) => ({
 			...prev,
@@ -51,8 +50,6 @@ const LoginTermsPage = () => {
 	const handleLogin = () => {
 		toggleAgree(undefined, {
 			onSuccess: () => navigate(PATH.ONBOARDING.ROOT),
-			// 		TODO:	약관 동의 후 → 유저 정보 다시 불러와서(me)
-			// 실제로 동의가 반영됐는지 확인 
 		})
 	};
 
@@ -72,7 +69,6 @@ const LoginTermsPage = () => {
 			</div>
 
 			<div className="flex flex-col gap-3 w-full px-6 max-w-80">
-				{/* 전체 동의 */}
 				<TermsCheckBox
 					checked={isAllChecked}
 					label="서비스 약관 전체 동의"
@@ -80,8 +76,6 @@ const LoginTermsPage = () => {
 				/>
 
 				<div className="h-px w-full  bg-neutral-200" />
-
-				{/* 개별 약관 */}
 				{(Object.keys(TERMS_CONFIG) as TermType[]).map((key) => (
 					<TermsCheckBox
 						key={key}
@@ -95,10 +89,9 @@ const LoginTermsPage = () => {
 			</div>
 			<div
 				className={`
-    max-w-87 w-full
-    transition-all duration-300 ease-out
-    ${isAllChecked ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2 pointer-events-none'}
-  `}
+				max-w-87 w-full
+				transition-all duration-300 ease-out
+				${isAllChecked ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2 pointer-events-none'}`}
 			>
 				<Button
 					disabled={!isAllChecked || togglepending}

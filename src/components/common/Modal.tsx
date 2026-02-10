@@ -27,7 +27,7 @@ export const Modal = ({
 			onClick={onClose}
 		>
 			<button
-				className="flex w-[303px] p-[20px] flex-col items-center gap-[16px] rounded-[12px] bg-white shadow-12"
+				className="flex w-[303px] p-[20px] flex-col items-center gap-[16px] rounded-[12px] bg-white shadow-12 animate-guide-down"
 				onClick={(e) => e.stopPropagation()}
 			>
 				<div className="flex flex-col items-center gap-[8px] text-center w-full">

@@ -30,8 +30,7 @@ const LoginPage = () => {
 						className='px-11 sm:w-400'
 					/>
 					<div className='text-center text-neutral-700 text-regular-16'> {/* breakpoin에는 커스텀 클래스 적용 안되는 문제 해결 필요 */}
-						 {/* TODO: 추후 폰트 수정 */}
-						<p className=''>Every Wear에 오신걸 환영합니다</p> 
+						<p>Every Wear에 오신걸 환영합니다</p> 
 						<p> 간편하게 로그인하고 스마트 쇼핑을 시작하세요</p>
 					</div>
 				</div>

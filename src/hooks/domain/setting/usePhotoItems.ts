@@ -29,8 +29,8 @@ export function usePhotoItems ({ profileData, pendingUploads, activeRealIndex }:
 		return [...sortedItems, ...uploadingPhotos, ...emptySlots];
 	})();
 
-
+	const itemIds = profileData.map((i)=> i.profileImageId).filter((i): i is number => i !== undefined)
 	const activeImageId =
 	filledPhotoItems[activeRealIndex]?.profileImageId;
-	return { photoItems: filledPhotoItems, activeImageId }
+	return { photoItems: filledPhotoItems, activeImageId, itemIds }
 }
