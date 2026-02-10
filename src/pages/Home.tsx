@@ -15,11 +15,17 @@ import { QUERY_KEYS } from '../constants/query-key';
 import { PATH } from '../constants/path';
 import type { FittingSummary, ListDTO } from '../apis/generated';
 import ProductCardSkeleton from '../components/common/ProductCardSkeleton';
+import MallGuide from '../components/products/MallGuide';
+
+const INDICATOR_MAX_DISTANCE = 37;
 
 const Home = () => {
 	const navigate = useNavigate();
 	const queryClient = useQueryClient();
+	const [showGuide, setShowGuide]  = useState(false)
 
+
+	
 	// 💡 홈 진입 시 데이터를 항상 최신으로 유지하기 위한 무효화 처리
 	useEffect(() => {
 		queryClient.invalidateQueries({ queryKey: QUERY_KEYS.PRODUCT.LIST });
@@ -52,8 +58,13 @@ const Home = () => {
 			if (maxScrollLeft > 0) setFittingScrollRatio(scrollLeft / maxScrollLeft);
 		}
 	};
-
-	const INDICATOR_MAX_DISTANCE = 37;
+			
+	if(showGuide)
+	{
+		return(
+			<MallGuide onClose={()=> setShowGuide(false)} />
+		)
+	}
 
 	return (
 		<div className='flex flex-col w-full bg-white pb-10 min-h-[calc(100vh-101px)]'>

@@ -1,4 +1,5 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import 'webrtc-adapter';
 import { getWebcamStream } from '@/src/utils/getWebcam';
 
 export const useCameraCapture = () => {
@@ -6,16 +7,36 @@ export const useCameraCapture = () => {
 
 	const videoRef = useRef<HTMLVideoElement | null>(null);
 	const canvasRef = useRef<HTMLCanvasElement | null>(null);
-	  const streamRef = useRef<MediaStream | null>(null);
+	const streamRef = useRef<MediaStream | null>(null);
 
+	const stopCamera = () => {
+		streamRef.current?.getTracks().forEach((t)=> t.stop())
+		streamRef.current = null;
+
+		if(videoRef.current) {
+			videoRef.current.srcObject = null;
+		}
+	}
 
 	const openCamera = async () => {
 		if (!videoRef.current) return;
+		try { 
+			if(streamRef.current) return;
 
-		const stream = await getWebcamStream();
-		streamRef.current = stream;
-		videoRef.current.srcObject = stream;
-		setIsCamera(true);
+			const stream = await getWebcamStream();
+			streamRef.current = stream;
+			videoRef.current.srcObject = stream;
+			setIsCamera(true);
+		} catch (e){
+			console.error('Camera access failed', e);
+			stopCamera();
+			setIsCamera(false);
+		};
+	}
+
+	const closeCamera = () => {
+		stopCamera();
+		setIsCamera(false)
 	};
 
 	const capturePhoto = (): string | null => {
@@ -31,12 +52,17 @@ export const useCameraCapture = () => {
 		ctx.drawImage(video, 0, 0);
 
 		// 카메라 종룐
-		streamRef.current?.getTracks().forEach((t) => t.stop());
-		streamRef.current = null;
+		const dataUrl =canvas.toDataURL('image/jpeg');
+		closeCamera();
 
-		setIsCamera(false);
-		return canvas.toDataURL('image/jpeg');
+		return dataUrl
 	};
+
+	useEffect(() => {
+		return () => {
+			stopCamera();
+		};
+	}, []);
 
 	return {
 		isCamera,
