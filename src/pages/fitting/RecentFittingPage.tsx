@@ -19,17 +19,14 @@ const RecentFitting = () => {
         isLoading: boolean 
     };
 
-	// 월별 그룹화 
 	const months = useMemo(() => {
 		if (!data.length) return [];
 		const uniqueMonths = Array.from(
 			new Set(data.map((item) => formatToMonthGroup(item.createdAt))),
 		);
-		// 최신 달이 위로 오도록 정렬
 		return uniqueMonths.sort((a, b) => b.localeCompare(a));
 	}, [data]);
 
-	// 로딩 중일 때
 	if (isLoading) return <div className="flex-1 bg-white" />;
 	if (data.length === 0) {
 		return (
