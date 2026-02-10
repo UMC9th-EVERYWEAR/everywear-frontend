@@ -4,7 +4,7 @@ import TabBar from '@/src/components/ai-fitting/TabBar';
 import FittingItemInfo from '@/src/components/ai-fitting/FittingItemInfo';
 import FittingTab from '@/src/components/ai-fitting/FittingTab';
 import ReviewTab from '@/src/components/ai-fitting/ReviewTab'; 
-import type { FittingState, ReviewState, ReviewSummaryState } from '@/src/types/ai-fitting/status';
+import type { AiSummaryState, FittingState, ReviewListState } from '@/src/types/ai-fitting/status';
 import Toast from '@/src/components/common/Toast';
 import ToastContainer from '@/src/components/common/ToastContainer';
 import useToast from '@/src/hooks/domain/ai-fitting/UseToast';
@@ -26,79 +26,95 @@ const AiFittingPage = () => {
 	// product_id useParams()로 가져오기
 	const { id } = useParams();
 	const productId = Number(id);
+	const navigate = useNavigate();
 
 	// ** useState, useQuery, useMutation, 커스텀 훅 선언 **
 	// useState, 커스텀 훅 선언
-	const navigate = useNavigate();
 	const [activeTab, setActiveTab] = useState<TabType>('fitting');
 	const [modal, setModal] = useState<ModalState>({ type : 'none' });
 	const { toasts, createToast, deleteToast } = useToast();
+
 	const [isReviewEnabled, setIsReviewEnabled] = useState(false);
 	const [isReviewAiEnabled, setIsReviewAiEnabled] = useState(false);
+	const [fittingResultUrl, setFittingResultUrl] = useState('');
 
 	// useQuery, useMutation 선언 
 	const { mutate : mutateLike } = useLike({ createToast });
-	const { mutate : mutateFitting,  data : resultFitting, isPending : isFittingLoading, isError : isFittingError } = usePostFitting({ createToast });
+	const { mutate : mutateFitting,  data : resultFitting, isPending : isFittingLoading, isError : isFittingError, isSuccess : isFittingSuccess } = usePostFitting({ createToast });
 	const { mutate : mutateReview } = usePostReview();
 	const { mutate : mutateReviewAi } = usePostReviewAi();
+
 	const { data : recentReview, isLoading : isReviewLoading } = useGetReview(productId, { enabled : isReviewEnabled });
 	const { data : aiReview, isLoading : isAiReviewLoading } = useGetReviewAi(productId, { enabled : isReviewAiEnabled });
 	const { data : productData, isLoading, isError } = useProductsDetail(productId);
 	const { data : profile } = useGetProfileImg();
 
+	// (A) 피팅 결과 이미지 저장
+	useEffect(() => {
+		if (isFittingSuccess && resultFitting?.fittingResultImageUrl) {
+			// eslint-disable-next-line
+			setFittingResultUrl(resultFitting?.fittingResultImageUrl);
+		}
+	}, [resultFitting, isFittingSuccess]);
+
+	// (B) [핵심] 리뷰 크롤링 완료 감지 -> AI 요약 요청 자동 실행
+	useEffect(() => {
+		// 조건: 
+		// 1. 리뷰 조회가 켜져 있고 (분석 시작됨)
+		// 2. 리뷰 데이터가 'completed' 상태로 들어왔으며
+		// 3. 아직 AI 조회가 켜지지 않았다면 (중복 요청 방지)
+		if (
+			isReviewEnabled && 
+            recentReview?.result?.status === 'completed' && 
+            !isReviewAiEnabled
+		) {
+			console.log('🚀 리뷰 크롤링 완료! AI 요약 생성을 요청합니다.');
+            
+			// 1. AI 요약 생성 요청 (POST)
+			mutateReviewAi({ productId });
+            
+			// 2. AI 요약 조회 폴링 시작 (GET)
+			// eslint-disable-next-line
+			setIsReviewAiEnabled(true);
+		}
+	}, [isReviewEnabled, recentReview, isReviewAiEnabled, mutateReviewAi, productId]);
+
 	// FittingTab 상태
-	const  currentFittingState = useMemo((): FittingState => {
-		if (isFittingLoading) {
-			return { status: 'loading' };
-		}
-		if (resultFitting) {
-			return { 
-				status: 'success', 
-				resultUrl: resultFitting?.fittingResultImageUrl,
-			};
-		}
-		if (isFittingError) {
-			return { status: 'error' }; 
-		}
+	const currentFittingState = useMemo((): FittingState => {
+		if (isFittingLoading) return { status: 'loading' };
+		if (fittingResultUrl) return { status: 'success', resultUrl: fittingResultUrl };
+		if (isFittingError) return { status: 'error' };
 		return { status: 'idle' };
-	}, [isFittingLoading, isFittingError, resultFitting])
+	}, [isFittingLoading, fittingResultUrl, isFittingError]);
 
-	const currentReviewState = useMemo((): ReviewState => {
-		if (recentReview?.status === 'processing') {
+	const currentReviewState = useMemo((): ReviewListState => {
+		if (isReviewLoading || recentReview?.result?.status === 'processing') {
 			return { status: 'loading' };
 		}
-
-		if (recentReview?.status === 'failed') {
+		if (recentReview?.result?.status === 'failed') {
 			return { status: 'error' };
 		}
-
-		if (recentReview?.status === 'complete') {
-			let summaryState: ReviewSummaryState;
-
-			if (isAiReviewLoading) {
-				summaryState = { status: 'loading' };
-			} else if (aiReview) {
-				summaryState = { 
-					status: 'success', 
-					result : {
-						keywords : aiReview.keywords || [],
-						summary : aiReview.summary || '', 
-					},
-				};
-			} else {
-				summaryState = { status: 'error' };
-			}
-
-			return {
-				status: 'success',
-				reviews: recentReview.reviews ?? [],
-				summary: summaryState,
+		if (recentReview?.result?.status === 'completed') {
+			return { 
+				status: 'success', 
+				reviews: recentReview.result.reviews ?? [], 
 			};
 		}
-
-		// 4. 기본 상태
 		return { status: 'idle' };
-	}, [recentReview, isAiReviewLoading, aiReview]);
+	}, [recentReview, isReviewLoading]);
+
+	const currentAiSummaryState = useMemo((): AiSummaryState => {
+		if (!isReviewAiEnabled || isAiReviewLoading || !aiReview) return { status: 'loading' };
+                
+		if (aiReview) {
+			return { 
+				status: 'success', 
+				result: aiReview, 
+			};
+		}
+        
+		return { status: 'error' };
+	}, [isReviewAiEnabled, isAiReviewLoading, aiReview]);
 
 	// 피팅 중 뒤로가기 방지용 
 	const allowExitRef = useRef(false);
@@ -201,6 +217,9 @@ const AiFittingPage = () => {
 		navigate(-2); 
 	};
 
+	console.log('현재 리뷰 상태 : ', currentReviewState);
+	console.log('현재 리뷰 데이터 : ', recentReview);
+	console.log('피팅 상태 : ', currentFittingState);
 	return (
 		<div className='flex items-center justify-center mb-8'>
 			<div className="flex flex-col px-4 h-full w-full max-w-109 relative">
@@ -218,7 +237,7 @@ const AiFittingPage = () => {
 				<TabBar 
 					activeTab={activeTab} 
 					onTabChange={setActiveTab} 
-					isIdle={!isAnalyzing}
+					isIdle={currentFittingState.status === 'idle'}
 					onIdleToast={createToast}
 				/>
 
@@ -242,9 +261,8 @@ const AiFittingPage = () => {
 				{activeTab === 'review' && (
 					<ReviewTab 
 						state={currentReviewState}
-						handleStartReviewAi={handleStartReviewAi}
-
-                        
+						aiState={currentAiSummaryState}
+						handleStartReviewAi={handleStartReviewAi}                       
 					/>
 				)}
 

@@ -8,17 +8,13 @@ export type FittingState =
 
 export type FittingStateStatus = 'idle' | 'loading' | 'success' | 'error';
 
-export type ReviewSummaryState = 
-  | { status: 'loading' }                     
-  | { status: 'success'; result : AiReviewDTO}       
-  | { status: 'error'};
-
-export type ReviewState = 
+export type ReviewListState = 
   | { status: 'idle' }
-  | { status: 'loading' } 
-  | { status: 'error'}
-  | { 
-      status: 'success'; 
-      reviews: ReviewDTO[];        
-      summary: ReviewSummaryState;
-    };
+  | { status: 'loading' }
+  | { status: 'error' }
+  | { status: 'success'; reviews: ReviewDTO[] };
+
+export type AiSummaryState = 
+  | { status: 'loading' }
+  | { status: 'error' }
+  | { status: 'success'; result: AiReviewDTO };

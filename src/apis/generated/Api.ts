@@ -1,5 +1,6 @@
 // @ts-nocheck
 import type {
+  ApiResponse,
   ApiResponseAgreeToggleResponse,
   ApiResponseAiReviewDTO,
   ApiResponseFittingApplyResult,
@@ -12,6 +13,7 @@ import type {
   ApiResponseProductDetailResponse,
   ApiResponseProductListResponse,
   ApiResponseRepresentativeImgResponse,
+  ApiResponseReviewDto,
   ApiResponseString,
   ApiResponseTokenRefreshResponse,
   ApiResponseUserResponse,
@@ -315,7 +317,7 @@ export class Api<
    * @response `200` `ReviewListDTO` 크롤링 진행 중
    */
   getReviews = (productId: number, params: RequestParams = {}) =>
-    this.request<ReviewListDTO, any>({
+    this.request<ApiResponseReviewDto, any>({
       path: `/api/review/${productId}`,
       method: "GET",
       secure: true,

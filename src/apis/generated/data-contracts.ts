@@ -60,7 +60,7 @@ export interface CrawlResponseDTO {
    */
   total_count?: number;
   /** 조회된 리뷰 목록 */
-  reviews?: ReviewDTO[];
+  reviews?: ReviewlDTO[];
 }
 
 /** 리뷰 상세 정보 */
@@ -293,6 +293,13 @@ export interface ApiResponseAiReviewDTO {
   message?: string;
   /** AI 리뷰 요약 및 키워드 DTO */
   result?: AiReviewDTO;
+}
+
+export interface ApiResponseReviewDto {
+  isSuccess? : boolean;
+  code? : string;
+  message? : string;
+  result? : ReviewListDTO;
 }
 
 export interface ApiResponseProductListResponse {

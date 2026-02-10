@@ -1,18 +1,17 @@
 import ReviewKeywordTag from './ReviewKeywordList';
 import ReviewCard from './ReviewCard';
-import type { ReviewState } from '@/src/types/ai-fitting/status';
 import { LoadingSpinner } from './LoadingSpinner';
 import { cn } from '@/src/utils/cn';
 import { AI_FITTING_IMAGES } from '@/src/constants/images';
+import type { AiSummaryState, ReviewListState } from '@/src/types/ai-fitting/status';
 
 interface ReviewTabProps {
-    state: ReviewState;
+    state: ReviewListState;
+	aiState: AiSummaryState;
 	handleStartReviewAi : () => void;
 }
 
-const ReviewTab = ({ state, handleStartReviewAi }: ReviewTabProps) => {
-	// 리뷰 요약 로딩 상태 계산
-	const isSummaryLoading = state.status === 'loading' || (state.status === 'success' && state.summary.status === 'loading');
+const ReviewTab = ({ state, aiState, handleStartReviewAi }: ReviewTabProps) => {
 
 	return (
 		<div className='flex flex-col items-center mb-32'>
@@ -23,7 +22,7 @@ const ReviewTab = ({ state, handleStartReviewAi }: ReviewTabProps) => {
 					<span className='text-bold-16 text-primary-600'>AI 리뷰 요약</span>
                     
 					{/* 로딩 표시 */}
-					{isSummaryLoading && (
+					{aiState.status === 'loading' && (
 						<div className="w-full flex items-center min-h-10">
 							<div className="w-[36.5px] flex justify-center items-center shrink-0">
 								<LoadingSpinner size={5}/>
@@ -34,14 +33,14 @@ const ReviewTab = ({ state, handleStartReviewAi }: ReviewTabProps) => {
 						</div>
 					)}
 
-					{state.status === 'success' && state.summary.status === 'success' && (
+					{state.status === 'success' && aiState.status === 'success' && (
 						<div className='w-full flex min-h-10 text-regular-14 text-neutral-900'>
-							{state.summary.result.summary}
+							{aiState.result.summary}
 						</div>
 					)}
 
 					{/* 에러 처리 */}
-					{(state.status === 'error' || (state.status === 'success' && state.summary.status === 'error')) && (
+					{(state.status === 'error' || (state.status === 'success' && aiState.status === 'error')) && (
 						<div className={cn('mb-2.5 gap-4 flex flex-col w-full')}>
 							<div className={cn('flex flex-col')}>
 								<span className={cn('text-regular-14 leading-5.2 tracking-[-0.42px] items-center justify-center flex')}>
@@ -68,12 +67,12 @@ const ReviewTab = ({ state, handleStartReviewAi }: ReviewTabProps) => {
 
 
 				{/* 주요 리뷰 키워드 */}
-				{state.status === 'success' && state.summary.status === 'success' && (
+				{state.status === 'success' && aiState.status === 'success' && (
 					<div className='flex flex-col my-1.5'>
 						<span className='text-primary-600 text-bold-16 flex justify-start mb-1'>
 							주요 리뷰 키워드
 						</span>
-						<ReviewKeywordTag keywordList={state.summary.result.keywords} />
+						<ReviewKeywordTag keywordList={aiState.result.keywords} />
 					</div>
 				)}
 
@@ -94,7 +93,7 @@ const ReviewTab = ({ state, handleStartReviewAi }: ReviewTabProps) => {
 						</div>
 					)}
 
-					{state.status === 'success' && state.summary.status === 'success' && (state.reviews.length > 0 ? (
+					{state.status === 'success' && (state.reviews.length > 0 ? (
 						state.reviews.map((review) => (
 							<ReviewCard
 								key={review.review_id}

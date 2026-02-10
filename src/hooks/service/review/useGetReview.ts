@@ -6,17 +6,14 @@ function useGetReview(product_id : number, options = {}) {
 	return useQuery({
 		queryKey: QUERY_KEYS.REVIEW.RECENT(product_id),
 		queryFn :() => getReviews(product_id), 
-
-		select: (data) => ({
-			status: data.status,
-    		total_count: data.total_count,
-    		reviews: data.reviews,
-		}),
 		
 		refetchInterval : (query) => {
 			const data = query.state.data;
 
-			if (!data ||data.status === 'processing') return 5000;
+			if (data?.result?.status=== 'processing') {
+				console.log('5초 타임아웃');
+				return 10000;
+			}
 			else return false;
 		},
 		refetchIntervalInBackground : true,
