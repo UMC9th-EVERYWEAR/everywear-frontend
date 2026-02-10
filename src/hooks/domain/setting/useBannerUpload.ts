@@ -8,12 +8,14 @@ interface UseBannerUploadParams {
   setPendingUploads: React.Dispatch<React.SetStateAction<PendingUpload[]>>;
   handleUploadStartNotice: () => void;
   handleError: () => void;
+	handleSuccess: () => void;
 }
 
 export const useBannerUpload = ({
 	setPendingUploads,
 	handleUploadStartNotice,
 	handleError,
+	handleSuccess,
 }: UseBannerUploadParams) => {
 	const fileInputRef = useRef<HTMLInputElement | null>(null);
 	const pendingIndexRef = useRef<number | null>(null);
@@ -49,6 +51,7 @@ export const useBannerUpload = ({
 
 			await uploadPhoto(resizedFile, {
 				onError: handleError,
+				onSuccess:handleSuccess,
 				onSettled: () => setPendingUploads([]),
 			});
 		} finally {

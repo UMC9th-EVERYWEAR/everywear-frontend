@@ -70,6 +70,10 @@ const SettingPhotoView = ({
 		createToast({ message: '가상피팅에 적합하지 않은 이미지에요.' })
 	}
 
+	const notifyvalidImage= () => {
+		createToast({ message: '사진 분석이 완료되었습니다.' })
+	}
+
 	const notifyAlreadyRepresentative = () => {
 		createToast({ message: '이미 대표 사진으로 설정되어 있어요' })
 	}
@@ -104,6 +108,7 @@ const SettingPhotoView = ({
 					setPendingUploads={setPendingUploads}
 					handleUploadStartNotice={notifyUploadStarted}
 					handleError={notifyInvalidImage}
+					handleSuccess={notifyvalidImage}
 				/>
 			</div>
 

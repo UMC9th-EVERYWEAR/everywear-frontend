@@ -21,14 +21,16 @@ interface BannerProps {
 	setPendingUploads: React.Dispatch<React.SetStateAction<PendingUpload[]>>;
 	handleUploadStartNotice: () => void;
 	handleError: () => void;
+	handleSuccess: () => void;
 	
 }
-const Banner = ({ activeRealIndex, photoItems, swiperRef, itemIds, setActiveRealIndex, setIsAddCardActive, setPendingUploads, handleUploadStartNotice, handleError }: BannerProps) => {
+const Banner = ({ activeRealIndex, photoItems, swiperRef, itemIds, setActiveRealIndex, setIsAddCardActive, setPendingUploads, handleUploadStartNotice, handleError, handleSuccess }: BannerProps) => {
 	
 	const { fileInputRef, openFilePicker, handleChangeFile } = useBannerUpload({
 		setPendingUploads,
 		handleUploadStartNotice,
 		handleError,
+		handleSuccess,
 	})
 
 	useEffect(() => {
