@@ -193,8 +193,9 @@ const Home = () => {
 				</div>
 			</section>
 
+
 			{/* 5. 최근 피팅 내역 섹션 */}
-			<section className="mt-12 pb-10">
+			<section className="mt-10">
 				<div className="px-4 mb-4">
 					<div className="flex justify-between items-end">
 						<h3 className="text-[var(--color-neutral-900)] text-medium-16 font-bold tracking-[-0.6px]">
@@ -219,9 +220,9 @@ const Home = () => {
 				>
 					{isFittingLoading ? (
 						[1, 2, 3].map((i) => (
-							<div
+							<ProductCardSkeleton
 								key={i}
-								className="min-w-[137px] h-[182px] bg-neutral-100 rounded-[10px] animate-pulse"
+								isHome
 							/>
 						))
 					) : recentFittings && recentFittings.length > 0 ? (
@@ -229,7 +230,6 @@ const Home = () => {
 							<button 
 								key={fitting.fittingId} 
 								className="min-w-[137px] h-[182px] bg-neutral-100 rounded-[10px] overflow-hidden shrink-0 cursor-pointer active:opacity-80 transition-opacity"
-								// 💡 수정: 생성 페이지가 아닌 '상세 조회'(/fittings/ID) 경로로 이동
 								onClick={() => navigate(PATH.FITTING_DETAIL.replace(':id', String(fitting.fittingId)))}
 							>
 								<img 
@@ -238,6 +238,7 @@ const Home = () => {
 									className="w-full h-full object-cover"
 								/>
 							</button>
+
 						))
 					) : (
 						<div className="w-full py-10 flex flex-col items-center justify-center border-2 border-dashed border-neutral-100 rounded-[10px]">
