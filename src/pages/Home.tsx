@@ -17,6 +17,7 @@ import type { FittingSummary, ListDTO } from '../apis/generated';
 import ProductCardSkeleton from '../components/common/ProductCardSkeleton';
 import MallGuide from '../components/products/MallGuide';
 
+
 const INDICATOR_MAX_DISTANCE = 37;
 
 const Home = () => {
@@ -102,6 +103,7 @@ const Home = () => {
 				))}
 			</section>
 
+
 			{/* 3. 상품 추가 버튼 */}
 			<section className="flex flex-col px-4 mt-4 gap-4">
 				<span className="self-center text-center text-[var(--color-primary-300)] text-regular-10 tracking-[-0.3px] cursor-pointer">
@@ -117,6 +119,7 @@ const Home = () => {
 					</Button>
 				</div>
 			</section>
+
 
 			{/* 4. 상품 둘러보기 섹션 */}
 			<section className="mt-10">
@@ -219,24 +222,30 @@ const Home = () => {
 				>
 					{isFittingLoading ? (
 						[1, 2, 3].map((i) => (
-							<div
+							<ProductCardSkeleton
 								key={i}
-								className="min-w-[137px] h-[182px] bg-neutral-100 rounded-[10px] animate-pulse"
+								isHome
 							/>
 						))
 					) : recentFittings && recentFittings.length > 0 ? (
 						recentFittings.map((fitting: FittingSummary) => (
-							<button 
-								key={fitting.fittingId} 
-								className="min-w-[137px] h-[182px] bg-neutral-100 rounded-[10px] overflow-hidden shrink-0 cursor-pointer active:opacity-80 transition-opacity"
-								// 💡 수정: 생성 페이지가 아닌 '상세 조회'(/fittings/ID) 경로로 이동
-								onClick={() => navigate(PATH.FITTING_DETAIL.replace(':id', String(fitting.fittingId)))}
+							<button
+								key={fitting.fittingId}
+								onClick={() =>
+									navigate(
+										PATH.FITTING_DETAIL.replace(':id', String(fitting.fittingId)),
+									)
+								}
+								className="flex flex-col items-center min-w-[140px] max-w-[200px] w-full shrink-0 cursor-pointer active:scale-[0.98] transition-transform"
 							>
-								<img 
-									src={fitting.fittingResultImage} 
-									alt="피팅 결과" 
-									className="w-full h-full object-cover"
-								/>
+								{/* ProductCard 이미지 레이아웃만 재사용 */}
+								<div className="w-full h-[178px] rounded-[10px] overflow-hidden bg-[var(--color-neutral-100)]">
+									<img
+										src={fitting.fittingResultImage || '/images/default-product.png'}
+										alt="피팅 결과"
+										className="w-full h-full object-cover transition-transform duration-200 ease-in-out hover:scale-110"
+									/>
+								</div>
 							</button>
 						))
 					) : (
@@ -266,8 +275,10 @@ const Home = () => {
 					</div>
 				</div>
 			</section>
+
 		</div>
 	);
 };
+
 
 export default Home;
