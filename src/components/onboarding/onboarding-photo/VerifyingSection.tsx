@@ -102,9 +102,9 @@ const VerifyingSection = ({ previewUrl, resizingPhoto, setIsVerify } : Verifying
 	}, [phase, stepIndex]);
 
 
-	// if(!previewUrl || !resizingPhoto){
-	// 	setIsVerify(false)
-	// }
+	if(!previewUrl || !resizingPhoto){
+		setIsVerify(false)
+	}
 
 	return (
 		<div className="min-h-screen flex flex-col items-center py-4 px-2.5 text-center">

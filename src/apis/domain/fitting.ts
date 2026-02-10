@@ -1,10 +1,9 @@
 import { apiClient } from '@/src/apis/common/apiClient';
 import type { FittingRequest } from '../generated';
-import { fittingTimeSet } from '@/src/constants/apiTime';
 
 export const requestFitting = async (payload: FittingRequest) => {
 	// 타임아웃 방지용으로 시간 5분으로 설정
-	const { data } = await apiClient.requestFitting(payload, { timeout: fittingTimeSet });
+	const { data } = await apiClient.requestFitting(payload, { timeout: 300000 });
 	return data.result;
 };
 
@@ -22,5 +21,3 @@ export const getHomeRecentFittings = async () => {
 	const { data } = await apiClient.getRecentFittings();
 	return data.result ?? [];
 };
-
-

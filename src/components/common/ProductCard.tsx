@@ -29,7 +29,7 @@ const StarIcon = () => (
 const ButtonClassName = `flex justify-center w-16 p-1 tracking-[-2px] leading-4.5
                           items-center border rounded-lg border-none bg-[var(--color-primary-600)] shrink-0
                           text-medium-12 text-[var(--color-neutral-50)] cursor-pointer font-anonymous
-                          hover:bg-[var(--color-primary-700)] transition-colors`
+                          hover:bg-[var(--color-primary-700)] transition-colors sm:w-21`
                           
 const ProductCard = ({ 
 	id, 
