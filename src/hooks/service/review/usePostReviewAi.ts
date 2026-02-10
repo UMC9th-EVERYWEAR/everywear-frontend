@@ -1,25 +1,24 @@
-import { generateAiReview } from '@/src/apis/domain';
+import { generateAiReview } from '@/src/apis/domain'; 
 import { QUERY_KEYS } from '@/src/constants/query-key';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-interface GenerateAiReviewVariable {
-    productId : number;
+interface AiReviewVariable {
+  productId: number;
 }
 
-function usePostReviewAi() {
+function usePostAiReview() {
 	const queryClient = useQueryClient();
 
 	return useMutation({
-		mutationFn: (product  : GenerateAiReviewVariable) => generateAiReview(product.productId),
+		mutationFn: ({ productId }: AiReviewVariable) => generateAiReview(productId),
 
-		onSuccess : (_data, variable) => {
-			queryClient.invalidateQueries({
-				queryKey: QUERY_KEYS.REVIEW.AI(variable.productId),
-			})
-            
+		onSuccess: (data, variables) => {
+			queryClient.setQueryData(
+				QUERY_KEYS.REVIEW.AI(variables.productId), 
+				data,
+			);
 		},
-	})
-
+	});
 }
 
-export default usePostReviewAi;
+export default usePostAiReview;

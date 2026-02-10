@@ -63,6 +63,13 @@ export interface CrawlResponseDTO {
   reviews?: ReviewlDTO[];
 }
 
+export interface ApiResponseCrawlResponseDTO {
+  isSuccess?: boolean;
+  code?: string;
+  message?: string;
+  result?: CrawlResponseDTO;
+}
+
 /** 리뷰 상세 정보 */
 export interface ReviewDTO {
   /**

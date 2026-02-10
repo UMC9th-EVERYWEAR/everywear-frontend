@@ -4,21 +4,21 @@ import { QUERY_KEYS } from '@/src/constants/query-key';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 interface CrawlReviewVariable {
-    payload : CrawlReviewDTO;
+  payload: CrawlReviewDTO;
 }
 
 function usePostReview() {
 	const queryClient = useQueryClient();
+
 	return useMutation({
-		mutationFn: ({ payload } : CrawlReviewVariable) => crawlReview(payload), 
+		mutationFn: ({ payload }: CrawlReviewVariable) => crawlReview(payload),
 
-		onSuccess: (_data, variable) => {
+		onSuccess: (_data, variables) => {
 			queryClient.invalidateQueries({
-				queryKey: QUERY_KEYS.REVIEW.RECENT(variable.payload.product_id),
-			})
+				queryKey: QUERY_KEYS.REVIEW.RECENT(variables.payload.product_id),
+			});
 		},
-
-	})
+	});
 }
 
 export default usePostReview;

@@ -17,11 +17,9 @@ const ReviewTab = ({ state, aiState, handleStartReviewAi }: ReviewTabProps) => {
 		<div className='flex flex-col items-center mb-32'>
 			<div className='w-full'>
                 
-				{/* AI 리뷰 요약 */}
 				<div className='bg-review-summary border border-none rounded-xl px-2.5 py-1.5 flex flex-col gap-1'>
 					<span className='text-bold-16 text-primary-600'>AI 리뷰 요약</span>
                     
-					{/* 로딩 표시 */}
 					{aiState.status === 'loading' && (
 						<div className="w-full flex items-center min-h-10">
 							<div className="w-[36.5px] flex justify-center items-center shrink-0">
@@ -33,13 +31,12 @@ const ReviewTab = ({ state, aiState, handleStartReviewAi }: ReviewTabProps) => {
 						</div>
 					)}
 
-					{state.status === 'success' && aiState.status === 'success' && (
+					{state.status === 'success' && aiState.status === 'success'  && aiState.result && (
 						<div className='w-full flex min-h-10 text-regular-14 text-neutral-900'>
 							{aiState.result.summary}
 						</div>
 					)}
 
-					{/* 에러 처리 */}
 					{(state.status === 'error' || (state.status === 'success' && aiState.status === 'error')) && (
 						<div className={cn('mb-2.5 gap-4 flex flex-col w-full')}>
 							<div className={cn('flex flex-col')}>
@@ -65,19 +62,15 @@ const ReviewTab = ({ state, aiState, handleStartReviewAi }: ReviewTabProps) => {
 					)}
 				</div>
 
-
-				{/* 주요 리뷰 키워드 */}
 				{state.status === 'success' && aiState.status === 'success' && (
 					<div className='flex flex-col my-1.5'>
 						<span className='text-primary-600 text-bold-16 flex justify-start mb-1'>
 							주요 리뷰 키워드
 						</span>
-						<ReviewKeywordTag keywordList={aiState.result.keywords} />
+						{aiState.result && <ReviewKeywordTag keywordList={aiState.result.keywords} />}
 					</div>
 				)}
 
-
-				{/* 최신 리뷰 */}
 				<div className='flex flex-col'>
 					<span className='text-primary-600 text-bold-16 flex justify-start border-b border-solid border-neutral-100 w-full'>
 						최신 리뷰

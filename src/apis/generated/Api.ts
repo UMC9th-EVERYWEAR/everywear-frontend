@@ -3,6 +3,7 @@ import type {
   ApiResponse,
   ApiResponseAgreeToggleResponse,
   ApiResponseAiReviewDTO,
+  ApiResponseCrawlResponseDTO,
   ApiResponseFittingApplyResult,
   ApiResponseFittingDetail,
   ApiResponseImportDTO,
@@ -89,7 +90,7 @@ export class Api<
    * @response `404` `ApiResponse` 상품을 찾을 수 없음
    */
   crawlReview = (data: CrawlReviewDTO, params: RequestParams = {}) =>
-    this.request<CrawlResponseDTO, ApiResponse>({
+    this.request<CrawlResponseDTO>({
       path: `/api/review/crawl`,
       method: "POST",
       body: data,
@@ -126,7 +127,7 @@ export class Api<
    * @response `200` `ApiResponseMapStringObject` OK
    */
   generateAiReview = (productId: number, params: RequestParams = {}) =>
-    this.request<ApiResponseMapStringObject, any>({
+    this.request<ApiResponseAiReviewDTO, any>({
       path: `/api/review/ai/${productId}`,
       method: "POST",
       secure: true,
@@ -317,7 +318,7 @@ export class Api<
    * @response `200` `ReviewListDTO` 크롤링 진행 중
    */
   getReviews = (productId: number, params: RequestParams = {}) =>
-    this.request<ApiResponseReviewDto, any>({
+    this.request< ApiResponseReviewDto, any>({
       path: `/api/review/${productId}`,
       method: "GET",
       secure: true,

@@ -2,22 +2,24 @@ import { getAiReview } from '@/src/apis/domain';
 import { QUERY_KEYS } from '@/src/constants/query-key';
 import { useQuery } from '@tanstack/react-query';
 
-function useGetReviewAi(product_id : number, options = {}) {
+function useGetReviewAi(product_id: number, enabled: boolean) {
 	return useQuery({
 		queryKey: QUERY_KEYS.REVIEW.AI(product_id),
-		queryFn :() => getAiReview(product_id), 
+		queryFn: () => getAiReview(product_id),
+        
+		enabled: enabled, 
 
-
-		refetchInterval : (query) => {
+		refetchInterval: (query) => {
 			const data = query.state.data;
 
-			if (!data) return 5000;
-			else return false;
+			if (data?.summary) {
+				return false;
+			}
+			return 5000; 
 		},
-		refetchIntervalInBackground : true,
-		...options,
-	})
-
+        
+		refetchIntervalInBackground: true,
+	});
 }
 
 export default useGetReviewAi;

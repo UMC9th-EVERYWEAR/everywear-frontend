@@ -2,25 +2,23 @@ import { getReviews } from '@/src/apis/domain';
 import { QUERY_KEYS } from '@/src/constants/query-key';
 import { useQuery } from '@tanstack/react-query';
 
-function useGetReview(product_id : number, options = {}) {
+function useGetReview(product_id: number, isEnabled: boolean) {
 	return useQuery({
 		queryKey: QUERY_KEYS.REVIEW.RECENT(product_id),
-		queryFn :() => getReviews(product_id), 
-		
-		refetchInterval : (query) => {
-			const data = query.state.data;
+		queryFn: () => getReviews(product_id),
+    
+		enabled: !!product_id && isEnabled, 
 
-			if (data?.result?.status=== 'processing') {
-				console.log('5초 타임아웃');
-				return 10000;
+		refetchInterval: (query) => {
+			const status = query.state.data?.result?.status;
+			if (status === 'processing' || status === 'not_started') {
+				return 5000;
 			}
-			else return false;
+			return false;
 		},
-		refetchIntervalInBackground : true,
-		...options,
-	})
-
+    
+		refetchIntervalInBackground: true,
+	});
 }
-
 
 export default useGetReview;

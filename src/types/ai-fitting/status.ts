@@ -15,6 +15,7 @@ export type ReviewListState =
   | { status: 'success'; reviews: ReviewDTO[] };
 
 export type AiSummaryState = 
+  | { status: 'idle' }
   | { status: 'loading' }
   | { status: 'error' }
-  | { status: 'success'; result: AiReviewDTO };
+  | { status: 'success'; result?: AiReviewDTO };

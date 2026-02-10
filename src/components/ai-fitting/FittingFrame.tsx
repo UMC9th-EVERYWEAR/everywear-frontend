@@ -27,7 +27,6 @@ const FittingFrame = ({ type = 'BEFORE', imgUrl, state }: FittingFrameProps) => 
 		>
 			{state.status !== 'idle' && 
 			<div className={cn('flex justify-start w-full')}>
-				{/* BEFORE / AFTER(idle 상태에서는 타입 표시 X) */}
 				<div
 					className={cn('px-1 py-2.5 border rounded-full border-primary-600 \
 						h-8 w-[77px] flex justify-center items-center text-medium-16 \
@@ -38,7 +37,6 @@ const FittingFrame = ({ type = 'BEFORE', imgUrl, state }: FittingFrameProps) => 
 			</div>
 			}
 
-			{/* 이미지 본문 */}
 			<div className="w-full border-none rounded-xl flex flex-col justify-center items-center overflow-hidden gap-2">
 				<div className="flex flex-col justify-center items-center gap-4 h-121">
 					{state.status === 'loading' && type === 'AFTER' ? (
