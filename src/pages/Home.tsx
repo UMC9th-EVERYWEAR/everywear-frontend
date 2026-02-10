@@ -17,6 +17,7 @@ import type { FittingSummary, ListDTO } from '../apis/generated';
 import ProductCardSkeleton from '../components/common/ProductCardSkeleton';
 import MallGuide from '../components/products/MallGuide';
 
+
 const INDICATOR_MAX_DISTANCE = 37;
 
 const Home = () => {
@@ -101,6 +102,7 @@ const Home = () => {
 					</a>
 				))}
 			</section>
+
 
 			{/* 3. 상품 추가 버튼 */}
 			<section className="flex flex-col px-4 mt-4 gap-4">
@@ -194,9 +196,8 @@ const Home = () => {
 				</div>
 			</section>
 
-
 			{/* 5. 최근 피팅 내역 섹션 */}
-			<section className="mt-10">
+			<section className="mt-12 pb-10">
 				<div className="px-4 mb-4">
 					<div className="flex justify-between items-end">
 						<h3 className="text-[var(--color-neutral-900)] text-medium-16 font-bold tracking-[-0.6px]">
@@ -228,18 +229,24 @@ const Home = () => {
 						))
 					) : recentFittings && recentFittings.length > 0 ? (
 						recentFittings.map((fitting: FittingSummary) => (
-							<button 
-								key={fitting.fittingId} 
-								className="min-w-[137px] h-[182px] bg-neutral-100 rounded-[10px] overflow-hidden shrink-0 cursor-pointer active:opacity-80 transition-opacity"
-								onClick={() => navigate(PATH.FITTING_DETAIL.replace(':id', String(fitting.fittingId)))}
+							<button
+								key={fitting.fittingId}
+								onClick={() =>
+									navigate(
+										PATH.FITTING_DETAIL.replace(':id', String(fitting.fittingId)),
+									)
+								}
+								className="flex flex-col items-center min-w-[140px] max-w-[200px] w-full shrink-0 cursor-pointer active:scale-[0.98] transition-transform"
 							>
-								<img 
-									src={fitting.fittingResultImage} 
-									alt="피팅 결과" 
-									className="w-full h-full object-cover"
-								/>
+								{/* ProductCard 이미지 레이아웃만 재사용 */}
+								<div className="w-full h-[178px] rounded-[10px] overflow-hidden bg-[var(--color-neutral-100)]">
+									<img
+										src={fitting.fittingResultImage || '/images/default-product.png'}
+										alt="피팅 결과"
+										className="w-full h-full object-cover transition-transform duration-200 ease-in-out hover:scale-110"
+									/>
+								</div>
 							</button>
-
 						))
 					) : (
 						<div className="w-full py-10 flex flex-col items-center justify-center border-2 border-dashed border-neutral-100 rounded-[10px]">
@@ -268,6 +275,7 @@ const Home = () => {
 					</div>
 				</div>
 			</section>
+
 		</div>
 	);
 };
