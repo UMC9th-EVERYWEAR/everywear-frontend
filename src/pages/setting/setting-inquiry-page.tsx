@@ -1,5 +1,5 @@
 import Tag from '@/src/components/setting/setting-inquiry/Tag';
-import React, { useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { useState } from 'react';
 import emailjs from '@emailjs/browser';
 import { uploadImageToImgBB } from '@/src/utils/imgbb';
