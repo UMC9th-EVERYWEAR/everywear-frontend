@@ -19,7 +19,7 @@ const AccountSection = ({
 }: Props) => {
 	return (
 
-		<div>
+		<div className='py-3'>
 			<div className="border-b py-1 border-neutral-900 text-medium-16">
 				회원정보
 			</div>

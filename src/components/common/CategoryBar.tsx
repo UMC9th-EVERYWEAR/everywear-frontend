@@ -49,8 +49,8 @@ const CategoryBar = ({ selected, onSelect }: CategoryBarProps) => {
 
 							<span
 								className={`
-                  text-medium-12 font-pretandard
-                  ${isActive ? 'font-bold' : ''}
+                  text-medium-14 font-pretandard
+                  ${isActive ? '' : ''}
                   ${cat.name === '전체' ? 'ml-[2px]' : 'ml-[-1px]'}
                 `}
 							>

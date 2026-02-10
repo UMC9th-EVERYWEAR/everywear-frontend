@@ -67,7 +67,7 @@ const ProductCard = ({
 	return (
 		<button 
 			onClick={handleCardClick}
-			className="flex flex-col items-center max-w-[200px] w-full shrink-0 cursor-pointer active:scale-[0.98] transition-transform"
+			className="flex flex-col items-center min-w-10 max-w-[200px] w-full shrink-0 cursor-pointer active:scale-[0.98] transition-transform"
 		>
       
 			{/* 1. 이미지 영역 */}

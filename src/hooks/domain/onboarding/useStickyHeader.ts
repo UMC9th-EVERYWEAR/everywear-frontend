@@ -33,7 +33,6 @@ export const useScrollStickyAnimation = () => {
 	}, []);
 
 	useEffect(() => {
-		if(!isInViewport) return;
 		if (isInViewport) {
 			const timer = setTimeout(() => {
 				setIsSticky(false);

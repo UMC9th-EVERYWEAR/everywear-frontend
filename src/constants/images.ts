@@ -13,18 +13,18 @@ export const AI_FITTING_IMAGES = {
 
 // landing
 export const LANDING_IMAGES = {
-	HOW_WORK_1: '/svgs/landing/how-work1.svg',
-	HOW_WORK_1_1: '/svgs/landing/how-work1-1.svg',
-	HOW_WORK_2_1: '/svgs/landing/how-work2-1.svg',
-	HOW_WORK_3: '/svgs/landing/how-work3.svg',
+	HOW_WORK_1: '/webp/howitwork1.webp',
+	HOW_WORK_1_1: '/svgs/howitwork1-1.svg',
+	HOW_WORK_2_1: '/webp/howitwork2.webp',
+	HOW_WORK_3: '/webp/howitwork3.webp',
 	HOW_WORK_3_1: '/svgs/landing/how-work3-1.svg',
-	HOW_WORK_4_1: '/svgs/landing/how-work4-1.svg',
+	HOW_WORK_4_1: '/webp/landing/howitwork4.webp',
 
-	INTRO_1: '/svgs/landing/intro1.svg',
-	INTRO_2: '/svgs/landing/intro2.svg',
-	INTRO_3: '/svgs/landing/intro3.svg',
+	INTRO_1: '/webp/intro1.webp',
+	INTRO_2: '/webp/intro2.webp',
+	INTRO_3: '/webp/intro3.webp',
 
-	IPHONE: '/svgs/landing/iPhone.svg',
+	IPHONE: '/webp/iphone_16.webp',
 } as const;
 
 
