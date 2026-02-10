@@ -118,6 +118,7 @@ const Home = () => {
 				</div>
 			</section>
 
+
 			{/* 4. 상품 둘러보기 섹션 */}
 			<section className="mt-10">
 				<div className="px-4 mb-4">
@@ -270,5 +271,6 @@ const Home = () => {
 		</div>
 	);
 };
+
 
 export default Home;
