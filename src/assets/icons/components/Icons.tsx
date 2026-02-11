@@ -84,7 +84,6 @@ OuterIcon.displayName = 'outerIcon'
 export const EtcIcon = createIcon(etcSvg)
 EtcIcon.displayName = 'etcIcon'
 
-
 export const ClosetIcon = createIcon(closetSvg)
 ClosetIcon.displayName = 'ClosetIcon'
 

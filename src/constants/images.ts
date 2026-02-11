@@ -13,27 +13,25 @@ export const AI_FITTING_IMAGES = {
 
 // landing
 export const LANDING_IMAGES = {
-	HOW_WORK_1: '/webp/howitwork1.webp',
-	HOW_WORK_1_1: '/svgs/howitwork1-1.svg',
-	HOW_WORK_2_1: '/webp/howitwork2.webp',
-	HOW_WORK_3: '/webp/howitwork3.webp',
-	HOW_WORK_3_1: '/svgs/landing/how-work3-1.svg',
-	HOW_WORK_4_1: '/webp/landing/howitwork4.webp',
+	HOW_WORK_1: '/webps/howitwork1.webp',
+	HOW_WORK_2_1: '/webps/howitwork2.webp',
+	HOW_WORK_3: '/webps/howitwork3.webp',
+	HOW_WORK_4_1: '/webps/landing/howitwork4.webp',
 
-	INTRO_1: '/webp/intro1.webp',
-	INTRO_2: '/webp/intro2.webp',
-	INTRO_3: '/webp/intro3.webp',
+	INTRO_1: '/webps/intro1.webp',
+	INTRO_2: '/webps/intro2.webp',
+	INTRO_3: '/webps/intro3.webp',
 
-	IPHONE: '/webp/iphone_16.webp',
+	IPHONE: '/webps/iphone_16.webp',
 } as const;
 
 
 // guide
 export const GUIDE_IMAGES = {
-	GUIDE_1: '/svgs/guide/guide1.svg',
-	GUIDE_2: '/svgs/guide/guide2.svg',
-	GUIDE_3: '/svgs/guide/guide3.svg',
-	GUIDE_4: '/svgs/guide/guide4.svg',
+	GUIDE_1: '/webps/guide1.webp',
+	GUIDE_2: '/webps/guide2.webp',
+	GUIDE_3: '/webps/guide3.webp',
+	GUIDE_4: '/webps/guide4.webp',
 } as const;
 
 // login
@@ -84,20 +82,20 @@ export const ONBOARDING_IMAGES = {
 
 export const ONBOARDING_GUIDE_IMAGES = {
 	GOOD: [
-		'/svgs/onboarding/guide/good-photo1.svg',
-		'/svgs/onboarding/guide/good-photo2.svg',
-		'/svgs/onboarding/guide/good-photo3.svg',
-		'/svgs/onboarding/guide/good-photo4.svg',
-		'/svgs/onboarding/guide/good-photo5.svg',
-		'/svgs/onboarding/guide/good-photo6.svg',
+		'/webps/good-photo1.webp',
+		'/webps/good-photo2.webp',
+		'/webps/good-photo3.webp',
+		'/webps/good-photo4.webp',
+		'/webps/good-photo5.webp',
+		'/webps/good-photo6.webp',
 	],
 	BAD: [
-		'/svgs/onboarding/guide/bad-photo1.svg',
-		'/svgs/onboarding/guide/bad-photo2.svg',
-		'/svgs/onboarding/guide/bad-photo3.svg',
-		'/svgs/onboarding/guide/bad-photo4.svg',
-		'/svgs/onboarding/guide/bad-photo5.svg',
-		'/svgs/onboarding/guide/bad-photo6.svg',
+		'/webps/bad-photo1.webp',
+		'/webps/bad-photo2.webp',
+		'/webps/bad-photo3.webp',
+		'/webps/bad-photo4.webp',
+		'/webps/bad-photo5.webp',
+		'/webps/bad-photo6.webp',
 	],
 } as const;
 
