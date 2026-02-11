@@ -49,6 +49,7 @@ const AiFittingPage = () => {
 	const { 
 		data: aiReview, 
 		isError: isAiGetError,
+		isLoading : isAiGetLoading,
 	} = useGetReviewAi(productId, isPollingStartedAi);
 	const { data : productData, isLoading, isError } = useProductsDetail(productId);
 	const { data : profile } = useGetProfileImg();
@@ -120,13 +121,13 @@ const AiFittingPage = () => {
 			return { status: 'error' };
 		}
 
-		if (aiReview && aiReview?.message == 'AI 리뷰 조회 성공') {
+		if (aiReview) {
 			return { status: 'success', result: aiReview };
 		}
 
-		const isReviewProcessing = recentReview?.result?.status === 'processing' || recentReview?.result?.status === 'completed';
+		const isReviewProcessing = recentReview?.result?.status === 'processing';
     
-		if (isReviewProcessing || isAiPostLoading) {
+		if (isReviewProcessing || isAiPostLoading || isAiGetLoading) {
 			return { status: 'loading' };
 		}
 
@@ -138,6 +139,7 @@ const AiFittingPage = () => {
 		aiReview, 
 		recentReview, 
 		isAiPostLoading, 
+		isAiGetLoading,
 	]);
 
 	const allowExitRef = useRef(false);
