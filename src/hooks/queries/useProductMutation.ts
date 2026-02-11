@@ -10,7 +10,7 @@ export const useImportProductMutation = () => {
 		mutationFn: (data: { product_url: string }) => importProduct(data),
 		onSuccess: () => {
 			// 상품 목록 쿼리를 무효화하여 최신 리스트를 불러오게 함
-			queryClient.invalidateQueries({ queryKey: QUERY_KEYS.PRODUCT.LIST });
+			queryClient.invalidateQueries({ queryKey: QUERY_KEYS.PRODUCT.ALL });
 			queryClient.invalidateQueries({ queryKey: QUERY_KEYS.CLOSET.LIST });
 		},
 	});
