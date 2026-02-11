@@ -12,7 +12,7 @@ function useGetReviewAi(product_id: number, enabled: boolean) {
 		refetchInterval: (query) => {
 			const data = query.state.data;
 
-			if (data?.summary) {
+			if (data?.summary || data?.message === 'AI 리뷰 조회 성공') {
 				return false;
 			}
 			return 5000; 

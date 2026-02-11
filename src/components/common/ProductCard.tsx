@@ -98,7 +98,7 @@ const ProductCard = ({
 							<StarIcon />
 						</div>
 						<span className="text-[var(--color-neutral-900)] ml-0.5">
-							{rating}
+							{(rating ?? 0).toFixed(1)}
 						</span>
 					</div>
 				</div>

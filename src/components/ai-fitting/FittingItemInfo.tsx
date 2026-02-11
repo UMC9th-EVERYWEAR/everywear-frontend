@@ -24,14 +24,16 @@ const FittingItemInfo = ({ data, handleHeart, handleBuy }: FittingItemInfoProps)
                 
 				<div className='flex flex-col'> 
 					<div className='flex justify-between items-center'>
-						<p className='text-fitting-company text-regular-12'>{data?.shoppingmale_name}</p>
+						<p className='text-fitting-company text-regular-12'>{data?.brand_name}</p>
 						<div className='flex items-center gap-0.5'>
 							<img
 								className='h-4 w-4'
 								src={AI_FITTING_IMAGES.FITTING_CARD_STAR}
 								alt='피팅 상품 별점'
 							/>
-							<p className='text-neutral-900 text-regular-12'>{data?.star_point}</p>
+							<p className='text-neutral-900 text-regular-12'>
+								{(data?.star_point ?? 0).toFixed(1)}
+							</p>
 						</div>
 					</div>
 					<p className='text-neutral-900 text-regular-14 text-left line-clamp-1'>{data?.product_name}</p>

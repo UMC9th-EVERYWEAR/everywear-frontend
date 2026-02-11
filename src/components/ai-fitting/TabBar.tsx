@@ -11,7 +11,7 @@ interface TabBarProps {
 
 const TabBar = ({ onTabChange, onIdleToast, activeTab, isIdle } : TabBarProps) => {
 	return (
-		<div className="relative flex border-b border-neutral-200 mb-[5px]"> 
+		<div className="relative flex border-b border-neutral-200 mb-1.5"> 
             
 			<button
 				className={cn(

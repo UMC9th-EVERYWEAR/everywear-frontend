@@ -25,9 +25,9 @@ const ReviewSummary = ({ state, aiState, handleStartReviewAi } : ReviewSummaryPr
 				</div>
 			)}
         
-			{aiState.status === 'success'  && aiState.result && (
-				<div className='w-full flex min-h-10 text-regular-14 text-neutral-900'>
-					{aiState.result.summary}
+			{aiState.status === 'success'  && aiState && (
+				<div className='w-full flex text-regular-14 text-neutral-900 '>
+					{aiState.result?.summary ? aiState.result.summary : '리뷰가 존재하지 않아 AI 요약이 불가능합니다.'}
 				</div>
 			)}
         

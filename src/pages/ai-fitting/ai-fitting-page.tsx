@@ -100,7 +100,6 @@ const AiFittingPage = () => {
 
 	const currentReviewState = useMemo((): ReviewListState => {
 		const status = recentReview?.result?.status;
-
 		if (status === 'completed') {
 			return { 
 				status: 'success', 
@@ -121,13 +120,13 @@ const AiFittingPage = () => {
 			return { status: 'error' };
 		}
 
-		if (aiReview?.summary) {
+		if (aiReview && aiReview?.message == 'AI 리뷰 조회 성공') {
 			return { status: 'success', result: aiReview };
 		}
 
-		const isReviewProcessing = recentReview?.result?.status === 'processing';
+		const isReviewProcessing = recentReview?.result?.status === 'processing' || recentReview?.result?.status === 'completed';
     
-		if (isReviewProcessing || isAiPostLoading || isPollingStartedAi) {
+		if (isReviewProcessing || isAiPostLoading) {
 			return { status: 'loading' };
 		}
 
@@ -139,7 +138,6 @@ const AiFittingPage = () => {
 		aiReview, 
 		recentReview, 
 		isAiPostLoading, 
-		isPollingStartedAi,
 	]);
 
 	const allowExitRef = useRef(false);
@@ -197,6 +195,8 @@ const AiFittingPage = () => {
 			payload : { productId : productData.product_id },
 		})
 	};
+
+	console.log(currentAiReviewState)
 
 	const handleStartCrawl = () => {
 		startCrawl(
