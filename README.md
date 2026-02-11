@@ -1,4 +1,5 @@
-![logo](https://github.com/user-attachments/assets/d0a45a9c-09ae-4a49-a5c1-73edf8ca8d92) 
+![ppt](https://github.com/user-attachments/assets/474866a8-30cd-443a-a5a1-e708929e57c3)
+
 # EVERYWEAR
 AI로 입어보고 AI로 분석하는 스마트 피팅 앱
 
