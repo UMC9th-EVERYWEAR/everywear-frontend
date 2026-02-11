@@ -13,11 +13,6 @@ import ProductsPage from '@/src/pages/products/products/products-page';
 import ProductsAddPage from '@/src/pages/products/add/products-add-page';
 import FittingDetailPage from '@/src/pages/fitting/FittingDetailPage';
 
-/*
- * protectedRoutes
- * - 인증이 필요한 페이지들
- */
-
 
 export const protectedRoutes = [
 	{

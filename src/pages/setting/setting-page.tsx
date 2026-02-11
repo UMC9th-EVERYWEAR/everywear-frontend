@@ -34,32 +34,33 @@ const SettingPage = () => {
 	const socialLogin =
   meData.data?.socialType ?? UserResponseDtoSocialTypeEnum.KAKAO;
 	
-	return <div className="mt-5 mx-4 w-[calc(100%-32px)]">
-		<div className='text-neutral-900  mb-7 '>
-			<div className=' flex flex-col gap-5' >
-				<AccountSection
-					openLoginSetting={openLoginSetting}
-					toggleLoginSetting={toggleLoginSetting}
-					socialType={socialLogin ?? 'KAKAO'}
-					onChangePhoto={goChangePhoto}
-				/>
-				<SupportSection
-					onInquiry={goInquiry}
-				/>
+	return (
+		<div className="mt-5 mx-4 w-[calc(100%-32px)] transition-colors duration-300">
+			<div className='text-neutral-900 dark:text-neutral-50 mb-7'>
+				<div className='flex flex-col gap-5'>
+					<AccountSection
+						openLoginSetting={openLoginSetting}
+						toggleLoginSetting={toggleLoginSetting}
+						socialType={socialLogin ?? 'KAKAO'}
+						onChangePhoto={goChangePhoto}
+					/>
+					<SupportSection
+						onInquiry={goInquiry}
+					/>
+				</div>
 			</div>
+
+			<FooterActions
+				onLogout={() => setOpenLogoutSetting(true)}
+				onWithdraw={goWithdraw}
+			/>
+
+			<LogoutModal
+				open={openLogoutSetting}
+				onClose={() => setOpenLogoutSetting(false)}
+			/>  
 		</div>
-
-		<FooterActions
-			onLogout={() => setOpenLogoutSetting(true)}
-			onWithdraw={goWithdraw}
-		/>
-
-		<LogoutModal
-			open={openLogoutSetting}
-			onClose={() => setOpenLogoutSetting(false)}
-		/>	
-		
-	</div>;
+	);
 }
 
 export default SettingPage;

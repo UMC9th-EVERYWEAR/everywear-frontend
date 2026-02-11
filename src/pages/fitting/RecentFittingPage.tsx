@@ -27,11 +27,12 @@ const RecentFitting = () => {
 		return uniqueMonths.sort((a, b) => b.localeCompare(a));
 	}, [data]);
 
-	if (isLoading) return <div className="flex-1 bg-white" />;
+	if (isLoading) return <div className="flex-1 bg-transparent" />;
+    
 	if (data.length === 0) {
 		return (
-			<div className="flex flex-1 flex-col items-center justify-center h-full bg-white">
-				<p className="text-[var(--color-neutral-500)] text-medium-16">
+			<div className="flex flex-1 flex-col items-center justify-center h-full bg-transparent">
+				<p className="text-[var(--color-neutral-500)] dark:text-gray-400 text-medium-16">
 					피팅 내역이 없습니다
 				</p>
 			</div>
@@ -39,14 +40,13 @@ const RecentFitting = () => {
 	}
 
 	return (
-		<main className="flex-1 overflow-y-auto bg-white pb-20 no-scrollbar">
+		<main className="flex-1 overflow-y-auto bg-transparent pb-20 no-scrollbar transition-colors duration-300">
 			{months.map((month) => (
 				<section
 					key={month}
 					className="mt-8 px-4"
 				>
-					{/* 월별 헤더 */}
-					<h2 className="mb-4 text-[var(--color-neutral-900)] text-medium-16 font-bold leading-normal">
+					<h2 className="mb-4 text-[var(--color-neutral-900)] dark:text-white text-medium-16 font-bold leading-normal">
 						{month}
 					</h2>
                     
@@ -68,7 +68,7 @@ const RecentFitting = () => {
 												navigate(PATH.FITTING_DETAIL.replace(':id', String(targetId)));
 											}
 										}}
-										className="w-full aspect-[3/4] rounded-[10px] overflow-hidden relative cursor-pointer active:scale-95 transition-transform outline-none focus:ring-2 focus:ring-primary-500 bg-[var(--color-neutral-100)] shadow-sm"
+										className="w-full aspect-[3/4] rounded-[10px] overflow-hidden relative cursor-pointer active:scale-95 transition-transform outline-none focus:ring-2 focus:ring-primary-500 bg-[var(--color-neutral-100)] dark:bg-gray-800 shadow-sm"
 									>
 										<img
 											src={item.fittingResultImage}
