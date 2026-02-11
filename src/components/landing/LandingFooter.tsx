@@ -28,7 +28,7 @@ const LandingFooter = () => {
 				<AnimatedItem
 					isActive={isInViewport}
 					to="right"
-					delay={1.5}
+					delay={1}
 					distance={60}
 					isShown
 				>
@@ -55,7 +55,7 @@ const LandingFooter = () => {
 				<AnimatedItem
 					isActive={isInViewport}
 					to="left"
-					delay={1.5}
+					delay={1}
 					distance={60}
 				>
 					<FooterNameSection />
@@ -66,7 +66,7 @@ const LandingFooter = () => {
 			<AnimatedItem
 				isActive={isInViewport}
 				to="center"
-				delay={1.5}
+				delay={1}
 			>
 				<div className='flex flex-col items-center gap-1'>
 					<p className='text-primary-600 text-medium-12 text-center'>지금 바로 시작하세요!</p>

@@ -443,56 +443,7 @@
       }
   }
 
-  @keyframes fade-in-left {
-      0% {
-          opacity: 0;
-          transform: translate3d(-100%, 0, 0);
-      }
-
-      to {
-          opacity: 1;
-          transform: translateZ(0);
-      }
-  }
-
-  @-webkit-keyframes fade-in-left {
-      0% {
-          opacity: 0;
-          transform: translate3d(-100%, 0, 0);
-      }
-
-      to {
-          opacity: 1;
-          transform: translateZ(0);
-      }
-  }
-
-
-  @keyframes infinite-slide-original {
-      0% {
-          transform: translateX(0);
-      }
-
-      50% {
-          transform: translateX(-100%);
-      }
-      50.1% {
-          transform: translateX(100%);
-      }
-      100% {
-          transform: translateX(0);
-      }
-  }
-    @keyframes infinite-slide-copy {
-      0% {
-          transform: translateX(0);
-      }
-      100% {
-          transform: translateX(-200%);
-      }
-  }
-
-      @keyframes infinite-fade {
+  @keyframes infinite-fade {
       0% {
             opacity: 0;      
       }
@@ -504,6 +455,21 @@
       }
   }
 
+
+@keyframes header-out {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-12px);
+  }
+}
+
+.animate-header-out {
+  animation: header-out 0.5s ease-out forwards;
+}
 
 
   .animate-frame-in {
@@ -521,7 +487,7 @@
   }
 
  .animate-clothes-motion  {
-    animation: clothes-motion  1.3s linear 0s infinite;
+    animation: clothes-motion  1.8s linear 0s infinite;
   }
   .animate-fade-in-right{
     position: relative;
@@ -529,42 +495,16 @@
     -webkit-animation: fade-in-right 3s forwards;
 }
 
-  .animate-fade-in-left {
-    position: relative;
-    animation: fade-in-left 3s forwards;
-    -webkit-animation: fade-in-left 3s forwards;
-}
-
-  .animation-paused {
-    animation-play-state: paused;
-  }
-  
-  .animation-infinite-slide-original {
-    animation: infinite-slide-original 20s linear infinite;
-  }
-  .animation-infinite-slide-copy {
-    animation: infinite-slide-copy 20s linear infinite;
-  }
-
-
-  .animation-infinite-slide-original,
-  .animation-infinite-slide-copy {
-    will-change: transform;
-  }
-
   .animate-text-change {
   animation: text-fade-slide 0.25s ease-out;
-}
-  @media (prefers-reduced-motion: reduce) {
-  .animation-infinite-slide-original,
-  .animation-infinite-slide-copy {
-    animation: none;
   }
-}
-
 
 @keyframes fade-out-up {
-  from {
+  0% {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  50% {
     opacity: 1;
     transform: translateY(0);
   }
@@ -582,12 +522,26 @@
 }
 
 .animate-view-out {
-  animation: fade-out-up 0.5s ;
+  animation: fade-out-up 3s ease;
 }
 
-@supports (animation-timeline: view()) {
-  .animate-view-in {
-    animation-timeline: view();
-    animation-range: entry 0% entry 80%;
+
+
+@keyframes view-in {
+  from {
+    opacity: 1;
   }
+  to {
+    opacity: 0;
+  }
+}
+
+.animate-view-in {
+  animation-name: view-in ;
+  animation-duration: 1s; /* 중요: 0s면 안 보임 */
+  animation-timing-function: linear;
+  animation-fill-mode: both;
+
+  animation-timeline: view();
+  animation-range: entry 90% exit 70%;
 }

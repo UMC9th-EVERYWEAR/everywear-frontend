@@ -1,7 +1,20 @@
 import PartnerMallSection from './PartnerMallSection';
+import MallGuide from './MallGuide';
+import { useState } from 'react';
 
 
 const MallLogosSection = () => {
+	const [showGuide, setShowGuide]  = useState(false)
+
+		
+	if(showGuide)
+	{
+		return(
+			<MallGuide onClose={()=> setShowGuide(false)} />
+		)
+	}
+
+
 	return(
 		
 
@@ -12,11 +25,13 @@ const MallLogosSection = () => {
 
 			</div>
       	
-			<div>
+			<button
+				onClick={()=>setShowGuide(true)}
+			>
 				<span className="text-start pl-3 text-primary-300 text-regular-10 cursor-pointer hover:opacity-75">
 					유명 브랜드 가상 피팅 가이드 &gt;
 				</span>
-			</div>  
+			</button>  
 		</div>
 
 	)

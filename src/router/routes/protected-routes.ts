@@ -3,7 +3,7 @@ import SettingPage from '../../pages/setting/setting-page';
 import SettingInquiry from '@/src/pages/setting/setting-inquiry-page';
 import SettingWithdraw from '@/src/pages/setting/setting-withdraw-page';
 import ClosetPage from '@/src/pages/closet/closet-page';
-import RecentFitting from '@/src/pages/RecentFittingPage';
+import RecentFitting from '@/src/pages/fitting/RecentFittingPage';
 import  { PATH } from '@/src/constants/path';
 import AiFittingPage from '@/src/pages/ai-fitting/ai-fitting-page';
 import OnBoardingPage from '@/src/pages/onboarding/onboarding-page';
@@ -11,6 +11,7 @@ import OnBoardingPhotoPage from '@/src/pages/onboarding/onboarding-photo-page';
 import Home from '@/src/pages/Home';
 import ProductsPage from '@/src/pages/products/products/products-page';
 import ProductsAddPage from '@/src/pages/products/add/products-add-page';
+import FittingDetailPage from '@/src/pages/fitting/FittingDetailPage';
 
 /*
  * protectedRoutes
@@ -69,4 +70,8 @@ export const protectedRoutes = [
 		Component: ProductsAddPage,
 	},
 
+	{
+		path: PATH.FITTING_DETAIL, 
+		Component: FittingDetailPage,
+	},
 ];

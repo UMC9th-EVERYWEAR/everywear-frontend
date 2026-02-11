@@ -67,7 +67,7 @@ const SettingWithdraw = () => {
 			<Button
 				variant='filled'
 				disabled={!isConfirmed}
-				size='md'
+				size='lg'
 				onClick={()=>setOpenWithdraw(true)}
 			>탈퇴하기</Button>
 		</div>

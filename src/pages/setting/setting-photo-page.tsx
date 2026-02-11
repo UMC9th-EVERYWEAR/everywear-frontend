@@ -22,14 +22,35 @@ const SettingPhotoPage = () => {
 
 
 	const [openChangePhotoModal, setOpenChangePhotoModal] = useState(false);
-	const [openDeletePhotoModal, setOpenDeletePhotoModal] = useState(false); // 사진 삭제 후 서버 값으로 초기화
+	const [openDeletePhotoModal, setOpenDeletePhotoModal] = useState(false); 
 	const [activeRealIndex, setActiveRealIndex] = useState(0);
 	const [isAddCardActive, setIsAddCardActive] = useState(false); 
 	const swiperRef = useRef<SwiperClass | null>(null)
 
+	const handleSelectRepresentative = () => {
+		if (!activeImageId) return;
+
+		selectRepresentative(activeImageId, {
+			onSuccess: () => {
+				setOpenChangePhotoModal(false);
+				swiperRef.current?.slideToLoop(0);
+			},
+		});
+	};
+
+	const handleDeleteImage = () => {
+		if (!activeImageId) return;
+
+		deleteImage(activeImageId, {
+			onSuccess: () => {
+				setOpenDeletePhotoModal(false);
+				setActiveRealIndex(0);
+			},
+		});
+	};
 
 	{/* 5칸짜리 UI 배열 */}
-	const { photoItems, activeImageId } = usePhotoItems({ profileData: profileData ?? [], pendingUploads, activeRealIndex })
+	const { photoItems, activeImageId, itemIds } = usePhotoItems({ profileData: profileData ?? [], pendingUploads, activeRealIndex })
 
 
 	return (
@@ -43,29 +64,15 @@ const SettingPhotoPage = () => {
 			openChangePhotoModal={openChangePhotoModal}
 			openDeletePhotoModal={openDeletePhotoModal}
 			swiperRef={swiperRef}
+			itemIds={itemIds}
 			onChangeIndex={setActiveRealIndex}
 			onAddCardActiveChange={setIsAddCardActive}
 			onOpenChangeModal={() => setOpenChangePhotoModal(true)}
 			onCloseChangeModal={() => setOpenChangePhotoModal(false)}
 			onOpenDeleteModal={() => setOpenDeletePhotoModal(true)}
 			onCloseDeleteModal={() => setOpenDeletePhotoModal(false)}
-			onSelectRepresentative={() => {
-				if (!activeImageId) return;
-				selectRepresentative(activeImageId, {
-					onSuccess: () => {setOpenChangePhotoModal(false)
-						    swiperRef.current?.slideToLoop(0);
-					},
-				});
-			}}
-			onDeleteImage={() => {
-				if (!activeImageId) return;
-				deleteImage(activeImageId, {
-					onSuccess: () => {
-						setOpenDeletePhotoModal(false);
-						setActiveRealIndex(0);
-					},
-				});
-			}}
+			onSelectRepresentative={handleSelectRepresentative}
+			onDeleteImage={handleDeleteImage}
 		/>
 	);
 };
