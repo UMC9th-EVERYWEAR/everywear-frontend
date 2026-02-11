@@ -215,7 +215,6 @@ const AiFittingPage = () => {
 			},
 		)
 	}
-	
 
 	const handleFirstFitting = () => {
 		handleStartFitting();
