@@ -1,19 +1,12 @@
-// 1. Fitting 타입
-export type FittingData = string;
-
-// 2. Review 타입
-// 가장 작은 단위들 (이미지, 키워드)
 export interface ReviewImage {
   id: number;
   imgUrl: string; 
 }
 
 export interface ReviewKeyword {
-  id: number;
   label: string; 
 }
 
-// ReviewItem 하나의 타입
 export interface ReviewItem {
   id: number;
   rating: number;      

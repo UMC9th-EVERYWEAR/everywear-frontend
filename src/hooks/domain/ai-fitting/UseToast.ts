@@ -1,29 +1,31 @@
-import { useRef, useState } from 'react';
+import { useRef, useState, useCallback } from 'react'; 
 
-export interface Toast {
+interface ToastType {
     id: number;
     message: string;
 }
 
-export type ToastInput = Omit<Toast, 'id'>;
+export type ToastInput = Omit<ToastType, 'id'>;
 
 function useToast() {
-	const [toasts, setToasts] = useState<Toast[]>([]);
+	const [toasts, setToasts] = useState<ToastType[]>([]);
 	const idRef = useRef(0);
 
-	const createToast = (toast : ToastInput) => {
-		const newToast: Toast = { 
-			id: idRef.current, 
+	const createToast = useCallback((toast: ToastInput) => {
+		const newId = idRef.current; 
+		const newToast: ToastType = { 
+			id: newId, 
 			...toast, 
 		};
 
 		setToasts((prevToasts) => [...prevToasts, newToast]);
-		idRef.current++;
-	}
+        
+		idRef.current += 1; 
+	}, []); 
 
-	const deleteToast = (id : number) => {
-		setToasts((toasts) => toasts.filter((toast) => toast.id !== id));
-	};
+	const deleteToast = useCallback((id: number) => {
+		setToasts((prevToasts) => prevToasts.filter((toast) => toast.id !== id));
+	}, []); 
 
 	return { toasts, createToast, deleteToast };
 }

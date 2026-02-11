@@ -1,8 +1,9 @@
 import { requestFitting } from '@/src/apis/domain';
 import type { FittingRequest } from '@/src/apis/generated';
 import { QUERY_KEYS } from '@/src/constants/query-key';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import type { ToastInput } from '../../domain/ai-fitting/UseToast';
+import { useMutation } from '@tanstack/react-query';
+import type { ToastInput } from '../../domain/ai-fitting/useToast';
+import { queryClient } from '@/src/lib/react-query';
 
 interface usePostFittingProps {
     createToast : (toast : ToastInput) => void;
@@ -13,7 +14,6 @@ interface FittingVariable {
 }
 
 function usePostFitting({ createToast } : usePostFittingProps) {
-	const queryClient = useQueryClient();
 	return useMutation({
 		mutationFn: ({ payload } : FittingVariable) => requestFitting(payload),
 		onSuccess: () => {
