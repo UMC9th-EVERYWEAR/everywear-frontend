@@ -22,7 +22,7 @@ const AI_FITTING_PROGRESS_MESSAGES = [
 	'오늘은 어떤 무드의 옷이 좋으세요?',
 	'의상 정보를 하나씩 분석하고 있어요',
 	'이 스타일을 기준으로 더 보여드릴까요?',
-	'의상을 꼼꼼히 분석하고 있어요. 조금만 기다려 주세요',
+	'의상을 꼼꼼히 분석하고 있어요.',
 ];
 
 
@@ -80,7 +80,7 @@ const LinkSection = ({
 				<div
 					className="fixed inset-0 z-100 flex flex-col gap-20 items-center justify-center bg-black/50"
 				>				
-					<div className="absolute scale-900 top-1/3 left-1/2 -translate-x-1/2 animate-clothes-motion pt-1">
+					<div className="absolute scale-900 top-1/3 left-1/2 -translate-x-1/2 animate-clothes-motion py-2 sm:pt-2">
 						{RotatingIcon(true)}
 					</div>
 					<div 
