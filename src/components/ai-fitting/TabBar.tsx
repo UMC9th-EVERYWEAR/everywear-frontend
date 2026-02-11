@@ -15,7 +15,7 @@ const TabBar = ({ onTabChange, onIdleToast, activeTab, isIdle } : TabBarProps) =
             
 			<button
 				className={cn(
-					'text-base flex-1 h-11 flex items-center justify-center p-2.5 transition-all duration-300 cursor-pointer', 
+					'text-bold-16 flex-1 h-11 flex items-center justify-center p-2.5 transition-all duration-300 cursor-pointer', 
 					activeTab === 'fitting' ? 'text-primary-600' : 'text-neutral-400',
 				)}
 				onClick={() => onTabChange('fitting')}
@@ -23,7 +23,7 @@ const TabBar = ({ onTabChange, onIdleToast, activeTab, isIdle } : TabBarProps) =
 
 			<button
 				className={cn(
-					'text-base flex-1 h-11 flex items-center justify-center p-2.5 transition-all duration-300 cursor-pointer', 
+					'text-bold-16 flex-1 h-11 flex items-center justify-center p-2.5 transition-all duration-300 cursor-pointer', 
 					activeTab === 'review' ? 'text-primary-600' : 'text-neutral-400',
 				)}
 				onClick={!isIdle ? () => onTabChange('review') : () => onIdleToast({ message : '먼저 가상피팅을 실행해주세요!' })}
@@ -31,7 +31,7 @@ const TabBar = ({ onTabChange, onIdleToast, activeTab, isIdle } : TabBarProps) =
 
 			<div
 				className={cn(
-					'absolute bottom-0 left-0 h-px w-1/2 bg-primary-600', 
+					'absolute bottom-0 left-0 h-[1.5px] w-1/2 bg-primary-600', 
 					'transition-transform duration-200 ease-in-out', 
 					activeTab === 'review' ? 'translate-x-full' : 'translate-x-0', 
 				)}
