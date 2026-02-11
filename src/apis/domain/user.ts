@@ -32,7 +32,7 @@ export const verifyAndSaveProfileImage = async (file: File) => {
 		return data;
 	}
 	catch (error) {
-		console.error('🔥 ', error);
+		console.error(error);
 		throw error; 
 	}
 };
