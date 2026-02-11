@@ -12,7 +12,7 @@ import type { ModalState } from '@/src/types/ai-fitting/modal';
 import { Modal } from '@/src/components/common/Modal';
 import useLike from '@/src/hooks/service/fitting/useLike';
 import usePostFitting from '@/src/hooks/service/fitting/usePostFitting';
-import usePostReview from '@/src/hooks/service/review/usePostReveiw';
+import usePostReview from '@/src/hooks/service/review/usePostReview';
 import usePostReviewAi from '@/src/hooks/service/review/usePostReviewAi';
 import useGetReview from '@/src/hooks/service/review/useGetReview';
 import useGetReviewAi from '@/src/hooks/service/review/useGetReviewAi';
