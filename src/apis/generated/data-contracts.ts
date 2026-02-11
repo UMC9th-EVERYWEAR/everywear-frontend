@@ -36,38 +36,12 @@ export interface CrawlReviewDTO {
   shoppingmall_name: string;
 }
 
-/** 리뷰 크롤링 응답 DTO */
-export interface CrawlResponseDTO {
-  /**
-   * 크롤링 상태
-   * @example "processing"
-   */
-  status?: CrawlResponseDtoStatusEnum;
-  /**
-   * 예상 소요 시간
-   * @example "30초"
-   */
-  estimated_time?: string;
-  /**
-   * 캐시 데이터 반환 여부
-   * @example false
-   */
-  from_cache?: boolean;
-  /**
-   * 총 리뷰 개수
-   * @format int32
-   * @example 0
-   */
-  total_count?: number;
-  /** 조회된 리뷰 목록 */
-  reviews?: ReviewlDTO[];
-}
-
-export interface ApiResponseCrawlResponseDTO {
+export interface ApiResponseReviewListDTO {
   isSuccess?: boolean;
   code?: string;
   message?: string;
-  result?: CrawlResponseDTO;
+  /** 리뷰 목록 조회 응답 DTO */
+  result?: ReviewListDTO;
 }
 
 /** 리뷰 상세 정보 */
@@ -115,18 +89,48 @@ export interface ReviewDTO {
   images?: string[];
 }
 
-export interface ApiResponse {
-  isSuccess?: boolean;
-  code?: string;
-  message?: string;
-  result?: any;
+/** 리뷰 목록 조회 응답 DTO */
+export interface ReviewListDTO {
+  /**
+   * 크롤링 상태
+   * @example "completed"
+   */
+  status?: string;
+  /**
+   * 총 리뷰 개수
+   * @format int32
+   * @example 15
+   */
+  total_count?: number;
+  /** 리뷰 상세 목록 */
+  reviews?: ReviewDTO[];
 }
 
-export interface ApiResponseMapStringObject {
+/** AI 리뷰 요약 및 키워드 DTO */
+export interface AiReviewDTO {
+  /**
+   * AI 생성 리뷰 요약
+   * @example "전체적으로 평점이 높으며 배송이 빠르다는 평이 많습니다."
+   */
+  summary?: string;
+  /**
+   * 추출된 키워드 (최대 4개)
+   * @example ["가성비","빠른배송","재질만족","정사이즈"]
+   */
+  keywords?: string[];
+  /**
+   * 처리 메시지
+   * @example "성공적으로 요약되었습니다."
+   */
+  message?: string;
+}
+
+export interface ApiResponseAiReviewDTO {
   isSuccess?: boolean;
   code?: string;
   message?: string;
-  result?: Record<string, any>;
+  /** AI 리뷰 요약 및 키워드 DTO */
+  result?: AiReviewDTO;
 }
 
 /** 상품 등록 요청 (무신사/지그재그/29cm/W컨셉 URL 자동 감지) */
@@ -218,6 +222,13 @@ export interface LikeToggleDTO {
   is_liked?: boolean;
 }
 
+export interface ApiResponseMapStringObject {
+  isSuccess?: boolean;
+  code?: string;
+  message?: string;
+  result?: Record<string, any>;
+}
+
 export interface ApiResponseUserResponseDto {
   isSuccess?: boolean;
   code?: string;
@@ -256,57 +267,6 @@ export interface ApiResponseRepresentativeImgResponse {
 
 export interface RepresentativeImgResponse {
   representative_img?: UserImgQuery;
-}
-
-/** 리뷰 목록 조회 응답 DTO */
-export interface ReviewListDTO {
-  /**
-   * 크롤링 상태
-   * @example "completed"
-   */
-  status?: string;
-  /**
-   * 총 리뷰 개수
-   * @format int32
-   * @example 15
-   */
-  total_count?: number;
-  /** 리뷰 상세 목록 */
-  reviews?: ReviewDTO[];
-}
-
-/** AI 리뷰 요약 및 키워드 DTO */
-export interface AiReviewDTO {
-  /**
-   * AI 생성 리뷰 요약
-   * @example "전체적으로 평점이 높으며 배송이 빠르다는 평이 많습니다."
-   */
-  summary?: string;
-  /**
-   * 추출된 키워드 (최대 4개)
-   * @example ["가성비","빠른배송","재질만족","정사이즈"]
-   */
-  keywords?: string[];
-  /**
-   * 처리 메시지
-   * @example "성공적으로 요약되었습니다."
-   */
-  message?: string;
-}
-
-export interface ApiResponseAiReviewDTO {
-  isSuccess?: boolean;
-  code?: string;
-  message?: string;
-  /** AI 리뷰 요약 및 키워드 DTO */
-  result?: AiReviewDTO;
-}
-
-export interface ApiResponseReviewDto {
-  isSuccess? : boolean;
-  code? : string;
-  message? : string;
-  result? : ReviewListDTO;
 }
 
 export interface ApiResponseProductListResponse {
@@ -417,16 +377,6 @@ export interface ProductSummary {
   rating?: number;
   purchaseUrl?: string;
   isLiked?: boolean;
-}
-
-/**
- * 크롤링 상태
- * @example "processing"
- */
-export enum CrawlResponseDtoStatusEnum {
-  Processing = "processing",
-  Completed = "completed",
-  Failed = "failed",
 }
 
 export enum UserResponseDtoSocialTypeEnum {
