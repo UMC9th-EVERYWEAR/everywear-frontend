@@ -8,9 +8,10 @@ interface FittingTabProps {
     state: FittingState;
     handleStartFitting: () => void; 
 	handleRestartFitting: () => void;
+	showRestart?: boolean;
 }
 
-const FittingTab = ({ state, handleStartFitting, handleRestartFitting }: FittingTabProps) => {
+const FittingTab = ({ state, handleStartFitting, handleRestartFitting, showRestart = true }: FittingTabProps) => {
 	// 목데이터
 	const imageUrlExample : FittingData = 'https://lh3.googleusercontent.com/d/1XuItc3eisxkLo6ZXqClQs-ZcsbYU0brI';
 
@@ -67,23 +68,22 @@ const FittingTab = ({ state, handleStartFitting, handleRestartFitting }: Fitting
 				/>
 			)}
 
-			{/* 2. 결과 확인 후 버튼들 (IDLE이 아닐 때 노출) */}
 			{!isIdle && (
 				<div className='flex flex-col mt-5 gap-5'>
-					{/* 재생성하기 버튼 */}
-					<ButtonLayout
-						content='재생성하기'
-						variant={isSuccess ? 'outline' : 'outline-secondary'}
-						onClick={handleRestartFitting}
-						disabled={isLoading} // 로딩 중 클릭 방지
-					/>
-
+					{showRestart && (
+						<ButtonLayout
+							content='재생성하기'
+							variant={isSuccess ? 'outline' : 'outline-secondary'}
+							onClick={handleRestartFitting}
+							disabled={isLoading}
+						/>
+					)}
 					{/* 다운로드하기 버튼 */}
 					<ButtonLayout
 						content='다운로드하기'
 						variant={isSuccess ? 'primary' : 'secondary'}
 						onClick={handleDownload}
-						disabled={!isSuccess} // 성공 상태가 아니면 클릭 방지
+						disabled={!isSuccess}
 					/>
 				</div>
 			)}
