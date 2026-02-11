@@ -184,8 +184,10 @@ const AiFittingPage = () => {
 	};
 
 	const handleGoToShop = () => {
-		window.open(productData?.product_url, '_blank', 'noopener,noreferrer');
-		setModal({ type: 'none' });
+		if (productData?.product_url && /^https?:\/\//.test(productData.product_url)) {
+			window.open(productData.product_url, '_blank', 'noopener,noreferrer');
+			setModal({ type: 'none' });
+		}
 	};
 
 	const handleStartFitting = () => {
