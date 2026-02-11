@@ -79,3 +79,8 @@ export const ICON_PATHS = {
 	// 뒤로가기 화살표
 	BACK: 'M9 1L1 9L9 17',
 } as const;
+
+export const OAUTH_AUTHORIZATION_PATH = {
+	KAKAO: '/oauth2/authorization/kakao',
+	GOOGLE: '/oauth2/authorization/google',
+} as const;

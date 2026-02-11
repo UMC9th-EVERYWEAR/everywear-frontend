@@ -1,4 +1,3 @@
-// 로딩 시 보여줄거임
 import { SVG_ICON_DATA, type SvgIconFn } from '@/src/assets/icons';
 import { useRotatingIcon } from '@/src/hooks/domain/products/useRotatingIcon';
 
@@ -13,7 +12,7 @@ const LoadingPage = () => {
 
 	const RotatingIcon = useRotatingIcon(
 		LOADING_ICONS,
-		2000,     // 2초
+		2000,   
 		true,
 	);
 	

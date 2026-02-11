@@ -1,28 +1,20 @@
 import Button from '@/src/components/common/Button';
 import TermsCheckBox, { type TermsCheckedState, type TermType } from '@/src/components/login/TermsCheckBox'
 import { LOGO_IMAGES } from '@/src/constants/images';
-import  { TERMS_LINK } from '@/src/constants/link';
 import { PATH } from '@/src/constants/path';
+import { TERMS_CONFIG } from '@/src/constants/terms';
 import { useToggleAgree } from '@/src/hooks/service/user/useToggle';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
-
-export const TERMS_CONFIG: Record<TermType, { label: string; url: string }> = {
-	SERVICE: { label: '서비스 이용약관 동의', url: TERMS_LINK.SERVICE_TERMS.url },
-	PRIVACY: { label: '개인정보 수집 및 이용 동의', url: TERMS_LINK.PRIVACY.url },
-	PHOTO: { label: '사진 정보 피팅 이용 동의', url: TERMS_LINK.PHOTO.url },
-	PRODUCT: { label: '상품 정보 수집 및 분석 동의', url: TERMS_LINK.PRODUCT.url },
-};
 
 const LoginTermsPage = () => {
 	const navigate = useNavigate();
 
-	const [checked, setChecked] = useState<TermsCheckedState>({
-		SERVICE: false,
-		PRIVACY: false,
-		PHOTO: false,
-		PRODUCT: false,
-	});
+	const initialState = Object.keys(TERMS_CONFIG).reduce((acc, key) => ({ ...acc, [key] : false }),
+	{} as TermsCheckedState,
+	)
+
+	const [checked, setChecked] = useState<TermsCheckedState>(initialState);
 
 
 	// 전체 동의 여부 (계산값)
@@ -31,12 +23,9 @@ const LoginTermsPage = () => {
 	// 전체 동의 토글
 	const toggleAll = () => {
 		const next = !isAllChecked;
-		setChecked({
-			SERVICE: next,
-			PRIVACY: next,
-			PHOTO: next,
-			PRODUCT: next,
-		});
+		const updated = Object.keys(TERMS_CONFIG).reduce((acc, key)=> ({ ...acc, [key] : next }),
+		{} as TermsCheckedState)
+		setChecked(updated)
 	};
 
 	const toggleOne = (key: TermType) => {
@@ -45,15 +34,20 @@ const LoginTermsPage = () => {
 			[key]: !prev[key],
 		}));
 	};
-	const { mutate: toggleAgree, isPending: togglepending , isError } = useToggleAgree();
+	const { mutate: toggleAgree, isPending: togglePending , isError } = useToggleAgree();
 
 	const handleLogin = () => {
+		if(!isAllChecked) return;
 		toggleAgree(undefined, {
 			onSuccess: () => navigate(PATH.ONBOARDING.ROOT),
 		})
 	};
 
-	if(isError) navigate(PATH.LOGIN.ROOT)
+	useEffect(() => {
+		if (isError) {
+			navigate(PATH.LOGIN.ROOT, { replace: true });
+		}
+	}, [isError, navigate]);
 
 	return(
 		<div className='w-full flex flex-col items-center pt-32 gap-13'>
@@ -94,7 +88,7 @@ const LoginTermsPage = () => {
 				${isAllChecked ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2 pointer-events-none'}`}
 			>
 				<Button
-					disabled={!isAllChecked || togglepending}
+					disabled={!isAllChecked || togglePending}
 					onClick={handleLogin}
 				>로그인하기</Button>
 			</div>

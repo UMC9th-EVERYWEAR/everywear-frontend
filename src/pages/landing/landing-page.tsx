@@ -16,15 +16,14 @@ const LadingPage = () => {
 
 	useEffect(() => {
 		if (me) {
-			navigate(PATH.HOME); // 또는 onboarding
+			navigate(PATH.HOME);
 		}
 	}, [me, navigate]);
 
 
-
 	return (
 		<div
-			className={cn('w-full ')}
+			className={cn('w-full')}
 		>
 			{/* Hero  */}
 			<section
@@ -33,11 +32,11 @@ const LadingPage = () => {
 				<HeroSection />
 			</section>
 
+			{/* intro */}
 			<section
 				className="relative h-[200vh]"
 			>				
 				<div className="sticky top-0 h-screen flex items-center justify-center">
-					{/* intro */}
 					<IntroConnectSection />
 				</div>
 			</section>
@@ -46,8 +45,6 @@ const LadingPage = () => {
 				className="relative h-[300vh] bg-phone-two-gradient"
 			>				
 				<div className="sticky top-0 h-screen flex items-center justify-center">
-
-					{/* intro */}
 					<IntroAIFittingSection />
 				</div>
 			</section>		
@@ -59,9 +56,10 @@ const LadingPage = () => {
 				</div>
 			</section>
 
-
+			{/* howWork */}
 			<HowItWorksSection />
 
+			{/* footer */}
 			<LandingFooter />
 
 		</div>
