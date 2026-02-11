@@ -1,3 +1,4 @@
+import { cn } from '@/src/utils/cn';
 import { useNavigate } from 'react-router';
 
 export interface ProductCardProps {
@@ -26,10 +27,14 @@ const StarIcon = () => (
 	</svg>
 );
 
-const ButtonClassName = `flex justify-center w-16 p-1 tracking-[-2px] leading-4.5
-                          items-center border rounded-lg border-none bg-[var(--color-primary-600)] shrink-0
-                          text-medium-12 text-[var(--color-neutral-50)] cursor-pointer
-                          hover:bg-[var(--color-primary-700)] transition-colors sm:w-21`
+const ButtonClassName = cn(
+	'flex justify-center items-center',
+	'p-1 border rounded-lg border-none shrink-0',
+	'bg-[var(--color-primary-600)] text-[var(--color-neutral-50)]',
+	'text-medium-12 cursor-pointer transition-colors',
+	'hover:bg-[var(--color-primary-700)]',
+	'flex-1',
+);
                           
 const ProductCard = ({ 
 	id, 
@@ -110,19 +115,26 @@ const ProductCard = ({
 
 				{/* 구매하기 & AI 분석하기 버튼 (내 옷장 페이지 전용) */}
 				{isCloset && (
-					<button
-						className="mt-2.5 flex justify-between w-full"
-						onClick={(e) => e.stopPropagation()}
-					>
+					<div className={cn('w-full flex gap-2 mt-2')}>
 						<button
 							className={ButtonClassName}
-							onClick={handlePurchase}
-						>구매하기</button>
+							onClick={(e) => {
+								e.stopPropagation(); 
+								handlePurchase();
+							}}
+						>
+							구매하기
+						</button>
 						<button
 							className={ButtonClassName}
-							onClick={handleRecentFitting}
-						>AI 분석하기</button>
-					</button>
+							onClick={(e) => {
+								e.stopPropagation(); 
+								handleRecentFitting();
+							}}
+						>
+							AI 분석하기
+						</button>
+					</div>
 				)}
 			</div>
 		</button>
