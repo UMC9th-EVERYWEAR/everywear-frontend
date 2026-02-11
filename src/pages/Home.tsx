@@ -1,6 +1,5 @@
 import { useRef, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router';
-import { useQueryClient } from '@tanstack/react-query';
 import { Button } from '@/src/components/common/Button';
 import MusinsaLogo from '@/public/svgs/LogoImages/MusinsaLogo.svg';
 import ZigzagLogo from '@/public/svgs/LogoImages/ZigzagLogo.png';
@@ -16,13 +15,13 @@ import { PATH } from '../constants/path';
 import type { FittingSummary, ListDTO } from '../apis/generated';
 import ProductCardSkeleton from '../components/common/ProductCardSkeleton';
 import MallGuide from '../components/products/MallGuide';
+import { queryClient } from '@/src/lib/react-query';
 
 
 const INDICATOR_MAX_DISTANCE = 37;
 
 const Home = () => {
 	const navigate = useNavigate();
-	const queryClient = useQueryClient();
 	const [showGuide, setShowGuide]  = useState(false)
 
 
@@ -31,7 +30,7 @@ const Home = () => {
 	useEffect(() => {
 		queryClient.invalidateQueries({ queryKey: QUERY_KEYS.PRODUCT.LIST });
 		queryClient.invalidateQueries({ queryKey: QUERY_KEYS.FITTING.RECENT });
-	}, [queryClient]);
+	}, []);
 
 	const { data: recentFittings, isLoading: isFittingLoading } = useRecentFittingsQuery();
 	const { data: homeProducts, isLoading: isProductLoading } = useHomeProductsQuery();

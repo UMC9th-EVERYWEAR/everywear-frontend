@@ -1,9 +1,9 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation } from '@tanstack/react-query';
 import { importProduct } from '@/src/apis/domain/product';
 import { QUERY_KEYS } from '@/src/constants/query-key';
+import { queryClient } from '@/src/lib/react-query';
 
 export const useImportProductMutation = () => {
-	const queryClient = useQueryClient();
 
 	return useMutation({
 		// 실제 API 호출 함수

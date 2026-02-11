@@ -1,9 +1,9 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation } from '@tanstack/react-query';
 import { QUERY_KEYS } from '@/src/constants/query-key';
 import { deleteProfileImage } from '@/src/apis/domain';
+import { queryClient } from '@/src/lib/react-query';
 
 export const useDeleteProfileImage = () => {
-	const queryClient = useQueryClient();
 
 	return useMutation({
 		mutationFn: (imageId: number) => deleteProfileImage(imageId),
