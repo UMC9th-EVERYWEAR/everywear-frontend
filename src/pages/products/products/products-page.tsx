@@ -16,14 +16,19 @@ const ProductsPage = () => {
 
 	const [selected, setSelected] = useState<CategoryKey>('전체');
 	const [showGuide, setShowGuide]  = useState(false)
+	const { data: products = [] , isLoading: productLoading, isError : productError, error } = useProductsByCategory(selected);
 
 
-	const handleSelected = (category : CategoryKey) => setSelected(category)
+	const handleSelected = setSelected;
+	const handleAddProduct = () => {
+		navigate(PATH.PRODUCTS.ADD)
+	}
 
-	const { data: products = [] , isLoading: productLoading, isError, error } = useProductsByCategory(selected);
 
 
-	if (isError) return <ErrorPage error={error} />;
+
+	if (productError && error) return <ErrorPage error={error} />;
+
 
 	return(
 		<div 
@@ -51,7 +56,7 @@ const ProductsPage = () => {
 				<ItemAddCountSection
 					category={selected}
 					count={products.length}
-					onClick={() => navigate(PATH.PRODUCTS.ADD)}
+					onClick={handleAddProduct}
 				/>
 				{
 					productLoading ? (
@@ -62,12 +67,12 @@ const ProductsPage = () => {
 						/>
 					)
 				}
+
+				{showGuide && (
+					<MallGuide onClose={() => setShowGuide(false)} />
+				)}
+
 			</div>
-
-
-			{
-				showGuide && <MallGuide onClose={()=> setShowGuide(false)} />
-			}
 		</div>
 	)
 }

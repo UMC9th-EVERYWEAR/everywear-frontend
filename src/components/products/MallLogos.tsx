@@ -15,13 +15,6 @@ const mallLogos = [
 const MallLogosSection = () => {
 	const [showGuide, setShowGuide]  = useState(false)
 
-		
-	if(showGuide)
-	{
-		return(
-			<MallGuide onClose={()=> setShowGuide(false)} />
-		)
-	}
 
 
 	return(
@@ -50,6 +43,10 @@ const MallLogosSection = () => {
 					유명 브랜드 가상 피팅 가이드 &gt;
 				</span>
 			</button>  
+			{showGuide && (
+				<MallGuide onClose={() => setShowGuide(false)} />
+			)}
+
 		</div>
 
 	)

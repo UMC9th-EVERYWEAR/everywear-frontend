@@ -5,15 +5,15 @@ import { useState } from 'react'
 const OnboardingPhotoPage = () => {
 	const [showGuide, setShowGuide] = useState(false);
 
-	if(showGuide)
-	{
-		return(
-			<MallGuide onClose={()=> setShowGuide(false)} />
-		)
-	}	
 	
 	return(
-		<AddPhotoSection setShowGuide={()=>setShowGuide(true)} />	
+		<>
+			<AddPhotoSection setShowGuide={()=>setShowGuide(true)} />	
+			{showGuide && (
+				<MallGuide onClose={() => setShowGuide(false)} />
+			)}
+
+		</>
 	)
 }
 export default OnboardingPhotoPage
