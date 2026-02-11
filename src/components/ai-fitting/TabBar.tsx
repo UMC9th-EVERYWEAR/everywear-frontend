@@ -1,4 +1,4 @@
-import type { ToastInput } from '@/src/hooks/domain/ai-fitting/UseToast';
+import type { ToastInput } from '@/src/hooks/domain/ai-fitting/useToast';
 import type { TabType } from '@/src/pages/ai-fitting/ai-fitting-page';
 import { cn } from '@/src/utils/cn';
 

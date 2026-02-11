@@ -17,7 +17,7 @@ export const getRepresentativeImage = async () => {
 }
 
 export const selectRepresentativeImage = async (imageId: number) => {
-	await apiClient.selectRepresentative(imageId);	
+	await apiClient.selectRepresentative(imageId);
 };
 
 export const deleteProfileImage = async (imageId: number) => {

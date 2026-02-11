@@ -1,6 +1,6 @@
 import { toggleProductLike } from '@/src/apis/domain';
 import { useMutation } from '@tanstack/react-query';
-import type { ToastInput } from '../../domain/ai-fitting/UseToast';
+import type { ToastInput } from '../../domain/ai-fitting/useToast';
 import { queryClient } from '@/src/lib/react-query';
 import { QUERY_KEYS } from '@/src/constants/query-key';
 

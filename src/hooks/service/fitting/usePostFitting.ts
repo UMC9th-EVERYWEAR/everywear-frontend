@@ -2,7 +2,7 @@ import { requestFitting } from '@/src/apis/domain';
 import type { FittingRequest } from '@/src/apis/generated';
 import { QUERY_KEYS } from '@/src/constants/query-key';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import type { ToastInput } from '../../domain/ai-fitting/UseToast';
+import type { ToastInput } from '../../domain/ai-fitting/useToast';
 
 interface usePostFittingProps {
     createToast : (toast : ToastInput) => void;

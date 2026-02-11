@@ -70,9 +70,9 @@ const ReviewCard = ({ data }: ReviewCardProps) => {
 					aria-label="리뷰 이미지 슬라이더"
 					// tabIndex={0}
 				>
-					{data.images.map((img, index) => (
+					{data.images.map((img) => (
 						<div
-							key={index}
+							key={img}
 							className="relative w-[161.75px] h-[107.833px] shrink-0"
 						>
 							<img
