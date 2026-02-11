@@ -1,9 +1,12 @@
 
+import { CheckCircleIcon } from '@/src/assets/icons/components/Icons';
 import Button from '@/src/components/common/Button';
+import Loading from '@/src/components/common/Loading';
 import { Modal } from '@/src/components/common/Modal';
 import { SETTING_IMAGES } from '@/src/constants/images';
 import { useMe } from '@/src/hooks/service/auth/useMe';
 import { useWithdraw } from '@/src/hooks/service/auth/useWithdraw';
+import { cn } from '@/src/utils/cn';
 import { useState } from 'react';
 const SettingWithdraw = () => {
 	const [isConfirmed, setIsConfirmed] = useState(false);
@@ -12,7 +15,7 @@ const SettingWithdraw = () => {
 	const { data, isLoading: meLoading } = useMe();
 
 	if(meLoading) 	{
-		return <>로딩</>
+		return <Loading />
 	}
 
 	const handleWithdraw = async () => {
@@ -20,8 +23,6 @@ const SettingWithdraw = () => {
 
 		try {
 			await withdraw();
-			console.log('회원탈퇴!')
-			// setOpenWithdraw(false);
 		} catch (e) {
 			console.error('회원 탈퇴 실패', e);
 		}
@@ -38,10 +39,7 @@ const SettingWithdraw = () => {
 
 			<div className='w-full text-regular-16 mb-5 text-start'>{data?.name}님, 탈퇴하기 전에 꼭 확인해주세요</div>
 			<div className=" border border-primary-300 py-4 px-2.5  rounded-lg flex items-start gap-3 w-full">
-				<img
-					src={SETTING_IMAGES.CHECK_BLUE}
-					alt='check-icon'
-				/>
+				<CheckCircleIcon className='text-primary-300'/>
 				<div className='text-regular-14'>
 					<p>찜한 상품, 상품 정보 등</p>
 					<p>{data?.name}님 소중한 기록이 모두 사라져요</p>
@@ -60,6 +58,11 @@ const SettingWithdraw = () => {
 					<img
 						src={isConfirmed ? SETTING_IMAGES.COMPLETE_CHECK:  SETTING_IMAGES.CHECK_INCOMPLETE }
 						alt='check'
+					/>
+					<CheckCircleIcon
+						className={cn('',
+							isConfirmed ? ' stroke-neutral-900' : 'text-neutral-900',
+						)}
 					/>
 					<p className='text-regular-16'>탈퇴 유의사항을 모두 확인했어요.</p>
 				</button>
