@@ -9,7 +9,7 @@ interface Props {
 
 const SupportSection = ({ onInquiry }: Props) => {
 	return (
-		<div className="mb-7">
+		<div className="mb-9">
 			<div className="border-b py-1 border-neutral-900 text-medium-16">
 				지원
 			</div>

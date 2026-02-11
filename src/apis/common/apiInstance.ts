@@ -47,7 +47,7 @@ export const axiosInstance = axios.create({
 		'Content-Type' : 'application/json',
 	},
 	// 5초 동안 응답이 없으면 에러 발생 (error code : ECONNABORTED)
-	timeout: 5000, 
+	timeout: 50000, 
 	// // 예: 파일 업로드 시에는 30초로 연장
 	// axiosInstance.post('/upload', formData, { timeout: 30000 });
 

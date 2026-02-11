@@ -35,7 +35,7 @@ export const getBottomProducts = async () => {
 
 export const importProduct = async (payload: ImportDTO) => {
 	const { data } = await apiClient.importProduct(payload, { 
-		timeout: 100000, //50초로 설정 진행
+		timeout: 60000, //60초로 설정 진행
 
 	});
 	return data.result;

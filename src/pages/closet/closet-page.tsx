@@ -25,7 +25,7 @@ const ClosetPage = () => {
 				/>
 			</div>
 
-			<div className='w-full flex flex-col mb-5'> {/* 나중에 width 설정 바꿔야 함 */}
+			<div className='w-full flex flex-col mb-5'>
 
 				<ItemAddCountSection
 					category={selected}
@@ -35,11 +35,11 @@ const ClosetPage = () => {
 
 				{
 					closetLoading ? (
-						<ItemSkeleton isCloset={true}/>
+						<ItemSkeleton isCloset/>
 					) :(
 						<ItemBrowseSection
 							data={filteredClosetProducts}
-							isCloset={true}
+							isCloset
 						/>
 					)
 				}

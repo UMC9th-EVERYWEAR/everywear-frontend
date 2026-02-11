@@ -29,7 +29,7 @@ const StarIcon = () => (
 const ButtonClassName = `flex justify-center w-16 p-1 tracking-[-2px] leading-4.5
                           items-center border rounded-lg border-none bg-[var(--color-primary-600)] shrink-0
                           text-medium-12 text-[var(--color-neutral-50)] cursor-pointer font-anonymous
-                          hover:bg-[var(--color-primary-700)] transition-colors`
+                          hover:bg-[var(--color-primary-700)] transition-colors sm:w-21`
                           
 const ProductCard = ({ 
 	id, 
@@ -67,7 +67,7 @@ const ProductCard = ({
 	return (
 		<button 
 			onClick={handleCardClick}
-			className="flex flex-col items-center max-w-[200px] w-full shrink-0 cursor-pointer active:scale-[0.98] transition-transform"
+			className="flex flex-col items-center min-w-10 max-w-[200px] w-full shrink-0 cursor-pointer active:scale-[0.98] transition-transform"
 		>
       
 			{/* 1. 이미지 영역 */}

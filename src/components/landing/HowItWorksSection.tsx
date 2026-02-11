@@ -39,7 +39,7 @@ const HowItWorksSection = () => {
 			<div
 				className={cn('flex items-center justify-center',
 					isSticky && 'sticky top-10',
-					isInViewport && 'animate-view-out',		
+					isInViewport && 'animate-header-out',		
 				)}
 			>
 
