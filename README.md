@@ -30,7 +30,16 @@ AI로 입어보고 AI로 분석하는 스마트 피팅 앱
 
 ----
 
+## 📈 Performance Optimization Guide
+
+## [👉 🚀 성능 최적화 해결 문서](https://www.notion.so/EVERY-WEAR-2f88e2de5f4a800baafcc63b07b5c215)
+
+  <br/>
+  <br/>
+
+
 ## 🛠 EVERYWEAR WEB 기술 스택 
+
 
 | 카테고리 | 기술 스택 |
 | --- | --- |
@@ -52,19 +61,19 @@ AI로 입어보고 AI로 분석하는 스마트 피팅 앱
 <br />
 
 
-# 🧭 EVERYWEAR WEB Convention
+# 👕 EVERYWEAR WEB Convention
 
 > EVERYWEAR Web 팀의 협업 효율과 코드 품질 유지를 위한 컨벤션 문서입니다.  
 > Git / 브랜치 / 커밋 / 코드 스타일 / 폴더 구조 전반에 대한 기준을 정의합니다.
 
 ---
 
-## 🌱 Git Convention
+##  Git Convention
 
 ### Git Flow 요약
 - `main` : 항상 배포 가능한 상태 유지
 - `develop` : 기능 통합 브랜치
-- `feature/*` : 기능 단위 작업 브랜치
+- `feat/*` : 기능 단위 작업 브랜치
 
 <details>
 <summary>📌 Git Flow 상세 규칙</summary>
@@ -86,7 +95,7 @@ AI로 입어보고 AI로 분석하는 스마트 피팅 앱
 
 ---
 
-## 📗 Commit Message Convention
+## Commit Message Convention
 
 ### 기본 형식
 ```text
@@ -129,7 +138,7 @@ AI로 입어보고 AI로 분석하는 스마트 피팅 앱
   - ✅ add, remove, prevent, handle, refactor
 </details> 
 
-## 🌿 Branch Convention
+##  Branch Convention
 
 ### 기본 형식
 ```text
@@ -151,7 +160,7 @@ AI로 입어보고 AI로 분석하는 스마트 피팅 앱
 
 </details>
 
-## 🔀 Pull Request Rule
+##  Pull Request Rule
 
 - `main`, `develop` 브랜치에 **직접 push 금지**
 - 반드시 **브랜치를 생성한 후 Pull Request**를 생성합니다.
@@ -170,7 +179,6 @@ AI로 입어보고 AI로 분석하는 스마트 피팅 앱
 
 ---
 
-## 🧑‍💻 Coding Convention
 
 
 ## 🗂 프로젝트 구조
@@ -227,4 +235,5 @@ src/
 
 - 질문을 주저하지 않습니다.
 
-- 문제가 발생하면 즉시 공유합니다.
+
+- 작업 내용은 상세히 공유합니다.
