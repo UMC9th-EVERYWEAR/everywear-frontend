@@ -19,6 +19,7 @@ import useGetReviewAi from '@/src/hooks/service/review/useGetReviewAi';
 import useProductsDetail from '@/src/hooks/service/product/useProductsDetail';
 import useGetProfileImg from '@/src/hooks/service/user/useGetProfileImg';
 import useGetRecentFitting from '@/src/hooks/service/fitting/useGetRecentFitting';
+import usePreventRefresh from '@/src/hooks/domain/products/usePreventRefresh';
 
 export type TabType = 'fitting' | 'review';
 
@@ -134,9 +135,13 @@ const AiFittingPage = () => {
 		isAiGetLoading,
 	]);
 
+
+
 	const allowExitRef = useRef(false);
 	const isAnalyzing = isFittingLoading || recentReview?.result?.status === 'processing' || isCrawling;
 	const isAnalyzingRef = useRef(false);
+
+	usePreventRefresh(isAnalyzing);
 
 	useEffect(() => {
 		isAnalyzingRef.current = isAnalyzing;
