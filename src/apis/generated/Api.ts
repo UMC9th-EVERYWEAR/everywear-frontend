@@ -2,6 +2,7 @@
 import type {
   ApiResponseAgreeToggleResponse,
   ApiResponseAiReviewDTO,
+  ApiResponseClosetProductDetailResponse,
   ApiResponseFittingApplyResult,
   ApiResponseFittingDetail,
   ApiResponseImportDTO,
@@ -538,7 +539,7 @@ export class Api<
    * @response `200` `ApiResponseProductListResponse` OK
    */
   getClosetProducts = (params: RequestParams = {}) =>
-    this.request<ApiResponseProductListResponse, any>({
+    this.request<ApiResponseClosetProductDetailResponse, any>({
       path: `/api/closet`,
       method: "GET",
       secure: true,
@@ -555,7 +556,7 @@ export class Api<
    * @response `200` `ApiResponseProductListResponse` OK
    */
   getClosetTopProducts = (params: RequestParams = {}) =>
-    this.request<ApiResponseProductListResponse, any>({
+    this.request<ApiResponseClosetProductDetailResponse, any>({
       path: `/api/closet/top`,
       method: "GET",
       secure: true,
@@ -572,7 +573,7 @@ export class Api<
    * @response `200` `ApiResponseProductListResponse` OK
    */
   getClosetOuterProducts = (params: RequestParams = {}) =>
-    this.request<ApiResponseProductListResponse, any>({
+    this.request<ApiResponseClosetProductDetailResponse, any>({
       path: `/api/closet/outer`,
       method: "GET",
       secure: true,
@@ -589,7 +590,7 @@ export class Api<
    * @response `200` `ApiResponseProductListResponse` OK
    */
   getClosetEtcProducts = (params: RequestParams = {}) =>
-    this.request<ApiResponseProductListResponse, any>({
+    this.request<ApiResponseClosetProductDetailResponse, any>({
       path: `/api/closet/etc`,
       method: "GET",
       secure: true,
@@ -606,7 +607,7 @@ export class Api<
    * @response `200` `ApiResponseProductListResponse` OK
    */
   getClosetDressProducts = (params: RequestParams = {}) =>
-    this.request<ApiResponseProductListResponse, any>({
+    this.request<ApiResponseClosetProductDetailResponse, any>({
       path: `/api/closet/dress`,
       method: "GET",
       secure: true,
@@ -623,7 +624,7 @@ export class Api<
    * @response `200` `ApiResponseProductListResponse` OK
    */
   getClosetBottomProducts = (params: RequestParams = {}) =>
-    this.request<ApiResponseProductListResponse, any>({
+    this.request<ApiResponseClosetProductDetailResponse, any>({
       path: `/api/closet/bottom`,
       method: "GET",
       secure: true,

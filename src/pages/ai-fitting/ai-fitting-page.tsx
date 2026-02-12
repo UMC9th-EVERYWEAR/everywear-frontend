@@ -38,6 +38,7 @@ const AiFittingPage = () => {
 	const [hasRequestedAi, setHasRequestedAi] = useState(false);
 	const [reviewAiRetryCount, setReviewAiRetryCount] = useState(0);
 	const [isFittingCompleted, setIsFittingCompleted] = useState(false);
+	const [shouldFetchAiReview, setShouldFetchAiReview] = useState(false);
 
 	const { mutate : mutateLike } = useLike({ createToast });
 	const { mutate : mutateFitting,  isPending : isFittingLoading, isError : isFittingError } = usePostFitting({ createToast });
@@ -62,6 +63,7 @@ const AiFittingPage = () => {
 		const reviewStatus = recentReview?.result?.status;
     
 		if (aiReview?.summary || hasRequestedAi) return;
+		if (!shouldFetchAiReview) return;
 		if (reviewStatus === 'completed') {
 			// eslint-disable-next-line
 			setHasRequestedAi(true);
@@ -83,7 +85,11 @@ const AiFittingPage = () => {
 		productId, 
 		createToast,
 		setIsPollingStartedAi,
+		isFittingCompleted,
+		shouldFetchAiReview,
 	]);
+	
+
 	
 	const currentFittingState = useMemo((): FittingState => {
 		if (isFittingLoading || isLoadingFittingResult) return { status: 'loading' };
@@ -225,6 +231,7 @@ const AiFittingPage = () => {
 	const handleFirstFitting = () => {
 		handleStartFitting();
 		handleStartCrawl();
+		setShouldFetchAiReview(true);
 	}
 
 	const handleExitConfirm = () => {
