@@ -19,6 +19,7 @@ import useGetReviewAi from '@/src/hooks/service/review/useGetReviewAi';
 import useProductsDetail from '@/src/hooks/service/product/useProductsDetail';
 import useGetProfileImg from '@/src/hooks/service/user/useGetProfileImg';
 import useGetRecentFitting from '@/src/hooks/service/fitting/useGetRecentFitting';
+import usePreventRefresh from '@/src/hooks/domain/products/usePreventRefresh';
 
 export type TabType = 'fitting' | 'review';
 
@@ -37,6 +38,7 @@ const AiFittingPage = () => {
 	const [hasRequestedAi, setHasRequestedAi] = useState(false);
 	const [reviewAiRetryCount, setReviewAiRetryCount] = useState(0);
 	const [isFittingCompleted, setIsFittingCompleted] = useState(false);
+	const [shouldFetchAiReview, setShouldFetchAiReview] = useState(false);
 
 	const { mutate : mutateLike } = useLike({ createToast });
 	const { mutate : mutateFitting,  isPending : isFittingLoading, isError : isFittingError } = usePostFitting({ createToast });
@@ -61,6 +63,7 @@ const AiFittingPage = () => {
 		const reviewStatus = recentReview?.result?.status;
     
 		if (aiReview?.summary || hasRequestedAi) return;
+		if (!shouldFetchAiReview) return;
 		if (reviewStatus === 'completed') {
 			// eslint-disable-next-line
 			setHasRequestedAi(true);
@@ -82,7 +85,11 @@ const AiFittingPage = () => {
 		productId, 
 		createToast,
 		setIsPollingStartedAi,
+		isFittingCompleted,
+		shouldFetchAiReview,
 	]);
+	
+
 	
 	const currentFittingState = useMemo((): FittingState => {
 		if (isFittingLoading || isLoadingFittingResult) return { status: 'loading' };
@@ -134,9 +141,13 @@ const AiFittingPage = () => {
 		isAiGetLoading,
 	]);
 
+
+
 	const allowExitRef = useRef(false);
 	const isAnalyzing = isFittingLoading || recentReview?.result?.status === 'processing' || isCrawling;
 	const isAnalyzingRef = useRef(false);
+
+	usePreventRefresh(isAnalyzing);
 
 	useEffect(() => {
 		isAnalyzingRef.current = isAnalyzing;
@@ -220,6 +231,7 @@ const AiFittingPage = () => {
 	const handleFirstFitting = () => {
 		handleStartFitting();
 		handleStartCrawl();
+		setShouldFetchAiReview(true);
 	}
 
 	const handleExitConfirm = () => {
@@ -269,6 +281,7 @@ const AiFittingPage = () => {
 					data={productData}
 					handleHeart={handleHeart}
 					handleBuy={() => setModal({ type: 'buy' })}
+					isFittingHistory={false}
 				/>
 
 				{activeTab === 'fitting' && (

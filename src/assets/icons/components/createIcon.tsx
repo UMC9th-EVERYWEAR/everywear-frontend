@@ -8,12 +8,12 @@ type BaseIconProps = {
 export const createIcon =
   (Icon: React.FC<React.SVGProps<SVGSVGElement>>) => {
   	const Component = ({ size = 24, className, ...rest }: BaseIconProps) => (
-	<Icon
-	width={size}
-	height={size}
-	className={className}
-	{...rest}
-  		/>
+  		<Icon
+  			width={size}
+  			height={size}
+  			className={className}
+  			{...rest}
+	/>
   	)
 
   	Component.displayName = Icon.displayName || Icon.name || 'Icon'

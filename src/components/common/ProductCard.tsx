@@ -1,4 +1,5 @@
 import { Icons } from '@/src/assets/icons/components/Icons';
+import { PATH } from '@/src/constants/path';
 import { useNavigate } from 'react-router';
 
 export interface ProductCardProps {
@@ -10,6 +11,7 @@ export interface ProductCardProps {
     imageUrl: string;
     isCloset?: boolean;
     productUrl?: string; 
+	recentFittingId?: number;
 }
 
 const ButtonClassName = `flex justify-center w-16 p-1 tracking-[-2px] leading-4.5
@@ -26,6 +28,7 @@ const ProductCard = ({
 	imageUrl, 
 	isCloset = false ,
 	productUrl,
+	recentFittingId = 0,
 }: ProductCardProps) => {
  
 	const navigate = useNavigate();
@@ -43,8 +46,8 @@ const ProductCard = ({
 	}
 
 	const handleRecentFitting = () => {
-		if (id) {
-			navigate(`/recent-fiitng/${id}`)
+		if (isCloset) {
+			navigate(PATH.FITTING_DETAIL.replace(':id', String(recentFittingId)));
 		}
 	}
 
