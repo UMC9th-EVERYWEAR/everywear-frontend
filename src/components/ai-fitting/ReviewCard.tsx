@@ -2,8 +2,8 @@ import { useState } from 'react';
 import { truncate } from '@/src/utils/truncate';
 import useDraggableScroll from '@/src/hooks/domain/ai-fitting/useDraggableScroll';
 import { cn } from '@/src/utils/cn';
-import { AI_FITTING_IMAGES } from '@/src/constants/images';
 import type { ReviewDTO } from '@/src/apis/generated';
+import { Icons } from '@/src/assets/icons/components/Icons';
 
 interface ReviewCardProps {
 	data: ReviewDTO; 
@@ -23,11 +23,14 @@ const ReviewCard = ({ data }: ReviewCardProps) => {
 			<div className="flex items-center">
 				<div className="flex">
 					{Array.from({ length: 5 }).map((_, index) => (
-						<img
-							key={index}
-							src={index < (data.rating ?? 0) ? AI_FITTING_IMAGES.REVIEW_STAR_ON : AI_FITTING_IMAGES.REVIEW_STAR_OFF}
-							alt="별점"
-						/>
+						<>
+							<Icons.Star
+								key={index}
+								className={cn('w-4 h-4',
+									index < (data.rating ?? 0) ? 'text-primary-600' : 'text-neutral-500',
+								)}
+							/>
+						</>
 					))}
 				</div>
 				<span className="text-neutral-400 dark:text-neutral-500 text-medium-10 ml-1">{data.review_date ?? ''}</span>

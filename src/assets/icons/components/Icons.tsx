@@ -34,6 +34,9 @@ import OnePieceSvg from '@/src/assets/icons/svgs/clothes/onepiece-icon.svg?react
 import OuterSvg from '@/src/assets/icons/svgs/clothes/outer-icon.svg?react'
 import EtcSvg from '@/src/assets/icons/svgs/clothes/etc-icon.svg?react'
 
+// fitting
+import StartSvg from '@/src/assets/icons/svgs/fitting/fitting-card-star.svg?react'
+
 
 export const Icons = {
 	// header 
@@ -68,5 +71,8 @@ export const Icons = {
 	OnePiece: createIcon(OnePieceSvg),
 	Outer: createIcon(OuterSvg),
 	Etc: createIcon(EtcSvg),
+
+	// fitting
+	Star: createIcon(StartSvg),
 
 } as const

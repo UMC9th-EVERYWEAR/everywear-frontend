@@ -2,12 +2,6 @@
 export const AI_FITTING_IMAGES = {
 	FITTING_CARD_HEART: '/svgs/ai-fitting/FittingCardHeart.svg',
 	FITTING_CARD_HEART_FILL: '/svgs/ai-fitting/FittingCardHeartFill.svg',
-	FITTING_CARD_IMG_EXAMPLE: '/svgs/ai-fitting/FittingCardImgExample.svg',
-	FITTING_CARD_STAR: '/svgs/ai-fitting/FittingCardStar.svg',
-
-	REVIEW_STAR_OFF: '/svgs/ai-fitting/ReviewStarOff.svg',
-	REVIEW_STAR_ON: '/svgs/ai-fitting/ReviewStarOn.svg',
-
 	ROTATE_ICON: '/svgs/ai-fitting/RotateIcon.svg',
 } as const;
 

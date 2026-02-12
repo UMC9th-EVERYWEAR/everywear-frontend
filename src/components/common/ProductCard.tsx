@@ -1,3 +1,4 @@
+import { Icons } from '@/src/assets/icons/components/Icons';
 import { useNavigate } from 'react-router';
 
 export interface ProductCardProps {
@@ -10,21 +11,6 @@ export interface ProductCardProps {
     isCloset?: boolean;
     productUrl?: string; 
 }
-
-const StarIcon = () => (
-	<svg
-		width="8.3"
-		height="7.9"
-		viewBox="0 0 9 8"
-		fill="none"
-		xmlns="http://www.w3.org/2000/svg"
-	>
-		<path
-			d="M1.59375 7.91667L2.27083 4.98958L0 3.02083L3 2.76042L4.16667 0L5.33333 2.76042L8.33333 3.02083L6.0625 4.98958L6.73958 7.91667L4.16667 6.36458L1.59375 7.91667Z"
-			className="fill-neutral-900 dark:fill-neutral-200"
-		/>
-	</svg>
-);
 
 const ButtonClassName = `flex justify-center w-16 p-1 tracking-[-2px] leading-4.5
                           items-center border rounded-lg border-none bg-[var(--color-primary-600)] shrink-0
@@ -84,8 +70,8 @@ const ProductCard = ({
 						{company || '브랜드'}
 					</span>
 					<div className="flex items-center">
-						<div className="flex items-center justify-center w-[14px] h-[14px]">
-							<StarIcon />
+						<div className="flex items-center justify-center">
+							<Icons.Star className='w-2.5 h-2.5 text-neutral-700 dark:text-neutral-200' />
 						</div>
 						<span className="text-neutral-900 dark:text-neutral-200 ml-0.5">
 							{rating}
