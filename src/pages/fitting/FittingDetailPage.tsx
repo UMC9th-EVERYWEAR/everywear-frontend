@@ -30,13 +30,13 @@ const FittingDetailPage = () => {
 
 		return (
 			(fittingsList.find(
-				(item) => (item.fittingId || (item as unknown as { id: number }).id) === fittingId,
+				(item) =>
+					(item.fittingId || (item as FittingDetailDTO).fittingId) === fittingId,
 			) as FittingDetailDTO) || null
 		);
 	}, [fittingsList, fittingId]);
 
 	const sourceData = useMemo<FittingDetailDTO | null>(() => {
-
 		if (fittingDetail?.afterImageUrl) {
 			return fittingDetail;
 		}
@@ -44,7 +44,7 @@ const FittingDetailPage = () => {
 	}, [fittingDetail, targetFromList]);
 
 	const normalizedProduct = useMemo<ListDTO | null>(() => {
-		if (!sourceData || !products || !sourceData.product) return null;
+		if (!sourceData || !products) return null;
 
 		const productId = sourceData.product.productId;
 		const productData = products.find(
@@ -53,24 +53,39 @@ const FittingDetailPage = () => {
 		const dtoProduct = sourceData.product;
 
 		return {
-      
 			product_id: productId,
 			product_name: productData?.product_name || dtoProduct.productName,
-			shoppingmale_name: productData?.shoppingmale_name || dtoProduct.siteName || '브랜드',
+			shoppingmale_name:
+        productData?.shoppingmale_name || dtoProduct.siteName || '브랜드',
 			price: productData?.price || dtoProduct.price,
-			product_img_url: productData?.product_img_url || (dtoProduct as unknown as { productImage: string }).productImage || '',
+			product_img_url:
+        productData?.product_img_url || dtoProduct.productImage || '',
 			product_url: productData?.product_url || dtoProduct.purchaseUrl,
 			star_point: productData?.star_point || dtoProduct.rating || 0,
 			is_liked: productData?.is_liked || dtoProduct.isLiked,
 		} as ListDTO;
 	}, [sourceData, products]);
 
+	// ✅ products 에서 실제 매칭되는 상품 (AI 리뷰용)
+	const matchedProduct = useMemo(() => {
+		if (!sourceData || !products) return null;
+
+		const productId = sourceData.product?.productId;
+		if (!productId) return null;
+
+		return (
+			products.find(
+				(p) => Number(p.product_id) === Number(productId),
+			) || null
+		);
+	}, [sourceData, products]);
+
 	const currentFittingState = useMemo((): FittingState => {
-		const url = sourceData?.afterImageUrl || '';
+		const resultUrl = sourceData?.afterImageUrl || '';
 
 		return {
 			status: 'success',
-			resultUrl: url,
+			resultUrl,
 		};
 	}, [sourceData]);
 
@@ -78,7 +93,10 @@ const FittingDetailPage = () => {
 
 	const handleHeart = (status: boolean) => {
 		if (normalizedProduct?.product_id) {
-			mutateLike({ productId: Number(normalizedProduct.product_id), isLiked: status });
+			mutateLike({
+				productId: Number(normalizedProduct.product_id),
+				isLiked: status,
+			});
 		}
 	};
 
@@ -96,23 +114,21 @@ const FittingDetailPage = () => {
 			product={normalizedProduct}
 			profileImg=""
 			fittingState={currentFittingState}
-			showRestartButton={false}
 			showBefore={false}
-			reviewState={{
-				status: 'success',
-				summary: {
-					status: 'success',
-					text: sourceData?.reviewSummary || '요약 정보가 없습니다.',
-				},
-				keywords: (sourceData?.product?.keywords || []).map((k, i) => ({
-					id: i,
-					label: k,
-				})),
-				reviews: (sourceData?.reviews || []).map((review) => ({
-					...review,
-					images: (review.images || []).map((img) => img.imgUrl),
-				})),
-			} as ReviewState}
+			showRestartButton={false}
+			reviewState={
+        {
+        	status: 'success',
+        	summary: {
+        		status: 'success',
+        		text: matchedProduct?.AI_review || '요약 정보가 없습니다.',
+        	},
+        	keywords: (matchedProduct?.keywords || []).map(
+        		(k: string, i: number) => ({ id: i, label: k }),
+        	),
+        	reviews: [],
+        } as ReviewState
+			}
 			toasts={toasts}
 			deleteToast={deleteToast}
 			isBuyModalOpen={modal.type === 'buy'}
