@@ -7,10 +7,9 @@ interface ReviewTabProps {
 	state: ReviewListState;
 	aiState: AiSummaryState;
 	handleStartReviewAi : () => void;
-	canRetry? : boolean;
 }
 
-const ReviewTab = ({ state, aiState, handleStartReviewAi, canRetry = false }: ReviewTabProps) => {
+const ReviewTab = ({ state, aiState, handleStartReviewAi }: ReviewTabProps) => {
 
 	return (
 		<div className='flex flex-col items-center mb-32 w-full'>
@@ -18,8 +17,6 @@ const ReviewTab = ({ state, aiState, handleStartReviewAi, canRetry = false }: Re
 				state={state}
 				aiState={aiState}
 				handleStartReviewAi={handleStartReviewAi}
-				canRetry={canRetry}
-				
 			/>
 
 			{state.status === 'success' && aiState.status === 'success' && aiState.result && (
