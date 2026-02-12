@@ -12,26 +12,39 @@ interface ReviewSummaryProps {
 
 const ReviewSummary = ({ state, aiState, handleStartReviewAi, canRetry = false } : ReviewSummaryProps) => {
 	return (
-		<div className='bg-review-summary border border-none rounded-xl px-2.5 py-1.5 flex flex-col gap-1 w-full'>
-			<span className='text-bold-16 text-primary-600'>AI 리뷰 요약</span>
-                            
+		<div
+			className='
+				bg-white
+				dark:bg-neutral-800
+				border border-none
+				rounded-xl
+				px-2.5 py-1.5
+				flex flex-col gap-1 w-full
+			'
+		>
+			<span className='text-bold-16 text-primary-600 dark:text-primary-400'>
+				AI 리뷰 요약
+			</span>
+							
 			{aiState.status === 'loading' && (
 				<div className="w-full flex items-center min-h-10">
 					<div className="w-[36.5px] flex justify-center items-center shrink-0">
 						<LoadingSpinner size={5}/>
 					</div>
-					<span className='ml-2 flex flex-1 text-regular-14 break-keep'>
+					<span className='ml-2 flex flex-1 text-regular-14 break-keep text-neutral-900 dark:text-neutral-300'>
 						AI가 리뷰 분석 결과를 계속 업데이트하고 있어요.
 					</span>
 				</div>
 			)}
-        
-			{aiState.status === 'success'  && aiState && (
-				<div className='w-full flex text-regular-14 text-neutral-900 '>
-					{aiState.result?.summary ? aiState.result.summary : '리뷰가 존재하지 않아 AI 요약이 불가능합니다.'}
+		
+			{aiState.status === 'success' && aiState && (
+				<div className='w-full flex text-regular-14 text-neutral-900 dark:text-neutral-100'>
+					{aiState.result?.summary
+						? aiState.result.summary
+						: '리뷰가 존재하지 않아 AI 요약이 불가능합니다.'}
 				</div>
 			)}
-        
+		
 			{(state.status === 'error' || (state.status === 'success' && aiState.status === 'error')) && (
 				<div className={cn('mb-2.5 gap-4 flex flex-col w-full')}>
 					<div className={cn('flex flex-col')}>

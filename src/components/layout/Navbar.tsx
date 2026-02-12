@@ -14,20 +14,22 @@ export const Navbar = () => {
 	const location = useLocation(); 
 
 	return (
-		<nav className="sticky bottom-0 flex w-full h-[50px] px-4 justify-between items-center bg-white border-t border-neutral-100 shadow-[var(--shadow-4)] z-10">
+ 
+		<nav className="sticky bottom-0 flex w-full h-[50px] px-4 justify-between items-center bg-white dark:bg-neutral-900 border-t border-neutral-100 dark:border-neutral-800 shadow-[var(--shadow-4)] z-10 transition-colors duration-300">
 			{NAV_ITEMS.map(({ id, label, Icon, path }) => {
 				const isActive = location.pathname === path;
 
 				return (
 					<button
 						key={id}
-						onClick={() => navigate(path)} 
+						onClick={() => navigate(path)}
 						className={`flex flex-1 flex-col items-center justify-center transition-colors duration-200 cursor-pointer ${
-                            isActive ? 'text-primary-600 font-bold' : 'text-neutral-700'
+                            isActive 
+                            	? 'text-primary-600 font-bold' 
+                            	: 'text-neutral-700 dark:text-neutral-400'
                         }`}
 					>
 						<div className="flex items-center justify-center h-[20px]">
-							{/* isActive를 props로 넘겨서 아이콘 색상을 바꿀 수 있다면 전달 */}
 							<IconImage
 								name={Icon}
 								size={24}
