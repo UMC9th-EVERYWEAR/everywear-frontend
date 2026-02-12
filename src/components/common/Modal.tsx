@@ -1,3 +1,5 @@
+import { useEffect } from 'react';
+
 interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -19,6 +21,17 @@ export const Modal = ({
 	btn2Text,
 	btn2Action,
 }: ModalProps) => {
+
+	  useEffect(() => {
+		if (isOpen) {
+			document.body.style.overflow = 'hidden';
+		}
+
+		return () => {
+			document.body.style.overflow = '';
+		};
+	}, [isOpen]);
+
 	if (!isOpen) return null;
 
 	return (

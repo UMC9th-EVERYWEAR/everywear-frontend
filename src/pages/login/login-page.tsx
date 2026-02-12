@@ -1,13 +1,9 @@
 import LoginBtn from '@/src/components/login/LoginBtn'
 import { ENV_CONFIG } from '@/src/constants/config';
 import { LOGO_IMAGES } from '@/src/constants/images';
+import  { OAUTH_AUTHORIZATION_PATH } from '@/src/constants/path';
+
 export type LoginType = keyof typeof OAUTH_AUTHORIZATION_PATH;
-
-const OAUTH_AUTHORIZATION_PATH = {
-	KAKAO: '/oauth2/authorization/kakao',
-	GOOGLE: '/oauth2/authorization/google',
-} as const;
-
 
 const LoginPage = () => {
 
