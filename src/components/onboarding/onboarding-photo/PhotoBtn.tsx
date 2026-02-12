@@ -1,5 +1,5 @@
-import  { ONBOARDING_IMAGES } from '@/src/constants/images';
-
+import { Icons } from '@/src/assets/icons/components/Icons';
+import React from 'react';
 
 export type PhotoBtnType =
   | 'CAMERA'
@@ -10,16 +10,16 @@ const PHOTO_BTN_CONFIG: Record<
   PhotoBtnType,
 {
   title: string,
-  icon: string
+Icon: React.FC<{ size?: number; className?: string }>,
 }
 > = {
 	CAMERA: {
 		title: '사진 촬영',
-		icon: ONBOARDING_IMAGES.CAMERA_BLUE, 
+		Icon: Icons.Camera, 
 	},
 	GALLERY: {
 		title: '갤러리에서 선택',
-		icon: ONBOARDING_IMAGES.GALLERY,
+		Icon: Icons.Gallery,
 	},
 };
 
@@ -30,19 +30,18 @@ interface PhotoBtnProps {
 
 
 const PhotoBtn = ({ btnType, handleClick }: PhotoBtnProps) => {
-	const { title, icon } = PHOTO_BTN_CONFIG[btnType];
+	const { title, Icon } = PHOTO_BTN_CONFIG[btnType];
 
 	return (
 		<div className="max-w-42 w-full">
 			<button
 				onClick={() => handleClick(btnType)}
-				className="w-full border border-primary-600 rounded-lg py-4 flex gap-2.5 justify-center cursor-pointer hover:border-2 hover:-mb-1"
+				className="w-full border border-primary-600 rounded-lg py-4 flex gap-2.5 justify-center items-center cursor-pointer hover:border-2 hover:-mb-1"
 			> 
-				<img
-					src={icon}
-					alt='btn-img'
-					className='w-5'
-				/>                                                                       
+				<Icon
+					size={20}
+					className= {'text-primary-600'}
+				/>                                                                   
 				<span className='text-regular-16'>{title}</span>
 			</button>
 		</div>

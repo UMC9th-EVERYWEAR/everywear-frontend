@@ -1,7 +1,8 @@
-import { SETTING_IMAGES } from '@/src/constants/images';
 import { ArrowRightIcon } from './ArrowRightIcon.';
 import ToggleBtn from './ToggleBtn';
 import type { UserResponseDtoSocialTypeEnum } from '@/src/apis/generated';
+import { Icons } from '@/src/assets/icons/components/Icons';
+import { cn } from '@/src/utils/cn';
 
 
 interface Props {
@@ -31,9 +32,11 @@ const AccountSection = ({
 				<span className="text-regular-14 flex items-center">
 					기본 사진 변경
 				</span>
-				<img
-					src={SETTING_IMAGES.ARROW_RIGHT}
-					alt="arrow right"
+				<Icons.Arrow 
+					size={25}
+					className={cn(
+						'cursor-pointer transition-transform duration-200 text-neutral-300',
+					)}
 				/>
 			</button>
 

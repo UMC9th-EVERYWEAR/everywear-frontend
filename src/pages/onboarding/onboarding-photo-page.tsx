@@ -3,9 +3,8 @@ import MallGuide from '@/src/components/products/MallGuide';
 import { useState } from 'react'
 
 const OnboardingPhotoPage = () => {
-	const [showGuide, setShowGuide] = useState(false);
+	const [showGuide,setShowGuide] = useState(false)
 
-	
 	return(
 		<>
 			<AddPhotoSection setShowGuide={()=>setShowGuide(true)} />	

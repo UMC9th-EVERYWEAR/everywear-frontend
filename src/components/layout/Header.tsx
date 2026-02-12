@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router';
-import { ICON_PATHS } from '../../constants/path'; 
-import { LOGO_IMAGES } from '@/src/constants/images';
-import { useThemeStore } from '@/src/store/use-theme-store'; 
+import { Icons } from '@/src/assets/icons/components/Icons';
+import { useThemeStore } from '@/src/store/use-theme-store';
+import { PATH } from '@/src/constants/path';
 
 interface HeaderProps {
   type: 'main' | 'sub'; 
@@ -25,72 +25,26 @@ const Header = ({ type, title = 'EVERY WEAR', onBack }: HeaderProps) => {
 		<header className="w-full h-[45px] px-4 bg-white dark:bg-gray-900 flex items-center sticky top-0 z-30 shadow-12 transition-colors duration-300">
 			{type === 'main' ? (
 				<div className="flex justify-between items-end w-full pb-1">
-					<img 
-						src={LOGO_IMAGES.EVERYWEAR}
-						alt="Everywear" 
-						className="h-[18px] w-auto object-contain transition-all duration-300 dark:brightness-110"
-					/>
-                    
-					<div className="flex items-center gap-3">
+					<Icons.Everywear width={133}/>                    
+					<div className="flex items-center gap-3 ">
 						<button 
 							onClick={toggleTheme}
-							className="text-primary-600 dark:text-primary-400 cursor-pointer p-1"
+							className="text-primary-600 dark:text-primary-400 cursor-pointer p-1 pb-0"
 							aria-label="테마 전환"
 						>
 							{theme === 'light' ? (
-								<svg
-									xmlns="http://www.w3.org/2000/svg"
-									width="22"
-									height="22"
-									viewBox="0 0 24 24"
-									fill="none"
-									stroke="currentColor"
-									strokeWidth="2"
-									strokeLinecap="round"
-									strokeLinejoin="round"
-								><circle
-										cx="12"
-									cy="12"
-									r="5"
-								/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+								<Icons.LightLogo className='text-primary-600'/>		
 							) : (
-								<svg
-									xmlns="http://www.w3.org/2000/svg"
-									width="22"
-									height="22"
-									viewBox="0 0 24 24"
-									fill="none"
-									stroke="currentColor"
-									strokeWidth="2"
-									strokeLinecap="round"
-									strokeLinejoin="round"
-								><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+								<Icons.DarkLogo className='text-primary-600' />
 							)}
 						</button>
 
 						<button 
-							className="text-primary-600 dark:text-primary-400 transition-opacity active:opacity-50 cursor-pointer p-1"
+							className="text-primary-600 dark:text-primary-400 transition-opacity active:opacity-50 cursor-pointer p-1 pb-0"
 							aria-label="설정"
-							onClick={() => navigate('/setting')}
+							onClick={() => navigate(PATH.SETTING.ROOT)}
 						>
-							<svg
-								xmlns="http://www.w3.org/2000/svg"
-								width="24"
-								height="24"
-								viewBox="0 0 24 24"
-								fill="none"
-								stroke="currentColor"
-								strokeWidth="2"
-								strokeLinecap="round"
-								strokeLinejoin="round"
-							>
-								<path d={ICON_PATHS.SETTINGS} />
-								<circle
-									cx="12"
-									cy="12"
-									r="3"
-								/>
-							</svg>
+							<Icons.SettingHeader  className='text-primary-600'/>
 						</button>
 					</div>
 				</div>
@@ -98,25 +52,13 @@ const Header = ({ type, title = 'EVERY WEAR', onBack }: HeaderProps) => {
 				<div className="flex items-center w-full h-full">
 					<button 
 						onClick={handleBack}
-						className="flex items-center justify-center mr-2 active:opacity-50 transition-opacity cursor-pointer"
+						className="flex items-center justify-center mr-1 -ml-2 active:opacity-50 transition-opacity cursor-pointer"
 						aria-label="뒤로가기"
 					>
-						<svg
-							width="10"
-							height="18"
-							viewBox="0 0 10 18"
-							fill="none"
-							className="shrink-0"
-						>
-							<path
-								d={ICON_PATHS.BACK}
-								stroke="currentColor"
-								className="text-primary-600 dark:text-primary-400"
-								strokeWidth="2"
-								strokeLinecap="round"
-								strokeLinejoin="round"
-							/>
-						</svg>
+						<Icons.Arrow
+							className='text-primary-600 rotate-180 dark:text-primary-400'
+							size={30}
+						/>
 					</button>
 					<h2 className="text-primary-600 dark:text-primary-400 text-medium-16 tracking-[-0.48px] font-bold">
 						{title}

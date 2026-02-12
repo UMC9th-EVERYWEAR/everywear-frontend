@@ -60,6 +60,7 @@ const ProductsAddPage = () => {
 				onSubmit={handleSubmit}
 			/>
 
+			{/** modals */}
 			{
 				openModal && <ProductsModals
 					type={openModal}

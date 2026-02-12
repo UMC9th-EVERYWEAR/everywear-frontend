@@ -23,7 +23,7 @@ const FittingTab = ({
 
 	const handleDownload = () => {
 		if (state.status === 'success' && state.resultUrl) {
-			fileDownload(state.resultUrl);
+			fileDownload(state.resultUrl, 'download');
 		}
 	};
 

@@ -1,4 +1,5 @@
 import type { ListDTO } from '@/src/apis/generated';
+import { Icons } from '@/src/assets/icons/components/Icons';
 import { AI_FITTING_IMAGES } from '@/src/constants/images';
 import { useState } from 'react';
 
@@ -37,11 +38,7 @@ const FittingItemInfo = ({ data, handleHeart, handleBuy }: FittingItemInfoProps)
 						{/* ✅ 쇼핑몰명: dark:text-neutral-400 */}
 						<p className='text-neutral-600 dark:text-neutral-400 text-regular-12'>{data?.shoppingmale_name}</p>
 						<div className='flex items-center gap-0.5'>
-							<img
-								className='h-4 w-4'
-								src={AI_FITTING_IMAGES.FITTING_CARD_STAR}
-								alt='별점'
-							/>
+							<Icons.Star className='text-neutral-700 h-3 w-3'/>
 							<p className='text-neutral-900 dark:text-neutral-200 text-regular-12'>{data?.star_point}</p>
 						</div>
 					</div>
