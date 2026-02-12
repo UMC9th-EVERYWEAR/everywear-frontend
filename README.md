@@ -51,7 +51,6 @@ AI로 입어보고 AI로 분석하는 스마트 피팅 앱
 | **Styling** | ![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS-06B6D4?logo=tailwindcss&logoColor=white&style=for-the-badge) |
 | **State & Networking** | ![TanStack Query](https://img.shields.io/badge/TanStack%20Query-FF4154?logo=reactquery&logoColor=white&style=for-the-badge) |
 | **Client State Management** | ![Zustand](https://img.shields.io/badge/Zustand-443E38?style=for-the-badge) |
-| **Validation** | ![Zod](https://img.shields.io/badge/Zod-3E67B1?style=for-the-badge) |
 | **Utility** | ![clsx](https://img.shields.io/badge/clsx-000000?style=for-the-badge)|
 | **Package Manager** | ![pnpm](https://img.shields.io/badge/pnpm-F69220?logo=pnpm&logoColor=white&style=for-the-badge) |
 | **Formatting & Workflow** | ![ESLint](https://img.shields.io/badge/ESLint-4B32C3?logo=eslint&logoColor=white&style=for-the-badge) ![Lefthook](https://img.shields.io/badge/Lefthook-000000?style=for-the-badge) |
@@ -187,27 +186,23 @@ AI로 입어보고 AI로 분석하는 스마트 피팅 앱
 
 ```text
 src/
-├── apis/                          # 서버 API 호출 레이어
-│   ├── common/                    # axios instance, interceptor 등 공통 설정
-│   ├── domain/                    # 도메인별 API 정의
-│   │   ├── home.ts
-│   │   ├── setting.ts
-│   │   └── index.ts               # domain API re-export
-│   └── index.ts                   # apis 진입점
+├── apis/                              # 서버 API 호출 레이어
+│   ├── common/                        # axios instance, interceptor 등 공통 설정
+│   ├── domain/                        # 도메인별 API wrapper (generated 위를 감싸는 레이어)
+│   ├── generated/                     # swagger-typescript-api 생성물 (있다면)
+│   └── index.ts                       # apis 진입점 / re-export
+├── assets/
+│   └── icons/                         # 아이콘/정적 리소스 엔트리(아이콘 전용)
 │
 ├── components/                    # UI 컴포넌트
-│   ├── common/                    # 전역 공통 컴포넌트
-│   └── layout/                    # 레이아웃 전용 컴포넌트
 │
 ├── constants/                     # 상수 관리
-│   ├── api.ts                     # API endpoint 상수
-│   ├── config.ts                  # 환경 변수, 앱 설정
-│   ├── path.ts                    # 라우트 PATH 상수
-│   └── query-key.ts               # React Query key
 │
 ├── hooks/                         # 커스텀 훅
 │   ├── services/                  # 서버 통신 성격의 hook
 │   └── domain/                    # 비즈니스 로직 성격의 hook
+│
+├── lib/                               # queryClient 세팅 
 │
 ├── pages/                         # 라우팅 단위 페이지(View)
 │   ├── onboarding/
