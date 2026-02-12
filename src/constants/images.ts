@@ -87,7 +87,6 @@ export const ONBOARDING_GUIDE_IMAGES = {
 export const SETTING_IMAGES = {
 	BLUE_CLOSE: '/svgs/setting/blue-close-icon.svg',
 	CAMERA: '/svgs/setting/camera-icon.svg',
-	CHECK_BLUE: '/svgs/setting/check-blue-icon.svg',
 	CHECK_INCOMPLETE: '/svgs/setting/check-incomplete.svg',
 	COMPLETE_CHECK: '/svgs/setting/complete-check.svg',
 	PLUS: '/svgs/setting/plus-icon.svg',

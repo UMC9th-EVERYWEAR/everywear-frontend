@@ -28,7 +28,7 @@ const STEP_CONFIG: Record<
 		description: '유명 쇼핑몰로 이동하여',
 		description2: '원하는 상품을 찾습니다.',
 		phoneMockup: LANDING_IMAGES.HOW_WORK_1,
-		phoneDetailHighlight: LANDING_IMAGES.HOW_WORK_1_1,
+		phoneDetailHighlight: LANDING_IMAGES.HOW_WORK_1,
 
 	},
 	STEP2: {
@@ -44,7 +44,7 @@ const STEP_CONFIG: Record<
 		description: '원하는 상품을 클릭해',
 		description2: 'AI 분석을 요청합니다.',
 		phoneMockup: LANDING_IMAGES.HOW_WORK_3,
-		phoneDetailHighlight: LANDING_IMAGES.HOW_WORK_3_1,
+		phoneDetailHighlight: LANDING_IMAGES.HOW_WORK_3,
 
 
 	},
