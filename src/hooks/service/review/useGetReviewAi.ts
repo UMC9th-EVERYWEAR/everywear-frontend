@@ -6,7 +6,7 @@ function useGetReviewAi(product_id: number, enabled: boolean) {
 	return useQuery({
 		queryKey: QUERY_KEYS.REVIEW.AI(product_id),
 		queryFn: () => getAiReview(product_id),
-        
+		// 주석
 		enabled: enabled, 
 
 		refetchInterval: (query) => {
