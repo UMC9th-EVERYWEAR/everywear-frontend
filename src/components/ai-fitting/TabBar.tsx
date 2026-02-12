@@ -3,13 +3,26 @@ import type { TabType } from '@/src/pages/ai-fitting/ai-fitting-page';
 import { cn } from '@/src/utils/cn';
 
 interface TabBarProps {
-	onTabChange : (tab : TabType) => void;
-	onIdleToast : (toast : ToastInput) => void;
-    activeTab : 'fitting' | 'review';   
-	isIdle : boolean;
+    onTabChange: (tab: TabType) => void;
+    onIdleToast?: (toast: ToastInput) => void; 
+    activeTab: 'fitting' | 'review';    
+    isIdle: boolean;
 }
 
-const TabBar = ({ onTabChange, onIdleToast, activeTab, isIdle } : TabBarProps) => {
+const TabBar = ({ onTabChange, onIdleToast, activeTab, isIdle }: TabBarProps) => {
+
+	const handleReviewClick = () => {
+		if (!isIdle) {
+			onTabChange('review');
+			return;
+		}
+		if (onIdleToast) {
+			onIdleToast({ message: '먼저 가상피팅을 실행해주세요!' });
+		} else {
+			onTabChange('review');
+		}
+	};
+
 	return (
 		<div className="relative flex border-b border-neutral-200 mb-1.5"> 
             
@@ -26,7 +39,7 @@ const TabBar = ({ onTabChange, onIdleToast, activeTab, isIdle } : TabBarProps) =
 					'text-bold-16 flex-1 h-11 flex items-center justify-center p-2.5 transition-all duration-300 cursor-pointer', 
 					activeTab === 'review' ? 'text-primary-600' : 'text-neutral-400',
 				)}
-				onClick={!isIdle ? () => onTabChange('review') : () => onIdleToast({ message : '먼저 가상피팅을 실행해주세요!' })}
+				onClick={handleReviewClick}
 			>AI 리뷰</button>
 
 			<div
