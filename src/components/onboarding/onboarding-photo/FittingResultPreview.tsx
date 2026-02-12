@@ -1,4 +1,4 @@
-import { CheckLoginIcon, LoadingIcon, XBoxIcon } from '@/src/assets/icons/components/Icons';
+import { Icons } from '@/src/assets/icons/components/Icons';
 
 export type FittingStatus = 'LOADING' | 'SUCCESS' | 'FAIL';
 
@@ -27,7 +27,7 @@ const FittingResultPreview = ({
 				{status === 'LOADING' && (
 					<div className="flex flex-col items-center gap-2.5 text-regular-16">
 
-						<LoadingIcon
+						<Icons.Loading
 							width={28}
 							height={28}
 						/>
@@ -39,7 +39,7 @@ const FittingResultPreview = ({
 
 				{status === 'SUCCESS'  && (
 					<div className="flex flex-col items-center gap-2.5 text-regular-16">
-						<CheckLoginIcon
+						<Icons.CheckLogin
 							width={28}
 							height={28}
 							className={  'text-primary-300 rounded-xs'}
@@ -52,7 +52,7 @@ const FittingResultPreview = ({
 
 				{status === 'FAIL' && (
 					<div className="flex flex-col items-center gap-2.5 text-regular-16">
-						<XBoxIcon
+						<Icons.XBox
 							width={28}
 							height={28}
 						/>

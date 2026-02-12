@@ -1,4 +1,4 @@
-import { CheckLoginIcon, LoadingIcon, XBoxIcon } from '@/src/assets/icons/components/Icons';
+import { Icons } from '@/src/assets/icons/components/Icons';
 import { cn } from '@/src/utils/cn';
 
 export type StepStatus = 'WAIT' | 'LOADING' | 'SUCCESS' | 'FAIL';
@@ -45,18 +45,18 @@ const getStepIcon = (
 	step: typeof steps[number],
 	status: StepStatus,
 ) => {
-	if (status === 'LOADING' || status === 'WAIT') return LoadingIcon;
+	if (status === 'LOADING' || status === 'WAIT') return Icons.CheckLogin;
 
 
 	if (step.type === 'PROCESS') {
-		return status === 'SUCCESS' ? CheckLoginIcon : XBoxIcon;
+		return status === 'SUCCESS' ? Icons.CheckLogin : Icons.XBox;
 	}
 
 	// RESULT 타입
-	if (status === 'SUCCESS') return CheckLoginIcon;
-	if (status === 'FAIL') return XBoxIcon;
+	if (status === 'SUCCESS') return Icons.CheckLogin;
+	if (status === 'FAIL') return Icons.XBox;
 
-	return LoadingIcon;
+	return Icons.Loading;
 };
 
 const getIconClass = (

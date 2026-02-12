@@ -1,4 +1,4 @@
-import { EverWearIcon } from '@/src/assets/icons/components/Icons';
+import { Icons } from '@/src/assets/icons/components/Icons';
 import Button from '@/src/components/common/Button';
 import TermsCheckBox, { type TermsCheckedState, type TermType } from '@/src/components/login/TermsCheckBox'
 import  { TERMS_LINK } from '@/src/constants/link';
@@ -58,7 +58,7 @@ const LoginTermsPage = () => {
 	return(
 		<div className='w-full flex flex-col items-center pt-32 gap-13'>
 			<div className='flex flex-col items-center w-65'>
-				<EverWearIcon
+				<Icons.Everywear
 					width={260}
 					height={32}
 					className='mb-5'

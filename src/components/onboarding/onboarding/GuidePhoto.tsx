@@ -1,4 +1,4 @@
-import { GoodBoxIcon, XBoxIcon } from '@/src/assets/icons/components/Icons';
+import { Icons } from '@/src/assets/icons/components/Icons';
 import { ONBOARDING_GUIDE_IMAGES } from '@/src/constants/images';
 import { cn } from '@/src/utils/cn';
 
@@ -50,11 +50,11 @@ const GuidePhoto = ({
 					alt='guide'
 					className="w-full h-full object-cover"
 				/>
-				{variant === 'GOOD' ? 		<GoodBoxIcon
+				{variant === 'GOOD' ? 		<Icons.GoodBox
 					className={cn('absolute right-2 bottom-2  rounded-xs',
 						hasText ? 'w-6' : 'w-4.5')
 					}
-				                        /> : 		<XBoxIcon
+				                        /> : 		<Icons.XBox
 					className={cn('absolute right-2 bottom-2',
 						hasText ? 'w-6' : 'w-4.5')
 					}

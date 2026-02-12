@@ -1,23 +1,30 @@
-// 로딩 시 보여줄거임
-import { SVG_ICON_DATA, type SvgIconFn } from '@/src/assets/icons';
+import { Icons } from '@/src/assets/icons/components/Icons';
 import { useRotatingIcon } from '@/src/hooks/domain/products/useRotatingIcon';
+import React from 'react';
 
 
-const LOADING_ICONS: SvgIconFn[] = [
-	SVG_ICON_DATA.Top,
-	SVG_ICON_DATA.Bottom,
-	SVG_ICON_DATA.Outer,
-	SVG_ICON_DATA.Dress,
+type SvgIconComponent = React.ComponentType<
+  React.SVGProps<SVGSVGElement>
+>;
+
+
+const LOADING_ICONS: SvgIconComponent[] = [
+	Icons.Top,
+	Icons.Bottom,
+	Icons.Outer,
+	Icons.OnePiece,
 ];
 
 
 const Loading = () => {
 
-	const RotatingIcon = useRotatingIcon(
+	const index = useRotatingIcon(
 		LOADING_ICONS,
-		2000,     // 2초
+		2000,   
 		true,
 	);
+
+	const Icon = LOADING_ICONS[index];
 
   
 	return(
@@ -25,7 +32,7 @@ const Loading = () => {
 			className="min-h-screen flex flex-col items-center justify-center"
 		>
 			<div className="absolute scale-800 top-1/3 left-1/2 -translate-x-1/2   animate-clothes-motion mb-20">
-				{RotatingIcon(false)}
+				<Icon className="w-5 h-10 text-primary-600" />
 			</div>
 		</div>
 	)

@@ -1,4 +1,4 @@
-import { GalleryIcon, CameraIcon } from '@/src/assets/icons/components/Icons';
+import { Icons } from '@/src/assets/icons/components/Icons';
 import React from 'react';
 
 export type PhotoBtnType =
@@ -15,11 +15,11 @@ Icon: React.FC<{ size?: number; className?: string }>,
 > = {
 	CAMERA: {
 		title: '사진 촬영',
-		Icon: CameraIcon, 
+		Icon: Icons.Camera, 
 	},
 	GALLERY: {
 		title: '갤러리에서 선택',
-		Icon: GalleryIcon,
+		Icon: Icons.Gallery,
 	},
 };
 

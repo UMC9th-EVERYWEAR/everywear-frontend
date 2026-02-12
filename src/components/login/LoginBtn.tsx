@@ -1,4 +1,4 @@
-import { GoogleIcon, KakaoIcon } from '@/src/assets/icons/components/Icons';
+import { Icons } from '@/src/assets/icons/components/Icons';
 import { cn } from '@/src/utils/cn'
 import React from 'react';
 
@@ -11,11 +11,11 @@ Icon: React.FC<{ size?: number; className?: string }>,
 description: string
 }> = {
 	KAKAO :{
-		Icon: KakaoIcon,
+		Icon: Icons.Kakao,
 		description: '카카오로 로그인',
 	},
 	GOOGLE :{
-		Icon: GoogleIcon,
+		Icon: Icons.Google,
 		description: 'Google로 로그인',
 	},
 }

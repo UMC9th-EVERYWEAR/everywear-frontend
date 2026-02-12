@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router';
-import { ICON_PATHS } from '../../constants/path'; 
-import { EverWearIcon } from '@/src/assets/icons/components/Icons';
+import {  PATH } from '../../constants/path'; 
+import { Icons } from '@/src/assets/icons/components/Icons';
 
 interface HeaderProps {
   type: 'main' | 'sub'; 
@@ -21,35 +21,17 @@ const Header = ({ type, title = 'EVERY WEAR', onBack }: HeaderProps) => {
 	};
 
 	return (
-		<header className="w-full h-[45px] px-4 bg-white flex items-center sticky top-0 z-30 shadow-12">
+		<header className="w-full h-11.25 px-4 bg-white flex items-center sticky top-0 z-30 shadow-12">
 			{type === 'main' ? (
 			/* 1. 메인 헤더 레이아웃*/
 				<div className="flex justify-between items-end w-full">
-					<EverWearIcon width={133}/>
+					<Icons.Everywear width={133}/>
 					<button 
-						className="text-primary-600 transition-opacity active:opacity-50 cursor-pointer"
+						className="transition-opacity active:opacity-50 cursor-pointer"
 						aria-label="설정"
-						onClick={() => navigate('/setting')}
+						onClick={() => navigate(PATH.SETTING.ROOT)}
 					>
-						<svg
-							xmlns="http://www.w3.org/2000/svg"
-							width="24"
-							height="24"
-							viewBox="0 0 24 24"
-							fill="none"
-							stroke="currentColor"
-							strokeWidth="2"
-							strokeLinecap="round"
-							strokeLinejoin="round"
-						>
-							{/* 상수 처리된 설정 아이콘 경로 사용 */}
-							<path d={ICON_PATHS.SETTINGS} />
-							<circle
-								cx="12"
-								cy="12"
-								r="3"
-							/>
-						</svg>
+						<Icons.SettingHeader />
 					</button>
 				</div>
 			) : (
@@ -57,28 +39,17 @@ const Header = ({ type, title = 'EVERY WEAR', onBack }: HeaderProps) => {
 				<div className="flex items-center w-full h-full">
 					<button 
 						onClick={handleBack}
-						className="flex items-center justify-center mr-2 active:opacity-50 transition-opacity cursor-pointer"
+						className="flex items-center justify-center mr-1 active:opacity-50 transition-opacity cursor-pointer"
 						aria-label="뒤로가기"
 					>
-						<svg
-							width="10"
-							height="18"
-							viewBox="0 0 10 18"
-							fill="none"
-							className="shrink-0"
-						>
-							<path
-								/* 상수 처리된 뒤로가기 아이콘 경로 사용 */
-								d={ICON_PATHS.BACK}
-								stroke="currentColor"
-								className="text-primary-600"
-								strokeWidth="2"
-								strokeLinecap="round"
-								strokeLinejoin="round"
-							/>
-						</svg>
+		
+						<Icons.Arrow
+							className='text-primary-600 rotate-180'
+							size={30}
+						/>
+
 					</button>
-					<h2 className="text-primary-600 text-medium-16 tracking-[-0.48px] font-bold">
+					<h2 className="text-primary-600 text-bold-16">
 						{title}
 					</h2>
 				</div>

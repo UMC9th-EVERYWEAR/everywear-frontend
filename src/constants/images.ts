@@ -109,5 +109,4 @@ export const SETTING_IMAGES = {
 	CHECK_INCOMPLETE: '/svgs/setting/check-incomplete.svg',
 	COMPLETE_CHECK: '/svgs/setting/complete-check.svg',
 	PLUS: '/svgs/setting/plus-icon.svg',
-	DUMMY_PHOTO: '/svgs/setting/dummyphoto.jpeg',
 } as const;

@@ -1,102 +1,73 @@
-import GoogleSvg from '@/src/assets/icons/svgs/login/google-icon.svg?react' 
-import KakaoSvg from '@/src/assets/icons/svgs/login/kakao-icon.svg?react'
-import checkSvg from '@/src/assets/icons/svgs/login/check-box.svg?react'
-import everywearSvg from '@/src/assets/icons/svgs/logo/everywear.svg?react'
-import goodboxSvg from '@/src/assets/icons/svgs/onboarding/good-box.svg?react'
-import xboxSvg from '@/src/assets/icons/svgs/onboarding/bad-box.svg?react'
-import cameraSvg from '@/src/assets/icons/svgs/onboarding/camera-blue.svg?react'
-import gallerySvg from '@/src/assets/icons/svgs/onboarding/gallery.svg?react'
-import loadingSvg from '@/src/assets/icons/svgs/onboarding/loading-one.svg?react'
-
-import musinsaSvg from '@/src/assets/icons/svgs/logo/musinsa-logo.svg?react'
-import cmLogoSvg from '@/src/assets/icons/svgs/logo/29cmLogo.svg?react'
-import zigzagSvg from '@/src/assets/icons/svgs/logo/zigzag-logo.svg?react'
-import wSvg from '@/src/assets/icons/svgs/logo/w-logo.svg?react'
-import allSvg from '@/src/assets/icons/svgs/clothes/all-icon.svg?react'
-import bottomSvg from '@/src/assets/icons/svgs/clothes/bottom-icon.svg?react'
-import etcSvg from '@/src/assets/icons/svgs//clothes/etc-icon.svg?react'
-import onepeiceSvg from '@/src/assets/icons/svgs/clothes/onepeice-icon.svg?react'
-import outerSvg from '@/src/assets/icons/svgs/clothes/outer-icon.svg?react'
-import topSvg from '@/src/assets/icons/svgs//clothes/top-icon.svg?react'
-
-import closetSvg from '@/src/assets/icons/svgs/clothes/closet-icon.svg?react'
-import fittingSvg from '@/src/assets/icons/svgs/clothes/fitting-icon.svg?react'
-import homeSvg from '@/src/assets/icons/svgs/clothes/home-icon.svg?react'
-import productSvg from '@/src/assets/icons/svgs/clothes/product-icon.svg?react'
-import checkCircleSvg from '@/src/assets/icons/svgs/login/check-incomplete.svg?react'
-
-
-
 import { createIcon } from './createIcon'
 
-export const GoogleIcon = createIcon(GoogleSvg)
-GoogleIcon.displayName = 'GoogleIcon'
+// header
+import arrowSvg from '@/src/assets/icons/svgs/logo/arrow-icon.svg?react'
+import settingSvg from '@/src/assets/icons/svgs/logo/setting-icon.svg?react'
 
-export const KakaoIcon = createIcon(KakaoSvg)
-KakaoIcon.displayName = 'KakaoIcon'
+// login
+import GoogleSvg from '@/src/assets/icons/svgs/login/google-icon.svg?react'
+import KakaoSvg from '@/src/assets/icons/svgs/login/kakao-icon.svg?react'
+import CheckSvg from '@/src/assets/icons/svgs/login/check-box.svg?react'
 
-export const CheckLoginIcon = createIcon(checkSvg)
-CheckLoginIcon.displayName = 'CheckIcon'
+// logo
+import EverywearSvg from '@/src/assets/icons/svgs/logo/everywear.svg?react'
+import MusinsaSvg from '@/src/assets/icons/svgs/logo/musinsa-logo.svg?react'
+import CmLogoSvg from '@/src/assets/icons/svgs/logo/29cmLogo.svg?react'
+import ZigzagSvg from '@/src/assets/icons/svgs/logo/zigzag-logo.svg?react'
+import WSvg from '@/src/assets/icons/svgs/logo/w-logo.svg?react'
 
-export const GoodBoxIcon = createIcon(goodboxSvg)
-GoodBoxIcon.displayName = 'GoodBoxIcon'
+// onboarding
+import GoodBoxSvg from '@/src/assets/icons/svgs/onboarding/good-box.svg?react'
+import XBoxSvg from '@/src/assets/icons/svgs/onboarding/bad-box.svg?react'
+import CameraSvg from '@/src/assets/icons/svgs/onboarding/camera-blue.svg?react'
+import GallerySvg from '@/src/assets/icons/svgs/onboarding/gallery.svg?react'
+import LoadingSvg from '@/src/assets/icons/svgs/onboarding/loading-one.svg?react'
 
-export const XBoxIcon = createIcon(xboxSvg)
-XBoxIcon.displayName = 'XBoxIcon'
+// clothes
+import AllSvg from '@/src/assets/icons/svgs/clothes/all-icon.svg?react'
+import BottomSvg from '@/src/assets/icons/svgs/clothes/bottom-icon.svg?react'
+import TopSvg from '@/src/assets/icons/svgs/clothes/top-icon.svg?react'
+import OnePieceSvg from '@/src/assets/icons/svgs/clothes/onepeice-icon.svg?react'
+import OuterSvg from '@/src/assets/icons/svgs/clothes/outer-icon.svg?react'
+import EtcSvg from '@/src/assets/icons/svgs/clothes/etc-icon.svg?react'
+import ClosetSvg from '@/src/assets/icons/svgs/clothes/closet-icon.svg?react'
+import FittingSvg from '@/src/assets/icons/svgs/clothes/fitting-icon.svg?react'
+import HomeSvg from '@/src/assets/icons/svgs/clothes/home-icon.svg?react'
+import ProductSvg from '@/src/assets/icons/svgs/clothes/product-icon.svg?react'
 
-export const EverWearIcon = createIcon(everywearSvg)
-EverWearIcon.displayName = 'EveryWearIcon'
+export const Icons = {
+	// header 
+	Arrow: createIcon(arrowSvg),
+	SettingHeader: createIcon(settingSvg),
+	
+	// login
+	Google: createIcon(GoogleSvg),
+	Kakao: createIcon(KakaoSvg),
+	CheckLogin: createIcon(CheckSvg),
 
-export const CameraIcon = createIcon(cameraSvg)
-CameraIcon.displayName = 'CameraIcon'
+	// logo
+	Everywear: createIcon(EverywearSvg),
+	Musinsa: createIcon(MusinsaSvg),
+	Cm: createIcon(CmLogoSvg),
+	Zigzag: createIcon(ZigzagSvg),
+	WLogo: createIcon(WSvg),
 
-export const GalleryIcon = createIcon(gallerySvg)
-GalleryIcon.displayName = 'GalleryIcon'
+	// onboarding
+	GoodBox: createIcon(GoodBoxSvg),
+	XBox: createIcon(XBoxSvg),
+	Camera: createIcon(CameraSvg),
+	Gallery: createIcon(GallerySvg),
+	Loading: createIcon(LoadingSvg),
 
-export const LoadingIcon = createIcon(loadingSvg)
-LoadingIcon.displayName = 'LoadingIcon'
-
-export const MusinsaIcon = createIcon(musinsaSvg)
-MusinsaIcon.displayName = 'MusinsaIcon'
-
-export const CmIcon = createIcon(cmLogoSvg)
-CmIcon.displayName = 'CmIcon'
-
-export const ZigzagIcon = createIcon(zigzagSvg)
-ZigzagIcon.displayName = 'ZigzagIcon'
-
-export const WLogoIcon = createIcon(wSvg)
-WLogoIcon.displayName = 'WLogoIcon'
-
-export const AllIcon = createIcon(allSvg)
-AllIcon.displayName = 'allIcon'
-
-export const BottomIcon = createIcon(bottomSvg)
-BottomIcon.displayName = 'bottomIcon'
-
-export const TopIcon = createIcon(topSvg)
-TopIcon.displayName = 'topIcon'
-
-export const OnepeiceIcon = createIcon(onepeiceSvg)
-OnepeiceIcon.displayName = 'onepeiceIcon'
-
-export const OuterIcon = createIcon(outerSvg)
-OuterIcon.displayName = 'outerIcon'
-
-export const EtcIcon = createIcon(etcSvg)
-EtcIcon.displayName = 'etcIcon'
-
-export const ClosetIcon = createIcon(closetSvg)
-ClosetIcon.displayName = 'ClosetIcon'
-
-export const FittingIcon = createIcon(fittingSvg)
-FittingIcon.displayName = 'FittingIcon'
-
-export const HomeIcon = createIcon(homeSvg)
-HomeIcon.displayName = 'HomeIcon'
-
-export const ProductIcon = createIcon(productSvg)
-ProductIcon.displayName = 'ProductIcon'
-
-export const CheckCircleIcon = createIcon(checkCircleSvg)
-CheckCircleIcon.displayName = 'CheckCircleIcon'
+	// clothes
+	All: createIcon(AllSvg),
+	Bottom: createIcon(BottomSvg),
+	Top: createIcon(TopSvg),
+	OnePiece: createIcon(OnePieceSvg),
+	Outer: createIcon(OuterSvg),
+	Etc: createIcon(EtcSvg),
+	Closet: createIcon(ClosetSvg),
+	Fitting: createIcon(FittingSvg),
+	Home: createIcon(HomeSvg),
+	Product: createIcon(ProductSvg),
+} as const

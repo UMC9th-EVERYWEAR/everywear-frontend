@@ -1,18 +1,18 @@
 import React from 'react';
 import type { CategoryKey } from '@/src/types/products/product';
-import { AllIcon, BottomIcon, EtcIcon, OnepeiceIcon, OuterIcon, TopIcon } from '@/src/assets/icons/components/Icons';
+import { Icons } from '@/src/assets/icons/components/Icons';
 import { cn } from '@/src/utils/cn';
 
 const categories: readonly {
   name: CategoryKey;
 	Icon: React.FC<{ size?: number; className?: string }>,
 }[] = [
-	{ name: '전체', Icon: AllIcon },
-	{ name: '상의', Icon: TopIcon },
-	{ name: '하의', Icon: BottomIcon },
-	{ name: '아우터', Icon: OuterIcon },
-	{ name: '원피스', Icon: OnepeiceIcon },
-	{ name: '기타', Icon: EtcIcon },
+	{ name: '전체', Icon: Icons.All },
+	{ name: '상의', Icon: Icons.Top },
+	{ name: '하의', Icon: Icons.Bottom },
+	{ name: '아우터', Icon: Icons.Outer },
+	{ name: '원피스', Icon: Icons.OnePiece },
+	{ name: '기타', Icon: Icons.Etc },
 ];
 
 interface CategoryBarProps {
