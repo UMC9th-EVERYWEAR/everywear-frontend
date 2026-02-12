@@ -1,5 +1,5 @@
 import  { SETTING_IMAGES } from '@/src/constants/images';
-import { TERMS_CONFIG } from '@/src/pages/login/login-terms-page';
+import { TERMS_CONFIG } from '@/src/constants/terms';
 
 interface Props {
   onInquiry: () => void;
