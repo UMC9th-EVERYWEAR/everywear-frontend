@@ -7,7 +7,6 @@ import { useToggleAgree } from '@/src/hooks/service/user/useToggle';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
 
-
 const LoginTermsPage = () => {
 	const navigate = useNavigate();
 

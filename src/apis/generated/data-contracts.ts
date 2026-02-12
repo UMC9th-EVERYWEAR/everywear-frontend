@@ -36,35 +36,101 @@ export interface CrawlReviewDTO {
   shoppingmall_name: string;
 }
 
-export interface CrawlResponseDTO {
-  status?: string;
-  estimated_time?: string;
-  from_cache?: boolean;
-  /** @format int32 */
-  total_count?: number;
-  reviews?: ReviewDTO[];
-}
-
-export interface ReviewDTO {
-  /** @format int64 */
-  review_id?: number;
-  /** @format int32 */
-  rating?: number;
-  content?: string;
-  review_date?: string;
-  /** @format int32 */
-  user_height?: number;
-  /** @format int32 */
-  user_weight?: number;
-  option_text?: string;
-  images?: string[];
-}
-
-export interface ApiResponseMapStringObject {
+export interface ApiResponseReviewListDTO {
   isSuccess?: boolean;
   code?: string;
   message?: string;
-  result?: Record<string, any>;
+  /** 리뷰 목록 조회 응답 DTO */
+  result?: ReviewListDTO;
+}
+
+/** 리뷰 상세 정보 */
+export interface ReviewDTO {
+  /**
+   * 리뷰 고유 ID
+   * @format int64
+   * @example 101
+   */
+  review_id?: number;
+  /**
+   * 평점 (1~5)
+   * @format int32
+   * @example 5
+   */
+  rating?: number;
+  /**
+   * 리뷰 내용
+   * @example "사이즈가 딱 맞고 재질이 좋아요."
+   */
+  content?: string;
+  /**
+   * 리뷰 작성일
+   * @example "2025.05.20 or 7일전"
+   */
+  review_date?: string;
+  /**
+   * 사용자 키 (cm)
+   * @format int32
+   * @example 175
+   */
+  user_height?: number;
+  /**
+   * 사용자 몸무게 (kg)
+   * @format int32
+   * @example 70
+   */
+  user_weight?: number;
+  /**
+   * 구매 옵션 정보
+   * @example "Black / L"
+   */
+  option_text?: string;
+  /** 리뷰 이미지 URL 리스트 */
+  images?: string[];
+}
+
+/** 리뷰 목록 조회 응답 DTO */
+export interface ReviewListDTO {
+  /**
+   * 크롤링 상태
+   * @example "completed"
+   */
+  status?: string;
+  /**
+   * 총 리뷰 개수
+   * @format int32
+   * @example 15
+   */
+  total_count?: number;
+  /** 리뷰 상세 목록 */
+  reviews?: ReviewDTO[];
+}
+
+/** AI 리뷰 요약 및 키워드 DTO */
+export interface AiReviewDTO {
+  /**
+   * AI 생성 리뷰 요약
+   * @example "전체적으로 평점이 높으며 배송이 빠르다는 평이 많습니다."
+   */
+  summary?: string;
+  /**
+   * 추출된 키워드 (최대 4개)
+   * @example ["가성비","빠른배송","재질만족","정사이즈"]
+   */
+  keywords?: string[];
+  /**
+   * 처리 메시지
+   * @example "성공적으로 요약되었습니다."
+   */
+  message?: string;
+}
+
+export interface ApiResponseAiReviewDTO {
+  isSuccess?: boolean;
+  code?: string;
+  message?: string;
+  /** AI 리뷰 요약 및 키워드 DTO */
+  result?: AiReviewDTO;
 }
 
 /** 상품 등록 요청 (무신사/지그재그/29cm/W컨셉 URL 자동 감지) */
@@ -156,6 +222,13 @@ export interface LikeToggleDTO {
   is_liked?: boolean;
 }
 
+export interface ApiResponseMapStringObject {
+  isSuccess?: boolean;
+  code?: string;
+  message?: string;
+  result?: Record<string, any>;
+}
+
 export interface ApiResponseUserResponseDto {
   isSuccess?: boolean;
   code?: string;
@@ -185,17 +258,15 @@ export interface UserImgQuery {
   representative?: boolean;
 }
 
-export interface AiReviewDTO {
-  summary?: string;
-  keywords?: string[];
-  message?: string;
-}
-
-export interface ApiResponseAiReviewDTO {
+export interface ApiResponseRepresentativeImgResponse {
   isSuccess?: boolean;
   code?: string;
   message?: string;
-  result?: AiReviewDTO;
+  result?: RepresentativeImgResponse;
+}
+
+export interface RepresentativeImgResponse {
+  representative_img?: UserImgQuery;
 }
 
 export interface ApiResponseProductListResponse {
@@ -225,6 +296,35 @@ export interface ListDTO {
 
 export interface ProductListResponse {
   products?: ListDTO[];
+}
+
+export interface ApiResponseProductDetailResponse {
+  isSuccess?: boolean;
+  code?: string;
+  message?: string;
+  result?: ProductDetailResponse;
+}
+
+export interface ProductDetailResponse {
+  product?: ProductForFittingDTO;
+}
+
+export interface ProductForFittingDTO {
+  brand_name?: string;
+  category?: string;
+  is_liked?: boolean;
+  price?: string;
+  /** @format int64 */
+  product_id?: number;
+  product_img_url?: string;
+  product_name?: string;
+  /** @format int64 */
+  product_num?: number;
+  product_url?: string;
+  shoppingmale_name?: string;
+  /** @format float */
+  star_point?: number;
+  ai_review?: string;
 }
 
 export interface ApiResponseListFittingSummary {

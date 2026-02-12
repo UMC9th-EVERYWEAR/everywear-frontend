@@ -2,33 +2,36 @@ import { matchPath, Outlet, useLocation } from 'react-router';
 import Header from './Header';
 import { Navbar } from './Navbar';
 import { Modal } from '../common/Modal';
-import { useMemo, useRef, useState } from 'react';
+import { useMemo, useRef, useState, useEffect } from 'react'; 
 import { fullscreenPatterns, hideHeaderPatterns, hideNavPatterns, PATH } from '@/src/constants/path';
 import { cn } from '@/src/utils/cn';
 import ScrollToTop from '@/src/hooks/domain/products/useScrollToTop';
+import { useThemeStore } from '@/src/store/use-theme-store'; 
 
 const RootLayout = () => {
 	const { pathname } = useLocation();
 	const [isWithdrawOpen, setIsWithdrawOpen] = useState(false);
 	const mainRef = useRef<HTMLElement | null>(null);
+	const theme = useThemeStore((state) => state.theme);
 
-  
-	// 추후 추가 가능
+	// 테마 적용
+	useEffect(() => {
+		const root = window.document.documentElement; 
+		if (theme === 'dark') {
+			root.classList.add('dark');
+		} else {
+			root.classList.remove('dark');
+		}
+	}, [theme]);
 
-	// 헤더 기능은 딱 2개
-	// 1. 뒤로가기
-	// 2. setting 페이지로 이동
 	const shouldHideHeader = useMemo(() => hideHeaderPatterns.some((pattern) =>
 		matchPath(pattern, pathname),
 	), [pathname]);
-	
+    
 	const shouldHideNav = useMemo(() => hideNavPatterns.some((pattern) =>
 		matchPath(pattern, pathname),
 	), [pathname]);
 
-
-
-	/* HEADER_TITLE_MAP: 추후 헤더 타이틀 동적 변경 */
 	const HEADER_TITLE_MAP = [
 		{ pattern: PATH.RECENT_FITTING, title: '최근 피팅 내역' },
 		{ pattern: PATH.AI_FITTING.DETAIL, title: 'AI 분석하기' },
@@ -39,35 +42,32 @@ const RootLayout = () => {
 		{ pattern: PATH.SETTING.INQUIRY, title: '1:1 문의하기' },
 		{ pattern: PATH.SETTING.WITHDRAW, title: '회원탈퇴' },
 		{ pattern: PATH.LOGIN.TERMS, title: '뒤로가기' },
-
 		{ pattern: PATH.ONBOARDING.PHOTO, title: '사진 가이드' },
 	] as const;
 
-	/*  getHeaderTitle: pathname으로 title 뽑는 함수 */
 	const getHeaderTitle = (pathname: string) => {
 		const matched = HEADER_TITLE_MAP.find(({ pattern }) => matchPath(pattern, pathname));
 		return matched?.title;
 	};
 
-  	/*  isMain: 타입 main/sub 나누는 로직 변수 */
-	const isMain =
-    ['/home'].some((pattern) => matchPath(pattern, pathname)) ||
-    pathname === '/';
-
-	const isFullscreen = fullscreenPatterns.some((path) =>
-		matchPath(path, pathname),
-	)
-
+	const isMain = ['/home'].some((pattern) => matchPath(pattern, pathname)) || pathname === '/';
+	const isFullscreen = fullscreenPatterns.some((path) => matchPath(path, pathname));
 
 	return (
-		/* 1. h-screen과 overflow-hidden으로 전체 바구니 크기를 화면에 딱 맞춤 */
-		<div className='h-screen w-full bg-gray-50 flex justify-center overflow-hidden'>
+		<div
+			className={cn(
+				// ✅ h-screen 대신 h-[100dvh]로 모바일 주소창 대응
+				'h-[100dvh] w-full flex justify-center overflow-hidden transition-colors duration-300',
+				'bg-gray-50 dark:bg-black', 
+			)}
+		>
 			<div
-				className={cn('flex flex-col w-full h-full bg-white relative',
-					isFullscreen ? '' : 'max-w-2xl ',  // 추후에는 모든 페이지로 확장 (반응형)
+				className={cn(
+					'flex flex-col w-full h-full relative transition-colors duration-300',
+					'bg-white dark:bg-gray-900', 
+					isFullscreen ? '' : 'max-w-2xl',
 				)}
 			>
-				{/* 2. 헤더 (고정) */}
 				{!shouldHideHeader && (
 					<Header
 						type={isMain ? 'main' : 'sub'}
@@ -75,26 +75,30 @@ const RootLayout = () => {
 					/>
 				)}
 
-				{/* 3. 콘텐츠 영역 (여기만 스크롤!) 
-				       grow를 주어 남은 공간을 다 차지하게 하고, no-scrollbar로 깔끔하게 처리 */}
 				<ScrollToTop targetRef={mainRef} />
+                
 				<main
 					ref={mainRef}
-					className='flex-1 overflow-y-auto no-scrollbar'
+					className={cn(
+						'flex-1 overflow-y-auto no-scrollbar bg-transparent min-h-0',
+						// ✅ Navbar가 fixed이므로 콘텐츠가 가려지지 않게 하단 여백 추가
+						!shouldHideNav && 'pb-[60px]',
+					)}
 				>
 					<Outlet />
 				</main>
 
-				{/* 4. 네비바 (고정) */}
-				{!shouldHideNav  && <Navbar />}	
+				{/* ✅ Navbar는 레이아웃 최하단에 배치 (z-index 50으로 항상 최상단 노출) */}
+				{!shouldHideNav  && <Navbar />} 
 
-				{/* 모달 */}
 				<Modal 
 					isOpen={isWithdrawOpen}
 					onClose={() => setIsWithdrawOpen(false)}
 					title='정말 탈퇴하시겠습니까?'
 					btn1Text='확인'
 					btn1Action={() => setIsWithdrawOpen(false)}
+					btn2Text='취소'
+					btn2Action={() => setIsWithdrawOpen(false)}
 				/>
 			</div>
 		</div>

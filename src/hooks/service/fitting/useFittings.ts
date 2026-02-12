@@ -1,7 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { getMyFittings, getFittingDetail } from '@/src/apis/domain/fitting';
 
-
 export interface ReviewItem {
     id: number;
     rating: number;
@@ -17,19 +16,20 @@ export interface ReviewItem {
 
 export interface FittingDetailDTO {
     fittingId: number;
-    fittingResultImage: string;
+    beforeImageUrl: string; 
+    afterImageUrl: string;  
     createdAt: string;
     reviewSummary?: string;
     product: {
         productId: number;
-        productName: string;
         siteName: string;
-        price: number;
-        productImage: string;
-        purchaseUrl: string;
+        productName: string;
+        price: string;
         rating: number;
+        purchaseUrl: string;
         isLiked: boolean;
         keywords?: string[];
+        productImage?: string; 
     };
     reviews?: ReviewItem[];
 }

@@ -11,6 +11,11 @@ export const getProfileImages = async () => {
 	return data;
 };
 
+export const getRepresentativeImage = async () => {
+	const { data } = await apiClient.getRepresentativeImage();
+	return data;
+}
+
 export const selectRepresentativeImage = async (imageId: number) => {
 	await apiClient.selectRepresentative(imageId);
 };
@@ -32,7 +37,7 @@ export const verifyAndSaveProfileImage = async (file: File) => {
 		return data;
 	}
 	catch (error) {
-		console.error('🔥 ', error);
+		console.error(error);
 		throw error; 
 	}
 };
