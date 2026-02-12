@@ -1,6 +1,6 @@
+import { Icons } from '@/src/assets/icons/components/Icons';
 import Button from '@/src/components/common/Button';
 import TermsCheckBox, { type TermsCheckedState, type TermType } from '@/src/components/login/TermsCheckBox'
-import { LOGO_IMAGES } from '@/src/constants/images';
 import { PATH } from '@/src/constants/path';
 import { TERMS_CONFIG } from '@/src/constants/terms';
 import { useToggleAgree } from '@/src/hooks/service/user/useToggle';
@@ -51,13 +51,12 @@ const LoginTermsPage = () => {
 	return(
 		<div className='w-full flex flex-col items-center pt-32 gap-13'>
 			<div className='flex flex-col items-center w-65'>
-
-
-				<img
-					src={LOGO_IMAGES.EVERYWEAR}
-					alt='logo'
-					className='w-full px-6 mb-5'
+				<Icons.Everywear
+					width={260}
+					height={32}
+					className='mb-5'
 				/>
+
 				<p className='text-center text-neutral-500'>회원가입을 위한 약관에 동의해주세요.</p>
 			</div>
 

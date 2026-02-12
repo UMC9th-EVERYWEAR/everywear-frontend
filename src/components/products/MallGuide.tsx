@@ -17,7 +17,7 @@ const MallGuide = ({ onClose }: MallGuideProps) => {
 					<img
 						src={GUIDE_IMAGES.GUIDE_1}
 						alt='step1'
-						className='w-full'
+						className='w-93.75'
 					/>
 				</button>
 			}			
@@ -29,6 +29,7 @@ const MallGuide = ({ onClose }: MallGuideProps) => {
 					<img
 						src={GUIDE_IMAGES.GUIDE_2}
 						alt='step2'
+						className='w-93.75'
 					/>
 				</button>
 			}		
@@ -40,6 +41,7 @@ const MallGuide = ({ onClose }: MallGuideProps) => {
 					<img
 						src={GUIDE_IMAGES.GUIDE_3}
 						alt='step3'
+						className='w-93.75'
 					/>
 				</button>
 			}		
@@ -51,6 +53,7 @@ const MallGuide = ({ onClose }: MallGuideProps) => {
 					<img
 						src={GUIDE_IMAGES.GUIDE_4}
 						alt='step4'
+						className='w-93.75'
 					/>
 				</button>
 			}

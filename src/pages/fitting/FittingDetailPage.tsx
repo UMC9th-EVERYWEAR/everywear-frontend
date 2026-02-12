@@ -16,6 +16,15 @@ import type { ReviewState } from '@/src/types/ai-fitting/status';
 import { AiFittingLayout, type TabType } from '@/src/components/ai-fitting/AiFittingLayout';
 import type { ReviewDTO } from '@/src/apis/generated/data-contracts';
 
+type ExtendedFittingDTO = FittingDetailDTO & {
+  afterImageUrl?: string;
+  fittingResultImageUrl?: string;
+  fittingResultImage?: string;
+  fitting_result_image?: string;
+  resultUrl?: string;
+  reviewSummary?: string;
+}
+
 const FittingDetailPage = () => {
 	const { id } = useParams();
 	const fittingId = Number(id);
@@ -27,27 +36,46 @@ const FittingDetailPage = () => {
 	const { data: fittingDetail } = useFittingDetail(fittingId);
 	const { data: fittingsList } = useFittings();
 	const { data: products } = useProducts();
-
-	// ✅ [에러 해결 1] Hook은 반드시 최상단에서 호출해야 합니다.
 	const { mutate: mutateLike } = useLike({ createToast });
 
-	const productId = useMemo(() => fittingDetail?.product?.productId || 0, [fittingDetail]);
+	const sourceData = useMemo<ExtendedFittingDTO | null>(() => {
+		if (fittingDetail) {
+			const detail = fittingDetail as ExtendedFittingDTO;
+			if (detail.afterImageUrl || detail.fittingResultImageUrl) {
+				return detail;
+			}
+		}
+
+		if (fittingsList && fittingsList.length > 0) {
+			const found = fittingsList.find(
+				(item) => {
+					const castedItem = item as unknown as { fittingId: number };
+					return (item.fittingId || castedItem.fittingId) === fittingId;
+				},
+			);
+			if (found) return found as ExtendedFittingDTO;
+		}
+
+		return (fittingDetail as ExtendedFittingDTO) || null;
+	}, [fittingDetail, fittingsList, fittingId]);
+
+	const resultImageUrl = useMemo(() => {
+		if (!sourceData) return '';
+    
+		return (
+			sourceData.afterImageUrl || 
+      sourceData.fittingResultImageUrl || 
+      sourceData.fittingResultImage || 
+      sourceData.fitting_result_image || 
+      sourceData.resultUrl || 
+      sourceData.product?.productImage || 
+      ''
+		);
+	}, [sourceData]);
+
+	const productId = useMemo(() => sourceData?.product?.productId || 0, [sourceData]);
 	const { data: reviewsData, isLoading: isReviewLoading } = useGetReview(productId, !!productId);
 	const { data: aiReviewData, isLoading: isAiLoading } = useGetReviewAi(productId, !!productId);
-
-	const targetFromList = useMemo<FittingDetailDTO | null>(() => {
-		if (!fittingsList) return null;
-		return (
-			(fittingsList.find(
-				(item) => (item.fittingId || (item as unknown as { fittingId: number }).fittingId) === fittingId,
-			) as FittingDetailDTO) || null
-		);
-	}, [fittingsList, fittingId]);
-
-	const sourceData = useMemo<FittingDetailDTO | null>(() => {
-		if (fittingDetail?.afterImageUrl) return fittingDetail;
-		return targetFromList || fittingDetail || null;
-	}, [fittingDetail, targetFromList]);
 
 	const normalizedProduct = useMemo<ListDTO | null>(() => {
 		if (!sourceData || !products) return null;
@@ -74,9 +102,11 @@ const FittingDetailPage = () => {
 			isIdle={false}
 			product={normalizedProduct}
 			profileImg=""
-			fittingState={{ status: 'success', resultUrl: sourceData?.afterImageUrl || '' }}
+			fittingState={{ status: 'success', resultUrl: resultImageUrl }}
 			showBefore={false}
 			showRestartButton={false}
+			// ✅ 추가된 Props: 상세 페이지이므로 재시도 버튼이 필요 없다면 false를 줍니다.
+			canRetry={false} 
 			reviewState={{
 				status: isReviewLoading ? 'loading' : 'success',
 				summary: {
@@ -87,20 +117,21 @@ const FittingDetailPage = () => {
 					id: i,
 					label: k,
 				})),
-				// ✅ [에러 해결 2] any를 제거하고 구체적인 타입을 지정합니다.
-				reviews: (reviewsData?.result?.reviews || []).map((review: ReviewDTO) => ({
-					...review,
-					review_id: review.review_id || (review as unknown as { id: number }).id,
-					images: (review.images || []).map((img: string | { imgUrl: string }) => 
-						typeof img === 'string' ? img : img.imgUrl,
-					),
-				})),
+				reviews: (reviewsData?.result?.reviews || []).map((review: ReviewDTO) => {
+					const castedReview = review as unknown as { id: number };
+					return {
+						...review,
+						review_id: review.review_id || castedReview.id,
+						images: (review.images || []).map((img: string | { imgUrl: string }) => 
+							typeof img === 'string' ? img : img.imgUrl,
+						),
+					};
+				}),
 			} as ReviewState}
 			toasts={toasts}
 			deleteToast={deleteToast}
 			isBuyModalOpen={modal.type === 'buy'}
 			closeBuyModal={() => setModal({ type: 'none' })}
-			// ✅ [에러 해결 3] 선언해둔 mutateLike를 사용합니다.
 			onHeart={(status) => {
 				if (normalizedProduct?.product_id) {
 					mutateLike({ productId: Number(normalizedProduct.product_id), isLiked: status });

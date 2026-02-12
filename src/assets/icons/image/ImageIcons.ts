@@ -1,15 +1,17 @@
+import { LOGO_IMAGES } from '@/src/constants/images';
+
 export const IMAGE_ICON_DATA = {
 	Home: (active: boolean) =>
-		active ? '/svgs/LogoImages/home-on.svg' : '/svgs/LogoImages/home-off.svg',
+		active ? LOGO_IMAGES.HOME_ON : LOGO_IMAGES.HOME_OFF,
 
 	Product: (active: boolean) =>
-		active ? '/svgs/LogoImages/clothes-on.svg' : '/svgs/LogoImages/clothes-off.svg',
+		active ? LOGO_IMAGES.CLOTHES_ON : LOGO_IMAGES.CLOTHES_OFF,
 
 	Fitting: (active: boolean) =>
-		active ? '/svgs/LogoImages/hanger-on.svg' : '/svgs/LogoImages/hanger-off.svg',
+		active ? LOGO_IMAGES.HANGER_ON : LOGO_IMAGES.HANGER_OFF,
 
 	Closet: (active: boolean) =>
-		active ? '/svgs/LogoImages/closet-on.svg' : '/svgs/LogoImages/closet-off.svg',
+		active ? LOGO_IMAGES.CLOSET_ON : LOGO_IMAGES.CLOSET_OFF,
 } as const;
 
 export type ImageIconKey = keyof typeof IMAGE_ICON_DATA;

@@ -1,5 +1,6 @@
 
 import Button from '@/src/components/common/Button';
+import Loading from '@/src/components/common/Loading';
 import { Modal } from '@/src/components/common/Modal';
 import { SETTING_IMAGES } from '@/src/constants/images';
 import { useMe } from '@/src/hooks/service/auth/useMe';
@@ -12,7 +13,7 @@ const SettingWithdraw = () => {
 	const { data, isLoading: meLoading } = useMe();
 
 	if(meLoading) 	{
-		return <>로딩</>
+		return <Loading />
 	}
 
 	const handleWithdraw = async () => {
@@ -20,8 +21,6 @@ const SettingWithdraw = () => {
 
 		try {
 			await withdraw();
-			console.log('회원탈퇴!')
-			// setOpenWithdraw(false);
 		} catch (e) {
 			console.error('회원 탈퇴 실패', e);
 		}
@@ -34,13 +33,11 @@ const SettingWithdraw = () => {
 
 	return <div className='mx-4 mt-3.5 text-neutral-900 h-screen overflow-hidden flex flex-col items-center'>
 		<div className='w-full flex-1 flex flex-col items-center max-w-sm'>
-
-
-			<div className='w-full text-regular-16 mb-5 text-start'>{data?.name}님, 탈퇴하기 전에 꼭 확인해주세요</div>
+			<div className='w-full text-regular-16 mb-5 text-start'>{data?.name}님, 탈퇴하기 전에 꼭 확인해 주세요</div>
 			<div className=" border border-primary-300 py-4 px-2.5  rounded-lg flex items-start gap-3 w-full">
 				<img
-					src={SETTING_IMAGES.CHECK_BLUE}
-					alt='check-icon'
+					src={ SETTING_IMAGES.CHECK_BLUE }
+					alt='check'
 				/>
 				<div className='text-regular-14'>
 					<p>찜한 상품, 상품 정보 등</p>
@@ -58,7 +55,7 @@ const SettingWithdraw = () => {
 					onClick={toggleWithdraw}
 				>
 					<img
-						src={isConfirmed ? SETTING_IMAGES.COMPLETE_CHECK:  SETTING_IMAGES.CHECK_INCOMPLETE }
+						src={isConfirmed ? SETTING_IMAGES.COMPLETE_CHECK: SETTING_IMAGES.CHECK_INCOMPLETE }
 						alt='check'
 					/>
 					<p className='text-regular-16'>탈퇴 유의사항을 모두 확인했어요.</p>

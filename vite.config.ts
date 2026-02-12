@@ -1,6 +1,7 @@
 import { defineConfig } from 'vite'
 import tailwindcss from '@tailwindcss/vite'
 import tsconfigPaths from 'vite-tsconfig-paths'
+import svgr from 'vite-plugin-svgr'; // << 추가
 
 export default defineConfig(({ mode }) => {
 	const isDev = mode === 'development';
@@ -9,7 +10,10 @@ export default defineConfig(({ mode }) => {
 		plugins: [
 			tailwindcss(),
 			tsconfigPaths(),
-			
+			svgr(   {
+				svgrOptions: {
+					icon: true,
+				} }),
 		],
 
 		define: {

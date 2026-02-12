@@ -4,13 +4,18 @@ import ReviewCardList from './ReviewCardList';
 import ReviewSummary from './ReviewSummary';
 
 interface ReviewTabProps {
-	state: ReviewListState;
-	aiState: AiSummaryState;
-	handleStartReviewAi : () => void;
-	canRetry? : boolean;
+    state: ReviewListState;
+    aiState: AiSummaryState;
+    handleStartReviewAi: () => void;
+    canRetry: boolean; 
 }
 
-const ReviewTab = ({ state, aiState, handleStartReviewAi, canRetry = false }: ReviewTabProps) => {
+const ReviewTab = ({ 
+	state, 
+	aiState, 
+	handleStartReviewAi, 
+	canRetry, 
+}: ReviewTabProps) => {
 
 	return (
 		<div className='flex flex-col items-center mb-32 w-full'>
@@ -18,8 +23,7 @@ const ReviewTab = ({ state, aiState, handleStartReviewAi, canRetry = false }: Re
 				state={state}
 				aiState={aiState}
 				handleStartReviewAi={handleStartReviewAi}
-				canRetry={canRetry}
-				
+				canRetry={canRetry} 
 			/>
 
 			{state.status === 'success' && aiState.status === 'success' && aiState.result && (
@@ -30,9 +34,12 @@ const ReviewTab = ({ state, aiState, handleStartReviewAi, canRetry = false }: Re
 			)}
 
 			<div className='flex flex-col w-full'>
-				<span className='text-primary-600 text-bold-16 flex justify-start border-b border-solid border-neutral-100 w-full'>최신 리뷰</span>
+				<span className='text-primary-600 text-bold-16 flex justify-start border-b border-solid border-neutral-100 dark:border-neutral-700 w-full'>
+					최신 리뷰
+				</span>
 				<ReviewCardList state={state} />
 			</div>
+
 		</div>
 	);
 };
