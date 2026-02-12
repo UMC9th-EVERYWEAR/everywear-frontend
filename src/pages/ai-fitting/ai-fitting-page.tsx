@@ -7,7 +7,6 @@ import ReviewTab from '@/src/components/ai-fitting/ReviewTab';
 import type { AiSummaryState, FittingState, ReviewListState } from '@/src/types/ai-fitting/status';
 import Toast from '@/src/components/common/Toast';
 import ToastContainer from '@/src/components/common/ToastContainer';
-import useToast from '@/src/hooks/domain/ai-fitting/UseToast';
 import type { ModalState } from '@/src/types/ai-fitting/modal';
 import { Modal } from '@/src/components/common/Modal';
 import useLike from '@/src/hooks/service/fitting/useLike';
@@ -18,6 +17,7 @@ import useGetReview from '@/src/hooks/service/review/useGetReview';
 import useGetReviewAi from '@/src/hooks/service/review/useGetReviewAi';
 import useProductsDetail from '@/src/hooks/service/product/useProductsDetail';
 import useGetProfileImg from '@/src/hooks/service/user/useGetProfileImg';
+import useToast from '@/src/hooks/domain/ai-fitting/useToast';
 
 export type TabType = 'fitting' | 'review';
 
