@@ -4,10 +4,9 @@ import TabBar from '@/src/components/ai-fitting/TabBar';
 import FittingItemInfo from '@/src/components/ai-fitting/FittingItemInfo';
 import FittingTab from '@/src/components/ai-fitting/FittingTab';
 import ReviewTab from '@/src/components/ai-fitting/ReviewTab'; 
-import type { FittingState, ReviewState } from '@/src/types/ai-fitting/status';
+import type { FittingState, ReviewListState } from '@/src/types/ai-fitting/status';
 import Toast from '@/src/components/common/Toast';
 import ToastContainer from '@/src/components/common/ToastContainer';
-import useToast from '@/src/hooks/domain/ai-fitting/useToast';
 import type { ModalState } from '@/src/types/ai-fitting/modal';
 import { Modal } from '@/src/components/common/Modal';
 import { useProducts } from '@/src/hooks/service/product/useProducts';
@@ -15,6 +14,7 @@ import useLike from '@/src/hooks/service/fitting/useLike';
 import usePostFitting from '@/src/hooks/service/fitting/usePostFitting';
 import { useFittings } from '@/src/hooks/service/fitting/useFittings';
 import type { ListDTO } from '@/src/apis/generated';
+import useToast from '@/src/hooks/domain/ai-fitting/useToast';
 
 export type TabType = 'fitting' | 'review';
 
@@ -32,7 +32,7 @@ interface FittingData {
 const FittingDetailPage = () => {
 	const navigate = useNavigate();
 	const [activeTab, setActiveTab] = useState<TabType>('fitting');
-	const [reviewState, setReviewState] = useState<ReviewState>({ status: 'idle' });
+	const [reviewState, setReviewState] = useState<ReviewListState>({ status: 'idle' });
 	const [modal, setModal] = useState<ModalState>({ type: 'none' });
 	const { toasts, createToast, deleteToast } = useToast();
 

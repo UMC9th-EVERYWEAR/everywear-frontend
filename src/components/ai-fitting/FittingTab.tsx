@@ -4,13 +4,14 @@ import ButtonLayout from './ButtonLayout';
 import { fileDownload } from '@/src/utils/fileDownload';
 
 interface FittingTabProps {
-	profileImg : string;
+	profileImg? : string;
     state: FittingState;
     handleStartFitting: () => void; 
 	handleRestartFitting: () => void;
 }
 
-const FittingTab = ({ profileImg, state, handleStartFitting, handleRestartFitting }: FittingTabProps) => {
+const FittingTab = ({ profileImg = '', state, handleStartFitting, handleRestartFitting }: FittingTabProps) => {
+	
 	const handleDownload = () => {
 		if (state.status === 'success' && state.resultUrl) {
 			fileDownload(state.resultUrl);
