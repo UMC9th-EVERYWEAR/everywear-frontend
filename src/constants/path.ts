@@ -14,6 +14,7 @@ export const PATH = {
 	},
 	ONBOARDING:{
 		ROOT: '/onboarding',
+		GUIDE: '/onboarding/guide',
 		PHOTO: '/onboarding/photo',
 	},	
 	

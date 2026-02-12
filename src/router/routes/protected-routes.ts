@@ -10,6 +10,7 @@ const RecentFitting = lazy(() => import('@/src/pages/fitting/RecentFittingPage')
 const AiFittingPage = lazy(() => import('@/src/pages/ai-fitting/ai-fitting-page'));
 const OnBoardingPage = lazy(() => import('@/src/pages/onboarding/onboarding-page'));
 const OnBoardingPhotoPage = lazy(() => import('@/src/pages/onboarding/onboarding-photo-page'));
+const OnBoardingGuidePage = lazy(() => import('@/src/pages/onboarding/onboarding-guide-page'));
 const ProductsPage = lazy(() => import('@/src/pages/products/products/products-page'));
 const ProductsAddPage = lazy(() => import('@/src/pages/products/add/products-add-page'));
 const FittingDetailPage = lazy(() => import('@/src/pages/fitting/FittingDetailPage'));
@@ -49,6 +50,10 @@ export const protectedRoutes = [
 	{
 		path: PATH.ONBOARDING.PHOTO,
 		Component: OnBoardingPhotoPage,
+	},
+	{
+		path: PATH.ONBOARDING.GUIDE,
+		Component: OnBoardingGuidePage,
 	},
 	{
 		path: PATH.AI_FITTING.DETAIL,

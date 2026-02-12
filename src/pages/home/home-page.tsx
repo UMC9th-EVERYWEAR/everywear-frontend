@@ -3,8 +3,8 @@ import { useNavigate } from 'react-router';
 import { useQueryClient } from '@tanstack/react-query';
 import { Button } from '@/src/components/common/Button';
 import ProductCard from '@/src/components/common/ProductCard';
-import RectangleIcon from '@/public/svgs/LogoImages/Rectangle.svg'; 
-import EllipseIcon from '@/public/svgs/LogoImages/Ellipse.svg';     
+import RectangleIcon from '@/public/svgs/LogoImages/rectangle.svg'; 
+import EllipseIcon from '@/public/svgs/LogoImages/ellipse.svg';     
 import { useRecentFittingsQuery, useHomeProductsQuery } from '@/src/hooks/queries/useHomeQueries';
 import { QUERY_KEYS } from '../../constants/query-key';
 import { PATH } from '../../constants/path';
@@ -74,9 +74,12 @@ const Home = () => {
 
 			{/* 3. 상품 추가 버튼 */}
 			<section className="flex flex-col px-4 mt-4 gap-4">
-				<span className="self-center text-center text-[var(--color-primary-300)] dark:text-primary-400 text-regular-10 tracking-[-0.3px] cursor-pointer">
+				<button 
+					onClick={()=>setShowGuide(true)}
+					className="self-center text-center text-[var(--color-primary-300)] dark:text-primary-400 text-regular-10 tracking-[-0.3px] cursor-pointer"
+				>
 					유명 브랜드 가상 피팅 가이드
-				</span>
+				</button>
 				<div className="w-full">
 					<Button 
 						variant="filled" 
