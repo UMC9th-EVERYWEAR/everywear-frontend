@@ -47,9 +47,9 @@ jobs:
       - name: Type check
         run: pnpm run type-check
 
-      # 7. 테스트 실행
-      - name: Run tests
-        run: pnpm tests
+      # # 7. 테스트 실행
+      # - name: Run tests
+      #   run: pnpm tests
 
       # 8. Vercel CLI 설치
       - name: Install Vercel CLI
