@@ -8,7 +8,7 @@ const OnboardingPhotoPage = () => {
 
 	return(
 		<>
-			<AddPhotoSection setShowGuide={()=>navigate(PATH.ONBOARDING.GUIDE)} />	
+			<AddPhotoSection setShowGuide={()=> navigate(PATH.ONBOARDING.GUIDE)} />	
 		</>
 	)
 }
