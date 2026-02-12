@@ -7,6 +7,7 @@ import ReviewTab from '@/src/components/ai-fitting/ReviewTab';
 import type { AiSummaryState, FittingState, ReviewListState } from '@/src/types/ai-fitting/status';
 import Toast from '@/src/components/common/Toast';
 import ToastContainer from '@/src/components/common/ToastContainer';
+import useToast from '@/src/hooks/domain/ai-fitting/useToast';
 import type { ModalState } from '@/src/types/ai-fitting/modal';
 import { Modal } from '@/src/components/common/Modal';
 import useLike from '@/src/hooks/service/fitting/useLike';
@@ -17,7 +18,7 @@ import useGetReview from '@/src/hooks/service/review/useGetReview';
 import useGetReviewAi from '@/src/hooks/service/review/useGetReviewAi';
 import useProductsDetail from '@/src/hooks/service/product/useProductsDetail';
 import useGetProfileImg from '@/src/hooks/service/user/useGetProfileImg';
-import useToast from '@/src/hooks/domain/ai-fitting/useToast';
+import useGetRecentFitting from '@/src/hooks/service/fitting/useGetRecentFitting';
 
 export type TabType = 'fitting' | 'review';
 
@@ -30,20 +31,21 @@ const AiFittingPage = () => {
 	const [activeTab, setActiveTab] = useState<TabType>('fitting');
 	const [modal, setModal] = useState<ModalState>({ type : 'none' });
 	const { toasts, createToast, deleteToast } = useToast();
-	const [fittingResultUrl, setFittingResultUrl] = useState('');
 
 	const [isPollingStarted, setIsPollingStarted] = useState(false);
 	const [isPollingStartedAi, setIsPollingStartedAi] = useState(false);
 	const [hasRequestedAi, setHasRequestedAi] = useState(false);
+	const [reviewAiRetryCount, setReviewAiRetryCount] = useState(0);
+	const [isFittingCompleted, setIsFittingCompleted] = useState(false);
 
 	const { mutate : mutateLike } = useLike({ createToast });
-	const { mutate : mutateFitting,  data : resultFitting, isPending : isFittingLoading, isError : isFittingError, isSuccess : isFittingSuccess } = usePostFitting({ createToast });
+	const { mutate : mutateFitting,  isPending : isFittingLoading, isError : isFittingError } = usePostFitting({ createToast });
 	const { mutate : startCrawl, isPending : isCrawling } = usePostReview();
 	const { 
 		mutate: mutateReviewAi, 
 		isPending: isAiPostLoading, 
 		isError: isAiPostError, 
-	} = usePostReviewAi();
+	} = usePostReviewAi({ createToast });
 
 	const { data : recentReview } = useGetReview(productId, isPollingStarted);
 	const { 
@@ -53,13 +55,7 @@ const AiFittingPage = () => {
 	} = useGetReviewAi(productId, isPollingStartedAi);
 	const { data : productData, isLoading, isError } = useProductsDetail(productId);
 	const { data : profile } = useGetProfileImg();
-
-	useEffect(() => {
-		if (isFittingSuccess && resultFitting?.fittingResultImageUrl) {
-			// eslint-disable-next-line
-			setFittingResultUrl(resultFitting?.fittingResultImageUrl);
-		}
-	}, [resultFitting, isFittingSuccess]);
+	const { data : fittingResult, isLoading : isLoadingFittingResult } = useGetRecentFitting({ productId, isEnabled : isFittingCompleted })
 
 	useEffect(() => {
 		const reviewStatus = recentReview?.result?.status;
@@ -75,10 +71,6 @@ const AiFittingPage = () => {
 					onSuccess: () => {
 						setIsPollingStartedAi(true);
 					},
-					onError: () => {
-						createToast({ message: 'AI 요약 요청에 실패했습니다.' });
-						setHasRequestedAi(false);
-					},
 				},
 			);
 		}
@@ -93,11 +85,11 @@ const AiFittingPage = () => {
 	]);
 	
 	const currentFittingState = useMemo((): FittingState => {
-		if (isFittingLoading) return { status: 'loading' };
-		if (fittingResultUrl) return { status: 'success', resultUrl: fittingResultUrl };
+		if (isFittingLoading || isLoadingFittingResult) return { status: 'loading' };
+		if (fittingResult) return { status: 'success', resultUrl: fittingResult.fittingResultImageUrl };
 		if (isFittingError) return { status: 'error' };
 		return { status: 'idle' };
-	}, [isFittingLoading, fittingResultUrl, isFittingError]);
+	}, [isFittingLoading, fittingResult, isFittingError, isLoadingFittingResult]);
 
 	const currentReviewState = useMemo((): ReviewListState => {
 		const status = recentReview?.result?.status;
@@ -195,10 +187,15 @@ const AiFittingPage = () => {
 
 		mutateFitting({
 			payload : { productId : productData.product_id },
+		}, {
+			onSuccess: () => {
+				setIsFittingCompleted(true);
+			},
+			onError: () => {
+				setIsFittingCompleted(false);
+			},
 		})
 	};
-
-	console.log(currentAiReviewState)
 
 	const handleStartCrawl = () => {
 		startCrawl(
@@ -232,13 +229,14 @@ const AiFittingPage = () => {
 	};
 
 	const handleStartReviewAi = () => {
+		if (reviewAiRetryCount >= 1) return;
 		setHasRequestedAi(true);
+		setReviewAiRetryCount((prev) => prev + 1);
 		mutateReviewAi(
 			{ productId },
 			{
 				onSuccess: () => setIsPollingStartedAi(true),
 				onError: () => {
-					createToast({ message: 'AI 요약 요청 실패' });
 					setHasRequestedAi(false);
 				},
 			},
@@ -286,7 +284,8 @@ const AiFittingPage = () => {
 					<ReviewTab 
 						state={currentReviewState}
 						aiState={currentAiReviewState}
-						handleStartReviewAi={handleStartReviewAi}                       
+						handleStartReviewAi={handleStartReviewAi}  
+						canRetry={reviewAiRetryCount < 1}                     
 					/>
 				)}
 

@@ -5,7 +5,7 @@ const VARIANTS = {
 	primary: 'bg-primary-600 text-white hover:bg-primary-700 border-transparent',
     
 	outline: 'bg-white text-primary-600 border-primary-600 hover:bg-primary-50',
-
+    
 	secondary: 'bg-neutral-400 text-white border-transparent cursor-not-allowed',
     
 	'outline-secondary': 'bg-white text-neutral-400 border-neutral-400 cursor-not-allowed',
@@ -35,9 +35,8 @@ const ButtonLayout = ({
 				'w-full p-2.5 shrink-0 self-stretch flex justify-center items-center',
 				'leading-[150%] tracking-[-0.48px] text-regular-16 border',
 				'rounded-xl transition-colors duration-200 cursor-pointer',
-        
+                
 				VARIANTS[variant],
-        
 				disabled && 'opacity-70 cursor-not-allowed',
 
 				className,

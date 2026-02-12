@@ -1,11 +1,15 @@
+export type FittingData = string;
+
 export interface ReviewImage {
   id: number;
   imgUrl: string; 
 }
 
 export interface ReviewKeyword {
+  id: number;
   label: string; 
 }
+
 
 export interface ReviewItem {
   id: number;
@@ -22,9 +26,7 @@ export interface ReviewItem {
 
 // 최종 ReviewData 타입
 export interface ReviewData {
-  summary: string;           // AI 요약 텍스트
-  keywords: ReviewKeyword[]; // 추천 키워드 리스트
-  reviews: ReviewItem[];     // 리뷰 목록 리스트
+  summary: string;         
+  keywords: ReviewKeyword[]; 
+  reviews: ReviewItem[];    
 }
-
-
