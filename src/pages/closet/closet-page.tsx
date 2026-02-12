@@ -39,6 +39,7 @@ const ClosetPage = () => {
 					) :(
 						<ItemBrowseSection
 							closetData={filteredClosetProducts}
+							isCloset={true}
 						/>
 					)
 				}
