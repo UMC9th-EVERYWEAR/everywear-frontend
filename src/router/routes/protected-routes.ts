@@ -1,6 +1,6 @@
 import  { PATH } from '@/src/constants/path';
 import { lazy } from 'react';
-const Home = lazy(() => import('@/src/pages/Home'));
+const Home = lazy(() => import('@/src/pages/home/home-page'));
 const SettingPage = lazy(() => import('../../pages/setting/setting-page'));
 const SettingPhotoPage = lazy(() => import('@/src/pages/setting/setting-photo-page'));
 const SettingInquiry = lazy(() => import('@/src/pages/setting/setting-inquiry-page'));
@@ -10,6 +10,7 @@ const RecentFitting = lazy(() => import('@/src/pages/fitting/RecentFittingPage')
 const AiFittingPage = lazy(() => import('@/src/pages/ai-fitting/ai-fitting-page'));
 const OnBoardingPage = lazy(() => import('@/src/pages/onboarding/onboarding-page'));
 const OnBoardingPhotoPage = lazy(() => import('@/src/pages/onboarding/onboarding-photo-page'));
+const OnBoardingGuidePage = lazy(() => import('@/src/pages/onboarding/onboarding-guide-page'));
 const ProductsPage = lazy(() => import('@/src/pages/products/products/products-page'));
 const ProductsAddPage = lazy(() => import('@/src/pages/products/add/products-add-page'));
 const FittingDetailPage = lazy(() => import('@/src/pages/fitting/FittingDetailPage'));
@@ -49,6 +50,10 @@ export const protectedRoutes = [
 	{
 		path: PATH.ONBOARDING.PHOTO,
 		Component: OnBoardingPhotoPage,
+	},
+	{
+		path: PATH.ONBOARDING.GUIDE,
+		Component: OnBoardingGuidePage,
 	},
 	{
 		path: PATH.AI_FITTING.DETAIL,
