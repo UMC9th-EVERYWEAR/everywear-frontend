@@ -98,6 +98,7 @@ const FittingDetailPage = () => {
 	return (
 		<AiFittingLayout
 			activeTab={activeTab}
+			isFittingHistory={true}
 			setActiveTab={setActiveTab}
 			isIdle={false}
 			product={normalizedProduct}

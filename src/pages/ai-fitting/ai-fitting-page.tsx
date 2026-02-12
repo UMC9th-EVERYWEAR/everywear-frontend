@@ -281,6 +281,7 @@ const AiFittingPage = () => {
 					data={productData}
 					handleHeart={handleHeart}
 					handleBuy={() => setModal({ type: 'buy' })}
+					isFittingHistory={false}
 				/>
 
 				{activeTab === 'fitting' && (
