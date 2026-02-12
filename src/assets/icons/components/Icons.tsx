@@ -27,13 +27,10 @@ import LoadingSvg from '@/src/assets/icons/svgs/onboarding/loading-one.svg?react
 import AllSvg from '@/src/assets/icons/svgs/clothes/all-icon.svg?react'
 import BottomSvg from '@/src/assets/icons/svgs/clothes/bottom-icon.svg?react'
 import TopSvg from '@/src/assets/icons/svgs/clothes/top-icon.svg?react'
-import OnePieceSvg from '@/src/assets/icons/svgs/clothes/onepeice-icon.svg?react'
+import OnePieceSvg from '@/src/assets/icons/svgs/clothes/onepiece-icon.svg?react'
 import OuterSvg from '@/src/assets/icons/svgs/clothes/outer-icon.svg?react'
 import EtcSvg from '@/src/assets/icons/svgs/clothes/etc-icon.svg?react'
-import ClosetSvg from '@/src/assets/icons/svgs/clothes/closet-icon.svg?react'
-import FittingSvg from '@/src/assets/icons/svgs/clothes/fitting-icon.svg?react'
-import HomeSvg from '@/src/assets/icons/svgs/clothes/home-icon.svg?react'
-import ProductSvg from '@/src/assets/icons/svgs/clothes/product-icon.svg?react'
+
 
 export const Icons = {
 	// header 
@@ -66,8 +63,5 @@ export const Icons = {
 	OnePiece: createIcon(OnePieceSvg),
 	Outer: createIcon(OuterSvg),
 	Etc: createIcon(EtcSvg),
-	Closet: createIcon(ClosetSvg),
-	Fitting: createIcon(FittingSvg),
-	Home: createIcon(HomeSvg),
-	Product: createIcon(ProductSvg),
+
 } as const

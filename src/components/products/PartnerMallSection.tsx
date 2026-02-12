@@ -1,8 +1,6 @@
-import MusinsaLogo from '@/public/svgs/LogoImages/MusinsaLogo.svg';
-import ZigzagLogo from '@/public/svgs/LogoImages/ZigzagLogo.png';
-import Logo29cm from '@/public/svgs/LogoImages/29cmLogo.svg';
-import WLogo from '@/public/svgs/LogoImages/WLogo.svg';import  { MALL_LINKS } from '@/src/constants/link'
+import  { MALL_LINKS } from '@/src/constants/link'
 import { cn } from '@/src/utils/cn';
+import { LOGO_IMAGES } from '@/src/constants/images';
 
 interface PartnerMallSectionProps {
 isHome?: boolean
@@ -16,10 +14,10 @@ const PartnerMallSection = ({ isHome } : PartnerMallSectionProps) => {
 			)}
 		>
 			{[
-				{ url: MALL_LINKS.MUSINSA.url, src: MusinsaLogo, alt: '무신사', bg: 'bg-black' },
-				{ url: MALL_LINKS.ZIGZAG.url, src: ZigzagLogo, alt: '지그재그', bg: 'bg-[#E976DE]' },
-				{ url: MALL_LINKS.CM.url, src: Logo29cm, alt: '29CM', bg: 'bg-black' },
-				{ url: MALL_LINKS.WCONCEPT.url, src: WLogo, alt: 'W컨셉', bg: 'bg-white border border-[var(--color-neutral-100)]' },
+				{ url: MALL_LINKS.MUSINSA.url, src: LOGO_IMAGES.MUSINSA, alt: '무신사', bg: 'bg-black' },
+				{ url: MALL_LINKS.ZIGZAG.url, src: LOGO_IMAGES.ZIGZAG, alt: '지그재그', bg: 'bg-[#E976DE]' },
+				{ url: MALL_LINKS.CM.url, src: LOGO_IMAGES.LOGO_29CM, alt: '29CM', bg: 'bg-black' },
+				{ url: MALL_LINKS.WCONCEPT.url, src: LOGO_IMAGES.W_LOGO, alt: 'W컨셉', bg: 'bg-white border border-[var(--color-neutral-100)]' },
 			].map((mall, idx) => (
 				<a
 					key={idx}

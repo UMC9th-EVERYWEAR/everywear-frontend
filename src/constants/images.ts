@@ -34,29 +34,21 @@ export const GUIDE_IMAGES = {
 	GUIDE_4: '/webps/guide4.webp',
 } as const;
 
-// login
-export const LOGIN_IMAGES = {
-	CHECK_BOX: '/svgs/login/check-box.svg',
-	NO_CHECK_BOX: '/svgs/login/no-check-box.svg',
-
-	GOOGLE_ICON: '/svgs/login/google-icon.svg',
-	KAKAO_ICON: '/svgs/login/kakao-icon.svg',
-} as const;
 
 // logo
 export const LOGO_IMAGES = {
 	HANEGER_LOGO: 'svgs/LogoImages/hanger-logo.svg',
-	EVERYWEAR: '/svgs/LogoImages/Everywear.svg',
+	EVERYWEAR: '/svgs/LogoImages/everywear-logo.svg',
 	EVERY_LOGO: '/svgs/LogoImages/every-logo.svg',
 	WEAR_LOGO: '/svgs/LogoImages/wear-logo.svg',
 
-	MUSINSA: '/svgs/LogoImages/MusinsaLogo.svg',
-	ZIGZAG: '/svgs/LogoImages/ZigzagLogo.png',
-	LOGO_29CM: '/svgs/LogoImages/29cmLogo.svg',
-	W_LOGO: '/svgs/LogoImages/WLogo.svg',
+	MUSINSA: '/svgs/LogoImages/musinsa-logo.svg',
+	ZIGZAG: '/svgs/LogoImages/zigzag-logo.svg',
+	LOGO_29CM: '/svgs/LogoImages/29cm-logo.svg',
+	W_LOGO: '/svgs/LogoImages/w-logo.svg',
 
-	RECTANGLE: '/svgs/LogoImages/Rectangle.svg',
-	ELLIPSE: '/svgs/LogoImages/Ellipse.svg',
+	RECTANGLE: '/svgs/LogoImages/rectangle.svg',
+	ELLIPSE: '/svgs/LogoImages/ellipse.svg',
 
 	HOME_ON: '/svgs/LogoImages/home-on.svg',
 	HOME_OFF: '/svgs/LogoImages/home-off.svg',
@@ -64,7 +56,7 @@ export const LOGO_IMAGES = {
 	HANGER_OFF: '/svgs/LogoImages/hanger-off.svg',
 	CLOTHES_ON: '/svgs/LogoImages/clothes-on.svg',
 	CLOTHES_OFF: '/svgs/LogoImages/clothes-off.svg',
-	CLOSET_ON: '/svgs/LogoImages/closet-on.svg?react',
+	CLOSET_ON: '/svgs/LogoImages/closet-on.svg',
 	CLOSET_OFF: '/svgs/LogoImages/closet-off.svg',
 
 } as const;
@@ -74,8 +66,6 @@ export const ONBOARDING_IMAGES = {
 	ACCURACY_ICON: '/svgs/onboarding/accuracy-icon.svg',
 	CAMERA_BLUE: '/svgs/onboarding/camera-blue.svg',
 	CART_ICON: '/svgs/onboarding/cart-icon.svg',
-	CHECKBOX_MARKED: '/svgs/onboarding/checkbox-marked.svg',
-	CHECKBOX_MARKED_CLOSE: '/svgs/onboarding/close-box.svg',
 	GALLERY: '/svgs/onboarding/gallerly.svg',
 	LOCK_ICON: '/svgs/onboarding/lock-icon.svg',
 } as const;
@@ -101,11 +91,9 @@ export const ONBOARDING_GUIDE_IMAGES = {
 
 // setting
 export const SETTING_IMAGES = {
-	ARROW_RIGHT: '/svgs/setting/arrow-right.svg',
 	BLUE_CLOSE: '/svgs/setting/blue-close-icon.svg',
 	CAMERA: '/svgs/setting/camera-icon.svg',
 	CHECK_BLUE: '/svgs/setting/check-blue-icon.svg',
-	CHECK: '/svgs/setting/check-icon.svg',
 	CHECK_INCOMPLETE: '/svgs/setting/check-incomplete.svg',
 	COMPLETE_CHECK: '/svgs/setting/complete-check.svg',
 	PLUS: '/svgs/setting/plus-icon.svg',
