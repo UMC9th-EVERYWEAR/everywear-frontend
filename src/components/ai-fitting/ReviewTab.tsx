@@ -6,16 +6,20 @@ import ReviewSummary from './ReviewSummary';
 interface ReviewTabProps {
 	state: ReviewListState;
 	aiState: AiSummaryState;
-	handleStartReviewAi: () => void;
+	handleStartReviewAi : () => void;
+	canRetry? : boolean;
 }
 
-const ReviewTab = ({ state, aiState, handleStartReviewAi }: ReviewTabProps) => {
+const ReviewTab = ({ state, aiState, handleStartReviewAi, canRetry = false }: ReviewTabProps) => {
+
 	return (
 		<div className='flex flex-col items-center mb-32 w-full'>
 			<ReviewSummary
 				state={state}
 				aiState={aiState}
 				handleStartReviewAi={handleStartReviewAi}
+				canRetry={canRetry}
+				
 			/>
 
 			{state.status === 'success' && aiState.status === 'success' && aiState.result && (

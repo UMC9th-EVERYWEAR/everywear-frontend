@@ -21,3 +21,8 @@ export const getHomeRecentFittings = async () => {
 	const { data } = await apiClient.getRecentFittings();
 	return data.result ?? [];
 };
+
+export const getRecentFittingDetail = async (productId : number) => {
+	const { data } = await apiClient.getLatestFittingByProduct({ productId : productId });
+	return data.result;
+}
