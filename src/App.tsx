@@ -8,13 +8,29 @@ function App() {
 	const theme = useThemeStore((state) => state.theme);
 
 	useEffect(() => {
-		const root = window.document.documentElement;
-		if (theme === 'dark') {
-			root.classList.add('dark');
-		} else {
-			root.classList.remove('dark');
-		}
-	}, [theme]);
+		const handleTheme = () => {
+			const root = window.document.documentElement;
+			const pathname = window.location.pathname;
+			const lightOnlyPaths = ['/login', '/onboarding', '/auth', '/landing'];
+			
+			const isLightOnlyPage = 
+				pathname === '/' || 
+				lightOnlyPaths.some((path) => pathname.includes(path));
+
+			if (isLightOnlyPage) {
+				root.classList.remove('dark');
+			} else if (theme === 'dark') {
+				root.classList.add('dark');
+			} else {
+				root.classList.remove('dark');
+			}
+		};
+
+		handleTheme();
+		window.addEventListener('popstate', handleTheme);
+		
+		return () => window.removeEventListener('popstate', handleTheme);
+	}, [theme]); 
 
 	return (
 		<AppErrorBoundary>

@@ -193,7 +193,6 @@ const Home = () => {
 					</div>
 				</div>
 			</section>
-
 			{/* 5. 최근 피팅 내역 섹션 */}
 			<section className="mt-12 pb-10">
 				<div className="px-4 mb-4">
@@ -234,13 +233,14 @@ const Home = () => {
 										PATH.FITTING_DETAIL.replace(':id', String(fitting.fittingId)),
 									)
 								}
+
 								className="flex flex-col items-center min-w-[140px] max-w-[200px] w-full shrink-0 cursor-pointer active:scale-[0.98] transition-transform"
 							>
-								<div className="w-full h-[178px] rounded-[10px] overflow-hidden bg-[var(--color-neutral-100)] dark:bg-gray-800">
+								<div className="w-full h-[210px] rounded-[10px] overflow-hidden bg-neutral-100 dark:bg-neutral-700 shadow-sm border border-black/5 dark:border-white/5">
 									<img
 										src={fitting.fittingResultImage || '/images/default-product.png'}
 										alt="피팅 결과"
-										className="w-full h-full object-cover transition-transform duration-200 ease-in-out hover:scale-110"
+										className="w-full h-full object-cover transition-transform duration-200 ease-in-out hover:scale-105"
 									/>
 								</div>
 							</button>
@@ -254,6 +254,7 @@ const Home = () => {
 					)}
 				</div>
 
+				{/* 인디케이터 영역 (기존 코드 유지) */}
 				<div className="flex justify-center items-center mt-2 h-[12px]">
 					<div className="relative flex items-center justify-center w-[55px] h-[6px]">
 						<img

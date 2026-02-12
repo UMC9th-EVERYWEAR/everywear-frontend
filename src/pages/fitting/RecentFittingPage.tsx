@@ -1,34 +1,43 @@
 import { useMemo } from 'react';
 import { useNavigate } from 'react-router'; 
-import { formatToMonthGroup } from '@/src/utils/date';
 import { useFittings } from '@/src/hooks/service/fitting/useFittings';
 import { PATH } from '@/src/constants/path';
 
 interface FittingItem {
-    id: number;
-    fittingId?: number; 
-    createdAt: string;
-    fittingResultImage: string; 
-    status: 'COMPLETED' | 'PROCESSING' | 'FAILED';
+	id: number;
+	fittingId?: number; 
+	createdAt: string;
+	fittingResultImage: string; 
+	status: 'COMPLETED' | 'PROCESSING' | 'FAILED';
 }
 
 const RecentFitting = () => {
 	const navigate = useNavigate();
 	const { data = [], isLoading } = useFittings() as unknown as { 
-        data: FittingItem[]; 
-        isLoading: boolean 
-    };
+		data: FittingItem[]; 
+		isLoading: boolean 
+	};
 
-	const months = useMemo(() => {
-		if (!data.length) return [];
-		const uniqueMonths = Array.from(
-			new Set(data.map((item) => formatToMonthGroup(item.createdAt))),
+	const groupedFittings = useMemo(() => {
+		const groups: Record<string, FittingItem[]> = {};
+		
+		// 최신순 정렬
+		const sortedData = [...data].sort((a, b) => 
+			new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
 		);
-		return uniqueMonths.sort((a, b) => b.localeCompare(a));
+
+		sortedData.forEach((item) => {
+			const date = new Date(item.createdAt);
+			const monthKey = `${date.getFullYear()}년 ${date.getMonth() + 1}월`;
+			if (!groups[monthKey]) groups[monthKey] = [];
+			groups[monthKey].push(item);
+		});
+
+		return Object.entries(groups);
 	}, [data]);
 
 	if (isLoading) return <div className="flex-1 bg-transparent" />;
-    
+	
 	if (data.length === 0) {
 		return (
 			<div className="flex flex-1 flex-col items-center justify-center h-full bg-transparent">
@@ -41,49 +50,46 @@ const RecentFitting = () => {
 
 	return (
 		<main className="flex-1 overflow-y-auto bg-transparent pb-20 no-scrollbar transition-colors duration-300">
-			{months.map((month) => (
+			{groupedFittings.map(([month, items]) => (
 				<section
 					key={month}
-					className="mt-8 px-4"
+					className="mt-8"
 				>
-					<h2 className="mb-4 text-[var(--color-neutral-900)] dark:text-white text-medium-16 font-bold leading-normal">
+					{/* 월별 타이틀 */}
+					<h2 className="mb-4 px-4 text-[var(--color-neutral-900)] dark:text-white text-bold-18 font-bold">
 						{month}
 					</h2>
-                    
-					{/* 3열 사진 그리드 */}
-					<div className="grid grid-cols-3 gap-x-[10px] gap-y-4">
-						{data
-							.filter((item) => formatToMonthGroup(item.createdAt) === month)
-							.map((item) => {
-								const targetId = item.id || item.fittingId;
-                                
-								return (
-									<div
-										key={targetId}
-										role="button"
-										tabIndex={0}
-										onClick={() => navigate(PATH.FITTING_DETAIL.replace(':id', String(targetId)))}
-										onKeyDown={(e) => {
-											if (e.key === 'Enter' || e.key === ' ') {
-												navigate(PATH.FITTING_DETAIL.replace(':id', String(targetId)));
-											}
-										}}
-										className="w-full aspect-[3/4] rounded-[10px] overflow-hidden relative cursor-pointer active:scale-95 transition-transform outline-none focus:ring-2 focus:ring-primary-500 bg-[var(--color-neutral-100)] dark:bg-gray-800 shadow-sm"
-									>
+					
+					{/* 가로 스크롤 컨테이너 */}
+					<div className="flex gap-3 overflow-x-auto no-scrollbar px-4 pb-2">
+						{items.map((item) => {
+							const targetId = item.id || item.fittingId;
+							const dateObj = new Date(item.createdAt);
+							const dateString = `${dateObj.getFullYear()}.${dateObj.getMonth() + 1}.${dateObj.getDate()}`;
+
+							return (
+								<button
+									key={targetId}
+									onClick={() => navigate(PATH.FITTING_DETAIL.replace(':id', String(targetId)))}
+									className="flex flex-col items-center min-w-[140px] max-w-[140px] shrink-0 cursor-pointer active:scale-[0.98] transition-transform outline-none"
+								>
+									<div className="w-full h-[210px] rounded-[15px] overflow-hidden relative bg-[var(--color-neutral-100)] dark:bg-gray-800 shadow-sm border border-black/5 dark:border-white/5">
 										<img
 											src={item.fittingResultImage}
 											alt="피팅 결과물"
 											className="w-full h-full object-cover"
 											loading="lazy"
 										/>
-										<div className="absolute bottom-2 w-full text-center">
-											<span className="text-white text-[10px] font-medium drop-shadow-md">
-												{new Date(item.createdAt).toLocaleDateString('ko-KR').replace(/\. /g, '.').replace(/\.$/, '')}
+										
+										<div className="absolute bottom-2.5 w-full text-center">
+											<span className="text-white/90 text-[10px] font-medium drop-shadow-[0_1px_2px_rgba(0,0,0,0.6)]">
+												{dateString}
 											</span>
 										</div>
 									</div>
-								);
-							})}
+								</button>
+							);
+						})}
 					</div>
 				</section>
 			))}

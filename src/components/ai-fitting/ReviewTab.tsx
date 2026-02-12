@@ -26,7 +26,9 @@ const ReviewTab = ({ state, aiState, handleStartReviewAi }: ReviewTabProps) => {
 			)}
 
 			<div className='flex flex-col w-full'>
-				<span className='text-primary-600 text-bold-16 flex justify-start border-b border-solid border-neutral-100 w-full'>최신 리뷰</span>
+				<span className='text-primary-600 text-bold-16 flex justify-start border-b border-solid border-neutral-100 dark:border-neutral-700 w-full'>
+					최신 리뷰
+				</span>
 				<ReviewCardList state={state} />
 			</div>
 		</div>
