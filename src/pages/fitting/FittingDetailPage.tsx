@@ -1,6 +1,6 @@
 import { useState, useMemo } from 'react';
 import { useParams } from 'react-router';
-import useToast from '@/src/hooks/domain/ai-fitting/UseToast';
+import useToast from '@/src/hooks/domain/ai-fitting/useToast';
 import type { ModalState } from '@/src/types/ai-fitting/modal';
 import { useProducts } from '@/src/hooks/service/product/useProducts';
 import useLike from '@/src/hooks/service/fitting/useLike';
@@ -36,6 +36,7 @@ const FittingDetailPage = () => {
 	}, [fittingsList, fittingId]);
 
 	const sourceData = useMemo<FittingDetailDTO | null>(() => {
+
 		if (fittingDetail?.afterImageUrl) {
 			return fittingDetail;
 		}
@@ -52,6 +53,7 @@ const FittingDetailPage = () => {
 		const dtoProduct = sourceData.product;
 
 		return {
+      
 			product_id: productId,
 			product_name: productData?.product_name || dtoProduct.productName,
 			shoppingmale_name: productData?.shoppingmale_name || dtoProduct.siteName || '브랜드',
@@ -64,15 +66,11 @@ const FittingDetailPage = () => {
 	}, [sourceData, products]);
 
 	const currentFittingState = useMemo((): FittingState => {
-		if (!sourceData) return { status: 'idle', resultUrl: '' };
-
-		const resultUrl = sourceData.afterImageUrl || 
-			(sourceData as unknown as { fittingResultImage: string }).fittingResultImage || 
-			'';
+		const url = sourceData?.afterImageUrl || '';
 
 		return {
 			status: 'success',
-			resultUrl,
+			resultUrl: url,
 		};
 	}, [sourceData]);
 
@@ -112,7 +110,7 @@ const FittingDetailPage = () => {
 				})),
 				reviews: (sourceData?.reviews || []).map((review) => ({
 					...review,
-					images: review.images.map((img) => img.imgUrl),
+					images: (review.images || []).map((img) => img.imgUrl),
 				})),
 			} as ReviewState}
 			toasts={toasts}
