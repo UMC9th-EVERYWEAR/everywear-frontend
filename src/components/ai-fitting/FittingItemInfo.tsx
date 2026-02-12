@@ -7,9 +7,10 @@ interface FittingItemInfoProps {
     data: ListDTO | null | undefined
     handleHeart: (current: boolean) => void;
     handleBuy: () => void;
+	isFittingHistory : boolean;
 }
 
-const FittingItemInfo = ({ data, handleHeart, handleBuy }: FittingItemInfoProps) => {
+const FittingItemInfo = ({ data, handleHeart, handleBuy, isFittingHistory }: FittingItemInfoProps) => {
 	const [isLiked, setIsLiked] = useState(data?.is_liked ?? false);
 
 	const onHeartClick = () => {
@@ -59,6 +60,7 @@ const FittingItemInfo = ({ data, handleHeart, handleBuy }: FittingItemInfoProps)
 						<button
 							onClick={onHeartClick}
 							className='cursor-pointer p-1 active:scale-90 transition-transform'
+							disabled={isFittingHistory}
 						>
 							<img
 								src={isLiked ? AI_FITTING_IMAGES.FITTING_CARD_HEART_FILL : AI_FITTING_IMAGES.FITTING_CARD_HEART}

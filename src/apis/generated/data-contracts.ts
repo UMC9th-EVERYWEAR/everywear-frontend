@@ -277,7 +277,6 @@ export interface ApiResponseProductListResponse {
 }
 
 export interface ListDTO {
-  /** @format int64 */
   product_id?: number;
   shoppingmale_name?: string;
   product_url?: string;
@@ -286,9 +285,7 @@ export interface ListDTO {
   product_name?: string;
   brand_name?: string;
   price?: string;
-  /** @format float */
   star_point?: number;
-  /** @format int64 */
   product_num?: number;
   is_liked?: boolean;
   ai_review?: string;
@@ -298,11 +295,38 @@ export interface ProductListResponse {
   products?: ListDTO[];
 }
 
+export interface ClosetListDTO {
+  product_id?: number;
+  shoppingmale_name?: string;
+  product_url?: string;
+  category?: string;
+  product_img_url?: string;
+  product_name?: string;
+  brand_name?: string;
+  price?: string;
+  star_point?: number;
+  product_num?: number;
+  is_liked?: boolean;
+  ai_review?: string;
+  recent_fitting_id: number,
+}
+
+export interface ClosetListResponse {
+  products?: ClosetListDTO[];
+}
+
 export interface ApiResponseProductDetailResponse {
   isSuccess?: boolean;
   code?: string;
   message?: string;
   result?: ProductDetailResponse;
+}
+
+export interface ApiResponseClosetProductDetailResponse {
+  isSuccess?: boolean;
+  code?: string;
+  message?: string;
+  result?: ClosetListResponse;
 }
 
 export interface ProductDetailResponse {

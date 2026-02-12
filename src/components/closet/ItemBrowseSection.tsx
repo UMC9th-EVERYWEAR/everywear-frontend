@@ -1,13 +1,13 @@
 import ProductCard from '../common/ProductCard';
 import { IconImage } from '@/src/assets/icons/image/IconImage';
-import type { ListDTO } from '@/src/apis/generated';
+import type { ClosetListDTO } from '@/src/apis/generated';
 import { Virtuoso } from 'react-virtuoso'
 import { forwardRef } from 'react';
 import React from 'react';
 import type { HTMLAttributes } from 'react';
 
 interface ItemBrowseSectionProps {
-    data : ListDTO[],
+    data : ClosetListDTO[],
 	isCloset?: boolean
 }
 const VIRTUALIZE_THRESHOLD = 50;
@@ -110,6 +110,7 @@ const ItemBrowseSection = ({ data, isCloset = false } : ItemBrowseSectionProps) 
 				{data.map((product, index) => (
 					<ProductCard
 						key={product.product_id ?? `${product.product_name}-${index}`} 
+						recentFittingId={product.recent_fitting_id}
 						id={product.product_id ?? 0}
 						company={product.brand_name ?? ''}
 						name={product.product_name ?? ''}
