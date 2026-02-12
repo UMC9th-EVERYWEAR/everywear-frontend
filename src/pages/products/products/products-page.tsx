@@ -63,7 +63,7 @@ const ProductsPage = () => {
 						<ItemSkeleton />
 					) :(
 						<ItemBrowseSection
-							data={products}
+							productdata={products}
 						/>
 					)
 				}

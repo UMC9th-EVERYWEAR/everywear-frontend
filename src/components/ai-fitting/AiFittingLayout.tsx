@@ -36,6 +36,7 @@ interface AiFittingLayoutProps {
   showRestartButton?: boolean;
   showBefore?: boolean;
   canRetry: boolean; 
+  isFittingHistory: boolean;
 }
 
 export const AiFittingLayout = ({
@@ -45,7 +46,7 @@ export const AiFittingLayout = ({
 	onHeart, onGoToShop, onConfirmBuy, onStartFitting, onRestartFitting, onStartReview, onExitAction,
 	showRestartButton = true,
 	showBefore = true,
-	canRetry, 
+	canRetry, isFittingHistory,
 }: AiFittingLayoutProps) => {
 	return (
 		<div className="flex items-center justify-center mb-8">
@@ -74,6 +75,7 @@ export const AiFittingLayout = ({
 						data={product}
 						handleHeart={onHeart}
 						handleBuy={onGoToShop}
+						isFittingHistory={isFittingHistory}
 					/>
 				) : (
 					<div className="h-24 flex items-center justify-center text-gray-400 font-medium">

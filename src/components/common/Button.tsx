@@ -17,7 +17,7 @@ export const Button = ({
 }: ButtonProps) => {
 	const baseStyle = `
     flex justify-center items-center gap-[10px] rounded-[10px]
-    transition-all font-['Pretendard']
+    transition-all 
   `;
 
 	const sizeStyles = {
