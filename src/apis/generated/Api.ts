@@ -276,7 +276,7 @@ export class Api<
    * @response `200` `(UserImgQuery)[]` OK
    */
   getProfileImages = (params: RequestParams = {}) =>
-    this.request<UserImgQuery[], any>({
+  this.request<ApiResponse<UserImgQuery[]>, any>({
       path: `/api/user-images`,
       method: "GET",
       secure: true,

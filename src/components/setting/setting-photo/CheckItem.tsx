@@ -1,4 +1,4 @@
-import { SETTING_IMAGES } from '@/src/constants/images';
+import { Icons } from '@/src/assets/icons/components/Icons';
 
 interface CheckItemProps {
   text: string;
@@ -7,12 +7,8 @@ interface CheckItemProps {
 
 const CheckItem = ({ text, className }: CheckItemProps) => {
 	return (
-		<div className={`flex gap-0.5 ${className ?? ''}`}>
-			<img
-				src={SETTING_IMAGES.CHECK}
-				alt="check icon"
-				className="inline-block align-middle"
-			/>
+		<div className={`flex gap-1 ${className ?? ''}`}>
+			<Icons.CheckIcon className='text-primary-300  w-4.5 h-4.5'/>
 			<p>{text}</p>
 		</div>
 	);
