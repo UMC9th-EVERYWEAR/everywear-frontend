@@ -17,13 +17,12 @@ import type { FittingSummary, ListDTO } from '../apis/generated';
 import ProductCardSkeleton from '../components/common/ProductCardSkeleton';
 import MallGuide from '../components/products/MallGuide';
 
-
 const INDICATOR_MAX_DISTANCE = 37;
 
 const Home = () => {
 	const navigate = useNavigate();
 	const queryClient = useQueryClient();
-	const [showGuide, setShowGuide]  = useState(false)
+	const [showGuide, setShowGuide]  = useState(false);
 
 	useEffect(() => {
 		queryClient.invalidateQueries({ queryKey: QUERY_KEYS.PRODUCT.LIST });
@@ -56,17 +55,14 @@ const Home = () => {
 			if (maxScrollLeft > 0) setFittingScrollRatio(scrollLeft / maxScrollLeft);
 		}
 	};
-            
-	if(showGuide)
-	{
-		return(
-			<MallGuide onClose={()=> setShowGuide(false)} />
-		)
+
+	if (showGuide) {
+		return <MallGuide onClose={() => setShowGuide(false)} />;
 	}
 
 	return (
 		<div className='flex flex-col w-full bg-white dark:bg-gray-900 pb-10 min-h-[calc(100vh-101px)] transition-colors duration-300'>
-            
+			
 			{/* 1. 파트너 쇼핑몰 타이틀 */}
 			<section className='px-4 pt-6 pb-2'> 
 				<h2 className='text-[var(--color-neutral-900)] dark:text-white text-medium-16 mt-1 font-bold'>
@@ -100,7 +96,6 @@ const Home = () => {
 				))}
 			</section>
 
-
 			{/* 3. 상품 추가 버튼 */}
 			<section className="flex flex-col px-4 mt-4 gap-4">
 				<span className="self-center text-center text-[var(--color-primary-300)] dark:text-primary-400 text-regular-10 tracking-[-0.3px] cursor-pointer">
@@ -116,7 +111,6 @@ const Home = () => {
 					</Button>
 				</div>
 			</section>
-
 
 			{/* 4. 상품 둘러보기 섹션 */}
 			<section className="mt-10">
@@ -150,7 +144,7 @@ const Home = () => {
 							/>
 						))
 					) : productsList.length > 0 ? (
-						productsList.map((product : ListDTO) => (
+						productsList.map((product: ListDTO) => (
 							<div
 								key={product.product_id}
 								className="min-w-[140px] shrink-0"
@@ -174,7 +168,6 @@ const Home = () => {
 					)}
 				</div>
 
-				{/* 인디케이터: 필요시 다크모드 대응 (아이콘 색상 등) */}
 				<div className="flex justify-center items-center mt-2 h-[12px]">
 					<div className="relative flex items-center justify-center w-[55px] h-[6px]">
 						<img
@@ -193,6 +186,7 @@ const Home = () => {
 					</div>
 				</div>
 			</section>
+
 			{/* 5. 최근 피팅 내역 섹션 */}
 			<section className="mt-12 pb-10">
 				<div className="px-4 mb-4">
@@ -200,9 +194,9 @@ const Home = () => {
 						<h3 className="text-[var(--color-neutral-900)] dark:text-white text-medium-16 font-bold tracking-[-0.6px]">
 							최근 피팅 내역
 						</h3>
-						<button 
+						<button
 							className="text-medium-12 text-[var(--color-neutral-900)] dark:text-gray-300 cursor-pointer mb-1 hover:text-[var(--color-primary-600)] transition-colors"
-							onClick={() => navigate(PATH.RECENT_FITTING)} 
+							onClick={() => navigate(PATH.RECENT_FITTING)}
 						>
 							자세히보기 →
 						</button>
@@ -212,7 +206,7 @@ const Home = () => {
 					</p>
 				</div>
 
-				<div 
+				<div
 					ref={fittingScrollRef}
 					onScroll={handleFittingScroll}
 					className="flex gap-3 overflow-x-auto no-scrollbar pb-4 px-4"
@@ -230,15 +224,27 @@ const Home = () => {
 								key={fitting.fittingId}
 								onClick={() =>
 									navigate(
-										PATH.FITTING_DETAIL.replace(':id', String(fitting.fittingId)),
+										PATH.FITTING_DETAIL.replace(
+											':id',
+											String(fitting.fittingId),
+										),
 									)
 								}
-
-								className="flex flex-col items-center min-w-[140px] max-w-[200px] w-full shrink-0 cursor-pointer active:scale-[0.98] transition-transform"
+								className="
+										flex flex-col items-center
+										min-w-[140px]
+										shrink-0
+										cursor-pointer
+										active:scale-[0.98]
+										transition-transform
+									"
 							>
-								<div className="w-full h-[210px] rounded-[10px] overflow-hidden bg-neutral-100 dark:bg-neutral-700 shadow-sm border border-black/5 dark:border-white/5">
+								<div className="w-full h-[230px] rounded-[10px] overflow-hidden bg-neutral-100 dark:bg-neutral-700 shadow-sm border border-black/5 dark:border-white/5">
 									<img
-										src={fitting.fittingResultImage || '/images/default-product.png'}
+										src={
+											fitting.fittingResultImage ||
+												'/images/default-product.png'
+										}
 										alt="피팅 결과"
 										className="w-full h-full object-cover transition-transform duration-200 ease-in-out hover:scale-105"
 									/>
@@ -248,13 +254,14 @@ const Home = () => {
 					) : (
 						<div className="w-full py-10 flex flex-col items-center justify-center border-2 border-dashed border-neutral-100 dark:border-gray-700 rounded-[10px]">
 							<span className="text-neutral-400 dark:text-gray-500 text-regular-12 text-center">
-								피팅 내역이 없습니다.<br/>새로운 피팅을 시작해보세요!
+								피팅 내역이 없습니다.
+								<br />
+								새로운 피팅을 시작해보세요!
 							</span>
 						</div>
 					)}
 				</div>
 
-				{/* 인디케이터 영역 (기존 코드 유지) */}
 				<div className="flex justify-center items-center mt-2 h-[12px]">
 					<div className="relative flex items-center justify-center w-[55px] h-[6px]">
 						<img
@@ -262,21 +269,24 @@ const Home = () => {
 							alt=""
 							className="absolute w-full h-full object-contain dark:opacity-50"
 						/>
-						<img 
-							src={EllipseIcon} 
-							alt="" 
-							className="absolute w-auto h-full object-contain transition-transform duration-75 ease-out dark:brightness-150" 
+						<img
+							src={EllipseIcon}
+							alt=""
+							className="absolute w-auto h-full object-contain transition-transform duration-75 ease-out dark:brightness-150"
 							style={{
-								transform: `translateX(${(fittingScrollRatio * INDICATOR_MAX_DISTANCE) - (INDICATOR_MAX_DISTANCE / 2)}px)`,
+								transform: `translateX(${
+										fittingScrollRatio * INDICATOR_MAX_DISTANCE -
+										INDICATOR_MAX_DISTANCE / 2
+									}px)`,
 							}}
 						/>
 					</div>
 				</div>
 			</section>
 
+
 		</div>
 	);
 };
-
 
 export default Home;
