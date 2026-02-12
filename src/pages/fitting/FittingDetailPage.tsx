@@ -1,6 +1,5 @@
 import { useState, useMemo } from 'react';
 import { useParams } from 'react-router';
-import useToast from '@/src/hooks/domain/ai-fitting/UseToast';
 import type { ModalState } from '@/src/types/ai-fitting/modal';
 import { useProducts } from '@/src/hooks/service/product/useProducts';
 import useLike from '@/src/hooks/service/fitting/useLike';
@@ -12,6 +11,7 @@ import {
 import type { ListDTO } from '@/src/apis/generated';
 import type { FittingState, ReviewState } from '@/src/types/ai-fitting/status';
 import { AiFittingLayout, type TabType } from '@/src/components/ai-fitting/AiFittingLayout';
+import useToast from '@/src/hooks/domain/ai-fitting/useToast';
 
 const FittingDetailPage = () => {
 	const { id } = useParams();
@@ -64,7 +64,7 @@ const FittingDetailPage = () => {
 	}, [sourceData, products]);
 
 	const currentFittingState = useMemo((): FittingState => {
-		if (!sourceData) return { status: 'idle', resultUrl: '' };
+		if (!sourceData) return { status: 'idle' };
 
 		const resultUrl = sourceData.afterImageUrl || 
 			(sourceData as unknown as { fittingResultImage: string }).fittingResultImage || 

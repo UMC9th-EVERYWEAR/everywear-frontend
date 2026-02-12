@@ -9,7 +9,7 @@ interface ReviewTabProps {
 	handleStartReviewAi : () => void;
 }
 
-const ReviewTab = ({ state, aiState, handleStartReviewAi }: ReviewTabProps) => {
+const ReviewTab = ({ state, aiState, handleStartReviewAi  }: ReviewTabProps) => {
 
 	return (
 		<div className='flex flex-col items-center mb-32 w-full'>
