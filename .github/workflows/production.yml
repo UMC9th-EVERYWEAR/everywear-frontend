@@ -15,16 +15,11 @@ permissions:
 jobs:
   Deploy-Preview:
     runs-on: ubuntu-latest
-
-    # PR이 merge된 경우에만 실행
-    if: github.event_name == 'pull_request' && github.event.pull_request.merged == true || github.event_name == 'push'
     
     steps:
       # 1. 코드 체크아웃
       - name: Checkout code
         uses: actions/checkout@v4
-        with:
-          ref: develop
       
       # 2. pnpm 설정
       - name: Setup pnpm
@@ -43,18 +38,18 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
       
-      # # 5. 린트 검사
-      # - name: Run lint
-      #   run: pnpm run lint
-      #   continue-on-error: true
+      # 5. 린트 검사
+      - name: Run lint
+        run: pnpm run lint
+        continue-on-error: true
 
-      # # 6. 타입 체크
-      # - name: Type check
-      #   run: pnpm run type-check
+      # 6. 타입 체크
+      - name: Type check
+        run: pnpm run type-check
 
-      # # 7. 테스트 실행
-      # - name: Run tests
-      #   run: pnpm tests
+      # 7. 테스트 실행
+      - name: Run tests
+        run: pnpm tests
 
       # 8. Vercel CLI 설치
       - name: Install Vercel CLI
