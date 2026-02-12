@@ -12,7 +12,6 @@ import {
 import type { ListDTO } from '@/src/apis/generated';
 import type { FittingState, ReviewState } from '@/src/types/ai-fitting/status';
 import { AiFittingLayout, type TabType } from '@/src/components/ai-fitting/AiFittingLayout';
-import useToast from '@/src/hooks/domain/ai-fitting/useToast';
 
 const FittingDetailPage = () => {
 	const { id } = useParams();
