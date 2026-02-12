@@ -1,17 +1,19 @@
-import SettingPhotoPage from '@/src/pages/setting/setting-photo-page';
-import SettingPage from '../../pages/setting/setting-page';
-import SettingInquiry from '@/src/pages/setting/setting-inquiry-page';
-import SettingWithdraw from '@/src/pages/setting/setting-withdraw-page';
-import ClosetPage from '@/src/pages/closet/closet-page';
-import RecentFitting from '@/src/pages/fitting/RecentFittingPage';
 import  { PATH } from '@/src/constants/path';
-import AiFittingPage from '@/src/pages/ai-fitting/ai-fitting-page';
-import OnBoardingPage from '@/src/pages/onboarding/onboarding-page';
-import OnBoardingPhotoPage from '@/src/pages/onboarding/onboarding-photo-page';
-import Home from '@/src/pages/Home';
-import ProductsPage from '@/src/pages/products/products/products-page';
-import ProductsAddPage from '@/src/pages/products/add/products-add-page';
-import FittingDetailPage from '@/src/pages/fitting/FittingDetailPage';
+import { lazy } from 'react';
+const Home = lazy(() => import('@/src/pages/Home'));
+const SettingPage = lazy(() => import('../../pages/setting/setting-page'));
+const SettingPhotoPage = lazy(() => import('@/src/pages/setting/setting-photo-page'));
+const SettingInquiry = lazy(() => import('@/src/pages/setting/setting-inquiry-page'));
+const SettingWithdraw = lazy(() => import('@/src/pages/setting/setting-withdraw-page'));
+const ClosetPage = lazy(() => import('@/src/pages/closet/closet-page'));
+const RecentFitting = lazy(() => import('@/src/pages/fitting/RecentFittingPage'));
+const AiFittingPage = lazy(() => import('@/src/pages/ai-fitting/ai-fitting-page'));
+const OnBoardingPage = lazy(() => import('@/src/pages/onboarding/onboarding-page'));
+const OnBoardingPhotoPage = lazy(() => import('@/src/pages/onboarding/onboarding-photo-page'));
+const ProductsPage = lazy(() => import('@/src/pages/products/products/products-page'));
+const ProductsAddPage = lazy(() => import('@/src/pages/products/add/products-add-page'));
+const FittingDetailPage = lazy(() => import('@/src/pages/fitting/FittingDetailPage'));
+
 
 
 export const protectedRoutes = [

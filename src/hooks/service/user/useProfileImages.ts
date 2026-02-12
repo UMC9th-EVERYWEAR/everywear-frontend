@@ -6,5 +6,7 @@ export const useProfileImages = () => {
 	return useQuery({
 		queryKey: QUERY_KEYS.USER_IMAGES.ALL,
 		queryFn: getProfileImages,
+		  select: (data) =>
+			Array.isArray(data) ? data : data.result ?? [],
 	});
 };

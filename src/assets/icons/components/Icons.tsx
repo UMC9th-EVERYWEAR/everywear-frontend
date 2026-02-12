@@ -8,6 +8,8 @@ import settingSvg from '@/src/assets/icons/svgs/logo/setting-icon.svg?react'
 import GoogleSvg from '@/src/assets/icons/svgs/login/google-icon.svg?react'
 import KakaoSvg from '@/src/assets/icons/svgs/login/kakao-icon.svg?react'
 import CheckSvg from '@/src/assets/icons/svgs/login/check-box.svg?react'
+import CheckIconSvg from '@/src/assets/icons/svgs/login/check-icon.svg?react'
+
 
 // logo
 import EverywearSvg from '@/src/assets/icons/svgs/logo/everywear.svg?react'
@@ -47,6 +49,7 @@ export const Icons = {
 	Google: createIcon(GoogleSvg),
 	Kakao: createIcon(KakaoSvg),
 	CheckLogin: createIcon(CheckSvg),
+	CheckIcon: createIcon(CheckIconSvg),
 
 	// logo
 	Everywear: createIcon(EverywearSvg),

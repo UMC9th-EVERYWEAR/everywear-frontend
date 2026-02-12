@@ -1,8 +1,9 @@
-import { useEffect } from 'react';
+import { Suspense, useEffect } from 'react';
 import { RouterProvider } from 'react-router';
 import { router } from './router/router';
 import AppErrorBoundary from './providers/ErrorBoundary';
 import { useThemeStore } from '@/src/store/use-theme-store';
+import Loading from '@/src/components/common/Loading';
 
 function App() {
 	const theme = useThemeStore((state) => state.theme);
@@ -34,9 +35,11 @@ function App() {
 
 	return (
 		<AppErrorBoundary>
-			<div className="min-h-screen w-full bg-white dark:bg-gray-900 text-black dark:text-white transition-colors duration-300">
-				<RouterProvider router={router} />
-			</div>
+			<Suspense fallback={<Loading />}>
+				<div className="min-h-screen w-full bg-white dark:bg-gray-900 text-black dark:text-white transition-colors duration-300">
+					<RouterProvider router={router} />
+				</div>
+			</Suspense>
 		</AppErrorBoundary>
 	);
 }
