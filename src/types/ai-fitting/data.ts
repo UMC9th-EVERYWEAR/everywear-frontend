@@ -30,5 +30,3 @@ export interface ReviewData {
   keywords: ReviewKeyword[]; 
   reviews: ReviewItem[];    
 }
-
-

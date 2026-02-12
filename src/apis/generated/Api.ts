@@ -2,7 +2,6 @@
 import type {
   ApiResponseAgreeToggleResponse,
   ApiResponseAiReviewDTO,
-  ApiResponseAlarmToggleResponse,
   ApiResponseFittingApplyResult,
   ApiResponseFittingDetail,
   ApiResponseImportDTO,
@@ -11,9 +10,10 @@ import type {
   ApiResponseLong,
   ApiResponseMapStringObject,
   ApiResponseProductListResponse,
+  ApiResponseReviewListDTO,
   ApiResponseString,
   ApiResponseTokenRefreshResponse,
-  ApiResponseUserResponseDto,
+  ApiResponseUserResponse,
   ApiResponseVoid,
   CrawlResponseDTO,
   CrawlReviewDTO,
@@ -24,6 +24,7 @@ import type {
 } from "./data-contracts";
 import { HttpClient } from "./http-client";
 import type { RequestParams, ContentType } from "./http-client";
+
 
 enum ContentType {
   Json = "application/json",
@@ -72,25 +73,22 @@ export class Api<
       ...params,
     });
   /**
-   * @description 상품 리뷰 크롤링을 시작합니다. **동작 방식:** 1. DB에 리뷰가 이미 있으면 즉시 반환 (캐시된 데이터) 2. 리뷰가 없으면 백그라운드에서 크롤링 시작 3. 크롤링이 진행 중이면 상태만 반환 **응답 타입:** - `from_cache: true` → 즉시 리뷰 데이터 반환 (캐시) - `from_cache: false, status: processing` → 크롤링 진행 중 (약 30초 소요) **크롤링 진행 확인:** - `GET /api/review/{productId}` API로 크롤링 상태 확인 가능 **지원 쇼핑몰:** - 무신사, 지그재그, 29CM, W컨셉
+   * @description 상품 리뷰 크롤링을 시작합니다. **동작 방식:** 1. DB에 리뷰가 이미 있으면 즉시 반환 (캐시된 데이터) 2. 리뷰가 없으면 백그라운드에서 크롤링 시작 3. 크롤링이 진행 중이면 상태만 반환 **응답 status:** - `completed` → 즉시 리뷰 데이터 반환 (캐시) - `processing` → 크롤링 진행 중 (약 30초 소요) **크롤링 진행 확인:** - `GET /api/review/{productId}` API로 크롤링 상태 확인 가능 **지원 쇼핑몰:** - 무신사, 지그재그, 29CM, W컨셉
    *
    * @tags Review
    * @name CrawlReview
    * @summary 리뷰 크롤링 시작
    * @request POST:/api/review/crawl
    * @secure
-   * @response `200` `CrawlResponseDTO` 리뷰가 이미 존재하여 즉시 반환 (캐시)
-   * @response `202` `any` 리뷰 크롤링 시작됨 (백그라운드 처리 중)
-   * @response `404` `any` 상품을 찾을 수 없음
+   * @response `200` `ApiResponseReviewListDTO` OK
    */
   crawlReview = (data: CrawlReviewDTO, params: RequestParams = {}) =>
-    this.request<CrawlResponseDTO, any>({
+    this.request<ApiResponseReviewListDTO, any>({
       path: `/api/review/crawl`,
       method: "POST",
       body: data,
       secure: true,
       type: ContentType.Json,
-      format: "json",
       ...params,
     });
   /**
@@ -118,10 +116,10 @@ export class Api<
    * @summary 특정 상품의 AI 리뷰 및 키워드 생성
    * @request POST:/api/review/ai/{productId}
    * @secure
-   * @response `200` `ApiResponseMapStringObject` OK
+   * @response `200` `ApiResponseAiReviewDTO` OK
    */
   generateAiReview = (productId: number, params: RequestParams = {}) =>
-    this.request<ApiResponseMapStringObject, any>({
+    this.request<ApiResponseAiReviewDTO, any>({
       path: `/api/review/ai/${productId}`,
       method: "POST",
       secure: true,
@@ -285,21 +283,37 @@ export class Api<
       ...params,
     });
   /**
-   * @description 상품의 리뷰를 조회합니다. **응답 상태:** - `completed`: 리뷰 데이터 있음 (크롤링 완료) - `processing`: 크롤링 진행 중 (리뷰 데이터 없음) - `failed`: 크롤링 실패 - `not_started`: 크롤링 아직 시작 안 함 **사용 시나리오:** 1. `POST /api/review/crawl`로 크롤링 시작 2. 이 API로 크롤링 상태 확인 3. `status: completed`가 되면 리뷰 데이터 사용 **Polling 권장 주기:** - 5초마다 확인 (최대 1분)
+   * @description 사용자의 대표사진을 조회합니다.
+   *
+   * @tags user-img-controller
+   * @name GetRepresentativeImage
+   * @summary 대표 이미지 조회
+   * @request GET:/api/user-images/representative
+   * @secure
+   * @response `200` `ApiResponseRepresentativeImgResponse` OK
+   */
+  getRepresentativeImage = (params: RequestParams = {}) =>
+    this.request<ApiResponseRepresentativeImgResponse, any>({
+      path: `/api/user-images/representative`,
+      method: "GET",
+      secure: true,
+      ...params,
+    });
+  /**
+   * @description 상품의 리뷰를 조회합니다. **응답 status:** - `completed`: 리뷰 데이터 있음 (크롤링 완료) - `processing`: 크롤링 진행 중 (리뷰 데이터 없음) - `failed`: 크롤링 실패 - `pending`: 크롤링 아직 시작 안 함 **사용 시나리오:** 1. `POST /api/review/crawl`로 크롤링 시작 2. 이 API로 크롤링 상태 확인 3. `status: completed`가 되면 리뷰 데이터 사용 **Polling 권장 주기:** - 5초마다 확인 (최대 1분)
    *
    * @tags Review
    * @name GetReviews
    * @summary 리뷰 조회
    * @request GET:/api/review/{productId}
    * @secure
-   * @response `200` `any` 크롤링 진행 중
+   * @response `200` `ApiResponseReviewListDTO` OK
    */
   getReviews = (productId: number, params: RequestParams = {}) =>
-    this.request<any, any>({
+    this.request<ApiResponseReviewListDTO, any>({
       path: `/api/review/${productId}`,
       method: "GET",
       secure: true,
-      format: "json",
       ...params,
     });
   /**
@@ -315,6 +329,23 @@ export class Api<
   getProducts = (params: RequestParams = {}) =>
     this.request<ApiResponseProductListResponse, any>({
       path: `/api/products`,
+      method: "GET",
+      secure: true,
+      ...params,
+    });
+  /**
+   * @description 사용자가 선택한 상품의 정보를 조회합니다.
+   *
+   * @tags Product
+   * @name GetProductDetail
+   * @summary 상품 단건 조회
+   * @request GET:/api/products/{product_id}
+   * @secure
+   * @response `200` `ApiResponseProductDetailResponse` OK
+   */
+  getProductDetail = (productId: number, params: RequestParams = {}) =>
+    this.request<ApiResponseProductDetailResponse, any>({
+      path: `/api/products/${productId}`,
       method: "GET",
       secure: true,
       ...params,
@@ -469,6 +500,30 @@ export class Api<
     this.request<ApiResponseFittingDetail, any>({
       path: `/api/fittings/${fittingId}`,
       method: "GET",
+      secure: true,
+      ...params,
+    });
+  /**
+   * @description 특정 상품(productId)에 대해 현재 사용자(userId)의 가장 최근 피팅 1건을 조회합니다.
+   *
+   * @tags fitting-controller
+   * @name GetLatestFittingByProduct
+   * @summary 상품별 최근 피팅 조회
+   * @request GET:/api/fittings/latest
+   * @secure
+   * @response `200` `ApiResponseFittingApplyResult` OK
+   */
+  getLatestFittingByProduct = (
+    query: {
+      /** @format int64 */
+      productId: number;
+    },
+    params: RequestParams = {},
+  ) =>
+    this.request<ApiResponseFittingApplyResult, any>({
+      path: `/api/fittings/latest`,
+      method: "GET",
+      query: query,
       secure: true,
       ...params,
     });

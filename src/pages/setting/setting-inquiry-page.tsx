@@ -9,7 +9,7 @@ import type { TagCategory, InquiryDraft } from '@/src/types/setting/setting-inqu
 import { ENV_CONFIG } from '@/src/constants/config';
 import renderFields from '@/src/components/setting/setting-inquiry/renderFields';
 import { useForm } from 'react-hook-form';
-import useToast from '@/src/hooks/domain/ai-fitting/UseToast';
+import useToast from '@/src/hooks/domain/ai-fitting/useToast';
 import Toast from '@/src/components/common/Toast';
 import ToastContainer from '@/src/components/common/ToastContainer';
 

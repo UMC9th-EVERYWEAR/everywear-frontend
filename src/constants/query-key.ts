@@ -18,6 +18,7 @@ export const QUERY_KEYS = {
 	USER_IMAGES: {
 		ALL: ['user-images'] as const,
 		LIST: ['user-images', 'list'] as const,
+		REPRESENTATIVE: ['user-images', 'representative'] as const,
 		DETAIL: (imageId: number) =>
       ['user-images', 'detail', imageId] as const,
 	},
@@ -28,6 +29,7 @@ export const QUERY_KEYS = {
 		LIST: ['product', 'list'] as const,
 		CATEGORY: (category: CategoryQueryKey) => ['product', 'category', category] as const,
 		LIKE: ['product', 'like'] as const,
+		DETAIL: (productId : number) => ['product', 'detail', productId] as const,
 	}, 	
 
 	// 리뷰 및 크롤링 관련
