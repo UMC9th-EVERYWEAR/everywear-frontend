@@ -47,7 +47,7 @@ const CategoryBar = ({ selected, onSelect }: CategoryBarProps) => {
 							>
 								<cat.Icon
 									className={cn('w-5',
-										isActive ? 'text-white' : 'text-neutral-700',
+										isActive ? 'text-white' : 'text-neutral-500',
 									)}
 								/>
 								<span className={`text-medium-14 font-pretandard ${cat.name === '전체' ? 'ml-[2px]' : 'ml-[-1px]'}`}>
