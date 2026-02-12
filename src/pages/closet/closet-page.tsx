@@ -38,8 +38,7 @@ const ClosetPage = () => {
 						<ItemSkeleton isCloset/>
 					) :(
 						<ItemBrowseSection
-							data={filteredClosetProducts}
-							isCloset
+							closetData={filteredClosetProducts}
 						/>
 					)
 				}
