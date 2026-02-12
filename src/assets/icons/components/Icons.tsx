@@ -15,6 +15,9 @@ import MusinsaSvg from '@/src/assets/icons/svgs/logo/musinsa-logo.svg?react'
 import CmLogoSvg from '@/src/assets/icons/svgs/logo/29cmLogo.svg?react'
 import ZigzagSvg from '@/src/assets/icons/svgs/logo/zigzag-logo.svg?react'
 import WSvg from '@/src/assets/icons/svgs/logo/w-logo.svg?react'
+import LightSvg from '@/src/assets/icons/svgs/logo/light.svg?react'
+import DarkSvg from '@/src/assets/icons/svgs/logo/dark.svg?react'
+
 
 // onboarding
 import GoodBoxSvg from '@/src/assets/icons/svgs/onboarding/good-box.svg?react'
@@ -48,6 +51,8 @@ export const Icons = {
 	Cm: createIcon(CmLogoSvg),
 	Zigzag: createIcon(ZigzagSvg),
 	WLogo: createIcon(WSvg),
+	LightLogo: createIcon(LightSvg),
+	DarkLogo: createIcon(DarkSvg),
 
 	// onboarding
 	GoodBox: createIcon(GoodBoxSvg),
