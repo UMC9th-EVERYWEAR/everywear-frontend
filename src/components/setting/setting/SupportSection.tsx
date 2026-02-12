@@ -1,4 +1,5 @@
-import  { SETTING_IMAGES } from '@/src/constants/images';
+import { Icons } from '@/src/assets/icons/components/Icons';
+import { cn } from '@/src/utils/cn';
 import { TERMS_CONFIG } from '@/src/constants/terms';
 
 interface Props {
@@ -19,10 +20,11 @@ const SupportSection = ({ onInquiry }: Props) => {
 				className="w-full py-2 flex justify-between border-b-[0.5px] border-neutral-300 cursor-pointer"
 			>
 				<span className="text-regular-14">서비스 이용약관</span>
-				<img
-					src={SETTING_IMAGES.ARROW_RIGHT}
-					alt="arrow right"
-
+				<Icons.Arrow 
+					size={25}
+					className={cn(
+						'cursor-pointer transition-transform duration-200 text-neutral-300',
+					)}
 				/>
 			</button>
 
@@ -31,11 +33,11 @@ const SupportSection = ({ onInquiry }: Props) => {
 				className="w-full py-2 flex justify-between border-b-[0.5px] border-neutral-300 cursor-pointer"
 			>
 				<span className="text-regular-14">개인정보 처리방침</span>
-				<img
-					src={SETTING_IMAGES.ARROW_RIGHT}
-					alt="arrow right"
-					className='cursor-pointer'
-
+				<Icons.Arrow 
+					size={25}
+					className={cn(
+						'cursor-pointer transition-transform duration-200 text-neutral-300',
+					)}
 				/>
 			</button>
 
@@ -44,9 +46,11 @@ const SupportSection = ({ onInquiry }: Props) => {
 				className="py-2 w-full flex justify-between border-b-[0.5px] border-neutral-300 cursor-pointer"
 			>
 				<span className="text-regular-14">1:1 문의하기</span>
-				<img
-					src={SETTING_IMAGES.ARROW_RIGHT}
-					alt="arrow right"
+				<Icons.Arrow 
+					size={25}
+					className={cn(
+						'cursor-pointer transition-transform duration-200 text-neutral-300',
+					)}
 				/>
 			</button>
 		</div>

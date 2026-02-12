@@ -1,14 +1,18 @@
-import { IconSvg } from '@/src/assets/icons';
-import type { SvgIconKey } from '@/src/assets/icons/svg/SvgIcon';
+import React from 'react';
 import type { CategoryKey } from '@/src/types/products/product';
+import { Icons } from '@/src/assets/icons/components/Icons';
+import { cn } from '@/src/utils/cn';
 
-const categories: readonly { name: CategoryKey; icon: SvgIconKey; }[] = [
-	{ name: '전체', icon: 'All' },
-	{ name: '상의', icon: 'Top' },
-	{ name: '하의', icon: 'Bottom' },
-	{ name: '아우터', icon: 'Outer' },
-	{ name: '원피스', icon: 'Dress' },
-	{ name: '기타', icon: 'Etc' },
+const categories: readonly {
+  name: CategoryKey;
+	Icon: React.FC<{ size?: number; className?: string }>,
+}[] = [
+	{ name: '전체', Icon: Icons.All },
+	{ name: '상의', Icon: Icons.Top },
+	{ name: '하의', Icon: Icons.Bottom },
+	{ name: '아우터', Icon: Icons.Outer },
+	{ name: '원피스', Icon: Icons.OnePiece },
+	{ name: '기타', Icon: Icons.Etc },
 ];
 
 interface CategoryBarProps {
@@ -41,10 +45,10 @@ const CategoryBar = ({ selected, onSelect }: CategoryBarProps) => {
                                     }
                                 `}
 							>
-								<IconSvg
-									name={cat.icon}
-									active={isActive}
-									size={16}
+								<cat.Icon
+									className={cn('w-5',
+										isActive ? 'text-white' : 'text-neutral-500',
+									)}
 								/>
 								<span className={`text-medium-14 font-pretandard ${cat.name === '전체' ? 'ml-[2px]' : 'ml-[-1px]'}`}>
 									{cat.name}
