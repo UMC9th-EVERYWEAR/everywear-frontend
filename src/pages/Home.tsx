@@ -170,9 +170,9 @@ const Home = () => {
 						<h3 className="text-[var(--color-neutral-900)] dark:text-white text-medium-16 font-bold tracking-[-0.6px]">
 							최근 피팅 내역
 						</h3>
-						<button
+						<button 
 							className="text-medium-12 text-[var(--color-neutral-900)] dark:text-gray-300 cursor-pointer mb-1 hover:text-[var(--color-primary-600)] transition-colors"
-							onClick={() => navigate(PATH.RECENT_FITTING)}
+							onClick={() => navigate(PATH.RECENT_FITTING)} 
 						>
 							자세히보기 →
 						</button>
@@ -182,10 +182,10 @@ const Home = () => {
 					</p>
 				</div>
 
-				<div
+				<div 
 					ref={fittingScrollRef}
 					onScroll={handleFittingScroll}
-					className="flex gap-3 overflow-x-auto no-scrollbar pb-4 px-4"
+					className="flex gap-3 overflow-x-auto no-scrollbar pb-4 px-4 items-start"
 				>
 					{isFittingLoading ? (
 						[1, 2, 3].map((i) => (
@@ -200,27 +200,14 @@ const Home = () => {
 								key={fitting.fittingId}
 								onClick={() =>
 									navigate(
-										PATH.FITTING_DETAIL.replace(
-											':id',
-											String(fitting.fittingId),
-										),
+										PATH.FITTING_DETAIL.replace(':id', String(fitting.fittingId)),
 									)
 								}
-								className="
-										flex flex-col items-center
-										min-w-[140px]
-										shrink-0
-										cursor-pointer
-										active:scale-[0.98]
-										transition-transform
-									"
+								className="flex flex-col items-center min-w-[140px] max-w-[200px] w-full shrink-0 cursor-pointer active:scale-[0.98] transition-transform outline-none"
 							>
-								<div className="w-full h-[230px] rounded-[10px] overflow-hidden bg-neutral-100 dark:bg-neutral-700 shadow-sm border border-black/5 dark:border-white/5">
+								<div className="w-full h-[210px] rounded-[10px] overflow-hidden bg-[var(--color-neutral-100)] dark:bg-neutral-800 shadow-sm border border-black/5 dark:border-white/5">
 									<img
-										src={
-											fitting.fittingResultImage ||
-												'/images/default-product.png'
-										}
+										src={fitting.fittingResultImage || '/images/default-product.png'}
 										alt="피팅 결과"
 										className="w-full h-full object-cover transition-transform duration-200 ease-in-out hover:scale-105"
 									/>
@@ -230,9 +217,7 @@ const Home = () => {
 					) : (
 						<div className="w-full py-10 flex flex-col items-center justify-center border-2 border-dashed border-neutral-100 dark:border-gray-700 rounded-[10px]">
 							<span className="text-neutral-400 dark:text-gray-500 text-regular-12 text-center">
-								피팅 내역이 없습니다.
-								<br />
-								새로운 피팅을 시작해보세요!
+								피팅 내역이 없습니다.<br/>새로운 피팅을 시작해보세요!
 							</span>
 						</div>
 					)}
@@ -243,17 +228,14 @@ const Home = () => {
 						<img
 							src={RectangleIcon}
 							alt=""
-							className="absolute w-full h-full object-contain dark:opacity-50"
+							className="absolute w-full h-full object-contain dark:opacity-40"
 						/>
-						<img
-							src={EllipseIcon}
-							alt=""
-							className="absolute w-auto h-full object-contain transition-transform duration-75 ease-out dark:brightness-150"
+						<img 
+							src={EllipseIcon} 
+							alt="" 
+							className="absolute w-auto h-full object-contain transition-transform duration-75 ease-out dark:brightness-150" 
 							style={{
-								transform: `translateX(${
-										fittingScrollRatio * INDICATOR_MAX_DISTANCE -
-										INDICATOR_MAX_DISTANCE / 2
-									}px)`,
+								transform: `translateX(${(fittingScrollRatio * INDICATOR_MAX_DISTANCE) - (INDICATOR_MAX_DISTANCE / 2)}px)`,
 							}}
 						/>
 					</div>
