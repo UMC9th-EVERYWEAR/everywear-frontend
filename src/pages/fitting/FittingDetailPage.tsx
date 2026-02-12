@@ -9,9 +9,12 @@ import {
 	useFittings,
 	type FittingDetailDTO,
 } from '@/src/hooks/service/fitting/useFittings';
+import useGetReview from '@/src/hooks/service/review/useGetReview';
+import useGetReviewAi from '@/src/hooks/service/review/useGetReviewAi';
 import type { ListDTO } from '@/src/apis/generated';
-import type { FittingState, ReviewState } from '@/src/types/ai-fitting/status';
+import type { ReviewState } from '@/src/types/ai-fitting/status';
 import { AiFittingLayout, type TabType } from '@/src/components/ai-fitting/AiFittingLayout';
+import type { ReviewDTO } from '@/src/apis/generated/data-contracts';
 
 const FittingDetailPage = () => {
 	const { id } = useParams();
@@ -25,68 +28,44 @@ const FittingDetailPage = () => {
 	const { data: fittingsList } = useFittings();
 	const { data: products } = useProducts();
 
+	// ✅ [에러 해결 1] Hook은 반드시 최상단에서 호출해야 합니다.
+	const { mutate: mutateLike } = useLike({ createToast });
+
+	const productId = useMemo(() => fittingDetail?.product?.productId || 0, [fittingDetail]);
+	const { data: reviewsData, isLoading: isReviewLoading } = useGetReview(productId, !!productId);
+	const { data: aiReviewData, isLoading: isAiLoading } = useGetReviewAi(productId, !!productId);
+
 	const targetFromList = useMemo<FittingDetailDTO | null>(() => {
 		if (!fittingsList) return null;
-
 		return (
 			(fittingsList.find(
-				(item) => (item.fittingId || (item as unknown as { id: number }).id) === fittingId,
+				(item) => (item.fittingId || (item as unknown as { fittingId: number }).fittingId) === fittingId,
 			) as FittingDetailDTO) || null
 		);
 	}, [fittingsList, fittingId]);
 
 	const sourceData = useMemo<FittingDetailDTO | null>(() => {
-
-		if (fittingDetail?.afterImageUrl) {
-			return fittingDetail;
-		}
+		if (fittingDetail?.afterImageUrl) return fittingDetail;
 		return targetFromList || fittingDetail || null;
 	}, [fittingDetail, targetFromList]);
 
 	const normalizedProduct = useMemo<ListDTO | null>(() => {
-		if (!sourceData || !products || !sourceData.product) return null;
-
-		const productId = sourceData.product.productId;
-		const productData = products.find(
-			(p) => Number(p.product_id) === Number(productId),
-		);
+		if (!sourceData || !products) return null;
+		const pid = sourceData.product.productId;
+		const productData = products.find((p) => Number(p.product_id) === Number(pid));
 		const dtoProduct = sourceData.product;
 
 		return {
-      
-			product_id: productId,
+			product_id: pid,
 			product_name: productData?.product_name || dtoProduct.productName,
 			shoppingmale_name: productData?.shoppingmale_name || dtoProduct.siteName || '브랜드',
 			price: productData?.price || dtoProduct.price,
-			product_img_url: productData?.product_img_url || (dtoProduct as unknown as { productImage: string }).productImage || '',
+			product_img_url: productData?.product_img_url || dtoProduct.productImage || '',
 			product_url: productData?.product_url || dtoProduct.purchaseUrl,
 			star_point: productData?.star_point || dtoProduct.rating || 0,
 			is_liked: productData?.is_liked || dtoProduct.isLiked,
 		} as ListDTO;
 	}, [sourceData, products]);
-
-	const currentFittingState = useMemo((): FittingState => {
-		const url = sourceData?.afterImageUrl || '';
-
-		return {
-			status: 'success',
-			resultUrl: url,
-		};
-	}, [sourceData]);
-
-	const { mutate: mutateLike } = useLike({ createToast });
-
-	const handleHeart = (status: boolean) => {
-		if (normalizedProduct?.product_id) {
-			mutateLike({ productId: Number(normalizedProduct.product_id), isLiked: status });
-		}
-	};
-
-	const handleGoToShop = () => {
-		const url = normalizedProduct?.product_url;
-		if (url) window.open(url, '_blank', 'noopener,noreferrer');
-		setModal({ type: 'none' });
-	};
 
 	return (
 		<AiFittingLayout
@@ -95,33 +74,42 @@ const FittingDetailPage = () => {
 			isIdle={false}
 			product={normalizedProduct}
 			profileImg=""
-			fittingState={currentFittingState}
-			showRestartButton={false}
+			fittingState={{ status: 'success', resultUrl: sourceData?.afterImageUrl || '' }}
 			showBefore={false}
+			showRestartButton={false}
 			reviewState={{
-				status: 'success',
+				status: isReviewLoading ? 'loading' : 'success',
 				summary: {
-					status: 'success',
-					text: sourceData?.reviewSummary || '요약 정보가 없습니다.',
+					status: isAiLoading ? 'loading' : 'success',
+					text: aiReviewData?.summary || sourceData?.reviewSummary || '요약 정보가 없습니다.',
 				},
-				keywords: (sourceData?.product?.keywords || []).map((k, i) => ({
+				keywords: (aiReviewData?.keywords || []).map((k: string, i: number) => ({
 					id: i,
 					label: k,
 				})),
-				reviews: (sourceData?.reviews || []).map((review) => ({
+				// ✅ [에러 해결 2] any를 제거하고 구체적인 타입을 지정합니다.
+				reviews: (reviewsData?.result?.reviews || []).map((review: ReviewDTO) => ({
 					...review,
-					images: (review.images || []).map((img) => img.imgUrl),
+					review_id: review.review_id || (review as unknown as { id: number }).id,
+					images: (review.images || []).map((img: string | { imgUrl: string }) => 
+						typeof img === 'string' ? img : img.imgUrl,
+					),
 				})),
 			} as ReviewState}
 			toasts={toasts}
 			deleteToast={deleteToast}
 			isBuyModalOpen={modal.type === 'buy'}
 			closeBuyModal={() => setModal({ type: 'none' })}
-			onHeart={handleHeart}
+			// ✅ [에러 해결 3] 선언해둔 mutateLike를 사용합니다.
+			onHeart={(status) => {
+				if (normalizedProduct?.product_id) {
+					mutateLike({ productId: Number(normalizedProduct.product_id), isLiked: status });
+				}
+			}}
 			onGoToShop={() => setModal({ type: 'buy' })}
-			onConfirmBuy={handleGoToShop}
+			onConfirmBuy={() => normalizedProduct?.product_url && window.open(normalizedProduct.product_url, '_blank')}
 			onStartFitting={() => {}}
-			onStartReview={() => {}}
+			onStartReview={() => createToast({ message: '최신 리뷰 데이터를 불러왔습니다.' })}
 		/>
 	);
 };
