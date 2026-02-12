@@ -105,7 +105,6 @@ const FittingDetailPage = () => {
 			fittingState={{ status: 'success', resultUrl: resultImageUrl }}
 			showBefore={false}
 			showRestartButton={false}
-			// ✅ 추가된 Props: 상세 페이지이므로 재시도 버튼이 필요 없다면 false를 줍니다.
 			canRetry={false} 
 			reviewState={{
 				status: isReviewLoading ? 'loading' : 'success',
