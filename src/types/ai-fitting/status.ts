@@ -8,6 +8,16 @@ export type FittingState =
 
 export type FittingStateStatus = 'idle' | 'loading' | 'success' | 'error';
 
+export interface ReviewState {
+  status: 'idle' | 'loading' | 'success' | 'error';
+  reviews: ReviewDTO[];
+  summary: {
+    status: 'idle' | 'loading' | 'success' | 'error';
+    text: string;
+  };
+  keywords: { id: number; label: string }[];
+}
+
 export type ReviewListState = 
   | { status: 'idle' }
   | { status: 'loading' }
