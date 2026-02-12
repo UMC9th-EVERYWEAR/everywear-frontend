@@ -9,6 +9,7 @@ import type { FittingState, ReviewState } from '@/src/types/ai-fitting/status';
 import type { ListDTO } from '@/src/apis/generated';
 import type { Toast as ToastType } from '@/src/hooks/domain/ai-fitting/useToast';
 
+
 export type TabType = 'fitting' | 'review';
 
 interface AiFittingLayoutProps {
@@ -93,8 +94,18 @@ export const AiFittingLayout = ({
 
 					{activeTab === 'review' && (
 						<ReviewTab
-							state={reviewState}
-							handleStartReview={onStartReview}
+							state={{
+								status: reviewState.status,
+								reviews: reviewState.reviews,
+							}}
+							aiState={{
+								status: reviewState.summary.status,
+								result: {
+									summary: reviewState.summary.text,
+									keywords: reviewState.keywords.map(k => k.label),
+								},
+							}}
+							handleStartReviewAi={onStartReview}
 						/>
 					)}
 				</div>
@@ -110,6 +121,7 @@ export const AiFittingLayout = ({
 				/>
 
 				{isExitModalOpen !== undefined && closeExitModal && onExitAction && (
+          
 					<Modal
 						isOpen={isExitModalOpen}
 						onClose={closeExitModal}
