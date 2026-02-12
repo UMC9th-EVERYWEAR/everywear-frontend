@@ -36,7 +36,7 @@ const GridItem = ({ style, children, ...props }: HTMLAttributes<HTMLDivElement>)
 	<div
 		{...props}
 		style={{
-			width: '33.3333%',
+			width: 'w-1/2 sm:w-1/3 ',
 			padding: '8px',
 			boxSizing: 'border-box',
 			...style,
@@ -80,7 +80,7 @@ const ItemBrowseSection = ({ data, isCloset = false } : ItemBrowseSectionProps) 
 						data={data}
 						style={{ height: '80vh' }}
 						initialItemCount={8}
-						overscan={500}
+						overscan={200}
 						// useWindowScroll
 						components={{
 							List: GridList,
@@ -107,9 +107,9 @@ const ItemBrowseSection = ({ data, isCloset = false } : ItemBrowseSectionProps) 
 	return (
 		<>
 			<div className='grid grid-cols-2 gap-2.5 place-items-center sm:grid-cols-3'>
-				{data.map((product) => (
+				{data.map((product, index) => (
 					<ProductCard
-						key={product.product_id} // 리스트 렌더링엔 key가 필수
+						key={product.product_id ?? `${product.product_name}-${index}`} 
 						id={product.product_id ?? 0}
 						company={product.brand_name ?? ''}
 						name={product.product_name ?? ''}

@@ -1,15 +1,18 @@
 import AddPhotoSection from '@/src/components/onboarding/onboarding-photo/AddPhotoSection'
-import { PATH } from '@/src/constants/path';
-import { useNavigate } from 'react-router'
+import MallGuide from '@/src/components/products/MallGuide';
+import { useState } from 'react'
 
 const OnboardingPhotoPage = () => {
-	const navigate = useNavigate();
+	const [showGuide,setShowGuide] = useState(false)
 
 	return(
-		<>	
-			<AddPhotoSection setShowGuide={()=>navigate(PATH.ONBOARDING.ROOT)} />
-		</>
+		<>
+			<AddPhotoSection setShowGuide={()=>setShowGuide(true)} />	
+			{showGuide && (
+				<MallGuide onClose={() => setShowGuide(false)} />
+			)}
 
+		</>
 	)
 }
 export default OnboardingPhotoPage
