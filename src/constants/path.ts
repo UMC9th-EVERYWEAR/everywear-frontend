@@ -14,6 +14,7 @@ export const PATH = {
 	},
 	ONBOARDING:{
 		ROOT: '/onboarding',
+		GUIDE: '/onboarding/guide',
 		PHOTO: '/onboarding/photo',
 	},	
 	
@@ -47,6 +48,7 @@ export const hideHeaderPatterns = [
 	PATH.LANDING,
 	PATH.LOGIN.ROOT,
 	PATH.ONBOARDING.ROOT,
+	PATH.ONBOARDING.GUIDE,
 ];	
 
 /* hideNavRoutes: Nav 숨길 라우트 목록 */ 
@@ -55,6 +57,7 @@ export const hideNavPatterns = [
 	PATH.LOGIN.ROOT,
 	PATH.LOGIN.TERMS,
 	PATH.ONBOARDING.ROOT,
+	PATH.ONBOARDING.GUIDE,
 	PATH.ONBOARDING.PHOTO,
 	PATH.SETTING.ROOT,
 	PATH.SETTING.CHANGE_PHOTO,

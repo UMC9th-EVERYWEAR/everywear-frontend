@@ -3,15 +3,15 @@ import { useNavigate } from 'react-router';
 import { useQueryClient } from '@tanstack/react-query';
 import { Button } from '@/src/components/common/Button';
 import ProductCard from '@/src/components/common/ProductCard';
-import RectangleIcon from '@/public/svgs/LogoImages/Rectangle.svg'; 
-import EllipseIcon from '@/public/svgs/LogoImages/Ellipse.svg';     
+   
 import { useRecentFittingsQuery, useHomeProductsQuery } from '@/src/hooks/queries/useHomeQueries';
-import { QUERY_KEYS } from '../constants/query-key';
-import { PATH } from '../constants/path';
-import type { FittingSummary, ListDTO } from '../apis/generated';
-import ProductCardSkeleton from '../components/common/ProductCardSkeleton';
-import PartnerMallSection from '../components/products/PartnerMallSection';
-import MallGuide from '../components/products/MallGuide';
+import { QUERY_KEYS } from '../../constants/query-key';
+import { PATH } from '../../constants/path';
+import type { FittingSummary, ListDTO } from '../../apis/generated';
+import ProductCardSkeleton from '../../components/common/ProductCardSkeleton';
+import PartnerMallSection from '../../components/products/PartnerMallSection';
+import MallGuide from '../../components/products/MallGuide';
+import { LOGO_IMAGES } from '@/src/constants/images';
 
 const INDICATOR_MAX_DISTANCE = 37;
 
@@ -74,9 +74,12 @@ const Home = () => {
 
 			{/* 3. 상품 추가 버튼 */}
 			<section className="flex flex-col px-4 mt-4 gap-4">
-				<span className="self-center text-center text-[var(--color-primary-300)] dark:text-primary-400 text-regular-10 tracking-[-0.3px] cursor-pointer">
+				<button 
+					onClick={()=>setShowGuide(true)}
+					className="self-center text-center text-[var(--color-primary-300)] dark:text-primary-400 text-regular-10 tracking-[-0.3px] cursor-pointer"
+				>
 					유명 브랜드 가상 피팅 가이드
-				</span>
+				</button>
 				<div className="w-full">
 					<Button 
 						variant="filled" 
@@ -147,12 +150,12 @@ const Home = () => {
 				<div className="flex justify-center items-center mt-2 h-[12px]">
 					<div className="relative flex items-center justify-center w-[55px] h-[6px]">
 						<img
-							src={RectangleIcon}
+							src={LOGO_IMAGES.RECTANGLE}
 							alt=""
 							className="absolute w-full h-full object-contain dark:opacity-50"
 						/>
 						<img 
-							src={EllipseIcon} 
+							src={LOGO_IMAGES.ELLIPSE} 
 							alt="" 
 							className="absolute w-auto h-full object-contain transition-transform duration-75 ease-out dark:brightness-150" 
 							style={{
@@ -226,12 +229,12 @@ const Home = () => {
 				<div className="flex justify-center items-center mt-2 h-[12px]">
 					<div className="relative flex items-center justify-center w-[55px] h-[6px]">
 						<img
-							src={RectangleIcon}
+							src={LOGO_IMAGES.RECTANGLE}
 							alt=""
 							className="absolute w-full h-full object-contain dark:opacity-40"
 						/>
 						<img 
-							src={EllipseIcon} 
+							src={LOGO_IMAGES.ELLIPSE} 
 							alt="" 
 							className="absolute w-auto h-full object-contain transition-transform duration-75 ease-out dark:brightness-150" 
 							style={{

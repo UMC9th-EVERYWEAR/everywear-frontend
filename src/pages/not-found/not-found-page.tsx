@@ -1,6 +1,6 @@
+import { PATH } from '@/src/constants/path';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
-import { PATH } from '../constants/path';
 
 const NotFoundPage = () => {
 	const [remainingSeconds, setRemainingSeconds] = useState(3);
