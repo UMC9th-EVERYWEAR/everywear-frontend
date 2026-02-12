@@ -17,12 +17,12 @@ import { AiFittingLayout, type TabType } from '@/src/components/ai-fitting/AiFit
 import type { ReviewDTO } from '@/src/apis/generated/data-contracts';
 
 type ExtendedFittingDTO = FittingDetailDTO & {
-	afterImageUrl?: string;
-	fittingResultImageUrl?: string;
-	fittingResultImage?: string;
-	fitting_result_image?: string;
-	resultUrl?: string;
-	reviewSummary?: string;
+  afterImageUrl?: string;
+  fittingResultImageUrl?: string;
+  fittingResultImage?: string;
+  fitting_result_image?: string;
+  resultUrl?: string;
+  reviewSummary?: string;
 }
 
 const FittingDetailPage = () => {
@@ -38,7 +38,6 @@ const FittingDetailPage = () => {
 	const { data: products } = useProducts();
 	const { mutate: mutateLike } = useLike({ createToast });
 
-	// ✅ 1. 데이터 소스 통합 (any 제거)
 	const sourceData = useMemo<ExtendedFittingDTO | null>(() => {
 		if (fittingDetail) {
 			const detail = fittingDetail as ExtendedFittingDTO;
@@ -60,18 +59,17 @@ const FittingDetailPage = () => {
 		return (fittingDetail as ExtendedFittingDTO) || null;
 	}, [fittingDetail, fittingsList, fittingId]);
 
-	// ✅ 2. 다운로드 URL 추출 (any 제거)
 	const resultImageUrl = useMemo(() => {
 		if (!sourceData) return '';
-		
+    
 		return (
 			sourceData.afterImageUrl || 
-			sourceData.fittingResultImageUrl || 
-			sourceData.fittingResultImage || 
-			sourceData.fitting_result_image || 
-			sourceData.resultUrl || 
-			sourceData.product?.productImage || 
-			''
+      sourceData.fittingResultImageUrl || 
+      sourceData.fittingResultImage || 
+      sourceData.fitting_result_image || 
+      sourceData.resultUrl || 
+      sourceData.product?.productImage || 
+      ''
 		);
 	}, [sourceData]);
 
@@ -107,6 +105,8 @@ const FittingDetailPage = () => {
 			fittingState={{ status: 'success', resultUrl: resultImageUrl }}
 			showBefore={false}
 			showRestartButton={false}
+			// ✅ 추가된 Props: 상세 페이지이므로 재시도 버튼이 필요 없다면 false를 줍니다.
+			canRetry={false} 
 			reviewState={{
 				status: isReviewLoading ? 'loading' : 'success',
 				summary: {

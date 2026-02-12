@@ -7,9 +7,10 @@ interface ReviewSummaryProps {
     state : ReviewListState,
     aiState : AiSummaryState,
     handleStartReviewAi : () => void,
+    canRetry: boolean; 
 }
 
-const ReviewSummary = ({ state, aiState, handleStartReviewAi } : ReviewSummaryProps) => {
+const ReviewSummary = ({ state, aiState, handleStartReviewAi, canRetry } : ReviewSummaryProps) => {
 	return (
 		<div
 			className={cn(
@@ -40,7 +41,7 @@ const ReviewSummary = ({ state, aiState, handleStartReviewAi } : ReviewSummaryPr
 				</div>
 			)}
 
-			{(state.status === 'error' || (state.status === 'success' && aiState.status === 'error')) && (
+			{(state.status === 'error' || (state.status === 'success' && aiState.status === 'error')) && canRetry && (
 				<div className="mb-2.5 gap-4 flex flex-col w-full">
 					<div className="flex flex-col">
 						<span className="text-regular-14 leading-5.2 tracking-[-0.42px] items-center justify-center flex text-neutral-900 dark:text-neutral-300">
@@ -55,7 +56,7 @@ const ReviewSummary = ({ state, aiState, handleStartReviewAi } : ReviewSummaryPr
 
 					<div className="flex w-full items-center justify-center">
 						<button
-							className="p-2.5 bg-review-rotate rounded-full cursor-pointer shadow-2"
+							className="p-2.5 bg-review-rotate rounded-full cursor-pointer shadow-2 transition-transform active:scale-90"
 							onClick={handleStartReviewAi}
 						>
 							<img
@@ -64,6 +65,11 @@ const ReviewSummary = ({ state, aiState, handleStartReviewAi } : ReviewSummaryPr
 							/>
 						</button>
 					</div>
+				</div>
+			)}
+			{aiState.status === 'error' && !canRetry && (
+				<div className="py-2 text-center text-regular-12 text-neutral-500">
+					재시도 횟수를 초과했습니다. 나중에 다시 시도해 주세요.
 				</div>
 			)}
 		</div>
