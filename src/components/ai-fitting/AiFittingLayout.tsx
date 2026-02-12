@@ -95,13 +95,13 @@ export const AiFittingLayout = ({
 						<ReviewTab
 							state={{
 								status: reviewState.status,
-								reviews: reviewState.reviews, // ✅ 데이터 이름 일치 작업
+								reviews: reviewState.reviews || [],
 							}}
 							aiState={{
 								status: reviewState.summary.status,
 								result: {
 									summary: reviewState.summary.text,
-									keywords: reviewState.keywords.map(k => k.label),
+									keywords: (reviewState.keywords || []).map(k => k.label),
 								},
 							}}
 							handleStartReviewAi={onStartReview}

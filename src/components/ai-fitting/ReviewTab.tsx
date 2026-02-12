@@ -20,17 +20,13 @@ const ReviewTab = ({ state, aiState, handleStartReviewAi }: ReviewTabProps) => {
 
 			{state.status === 'success' && aiState.status === 'success' && aiState.result && (
 				<div className='flex flex-col my-1.5 w-full'>
-					<span className='text-primary-600 text-bold-16 flex justify-start mb-1'>
-						주요 리뷰 키워드
-					</span>
+					<span className='text-primary-600 text-bold-16 flex justify-start mb-1'>주요 리뷰 키워드</span>
 					<ReviewKeywordTag keywordList={aiState.result.keywords} />
 				</div>
 			)}
 
 			<div className='flex flex-col w-full'>
-				<span className='text-primary-600 text-bold-16 flex justify-start border-b border-solid border-neutral-100 w-full'>
-					최신 리뷰
-				</span>
+				<span className='text-primary-600 text-bold-16 flex justify-start border-b border-solid border-neutral-100 w-full'>최신 리뷰</span>
 				<ReviewCardList state={state} />
 			</div>
 		</div>
