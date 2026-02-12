@@ -12,29 +12,30 @@ import type { Toast as ToastType } from '@/src/hooks/domain/ai-fitting/useToast'
 export type TabType = 'fitting' | 'review';
 
 interface AiFittingLayoutProps {
-	activeTab: TabType;
-	setActiveTab: (tab: TabType) => void;
-	isIdle: boolean;
-	product: ListDTO | null;
-	profileImg?: string;
-	fittingState: FittingState;
-	reviewState: ReviewState;
-	toasts: ToastType[];
-	deleteToast: (id: number) => void;
-	createToast?: (toast: { message: string }) => void;
-	isBuyModalOpen: boolean;
-	closeBuyModal: () => void;
-	isExitModalOpen?: boolean;
-	closeExitModal?: () => void;
-	onHeart: (status: boolean) => void;
-	onGoToShop: () => void;
-	onConfirmBuy: () => void;
-	onStartFitting: () => void;
-	onRestartFitting?: () => void;
-	onStartReview: () => void;
-	onExitAction?: () => void;
-	showRestartButton?: boolean;
-	showBefore?: boolean;
+  activeTab: TabType;
+  setActiveTab: (tab: TabType) => void;
+  isIdle: boolean;
+  product: ListDTO | null;
+  profileImg?: string;
+  fittingState: FittingState;
+  reviewState: ReviewState;
+  toasts: ToastType[];
+  deleteToast: (id: number) => void;
+  createToast?: (toast: { message: string }) => void;
+  isBuyModalOpen: boolean;
+  closeBuyModal: () => void;
+  isExitModalOpen?: boolean;
+  closeExitModal?: () => void;
+  onHeart: (status: boolean) => void;
+  onGoToShop: () => void;
+  onConfirmBuy: () => void;
+  onStartFitting: () => void;
+  onRestartFitting?: () => void;
+  onStartReview: () => void;
+  onExitAction?: () => void;
+  showRestartButton?: boolean;
+  showBefore?: boolean;
+  canRetry: boolean; 
 }
 
 export const AiFittingLayout = ({
@@ -44,6 +45,7 @@ export const AiFittingLayout = ({
 	onHeart, onGoToShop, onConfirmBuy, onStartFitting, onRestartFitting, onStartReview, onExitAction,
 	showRestartButton = true,
 	showBefore = true,
+	canRetry, 
 }: AiFittingLayoutProps) => {
 	return (
 		<div className="flex items-center justify-center mb-8">
@@ -105,6 +107,8 @@ export const AiFittingLayout = ({
 								},
 							}}
 							handleStartReviewAi={onStartReview}
+							// ✅ 3. 자식인 ReviewTab에게 canRetry를 넘겨줍니다. (에러 해결 지점)
+							canRetry={canRetry} 
 						/>
 					)}
 				</div>
