@@ -14,6 +14,7 @@ const RootLayout = () => {
 	const mainRef = useRef<HTMLElement | null>(null);
 	const theme = useThemeStore((state) => state.theme);
 
+	// 테마 적용
 	useEffect(() => {
 		const root = window.document.documentElement; 
 		if (theme === 'dark') {
@@ -55,7 +56,8 @@ const RootLayout = () => {
 	return (
 		<div
 			className={cn(
-				'h-screen w-full flex justify-center overflow-hidden transition-colors duration-300',
+				// ✅ h-screen 대신 h-[100dvh]로 모바일 주소창 대응
+				'h-[100dvh] w-full flex justify-center overflow-hidden transition-colors duration-300',
 				'bg-gray-50 dark:bg-black', 
 			)}
 		>
@@ -74,13 +76,19 @@ const RootLayout = () => {
 				)}
 
 				<ScrollToTop targetRef={mainRef} />
+                
 				<main
 					ref={mainRef}
-					className='flex-1 overflow-y-auto no-scrollbar bg-transparent'
+					className={cn(
+						'flex-1 overflow-y-auto no-scrollbar bg-transparent min-h-0',
+						// ✅ Navbar가 fixed이므로 콘텐츠가 가려지지 않게 하단 여백 추가
+						!shouldHideNav && 'pb-[60px]',
+					)}
 				>
 					<Outlet />
 				</main>
 
+				{/* ✅ Navbar는 레이아웃 최하단에 배치 (z-index 50으로 항상 최상단 노출) */}
 				{!shouldHideNav  && <Navbar />} 
 
 				<Modal 
