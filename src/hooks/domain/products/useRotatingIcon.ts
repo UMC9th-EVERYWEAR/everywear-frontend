@@ -17,5 +17,5 @@ export function useRotatingIcon<T>(
 		return () => clearInterval(timer);
 	}, [items.length, intervalMs, enabled]);
 
-	return items[index];
+	return index;
 }

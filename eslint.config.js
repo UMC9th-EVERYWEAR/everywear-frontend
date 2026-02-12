@@ -14,7 +14,7 @@ import eslintConfigPrettier from 'eslint-config-prettier';
 
 export default defineConfig([
   globalIgnores(['dist',
-        'src/apis/generated/**',
+        'src/apis/generated/**','node_modules/**'
   ]),
   {
     files: ['**/*.{ts,tsx}'],

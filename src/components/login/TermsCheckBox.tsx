@@ -1,4 +1,4 @@
-import { LOGIN_IMAGES } from '@/src/constants/images';
+import { CheckIcon } from 'lucide-react';
 
 
 
@@ -31,9 +31,10 @@ const TermsCheckBox = ({
 				onClick={onClick}
 				className="cursor-pointer"
 			>
-				<img
-					src={checked ? LOGIN_IMAGES.CHECK_BOX : LOGIN_IMAGES.NO_CHECK_BOX}
-					alt={checked ? 'checkBox' : 'nonCheckBox'}
+				<CheckIcon
+					width={18}
+					height={18}
+					className={checked ? 'bg-primary-300 text-white rounded-xs' : 'bg-neutral-200 text-white rounded-xs'}
 				/>
 			</button>
 
