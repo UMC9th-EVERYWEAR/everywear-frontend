@@ -4,7 +4,7 @@ import InfoBox from '@/src/components/setting/setting-photo/InfoBox';
 import { Modal } from '@/src/components/common/Modal';
 import { cn } from '@/src/utils/cn';
 import type { UserImgQuery } from '@/src/apis/generated';
-import useToast from '@/src/hooks/domain/ai-fitting/UseToast';
+import useToast from '@/src/hooks/domain/ai-fitting/useToast';
 import Toast from '../../common/Toast';
 import ToastContainer from '../../common/ToastContainer';
 import React from 'react';

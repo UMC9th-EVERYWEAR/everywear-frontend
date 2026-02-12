@@ -9,7 +9,7 @@ const PartnerMallSection = ({ isHome } : PartnerMallSectionProps) => {
 	return(
 		<section
 			className={cn('flex gap-2 px-4 py-4',
-				isHome ? 'bg-white overflow-x-auto no-scrollbar' : '',
+				isHome ? 'bg-white dark:bg-gray-900 overflow-x-auto no-scrollbar' : '',
 
 			)}
 		>
@@ -17,7 +17,7 @@ const PartnerMallSection = ({ isHome } : PartnerMallSectionProps) => {
 				{ url: MALL_LINKS.MUSINSA.url, src: LOGO_IMAGES.MUSINSA, alt: '무신사', bg: 'bg-black' },
 				{ url: MALL_LINKS.ZIGZAG.url, src: LOGO_IMAGES.ZIGZAG, alt: '지그재그', bg: 'bg-[#E976DE]' },
 				{ url: MALL_LINKS.CM.url, src: LOGO_IMAGES.LOGO_29CM, alt: '29CM', bg: 'bg-black' },
-				{ url: MALL_LINKS.WCONCEPT.url, src: LOGO_IMAGES.W_LOGO, alt: 'W컨셉', bg: 'bg-white border border-[var(--color-neutral-100)]' },
+				{ url: MALL_LINKS.WCONCEPT.url, src: LOGO_IMAGES.W_LOGO, alt: 'W컨셉', bg: 'bg-white border border-[var(--color-neutral-100)] dark:bg-gray-100' },
 			].map((mall, idx) => (
 				<a
 					key={idx}

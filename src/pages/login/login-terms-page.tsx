@@ -1,18 +1,11 @@
 import { Icons } from '@/src/assets/icons/components/Icons';
 import Button from '@/src/components/common/Button';
 import TermsCheckBox, { type TermsCheckedState, type TermType } from '@/src/components/login/TermsCheckBox'
-import  { TERMS_LINK } from '@/src/constants/link';
 import { PATH } from '@/src/constants/path';
+import { TERMS_CONFIG } from '@/src/constants/terms';
 import { useToggleAgree } from '@/src/hooks/service/user/useToggle';
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
-
-export const TERMS_CONFIG: Record<TermType, { label: string; url: string }> = {
-	SERVICE: { label: '서비스 이용약관 동의', url: TERMS_LINK.SERVICE_TERMS.url },
-	PRIVACY: { label: '개인정보 수집 및 이용 동의', url: TERMS_LINK.PRIVACY.url },
-	PHOTO: { label: '사진 정보 피팅 이용 동의', url: TERMS_LINK.PHOTO.url },
-	PRODUCT: { label: '상품 정보 수집 및 분석 동의', url: TERMS_LINK.PRODUCT.url },
-};
 
 const LoginTermsPage = () => {
 	const navigate = useNavigate();

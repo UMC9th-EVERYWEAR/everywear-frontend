@@ -22,14 +22,13 @@ const useDraggableScroll = ( scrollSpeed : number ) => {
 		if (!isDragging || !scrollRef.current) return;
 		e.preventDefault();
 		const x = e.pageX - scrollRef.current.offsetLeft;
-		const walk = (x - startX) * scrollSpeed; // 스크롤 속도 (필요시 인자로 받아서 조절 가능)
+		const walk = (x - startX) * scrollSpeed; 
 		scrollRef.current.scrollLeft = scrollLeft - walk;
 	};
 
 	return {
 		scrollRef,
 		isDragging,
-		// 객체로 묶어서 보내면 {...dragEvents}로 한 번에 적용 가능
 		dragEvents: {
 			onMouseDown: onDragStart,
 			onMouseLeave: onDragEnd,

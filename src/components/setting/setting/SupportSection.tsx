@@ -1,6 +1,6 @@
 import { Icons } from '@/src/assets/icons/components/Icons';
-import { TERMS_CONFIG } from '@/src/pages/login/login-terms-page';
 import { cn } from '@/src/utils/cn';
+import { TERMS_CONFIG } from '@/src/constants/terms';
 
 interface Props {
   onInquiry: () => void;
