@@ -7,9 +7,10 @@ interface ReviewSummaryProps {
     state : ReviewListState,
     aiState : AiSummaryState,
     handleStartReviewAi : () => void,
+	canRetry? : boolean;
 }
 
-const ReviewSummary = ({ state, aiState, handleStartReviewAi } : ReviewSummaryProps) => {
+const ReviewSummary = ({ state, aiState, handleStartReviewAi, canRetry = false } : ReviewSummaryProps) => {
 	return (
 		<div className='bg-review-summary border border-none rounded-xl px-2.5 py-1.5 flex flex-col gap-1 w-full'>
 			<span className='text-bold-16 text-primary-600'>AI 리뷰 요약</span>
@@ -35,23 +36,29 @@ const ReviewSummary = ({ state, aiState, handleStartReviewAi } : ReviewSummaryPr
 				<div className={cn('mb-2.5 gap-4 flex flex-col w-full')}>
 					<div className={cn('flex flex-col')}>
 						<span className={cn('text-regular-14 leading-5.2 tracking-[-0.42px] items-center justify-center flex')}>
-							{state.status === 'error' ? '리뷰를 불러오는 데 실패했습니다.' : '리뷰를 요약하는 데 실패했습니다.'}
+							{!canRetry 
+								? '리뷰 수가 부족하여 AI 요약이 불가능합니다.'
+							 	: (state.status === 'error' ? '리뷰를 불러오는 데 실패했습니다.' : '리뷰를 요약하는 데 실패했습니다.')}
 						</span>
-						<span className={cn('text-regular-14 leading-5.2 tracking-[-0.42px] items-center justify-center flex')}>
-							재시도하려면 아래 버튼을 클릭하세요. 
-						</span>
+						{canRetry && 
+							<span className={cn('text-regular-14 leading-5.2 tracking-[-0.42px] items-center justify-center flex')}>
+								재시도하려면 아래 버튼을 클릭하세요. 
+							</span>
+						}
 					</div>
-					<div className={cn('flex w-full items-center justify-center')}>
-						<button
-							className='p-2.5 bg-review-rotate rounded-full cursor-pointer shadow-2'
-							onClick={handleStartReviewAi}
-						>
-							<img
-								src={AI_FITTING_IMAGES.ROTATE_ICON}
-								alt='새로고침 버튼'
-							/>
-						</button>
-					</div>
+					{canRetry && 
+						<div className={cn('flex w-full items-center justify-center')}>
+							<button
+								className='p-2.5 bg-review-rotate rounded-full cursor-pointer shadow-2'
+								onClick={handleStartReviewAi}
+							>
+								<img
+									src={AI_FITTING_IMAGES.ROTATE_ICON}
+									alt='새로고침 버튼'
+								/>
+							</button>
+						</div>
+					}
 				</div>
 			)}
 		</div>
