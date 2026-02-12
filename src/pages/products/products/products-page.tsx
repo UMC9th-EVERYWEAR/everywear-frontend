@@ -44,7 +44,7 @@ const ProductsPage = () => {
 					가상 피팅 가이드
 				</button>    
 			</div>
-			<div className='sm:w-full'>
+			<div className='w-full'>
 				<CategoryBar
 					selected={selected}
 					onSelect={handleSelected}
