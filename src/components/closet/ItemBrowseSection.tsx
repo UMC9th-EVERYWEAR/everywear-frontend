@@ -1,13 +1,16 @@
 import ProductCard from '../common/ProductCard';
 import { IconImage } from '@/src/assets/icons/image/IconImage';
-import type { ListDTO } from '@/src/apis/generated';
+import type { ClosetListDTO, ListDTO } from '@/src/apis/generated';
 import { Virtuoso } from 'react-virtuoso'
 import { forwardRef } from 'react';
 import React from 'react';
 import type { HTMLAttributes } from 'react';
 
+type ItemData = ListDTO | ClosetListDTO;
+
 interface ItemBrowseSectionProps {
-    data : ListDTO[],
+    productdata? : ListDTO[],
+	closetData? : ClosetListDTO[],
 	isCloset?: boolean
 }
 const VIRTUALIZE_THRESHOLD = 50;
@@ -36,7 +39,7 @@ const GridItem = ({ style, children, ...props }: HTMLAttributes<HTMLDivElement>)
 	<div
 		{...props}
 		style={{
-			width: '33.3333%',
+			width: 'w-1/2 sm:w-1/3 ',
 			padding: '8px',
 			boxSizing: 'border-box',
 			...style,
@@ -46,10 +49,11 @@ const GridItem = ({ style, children, ...props }: HTMLAttributes<HTMLDivElement>)
 	</div>
 );
 
-const ItemBrowseSection = ({ data, isCloset = false } : ItemBrowseSectionProps) => {
+const ItemBrowseSection = ({ productdata, isCloset = false, closetData } : ItemBrowseSectionProps) => {
+	const data: ItemData[] = (productdata && productdata.length > 0) 
+		? productdata 
+		: (closetData || []);
 	const shouldVirtualize = data.length >= VIRTUALIZE_THRESHOLD;
-
-
 
 	if(data.length === 0 ) {
 		return(
@@ -70,6 +74,26 @@ const ItemBrowseSection = ({ data, isCloset = false } : ItemBrowseSectionProps) 
 		)
 	}
 
+	const renderProductCard = (product: ItemData, index: number) => {
+		// recent_fitting_id는 ClosetListDTO에만 있을 수 있으므로 'in' 연산자나 옵셔널 체이닝 사용
+		const recentFittingId = 'recent_fitting_id' in product ? product.recent_fitting_id : undefined;
+
+		return (
+			<ProductCard
+				key={product.product_id ?? `${product.product_name}-${index}`}
+				id={product.product_id ?? 0}
+				company={product.brand_name ?? ''}
+				name={product.product_name ?? ''}
+				price={product.price ?? ''}
+				rating={product.star_point ?? 0}
+				imageUrl={product.product_img_url ?? ''}
+				isCloset={isCloset}
+				productUrl={product.product_url ?? ''}
+				recentFittingId={recentFittingId} // 여기서 타입 에러가 해결됩니다.
+			/>
+		);
+	};	
+
 	// 일단 50개 이상일 때만 Virtuoso 적용
 	// 서버에서 개수 구분 없이 한 번에 내려주기 때문
 	if(shouldVirtualize){
@@ -80,24 +104,13 @@ const ItemBrowseSection = ({ data, isCloset = false } : ItemBrowseSectionProps) 
 						data={data}
 						style={{ height: '80vh' }}
 						initialItemCount={8}
-						overscan={500}
+						overscan={200}
 						// useWindowScroll
 						components={{
 							List: GridList,
 							Item: GridItem,
 						}}
-						itemContent={(_, product) => (
-							<ProductCard
-								id={product.product_id ?? 0}
-								company={product.brand_name ?? ''}
-								name={product.product_name ?? ''}
-								price={product.price ?? ''}
-								rating={product.star_point ?? 0}
-								imageUrl={product.product_img_url ?? ''}
-								isCloset={isCloset}
-								productUrl={product.product_url ?? ''}
-							/>
-						)}
+						itemContent={(index, product) => renderProductCard(product, index)}
 					/>
 				}
 			</div>
@@ -107,19 +120,7 @@ const ItemBrowseSection = ({ data, isCloset = false } : ItemBrowseSectionProps) 
 	return (
 		<>
 			<div className='grid grid-cols-2 gap-2.5 place-items-center sm:grid-cols-3'>
-				{data.map((product) => (
-					<ProductCard
-						key={product.product_id} // 리스트 렌더링엔 key가 필수
-						id={product.product_id ?? 0}
-						company={product.brand_name ?? ''}
-						name={product.product_name ?? ''}
-						price={product.price ?? ''}
-						rating={product.star_point ?? 0}
-						imageUrl={product.product_img_url ?? ''}
-						isCloset={isCloset}
-						productUrl={product.product_url ?? ''}
-					/>
-				))}
+				{data.map((product, index) => renderProductCard(product, index))}
 			</div>
 
 		

@@ -1,38 +1,65 @@
 import { toggleProductLike } from '@/src/apis/domain';
 import { useMutation } from '@tanstack/react-query';
-import type { ToastInput } from '../../domain/ai-fitting/UseToast';
+import type { ToastInput } from '../../domain/ai-fitting/useToast';
 import { queryClient } from '@/src/lib/react-query';
 import { QUERY_KEYS } from '@/src/constants/query-key';
+import type { ListDTO } from '@/src/apis/generated';
 
 interface useLikeProps {
     createToast: (toast: ToastInput) => void;
 }
 
-interface LikeVariables {
-    productId: number;
-    isLiked: boolean | undefined; // 현재 좋아요 상태
-}
-
-function useLike({ createToast } : useLikeProps) {
-
+function useLike({ createToast }: useLikeProps) {
 	return useMutation({
-		mutationFn: ({ productId }: LikeVariables) => toggleProductLike(productId),
-		onSuccess: (_data, variables) => {
+		mutationFn: ({ productId }: { productId: number; isLiked: boolean }) => 
+			toggleProductLike(productId),
 
+		onMutate: async ({ productId, isLiked }) => {
+			await queryClient.cancelQueries({ 
+				queryKey: QUERY_KEYS.PRODUCT.DETAIL(productId), 
+			});
+
+			const previousData = queryClient.getQueryData(QUERY_KEYS.PRODUCT.DETAIL(productId));
+
+			queryClient.setQueryData<ListDTO>(
+				QUERY_KEYS.PRODUCT.DETAIL(productId), 
+				(old) => {
+					if (!old) return old;
+					return {
+						...old,
+						is_liked: !isLiked, 
+					};
+				},
+			);
+
+			if (isLiked) {
+				createToast({ message: '내 옷장에서 추가되었습니다.' });
+			} else {
+				createToast({ message: '내 옷장에서 삭제되었습니다.' });
+			}
+
+			return { previousData };
+		},
+
+		onError: (_err, variables, context) => {
+			if (context?.previousData) {
+				queryClient.setQueryData<ListDTO>(
+					QUERY_KEYS.PRODUCT.DETAIL(variables.productId),
+                    context.previousData as ListDTO,
+				);
+			}
+			createToast({ message: '잠시 후 다시 시도해주세요.' });
+		},
+
+		onSettled: (_data, _error, variables) => {
+			queryClient.invalidateQueries({ 
+				queryKey: QUERY_KEYS.PRODUCT.DETAIL(variables.productId), 
+			});
 			queryClient.invalidateQueries({ 
 				queryKey: QUERY_KEYS.CLOSET.ALL, 
 			});
-
-			// 내가 보낸 이전 상태값으로 판별	
-			// 이전에 좋아요였다면(true) -> 클릭했으니 삭제
-			// 이전에 좋아요가 아니었다면(false) -> 클릭했으니 추가
-			if (variables.isLiked) {
-				createToast({ message: '내 옷장에서 삭제되었습니다.' });
-			} else {
-				createToast({ message: '내 옷장에 추가되었습니다.' });
-			}
 		},
-	})
+	});
 }
 
 export default useLike;

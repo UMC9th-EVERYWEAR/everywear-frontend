@@ -1,26 +1,16 @@
-import GuideSection from '@/src/components/onboarding/onboarding/GuideSection'
 import OnboardingSection from '@/src/components/onboarding/onboarding/OnboardingSection'
+import { PATH } from '@/src/constants/path'
 import { cn } from '@/src/utils/cn'
-import { useState } from 'react'
+import { useNavigate } from 'react-router'
 
 const OnBoardingPage = () => {
-	const [isGuide, setIsGuide] = useState(false)
-	const clickGuide = () => {
-		setIsGuide((prev)=> !prev)
-	}
-
-
+	const navigate = useNavigate()
 	return <div
-		className={cn('min-h-screen px-5 flex justify-center',
-			isGuide ? 'bg-white py-10' : 'bg-onboarding py-20',
+		className={cn('min-h-screen px-5 flex justify-center bg-onboarding py-20',
 		)}
 	       >
-		{
-			!isGuide && <OnboardingSection setIsGuide={clickGuide} />
-		}
-		{
-			isGuide && <GuideSection />
-		}
+		<OnboardingSection setIsGuide={()=> navigate(PATH.ONBOARDING.GUIDE)} />
+	
 	</div>
 }
 export default OnBoardingPage

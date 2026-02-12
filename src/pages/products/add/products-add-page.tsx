@@ -11,11 +11,10 @@ const ProductsAddPage = () => {
 	const [openModal, setOpenModal] = useState<'SUCCESS' | 'FAIL' | null>(null);
 
 
-	// API 호출 로직을 전용 mutation 훅으로 분리
-	const { mutate: importProduct, isPending } = useImportProductMutation();
+ 	const { mutate: importProduct, isPending: importPending } = useImportProductMutation();
 
 	// usePreventRefresh: 상품 가져오는 도중의 새로고침 방지
-	const shouldBlockRefresh = isPending;
+	const shouldBlockRefresh = importPending;
 
 	usePreventRefresh(shouldBlockRefresh);
 
@@ -23,9 +22,8 @@ const ProductsAddPage = () => {
 	const isValidLink = checkUrlFormat(link);
 
 	const handleSubmit = () => {
-		if (!isValidLink || isPending) return;
+		if (!isValidLink || importPending) return;
 
-		// 컴포넌트 내부에서 직접 await 하지 않고 mutation 훅 실행
 		importProduct(
 			{ product_url: link },
 			{
@@ -56,12 +54,11 @@ const ProductsAddPage = () => {
 
 			<LinkSection
 				link={link}
-				loading={isPending} 
+				loading={importPending} 
 				isValidLink={isValidLink}
 				onChangeLink={setLink}
 				onSubmit={handleSubmit}
 			/>
-
 
 			{/** modals */}
 			{

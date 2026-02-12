@@ -1,6 +1,5 @@
-import loadingIcon from '@/public/svgs/onboarding/loadingOne.svg';
-import checkMarked from '@/public/svgs/login/check-box.svg';
-import noCheckMarked from '@/public/svgs/onboarding/close-box.svg';
+import { Icons } from '@/src/assets/icons/components/Icons';
+import { cn } from '@/src/utils/cn';
 
 export type StepStatus = 'WAIT' | 'LOADING' | 'SUCCESS' | 'FAIL';
 
@@ -46,18 +45,18 @@ const getStepIcon = (
 	step: typeof steps[number],
 	status: StepStatus,
 ) => {
-	if (status === 'LOADING') return loadingIcon;
-	if (status === 'WAIT') return loadingIcon;
+	if (status === 'LOADING' || status === 'WAIT') return Icons.CheckLogin;
+
 
 	if (step.type === 'PROCESS') {
-		return status === 'SUCCESS' ? checkMarked : noCheckMarked;
+		return status === 'SUCCESS' ? Icons.CheckLogin : Icons.XBox;
 	}
 
 	// RESULT 타입
-	if (status === 'SUCCESS') return checkMarked;
-	if (status === 'FAIL') return noCheckMarked;
+	if (status === 'SUCCESS') return Icons.CheckLogin;
+	if (status === 'FAIL') return Icons.XBox;
 
-	return loadingIcon;
+	return Icons.Loading;
 };
 
 const getIconClass = (
@@ -70,21 +69,24 @@ const getIconClass = (
 
 
 const VerifySteps = ({ stepStatus }: VerifyStepsProps) => {
-  
+	
 	return (
 		<div className="flex flex-col text-neutral-600 gap-2">
 			{steps.map((step, index) => {
 				const status = stepStatus[index];
+				const StepIcon = getStepIcon(step, status);
 
 				return (
 					<div
 						key={step.label}
 						className="flex gap-4 items-center"
 					>
-						<img
-							src={getStepIcon(step, status)}
-							className={`w-5 h-5 ${getIconClass(status)}`}
-							alt='icon'
+						<StepIcon
+							className={cn(
+								'w-5 h-5',
+								getIconClass(status),
+								'text-primary-300',
+							)}
 						/>
 						<span
 							key={`${step.label}-${status}`}

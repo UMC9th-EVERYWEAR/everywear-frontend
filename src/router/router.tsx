@@ -3,7 +3,7 @@ import { protectedRoutes } from './routes/protected-routes';
 import ProtectedRoute from './routes/ProtectedRoute';
 import { publicRoutes } from './routes/public-routes';
 import RootLayout from '../components/layout/RootLayout';
-import NotFoundPage from '../pages/NotFoundPage';
+import NotFoundPage from '../pages/not-found/not-found-page';
 
 
 /*  RootLayout 아래에

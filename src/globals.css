@@ -40,6 +40,7 @@
 
   --color-onboarding-photo: #FAFAFA;
   --color-onboarding: #F0F7FF;
+  --color-onboarding-green: #03C75A;
 
   --color-landing-shadow: #BDC3FB;
   --color-landing-back: #C9CEF6;
@@ -50,6 +51,8 @@
   --color-review-rotate: #C7CBEC;
   --color-review-summary: #E3E6FE;
   --color-fitting-company: #767676;
+  --color-review-summary: #E3E6FE; 
+  --color-review-summary-dark: #2a323f; 
 
   --color-verifying-border: #C4DEFF;
   --color-verifying: #E7F1FF;

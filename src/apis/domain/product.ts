@@ -1,10 +1,8 @@
 import { apiClient } from '@/src/apis/common/apiClient'
-import type { ImportDTO, ListDTO } from '../generated';
+import type { ClosetListDTO, ImportDTO, ListDTO } from '../generated';
 import type { CategoryKey } from '@/src/types/products/product';
 
 // products-page
-
-
 export const getProducts = async () => {
 	const { data } = await apiClient.getProducts();
 	return data.result?.products ?? [];
@@ -56,6 +54,11 @@ export const getProductsByCategory = async (category: CategoryKey) => {
 	return fetcher();
 };
 
+export const getProductDetail = async (productId : number) => {
+	const { data } = await apiClient.getProductDetail(productId);
+	return data.result?.product;
+}
+
 // home-page
 export const getHomeProducts = async () => {
 	const { data } = await apiClient.getHomeProducts();
@@ -94,7 +97,7 @@ export const getClosetBottomProducts = async () => {
 	return data.result?.products ?? [];
 };
 
-export const closetFetchers: Partial<Record<CategoryKey, () => Promise<ListDTO[]>>> = {
+export const closetFetchers: Partial<Record<CategoryKey, () => Promise<ClosetListDTO[]>>> = {
 	'상의': getClosetTopProducts,
 	'아우터': getClosetOuterProducts,
 	'기타': getClosetEtcProducts,
