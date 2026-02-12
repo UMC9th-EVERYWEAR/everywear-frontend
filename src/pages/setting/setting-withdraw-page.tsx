@@ -1,4 +1,5 @@
 
+import { Icons } from '@/src/assets/icons/components/Icons';
 import Button from '@/src/components/common/Button';
 import Loading from '@/src/components/common/Loading';
 import { Modal } from '@/src/components/common/Modal';
@@ -35,10 +36,7 @@ const SettingWithdraw = () => {
 		<div className='w-full flex-1 flex flex-col items-center max-w-sm'>
 			<div className='w-full text-regular-16 mb-5 text-start'>{data?.name}님, 탈퇴하기 전에 꼭 확인해 주세요</div>
 			<div className=" border border-primary-300 py-4 px-2.5  rounded-lg flex items-start gap-3 w-full">
-				<img
-					src={ SETTING_IMAGES.CHECK_BLUE }
-					alt='check'
-				/>
+				<Icons.CheckIcon  className='text-primary-300'/>
 				<div className='text-regular-14'>
 					<p>찜한 상품, 상품 정보 등</p>
 					<p>{data?.name}님 소중한 기록이 모두 사라져요</p>

@@ -22,8 +22,8 @@ interface CategoryBarProps {
 
 const CategoryBar = ({ selected, onSelect }: CategoryBarProps) => {
 	return (
-		<div className="w-full overflow-hidden bg-transparent sticky top-0 z-20 transition-colors duration-300">
-			<div className="flex overflow-x-auto no-scrollbar justify-center items-center p-4">
+		<div className="w-full bg-transparent sticky top-0 z-20 transition-colors duration-300">
+			<div className="flex overflow-x-auto no-scrollbar items-center p-4">
 				<div className="flex gap-[10px] items-center whitespace-nowrap">
 					{categories.map((cat) => {
 						const isActive = selected === cat.name;

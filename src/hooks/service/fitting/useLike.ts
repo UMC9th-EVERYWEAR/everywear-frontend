@@ -1,9 +1,9 @@
 import { toggleProductLike } from '@/src/apis/domain';
 import { useMutation } from '@tanstack/react-query';
+import type { ToastInput } from '../../domain/ai-fitting/useToast';
 import { queryClient } from '@/src/lib/react-query';
 import { QUERY_KEYS } from '@/src/constants/query-key';
 import type { ListDTO } from '@/src/apis/generated';
-import type { ToastInput } from '../../domain/ai-fitting/useToast';
 
 interface useLikeProps {
     createToast: (toast: ToastInput) => void;
@@ -33,9 +33,9 @@ function useLike({ createToast }: useLikeProps) {
 			);
 
 			if (isLiked) {
-				createToast({ message: '내 옷장에서 삭제되었습니다.' });
+				createToast({ message: '내 옷장에서 추가되었습니다.' });
 			} else {
-				createToast({ message: '내 옷장에 추가되었습니다.' });
+				createToast({ message: '내 옷장에서 삭제되었습니다.' });
 			}
 
 			return { previousData };

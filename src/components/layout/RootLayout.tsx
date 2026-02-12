@@ -57,13 +57,13 @@ const RootLayout = () => {
 		<div
 			className={cn(
 				// ✅ h-screen 대신 h-[100dvh]로 모바일 주소창 대응
-				'h-[100dvh] w-full flex justify-center overflow-hidden transition-colors duration-300',
+				'h-[100dvh] w-full flex justify-center overflow-x-hidden transition-colors duration-300',
 				'bg-gray-50 dark:bg-black', 
 			)}
 		>
 			<div
 				className={cn(
-					'flex flex-col w-full h-full relative transition-colors duration-300',
+					'flex flex-col w-full h-full relative overflow-x-hidden transition-colors duration-300',
 					'bg-white dark:bg-gray-900', 
 					isFullscreen ? '' : 'max-w-2xl',
 				)}
@@ -80,7 +80,7 @@ const RootLayout = () => {
 				<main
 					ref={mainRef}
 					className={cn(
-						'flex-1 overflow-y-auto no-scrollbar bg-transparent min-h-0',
+						'flex-1 overflow-y-auto  overflow-x-hidden no-scrollbar bg-transparent min-h-0',
 						// ✅ Navbar가 fixed이므로 콘텐츠가 가려지지 않게 하단 여백 추가
 						!shouldHideNav && 'pb-[60px]',
 					)}
