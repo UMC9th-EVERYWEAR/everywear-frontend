@@ -18,7 +18,7 @@ const ClosetPage = () => {
 	
 	return (
 		<div className="flex flex-col items-center px-5" >
-			<div className='sm:w-full'>
+			<div className='w-full'>
 				<CategoryBar
 					selected={selected}
 					onSelect={handleSelected}
