@@ -6,12 +6,12 @@ import ProductCard from '@/src/components/common/ProductCard';
 import RectangleIcon from '@/public/svgs/LogoImages/Rectangle.svg'; 
 import EllipseIcon from '@/public/svgs/LogoImages/Ellipse.svg';     
 import { useRecentFittingsQuery, useHomeProductsQuery } from '@/src/hooks/queries/useHomeQueries';
-import { QUERY_KEYS } from '../constants/query-key';
-import { PATH } from '../constants/path';
-import type { FittingSummary, ListDTO } from '../apis/generated';
-import ProductCardSkeleton from '../components/common/ProductCardSkeleton';
-import PartnerMallSection from '../components/products/PartnerMallSection';
-import MallGuide from '../components/products/MallGuide';
+import { QUERY_KEYS } from '../../constants/query-key';
+import { PATH } from '../../constants/path';
+import type { FittingSummary, ListDTO } from '../../apis/generated';
+import ProductCardSkeleton from '../../components/common/ProductCardSkeleton';
+import PartnerMallSection from '../../components/products/PartnerMallSection';
+import MallGuide from '../../components/products/MallGuide';
 
 const INDICATOR_MAX_DISTANCE = 37;
 

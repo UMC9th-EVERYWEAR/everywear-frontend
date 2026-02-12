@@ -1,6 +1,6 @@
 import  { PATH } from '@/src/constants/path';
 import { lazy } from 'react';
-const Home = lazy(() => import('@/src/pages/Home'));
+const Home = lazy(() => import('@/src/pages/home/home-page'));
 const SettingPage = lazy(() => import('../../pages/setting/setting-page'));
 const SettingPhotoPage = lazy(() => import('@/src/pages/setting/setting-photo-page'));
 const SettingInquiry = lazy(() => import('@/src/pages/setting/setting-inquiry-page'));
