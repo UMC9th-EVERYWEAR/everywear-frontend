@@ -6,24 +6,30 @@ AI로 입어보고 AI로 분석하는 스마트 피팅 앱
 
 
 
-<h2> EVERYWEAR Member </h2>
+<h2> 🤖 EVERYWEAR Member </h2>
 
 <table align="center">
     <tr align="center">
       <td style="min-width: 150px;">
+          <a href="https://github.com/ch0iii">
           <img width="200" height="300" alt="smurf2 2" src="https://github.com/user-attachments/assets/48fb3d3f-862c-454d-aef5-71a1a0c89646" />
               <br/>
               <b>최정인</b>
+          </a>
         </td>
       <td style="min-width: 150px;">
+          <a href="https://github.com/kinjaebeom">
             <img width="200" height="300" alt="1-74285756 2" src="https://github.com/user-attachments/assets/b1315436-0bcd-48b7-bdae-bb80d3024d8c" />
               <br/>
-              <b>김재범</b>           
+              <b>김재범</b>     
+          </a>      
         </td>
       <td style="min-width: 150px;">
+          <a href="https://github.com/brayden1102">
           <img width="200" height="300" alt="smurf3 2" src="https://github.com/user-attachments/assets/0e3ee9c8-426a-45d1-9393-a19aed778ec1" />
               <br/>
               <b>김동환</b>
+        </a>
         </td>
     </tr>
 
@@ -33,13 +39,12 @@ AI로 입어보고 AI로 분석하는 스마트 피팅 앱
 
 ## 📈 Performance Optimization Guide
 
-## [👉 🚀 성능 최적화 해결 문서](https://www.notion.so/EVERY-WEAR-2f88e2de5f4a800baafcc63b07b5c215)
+## ➡️ [성능 최적화 해결 문서](https://www.notion.so/EVERY-WEAR-2f88e2de5f4a800baafcc63b07b5c215)
 
-  <br/>
-  <br/>
 
 
 ## 🛠 EVERYWEAR WEB 기술 스택 
+## [➡️  기술 스택 선정 문서](https://www.notion.so/EVERY-WEAR-2f58e2de5f4a80b1b032c7fc2fa8cb04)
 
 
 | 카테고리 | 기술 스택 |
@@ -233,3 +238,5 @@ src/
 
 
 - 작업 내용은 상세히 공유합니다.
+
+
