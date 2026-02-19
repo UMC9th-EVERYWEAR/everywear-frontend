@@ -75,7 +75,6 @@ const ItemBrowseSection = ({ productdata, isCloset = false, closetData } : ItemB
 	}
 
 	const renderProductCard = (product: ItemData, index: number) => {
-		// recent_fitting_id는 ClosetListDTO에만 있을 수 있으므로 'in' 연산자나 옵셔널 체이닝 사용
 		const recentFittingId = 'recent_fitting_id' in product ? product.recent_fitting_id : undefined;
 
 		return (
@@ -89,13 +88,11 @@ const ItemBrowseSection = ({ productdata, isCloset = false, closetData } : ItemB
 				imageUrl={product.product_img_url ?? ''}
 				isCloset={isCloset}
 				productUrl={product.product_url ?? ''}
-				recentFittingId={recentFittingId} // 여기서 타입 에러가 해결됩니다.
+				recentFittingId={recentFittingId} 
 			/>
 		);
 	};	
 
-	// 일단 50개 이상일 때만 Virtuoso 적용
-	// 서버에서 개수 구분 없이 한 번에 내려주기 때문
 	if(shouldVirtualize){
 		return(
 			<div className='h-full'>
@@ -105,7 +102,6 @@ const ItemBrowseSection = ({ productdata, isCloset = false, closetData } : ItemB
 						style={{ height: '80vh' }}
 						initialItemCount={8}
 						overscan={200}
-						// useWindowScroll
 						components={{
 							List: GridList,
 							Item: GridItem,
