@@ -5,7 +5,7 @@ import SectionTitle from './SectionTitle'
 import { forwardRef } from 'react';
 
 import { cn } from '@/src/utils/cn';
-import { useScrollStickyAnimation } from '@/src/hooks/domain/onboarding/useStickyHeader';
+// import { useScrollStickyAnimation } from '@/src/hooks/domain/onboarding/useStickyHeader';
 
 interface StepSectionProps {
   step: STEPKEY;
@@ -17,7 +17,7 @@ const StepSection = forwardRef<HTMLDivElement, StepSectionProps>(
 		return (
 			<section
 				ref={ref}
-				className="min-h-screen flex items-center justify-center"
+				className=" flex items-center justify-center"
 			>
 				<HowItWorksStep step={step} />
 			</section>
@@ -29,7 +29,6 @@ StepSection.displayName = 'StepSection';
 
 const HowItWorksSection = () => {
 
-	const { ref: endRef, isInViewport, isSticky } = useScrollStickyAnimation();
 
 
 	return(
@@ -37,9 +36,9 @@ const HowItWorksSection = () => {
 			className="relative h-full bg-landing-how-it-works"
 		>
 			<div
-				className={cn('flex items-center justify-center',
-					isSticky && 'sticky top-10',
-					isInViewport && 'animate-header-out',		
+				className={cn('flex items-center justify-center pt-10 -mb-20 sm:-mb-40',
+					// isSticky && 'sticky top-10',
+					// isInViewport && 'animate-header-out',		
 				)}
 			>
 
@@ -54,7 +53,6 @@ const HowItWorksSection = () => {
 				<StepSection step="STEP2" />
 				<StepSection step="STEP3" />
 				<StepSection
-					ref={endRef}
 					step="STEP4"
 				/>
 			</div>
