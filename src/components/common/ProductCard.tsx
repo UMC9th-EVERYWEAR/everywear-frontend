@@ -14,10 +14,10 @@ export interface ProductCardProps {
 	recentFittingId?: number;
 }
 
-const ButtonClassName = `flex justify-center w-16 p-1 tracking-[-2px] leading-4.5
-                          items-center border rounded-lg border-none bg-[var(--color-primary-600)] shrink-0
-                          text-medium-12 text-[var(--color-neutral-50)] cursor-pointer font-anonymous
-                          hover:bg-[var(--color-primary-700)] transition-colors sm:w-21`
+const ButtonClassName = `flex justify-center p-1 leading-4.5
+                          items-center rounded-lg border-none bg-primary-600 shrink-0
+                          text-regular-12 text-neutral-50 cursor-pointer
+                          hover:bg-primary-700 transition-colors flex-1`
                           
 const ProductCard = ({ 
 	id, 
@@ -66,7 +66,7 @@ const ProductCard = ({
 			</div>
 
 			<div
-				className="w-full p-2.5 -mt-[34px] z-10 flex flex-col bg-white dark:bg-neutral-800 rounded-b-xl shadow-[var(--shadow-4)] transition-colors duration-300"
+				className="w-full pl-2.5 pr-2.5 pt-2.5 -mt-[34px] z-10 flex flex-col bg-white dark:bg-neutral-800 rounded-b-xl shadow-[var(--shadow-4)] transition-colors duration-300"
 			>
 				<div className="flex justify-between items-center text-regular-10">
 					<span className="text-neutral-500 dark:text-neutral-400 font-pretandard truncate max-w-[70px]">
@@ -92,7 +92,7 @@ const ProductCard = ({
 
 				{isCloset && (
 					<div
-						className="mt-2.5 flex justify-between w-full"
+						className="py-2.5 flex justify-between w-full gap-2"
 						onClick={(e) => e.stopPropagation()}
 						role="button"
 						tabIndex={0}
